@@ -576,6 +576,22 @@ input[type=file]{width:100%;color:var(--muted);font-size:15px}
 /* Retrospectiva */
 .retro-prev{margin:0}
 .retro-prev img{display:block;width:100%;max-width:340px;margin:0 auto;border-radius:16px;box-shadow:0 10px 30px rgba(10,9,40,.45)}
+/* Profeta conquistado (raro): contorno dourado e brilhos piscando */
+.avatar.raro{filter:drop-shadow(0 0 1.5px #FFD75A) drop-shadow(0 0 5px rgba(242,190,46,.7));overflow:visible}
+.av-raro rect{animation:avpisca 2.2s ease-in-out infinite}
+.av-raro rect:nth-child(4n+3),.av-raro rect:nth-child(4n){animation-delay:1.1s}
+@keyframes avpisca{0%,100%{opacity:1}50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.av-raro rect{animation:none}}
+.prof.bloq .avatar.raro{filter:grayscale(1) brightness(.75)}
+.chip.atual{background:#fff;color:var(--deep);border-color:#fff}
+/* Níveis de acesso (modal do usuário) */
+.papel-box{margin-top:14px;padding:12px;border-radius:var(--radius);background:rgba(0,0,0,.14)}
+.papel-box .rot{display:block;font-weight:700;margin:12px 0 6px}
+.salas-check{display:grid;gap:8px;max-height:200px;overflow:auto}
+.salas-check small{color:var(--muted);font-weight:600}
+/* Salas: barra de ações compacta */
+.sala-barra{display:flex;flex-wrap:wrap;gap:8px}
+.sala-barra .btn{flex:1 1 auto;width:auto;min-height:40px;padding:8px 14px;font-size:14.5px;white-space:nowrap}
 /* Tela inicial */
 .inicio-hero{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
 .inicio-hero .avatar{width:72px;height:92px}
@@ -617,7 +633,8 @@ input[type=file]{width:100%;color:var(--muted);font-size:15px}
 .inicio-grid .panel{margin:0}
 .inicio-hero>div{min-width:0}
 #rkCorpo{margin-top:14px}
-@media (min-width:900px){ .inicio-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start} .inicio-grid>div{gap:18px} .inicio-grid>div+div{margin-top:0} #rkCorpo{margin-top:16px} .badges{grid-template-columns:repeat(6,1fr)} }
+/* Notebook e monitor: o Início vira colunas equilibradas (2, e 3 em telas largas) */
+@media (min-width:900px){ .inicio-grid{display:block;column-count:2;column-gap:18px} .inicio-grid>div{display:contents} .inicio-grid .panel,.inicio-grid .atalhos{break-inside:avoid;margin:0 0 18px} .inicio-grid>div+div{margin-top:0} #rkCorpo{margin-top:16px} .badges{grid-template-columns:repeat(6,1fr)} }
 /* Abas dos dias (Estudar): sempre numa linha só */
 .tabs.dias{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;overflow:visible}
 .tabs.dias button{padding:6px 0;font-size:12px;line-height:1.15;white-space:normal;display:grid;justify-items:center;gap:1px;border-radius:12px}
@@ -732,10 +749,31 @@ ol.passos li{margin-bottom:8px}
   .selfie-h{text-align:center}
 }
 @media (min-width:1200px){
-  .wrap{max-width:1120px}
-  .home{grid-template-columns:1.05fr 1fr;gap:40px}
+  .wrap{max-width:1240px}
+  .home{gap:40px}
   .home .hero{--hero-w:540px}
 }
+/* Telas largas: usa a largura toda, com a navegação da tela à esquerda e o conteúdo à direita */
+.so-largo{display:none}
+@media (min-width:1200px){
+  .result-area.duas{max-width:none;display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:26px;align-items:start}
+  .result-area.duas .lado{position:sticky;top:84px}
+  .result-area.duas .principal{min-width:0;margin-top:0}
+  .result-area.duas #rkCorpo,.result-area.duas #muCorpo{margin-top:0}
+  .result-area.duas .salas-grid,.result-area.duas .mural,.result-area.duas .equipes{margin-top:0}
+  .so-largo{display:grid}.so-estreito{display:none}
+  .home{grid-template-columns:minmax(340px,440px) minmax(0,1fr)}
+  .admin-area{max-width:1100px}
+  .menu-conta{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1400px){
+  .inicio-grid{column-count:3}
+  .wrap{max-width:1440px}
+  .result-area.duas .salas-grid,.result-area.duas .mural,.result-area.duas .equipes{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .result-area.duas{grid-template-columns:minmax(320px,400px) minmax(0,1fr)}
+}
+@media (min-width:1700px){ .wrap{max-width:1640px} }
+
 
 @media (prefers-reduced-motion:reduce){.cd-num.anim,.cd-num.vai,.cd-ring,.cd-in .avatar,.modal,.modal-bg{animation:none}}
 </style>
@@ -752,7 +790,6 @@ ol.passos li{margin-bottom:8px}
   <button type="button" data-tab="quiz"><span class="ic">🎯</span>Quiz</button>
   <button type="button" data-tab="ranking"><span class="ic">🏃‍♂️</span>Corrida</button>
   <button type="button" data-tab="salas"><span class="ic">👥<b class="nav-n" id="navSalasN" hidden></b></span>Salas</button>
-  <button type="button" data-tab="conta"><span class="ic" id="navProfeta">👤</span>Minha conta</button>
   <button type="button" data-tab="admin" class="admin" id="navAdmin" hidden><span class="ic">🛠️</span>Admin</button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
@@ -1069,7 +1106,7 @@ function redimensionarIcone(file, tam){
 const FB_OK = !!(FIREBASE_CONFIG.apiKey && !/^COLE_/.test(FIREBASE_CONFIG.apiKey) && typeof firebase !== "undefined");
 function novoPerfil(nome, email, extra){
   const boot = ADMINS_INICIAIS.map(e=>e.toLowerCase()).includes(String(email).toLowerCase());
-  return Object.assign({ nome, email:String(email).toLowerCase(), emoji:"🙂", tema:"auto", profeta:"", admin:boot, aprovado:boot, liberarAnterior:false, criadoEm:Date.now() }, extra||{});
+  return Object.assign({ nome, email:String(email).toLowerCase(), emoji:"🙂", tema:"auto", profeta:"", admin:boot, master:boot, aprovado:boot, liberarAnterior:false, criadoEm:Date.now() }, extra||{});
 }
 
 function dbFirebase(){
@@ -1196,7 +1233,7 @@ function dbLocal(){
       if(d.usuarios[uid]) throw err("auth/email-already-in-use");
       if(String(senha).length < 6) throw err("auth/weak-password");
       const primeiro = Object.keys(d.usuarios).length === 0;
-      d.usuarios[uid] = novoPerfil(nome, email, primeiro ? {admin:true, aprovado:true} : ((d.config||{}).aprovacaoAuto ? {aprovado:true} : {}));
+      d.usuarios[uid] = novoPerfil(nome, email, primeiro ? {admin:true, master:true, aprovado:true} : ((d.config||{}).aprovacaoAuto ? {aprovado:true} : {}));
       d.senhas[uid] = senha; d.sessao = uid; gravar(d); avisar();
     },
     async sair(){ const d = ler(); d.sessao = ""; gravar(d); avisar(); },
@@ -1266,8 +1303,13 @@ let LICAO = null;          // lição selecionada na tela do quiz
 let jogo = null, timer = null, tabAtual = "inicio";
 // Salas (turmas): SALAS = salas em que participo; SALA = sala ativa (usada na Corrida e no Início)
 let SALAS = [], SALAS_PEDIDOS = [], SALA = null, SALAS_PENDENTES = 0, SALAS_ERRO = "", membrosCache = {}, resCache = {};
-const ehAdmin = ()=> !!(perfil && perfil.admin);
-const podeAnterior = ()=> !!(CONFIG.liberarAnterior || (perfil && perfil.liberarAnterior) || ehAdmin());
+/* Papéis: MASTER administra o jogo inteiro (usuários, todas as salas, lições). ADMIN DE SALA administra só as salas
+   que o master atribuiu a ele (campo "admins" da sala). Os e-mails de ADMINS_INICIAIS são sempre master. */
+const emailInicial = ()=> !!(usuario && ADMINS_INICIAIS.map(e=>e.toLowerCase()).includes(String(usuario.email).toLowerCase()));
+const ehMaster = ()=> !!(perfil && (perfil.master || emailInicial()));
+const ehAdminSala = s => !!(s && usuario && Array.isArray(s.admins) && s.admins.includes(usuario.uid));
+const souAdminDeSala = ()=> SALAS.some(s => ehAdminSala(s));
+const podeAnterior = ()=> !!(CONFIG.liberarAnterior || (perfil && perfil.liberarAnterior) || ehMaster());
 
 function montarLicao(L){
   const trimestre = L.trimestre || TRIMESTRE_BASE;
@@ -1331,7 +1373,7 @@ aplicarTema(lsGet(KEY + ":tema", "auto"));
    ============================================================ */
 function balaoFala(texto){
   const p = acharProfeta(perfil.profeta);
-  return `<div class="fala">${avatarSVG(perfil.profeta)}<div class="balao">${p ? `<strong>${esc(p.nome)}</strong>` : ""}<p>${esc(texto)}</p></div></div>`;
+  return `<div class="fala">${meuAvatar()}<div class="balao">${p ? `<strong>${esc(p.nome)}</strong>` : ""}<p>${esc(texto)}</p></div></div>`;
 }
 function falaDoDia(){
   const lista = FALAS[perfil.profeta]; if(!lista) return "";
@@ -1379,7 +1421,7 @@ function ocupado(btn, sim){ if(!btn) return; btn.disabled = sim; if(sim){ btn.da
 function contagem(dia, cb){
   const rapido = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const el = document.createElement("div"); el.className = "cd";
-  el.innerHTML = `<div class="cd-ring"></div><div class="cd-in">${avatarSVG(perfil.profeta)}<div class="cd-dia">${esc(dia.nome)} · ${esc(dia.tema)}</div><div class="cd-num" id="cdNum">Pronto?</div><div class="cd-sub" id="cdSub">Leu a lição de hoje? Então vamos!</div></div>`;
+  el.innerHTML = `<div class="cd-ring"></div><div class="cd-in">${meuAvatar()}<div class="cd-dia">${esc(dia.nome)} · ${esc(dia.tema)}</div><div class="cd-num" id="cdNum">Pronto?</div><div class="cd-sub" id="cdSub">Leu a lição de hoje? Então vamos!</div></div>`;
   document.body.appendChild(el);
   const passos = [["3","Prepare-se…"],["2","Mantenha a calma…"],["1","Quanto mais rápido, mais pontos!"],["VAI!",""]];
   let k = -1;
@@ -1401,10 +1443,10 @@ function contagem(dia, cb){
    CASCA: barra superior + menu inferior
    ============================================================ */
 function atualizarCasca(){
-  const logado = !!(usuario && perfil && (perfil.aprovado || perfil.admin));
+  const logado = !!(usuario && perfil && (perfil.aprovado || perfil.admin || ehMaster()));
   $("topbar").hidden = !logado; $("nav").hidden = !logado;
   document.body.classList.toggle("sem-menu", !logado);
-  if(logado){ $("chipEm").innerHTML = perfil.profeta ? avatarSVG(perfil.profeta) : ""; $("chipNome").textContent = perfil.nome || ""; $("navAdmin").hidden = !ehAdmin(); $("navProfeta").innerHTML = perfil.profeta ? avatarSVG(perfil.profeta) : "👤"; const np = $("navSalasN"); if(np){ const n = typeof SALAS_PENDENTES === "number" ? SALAS_PENDENTES : 0; np.hidden = !n; np.textContent = n > 9 ? "9+" : String(n); } $("nav").classList.toggle("n7", ehAdmin()); }
+  if(logado){ $("chipEm").innerHTML = perfil.profeta ? meuAvatar() : ""; $("chipNome").textContent = perfil.nome || ""; $("navAdmin").hidden = !(ehMaster() || souAdminDeSala()); $("chipConta").classList.toggle("atual", tabAtual === "conta"); const np = $("navSalasN"); if(np){ const n = typeof SALAS_PENDENTES === "number" ? SALAS_PENDENTES : 0; np.hidden = !n; np.textContent = n > 9 ? "9+" : String(n); } }
   document.querySelectorAll("#nav button").forEach(b => { if(b.dataset.tab === tabAtual) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
 }
 function nav(tab){
@@ -1438,10 +1480,10 @@ DB.onAuth(async u => {
     if(!u){ perfil = null; atualizarCasca(); telaLogin(); return; }
     perfil = await DB.getUsuario(u.uid);
     if(!perfil){ let auto = false; try{ auto = !!((await DB.getConfig()) || {}).aprovacaoAuto; }catch(e){} perfil = novoPerfil(u.email.split("@")[0], u.email, auto ? {aprovado:true} : {}); await DB.salvarUsuario(u.uid, perfil); }
-    if(ADMINS_INICIAIS.map(e=>e.toLowerCase()).includes(String(u.email).toLowerCase()) && !(perfil.admin && perfil.aprovado)){
-      perfil.admin = true; perfil.aprovado = true; await DB.salvarUsuario(u.uid, {admin:true, aprovado:true});
+    if(emailInicial() && !(perfil.master && perfil.admin && perfil.aprovado)){
+      perfil.master = true; perfil.admin = true; perfil.aprovado = true; await DB.salvarUsuario(u.uid, {master:true, admin:true, aprovado:true});
     }
-    if(!perfil.aprovado && !perfil.admin){ atualizarCasca(); telaPendente(); return; }
+    if(!perfil.aprovado && !perfil.admin && !ehMaster()){ atualizarCasca(); telaPendente(); return; }
     aplicarTema(perfil.tema || "auto");
     await carregarTudo();
     await carregarSalas();
@@ -1648,7 +1690,7 @@ function telaInicio(){
   const h = hoje(), L = LICOES[indiceLicaoAtual()], hojeIdx = L ? L.dias.findIndex(d => d.data === h) : -1, dHoje = hojeIdx >= 0 ? L.dias[hojeIdx] : null;
   const fala = falaDoDia();
   let html = `<div class="inicio-grid"><div>`;
-  html += `<section class="panel"><div class="inicio-hero">${avatarSVG(perfil.profeta)}<div><div class="saud">${saudacao()}</div><h2>${esc(perfil.nome)}!</h2>${fala ? `<div class="balao mini"><p>${esc(fala)}</p></div>` : ""}</div></div></section>`;
+  html += `<section class="panel"><div class="inicio-hero">${meuAvatar()}<div><div class="saud">${saudacao()}</div><h2>${esc(perfil.nome)}!</h2>${fala ? `<div class="balao mini"><p>${esc(fala)}</p></div>` : ""}</div></div></section>`;
   // HOJE
   html += `<section class="panel hoje">`;
   if(dHoje){
@@ -1716,7 +1758,7 @@ async function posicaoCorrida(L){
     const fmt1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR");
     el.innerHTML = `<div class="cq-head"><span class="hoje-lbl">Corrida do Rolo · ${esc(L.numero)}</span><button class="btn btn-ghost btn-sm" id="inSala" title="Trocar de sala">${esc(sala.nome)}</button></div>
       <div class="posicao">${pos ? `<b>${pos}º</b><span>de ${ordem.length} na pista · ${fmt1(meus)} ${meus===1?"passo":"passos"}</span>` : `<b>—</b><span>${ordem.length ? ordem.length + " já estão correndo. Entre na pista!" : "A pista está vazia. Seja o primeiro!"}</span>`}</div>
-      <div class="track" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:${Math.min(1, meus/7)}">${avatarSVG(perfil.profeta)}</div></div>
+      <div class="track" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:${Math.min(1, meus/7)}">${meuAvatar()}</div></div>
       <p class="muted small" style="margin:10px 0 0">${pos === 1 && meus ? "Você está na frente! Mantenha o ritmo." : lider > meus ? `O líder tem ${fmt1(lider)} ${lider===1?"passo":"passos"}. Cada dia no prazo é um passo.` : "Cada dia no prazo é um passo. Com atraso, meio passo."}</p>
       <div class="btn-row uma" style="margin-top:12px"><button class="btn btn-ghost" id="inRolo">Ver a corrida completa</button></div>`;
     $("inRolo").onclick = ()=> nav("ranking");
@@ -1751,7 +1793,7 @@ function telaQuiz(){
   if(!LICAO) LICAO = LICOES[indiceLicaoAtual()];
   let h = `<div class="home"><div class="col-a">` + heroLicao(LICAO);
   h += `<section class="panel">
-    <div class="hello2">${avatarSVG(perfil.profeta)}<div class="hello-txt"><div class="hello-top"><h2>Oi, ${esc(perfil.nome)}</h2><button class="linkish" id="verPontos">Pontuação</button></div>${falaDoDia() ? `<div class="balao mini"><p>${esc(falaDoDia())}</p></div>` : ""}</div></div>
+    <div class="hello2">${meuAvatar()}<div class="hello-txt"><div class="hello-top"><h2>Oi, ${esc(perfil.nome)}</h2><button class="linkish" id="verPontos">Pontuação</button></div>${falaDoDia() ? `<div class="balao mini"><p>${esc(falaDoDia())}</p></div>` : ""}</div></div>
     <div class="stats">
       <div class="stat"><b>${fmt(totalSemana())}</b><span>pontos nesta lição</span></div>
       <div class="stat"><b>${noPrazo()} de ${LICAO.dias.length}</b><span>dias no prazo</span></div>
@@ -1796,7 +1838,7 @@ function modalPontuacao(){
   let modo = "tema";
   const render = (m)=>{
     const c = m.querySelector(".modal-c");
-    let h = ehAdmin() ? `<div class="tabs" role="tablist"><button role="tab" aria-selected="${modo==="tema"}" data-m="tema">Esta lição (tema)</button><button role="tab" aria-selected="${modo==="tri"}" data-m="tri">Trimestre inteiro</button></div>` : "";
+    let h = ehMaster() ? `<div class="tabs" role="tablist"><button role="tab" aria-selected="${modo==="tema"}" data-m="tema">Esta lição (tema)</button><button role="tab" aria-selected="${modo==="tri"}" data-m="tri">Trimestre inteiro</button></div>` : "";
     if(modo === "tema"){
       h += `<div class="total-box"><b>${fmt(totalSemana())}</b><span>pontos em ${esc(LICAO.numero)}: ${esc(LICAO.titulo)}</span></div><ul class="lista">`;
       LICAO.dias.forEach(d=>{ const r = resDe(LICAO, d);
@@ -1820,9 +1862,9 @@ function modalBloqueio(){
   const render = async (m)=>{
     const c = m.querySelector(".modal-c");
     let h = `<p>As lições de <b>semanas anteriores</b> ficam bloqueadas para manter a corrida justa: cada dia vale mais quando é feito no dia certo.</p>`;
-    if(podeAnterior()) h += `<p class="muted">✅ Para você, elas estão <b>liberadas</b>${ehAdmin() ? " (você é admin)" : ""}.</p>`;
+    if(podeAnterior()) h += `<p class="muted">✅ Para você, elas estão <b>liberadas</b>${ehMaster() ? " (você é master)" : ""}.</p>`;
     else h += `<p class="muted">🔒 Para você, estão <b>bloqueadas</b>. Peça a um administrador para liberar.</p>`;
-    if(ehAdmin()){
+    if(ehMaster()){
       h += `<h3 class="h3" style="margin-top:14px">Controle do admin</h3>
         <div class="linha-sw"><div class="txt"><strong>Liberar para todos</strong><span>Qualquer pessoa pode fazer lições de semanas anteriores</span></div><button class="switch" role="switch" aria-checked="${!!CONFIG.liberarAnterior}" id="swGeral"></button></div>
         <p class="note">Para liberar só para algumas pessoas, use Admin › Usuários.</p>`;
@@ -1881,7 +1923,7 @@ function limparProgresso(L, data){
 }
 async function finalizarQuiz(){
   const r = { uid: usuario.uid, nome: perfil.nome, profeta: perfil.profeta || "", licaoId: jogo.L.id, trimestre: jogo.L.trimestre, data: jogo.dia.data,
-    pts: jogo.pts, acertos: jogo.acertos, total: jogo.total, noPrazo: jogo.prazo, resp: jogo.resp || [], quando: Date.now() };
+    pts: jogo.pts, acertos: jogo.acertos, total: jogo.total, noPrazo: jogo.prazo, resp: jogo.resp || [], nivel: Math.max(1, meuNivel()), quando: Date.now() };
   try{ await DB.salvarResultado(r); }catch(e){ aviso("Não deu para salvar no servidor: " + erroMsg(e)); }
   RES[r.licaoId + "|" + r.data] = r;
   limparCacheResultados();
@@ -2181,7 +2223,7 @@ async function telaRanking(){
   if(!corridaLicao || !cfg.lics.find(l=>l.id===corridaLicao)) corridaLicao = cfg.atual ? cfg.atual.id : (cfg.lics[0] && cfg.lics[0].id);
   const porLicao = corridaModo === "licao", porEquipe = corridaModo === "equipes", licSel = cfg.lics.find(l=>l.id===corridaLicao) || cfg.atual;
   if(equipeEscopo !== "*" && !cfg.lics.find(l=>l.id===equipeEscopo)) equipeEscopo = cfg.atual ? cfg.atual.id : "*";
-  app.innerHTML = `<div class="result-area">
+  app.innerHTML = `<div class="result-area duas"><div class="lado">
     <header class="hero" style="padding-bottom:14px"><div class="tag"><span class="box">${esc(sala.nome)}</span><span class="date" id="crPeriodo">${porEquipe ? "Equipes" : porLicao && licSel ? `Lição ${licSel.n}` : (cfg.pista.length ? `Lições ${cfg.pista[0].n} a ${cfg.pista[cfg.pista.length-1].n}` : esc(cfg.tri))}</span></div>
       <h1 class="rolo-h">Corrida do<span class="hl">Rolo</span></h1>
       <p>Cada dia de estudo no prazo é um passo no rolo. Feito com atraso, vale meio passo. Ninguém volta para trás.</p></header>
@@ -2190,8 +2232,8 @@ async function telaRanking(){
       <div class="tabs" role="tablist" style="margin-bottom:${porLicao||porEquipe?"10px":"0"}"><button role="tab" aria-selected="${porLicao}" data-m="licao">Por lição</button><button role="tab" aria-selected="${corridaModo==="tri"}" data-m="tri">Trimestre</button><button role="tab" aria-selected="${porEquipe}" data-m="equipes">Equipes</button></div>
       ${porLicao ? `<div class="field" style="margin:0"><select id="crLic" aria-label="Lição">${cfg.lics.map(l=>`<option value="${l.id}" ${l.id===corridaLicao?"selected":""}>${esc(l.numero)}: ${esc(l.titulo)}${l===cfg.atual?" (esta semana)":""}</option>`).join("")}</select></div>` : ""}
       ${porEquipe ? `<div class="field" style="margin:0"><select id="eqEscopo" aria-label="Período">${cfg.lics.map(l=>`<option value="${l.id}" ${l.id===equipeEscopo?"selected":""}>${esc(l.numero)}: ${esc(l.titulo)}${l===cfg.atual?" (esta semana)":""}</option>`).join("")}<option value="*" ${equipeEscopo==="*"?"selected":""}>Trimestre inteiro</option></select></div>` : ""}
-    </section>
-    <div id="rkCorpo"><section class="panel"><p class="vazio">Carregando a pista…</p></section></div></div>`;
+    </section></div>
+    <div class="principal" id="rkCorpo"><section class="panel"><p class="vazio">Carregando a pista…</p></section></div></div>`;
   app.querySelectorAll("[data-m]").forEach(b=> b.onclick = ()=>{ corridaModo = b.dataset.m; telaRanking(); });
   const sel = $("crLic"); if(sel) sel.onchange = ()=>{ corridaLicao = sel.value; telaRanking(); };
   $("crSala").onchange = e => { definirSala(e.target.value); telaRanking(); };
@@ -2217,7 +2259,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
   const jov = {};
   res.filter(r => idsPista.has(r.licaoId)).forEach(r=>{
     const u = pessoas[r.uid];
-    const j = jov[r.uid] || (jov[r.uid] = { uid:r.uid, nome:(u&&u.nome)||r.nome||"?", profeta:(u&&u.profeta)||r.profeta||"", passos:0, pts:0, regs:[] });
+    const j = jov[r.uid] || (jov[r.uid] = { uid:r.uid, nome:(u&&u.nome)||r.nome||"?", profeta:(u&&u.profeta)||r.profeta||"", nivel:(u&&u.nivel)||r.nivel||0, passos:0, pts:0, regs:[] });
     j.passos += r.noPrazo ? 1 : .5; j.pts += r.pts||0; j.regs.push(r);
   });
   const ids = Object.keys(jov).sort((a,b)=> jov[b].passos - jov[a].passos || jov[b].pts - jov[a].pts || jov[a].nome.localeCompare(jov[b].nome,"pt-BR"));
@@ -2229,7 +2271,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
     h += `<div class="escala" style="grid-template-columns:repeat(${colunas.length},1fr)">${colunas.map(c=>`<span title="${esc(c.titulo)}">${esc(c.rotulo)}</span>`).join("")}</div><ol class="lanes">`;
     ids.forEach((id,k)=>{ const j = jov[id];
       h += `<li class="lane ${id===usuario.uid?"eu":""}"><div class="lane-top"><strong>${k<3 && j.passos>0 ? `<span class="pos">${k+1}º</span>` : ""}${esc(j.nome)}${id===usuario.uid?" (você)":""}</strong><span>${fmt1(j.passos)} ${j.passos===1?"passo":"passos"} · ${fmt(j.pts)} pts</span></div>
-        <div class="track" style="--seg:${colunas.length}"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:${Math.min(1, j.passos/TOTAL)}">${avatarSVG(j.profeta || PROFETAS[0].id, j.nome)}</div></div></li>`; });
+        <div class="track" style="--seg:${colunas.length}"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:${Math.min(1, j.passos/TOTAL)}">${avatarSVG(j.profeta || PROFETA_PADRAO, j.nome, j.nivel)}</div></div></li>`; });
     h += `</ol>`;
   }
   h += `</section>`;
@@ -2239,7 +2281,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
     const completos = daSemana.filter(x => x.regs.filter(r=>r.noPrazo).length >= 7);
     const emDia = daSemana.filter(x => x.regs.length && x.regs.every(r=>r.noPrazo));
     const topPts = daSemana.map(x=>({ id:x.id, p:x.regs.reduce((s,r)=>s+(r.pts||0),0) })).filter(x=>x.p>0).sort((a,b)=>b.p-a.p)[0];
-    const chip = id => `<span class="chip">${avatarSVG(jov[id].profeta || PROFETAS[0].id)}${esc(jov[id].nome)}</span>`;
+    const chip = id => `<span class="chip">${avatarSVG(jov[id].profeta || PROFETA_PADRAO, null, jov[id].nivel)}${esc(jov[id].nome)}</span>`;
     h += `<section class="panel"><h2 class="h3" style="font-size:32px">Destaques da lição ${lic.n}</h2><div class="dest">
       <div><h3>Semana completa, 7 de 7</h3>${completos.length ? `<div class="chips">${completos.map(x=>chip(x.id)).join("")}</div>` : `<p class="muted" style="margin:0">Ainda ninguém. Quem vai ser o primeiro?</p>`}</div>
       <div><h3>Tudo no prazo até agora</h3>${emDia.length ? `<div class="chips">${emDia.map(x=>chip(x.id)).join("")}</div>` : `<p class="muted" style="margin:0">Ninguém por enquanto.</p>`}</div>
@@ -2257,7 +2299,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
 function telaConta(){
   const p = acharProfeta(perfil.profeta);
   app.innerHTML = `<div class="result-area"><section class="panel">
-    <div class="hello2">${avatarSVG(perfil.profeta)}<div class="hello-txt"><div class="hello-top"><h2>${esc(perfil.nome)}</h2></div><p class="muted small" style="margin:4px 0 0">${esc(perfil.email||"")}${p ? " · Profeta: " + esc(p.nome) : ""}${ehAdmin() ? ' · <span class="badge adm">admin</span>' : ""}</p></div></div>
+    <div class="hello2">${meuAvatar()}<div class="hello-txt"><div class="hello-top"><h2>${esc(perfil.nome)}</h2></div><p class="muted small" style="margin:4px 0 0">${esc(perfil.email||"")}${p ? " · Profeta: " + esc(p.nome) : ""}${ehMaster() ? ' · <span class="badge adm">master</span>' : souAdminDeSala() ? ' · <span class="badge">admin de sala</span>' : ""}</p></div></div>
     <div class="menu-conta">
       <button id="mNome"><span class="ic">✏️</span>Alterar nome<span class="seta">›</span></button>
       <button id="mSenha"><span class="ic">🔑</span>Alterar senha<span class="seta">›</span></button>
@@ -2468,7 +2510,7 @@ function nomeArquivo(i){
 let PROFETA_IMG = null;
 function carregarProfetaImg(){
   return new Promise(res => {
-    const svg = avatarSVG(perfil.profeta).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace('class="avatar"', 'width="240" height="310"');
+    const svg = meuAvatar().replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace(/class="avatar[^"]*"/, 'width="240" height="310"');
     const img = new Image(); img.onload = ()=>{ PROFETA_IMG = img; res(img); }; img.onerror = ()=> res(null);
     img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   });
@@ -2636,23 +2678,28 @@ function compartilharConquista(c, btn){ return gerarCartao(x => desenharConquist
    ============================================================ */
 let admTab = "usuarios";
 const ADM_TABS = [["resultados","📊 Resultados"],["salas","🏫 Salas"],["usuarios","👥 Usuários"],["aprovar","✅ Aprovar usuário"],["cadastrar","➕ Cadastrar usuário"],["licao","📥 Cadastrar lição"],["perguntas","📝 Cadastrar perguntas"],["icone","🖼️ Ícone do site"]];
+/* Master vê tudo. Admin de sala vê só Resultados e Salas, restritos às salas que administra. */
 function telaAdmin(){
-  if(!ehAdmin()){ nav("quiz"); return; }
-  app.innerHTML = `<div class="admin-area"><h2 class="h2">Admin</h2>
-    <div class="tabs" role="tablist">${ADM_TABS.map(([k,t])=>`<button role="tab" aria-selected="${admTab===k}" data-t="${k}">${t}</button>`).join("")}</div>
+  const master = ehMaster();
+  if(!master && !souAdminDeSala()){ nav("inicio"); return; }
+  const abas = master ? ADM_TABS : [["resultados","📊 Resultados"],["salas","🏫 Minhas salas"]];
+  if(!abas.some(([k]) => k === admTab)) admTab = abas[0][0];
+  app.innerHTML = `<div class="admin-area"><h2 class="h2">${master ? "Admin · Master" : "Admin da sala"}</h2>
+    ${master ? "" : `<p class="muted small" style="margin:-6px 0 12px">Você administra: <b>${SALAS.filter(ehAdminSala).map(x => esc(x.nome)).join(", ")}</b>.</p>`}
+    <div class="tabs" role="tablist">${abas.map(([k,t])=>`<button role="tab" aria-selected="${admTab===k}" data-t="${k}">${t}</button>`).join("")}</div>
     <div id="admC"></div></div>`;
   app.querySelectorAll("[data-t]").forEach(b=> b.onclick = ()=>{ admTab = b.dataset.t; telaAdmin(); });
   ({resultados:admResultados, salas:admSalas, usuarios:admUsuarios, aprovar:admAprovar, cadastrar:admCadastrar, licao:admLicao, perguntas:admPerguntas, icone:admIcone}[admTab])();
 }
 function linhaUsuario(u, pendente){
   const eu = u.id === usuario.uid;
-  return `<li data-u="${esc(u.id)}"><div class="em">${u.profeta ? avatarSVG(u.profeta) : "🙂"}</div><div class="info"><strong>${esc(u.nome||"(sem nome)")}${eu?" (você)":""}</strong><span>${esc(u.email||"")}</span><span>${u.admin?'<span class="badge adm">admin</span>':""}${u.aprovado?'<span class="badge ok">aprovado</span>':'<span class="badge warn">pendente</span>'}${u.liberarAnterior?'<span class="badge">semanas anteriores</span>':""}</span></div>
+  return `<li data-u="${esc(u.id)}"><div class="em">${u.profeta ? avatarSVG(u.profeta) : "🙂"}</div><div class="info"><strong>${esc(u.nome||"(sem nome)")}${eu?" (você)":""}</strong><span>${esc(u.email||"")}</span><span>${u.master?'<span class="badge adm">master</span>':u.admin?'<span class="badge">admin de sala</span>':""}${u.aprovado?'<span class="badge ok">aprovado</span>':'<span class="badge warn">pendente</span>'}${u.liberarAnterior?'<span class="badge">semanas anteriores</span>':""}</span></div>
     ${pendente ? `<button class="btn btn-ok btn-sm" data-aprovar="${esc(u.id)}">Aprovar</button>` : `<button class="btn btn-ghost btn-sm" data-editar="${esc(u.id)}">⋯</button>`}</li>`;
 }
 async function admUsuarios(){
   const c = $("admC"); c.innerHTML = `<section class="panel"><p class="vazio">Carregando…</p></section>`;
   let usuarios = [];
-  try{ usuarios = (await DB.listarUsuarios()).sort((a,b)=> (b.admin?1:0)-(a.admin?1:0) || String(a.nome).localeCompare(String(b.nome),"pt-BR")); }catch(e){ c.innerHTML = `<section class="panel"><p class="erro">${esc(erroMsg(e))}</p></section>`; return; }
+  try{ usuarios = (await DB.listarUsuarios()).sort((a,b)=> ((b.master?2:0)+(b.admin?1:0))-((a.master?2:0)+(a.admin?1:0)) || String(a.nome).localeCompare(String(b.nome),"pt-BR")); }catch(e){ c.innerHTML = `<section class="panel"><p class="erro">${esc(erroMsg(e))}</p></section>`; return; }
   const busca = lsGet(KEY+":busca","");
   c.innerHTML = `<section class="panel"><div class="field"><input type="text" id="uBusca" placeholder="Buscar por nome ou e-mail" value="${esc(busca)}"></div>
     <p class="muted small">${usuarios.length} usuário(s) · ${usuarios.filter(u=>!u.aprovado).length} pendente(s)</p>
@@ -2669,14 +2716,55 @@ function modalUsuario(u, depois){
   const eu = u.id === usuario.uid;
   modal(u.nome || "Usuário", `<p class="muted small" style="margin:0 0 6px">${esc(u.email||"")}</p>
     <div class="linha-sw"><div class="txt"><strong>Aprovado</strong><span>Pode entrar e jogar</span></div><button class="switch" role="switch" aria-checked="${!!u.aprovado}" data-c="aprovado" ${eu?"disabled":""}></button></div>
-    <div class="linha-sw"><div class="txt"><strong>Administrador</strong><span>Acesso ao menu Admin</span></div><button class="switch" role="switch" aria-checked="${!!u.admin}" data-c="admin" ${eu?"disabled":""}></button></div>
     <div class="linha-sw"><div class="txt"><strong>Liberar semanas anteriores</strong><span>Pode fazer lições de semanas passadas</span></div><button class="switch" role="switch" aria-checked="${!!u.liberarAnterior}" data-c="liberarAnterior"></button></div>
     <div class="field" style="margin-top:14px"><label for="uNome">Nome</label><div class="inline"><input type="text" id="uNome" maxlength="30" value="${esc(u.nome||"")}" style="flex:1"><button class="btn btn-main btn-sm" id="uNomeOk">Salvar</button></div></div>
+    <div class="papel-box"><div class="field" style="margin:0"><label for="uPapel">Nível de acesso</label><select id="uPapel" ${eu?"disabled":""}>
+        <option value="usuario" ${!u.master && !u.admin ? "selected" : ""}>Usuário</option>
+        <option value="admin" ${!u.master && u.admin ? "selected" : ""}>Administrador de sala</option>
+        <option value="master" ${u.master ? "selected" : ""}>Master</option></select>
+        <span class="hint" id="uPapelDica"></span></div>
+      <div id="uSalasBox" hidden><label class="rot">Salas que esta pessoa administra</label><div class="salas-check" id="uSalas"><p class="vazio">Carregando salas…</p></div></div>
+      ${eu ? `<p class="note" style="margin:8px 0 0">Você não pode mudar o seu próprio nível.</p>` : `<div class="btn-row uma" style="margin-top:10px"><button class="btn btn-main btn-sm" id="uPapelOk" style="width:100%">Salvar nível de acesso</button></div>`}</div>
     <p class="erro" id="uErro"></p>
     ${eu ? "" : `<div class="btn-row"><button class="btn btn-danger" id="uExcluir">Excluir usuário</button></div><p class="note">Excluir remove o perfil e tira a pessoa do ranking. ${FB_OK ? "O login (e-mail/senha) continua existindo no Firebase Authentication; para apagar de vez, remova também lá." : ""}</p>`}`,
   (m, fechar)=>{
     m.querySelectorAll(".switch").forEach(sw=> sw.onclick = async ()=>{ const campo = sw.dataset.c, v = sw.getAttribute("aria-checked") !== "true"; sw.setAttribute("aria-checked", String(v)); try{ await DB.salvarUsuario(u.id, {[campo]:v}); u[campo] = v; aviso("Salvo"); }catch(e){ sw.setAttribute("aria-checked", String(!v)); m.querySelector("#uErro").textContent = erroMsg(e); } });
     m.querySelector("#uNomeOk").onclick = async ()=>{ const v = m.querySelector("#uNome").value.trim(); if(!v) return; try{ await DB.salvarUsuario(u.id, {nome:v}); u.nome = v; aviso("Nome salvo"); }catch(e){ m.querySelector("#uErro").textContent = erroMsg(e); } };
+    // Nível de acesso: usuário, administrador de sala (com as salas atribuídas) ou master
+    const sel = m.querySelector("#uPapel"), box = m.querySelector("#uSalasBox"), dica = m.querySelector("#uPapelDica");
+    let salas = null;
+    const DICAS = { usuario: "Joga, cria as próprias salas e participa das salas dos outros.", admin: "Administra só as salas marcadas abaixo: aprova pedidos, inclui qualquer pessoa, remove membros e vê os resultados delas.", master: "Vê e edita tudo: todos os usuários, todas as salas, lições, perguntas e ícone." };
+    const listarSalas = () => { const el = m.querySelector("#uSalas"); if(!salas) return;
+      el.innerHTML = salas.length ? salas.map(x => `<label class="check"><input type="checkbox" value="${esc(x.id)}" ${(x.admins || []).includes(u.id) ? "checked" : ""}><span>${esc(x.nome)} <small>${x.publica ? "pública" : "privada"}${x.donoNome ? " · criada por " + esc(x.donoNome) : ""}</small></span></label>`).join("") : `<p class="vazio">Ainda não há salas além da 7world. Crie uma em Admin → Salas e depois volte aqui.</p>`; };
+    const atualizarPapel = () => { dica.textContent = DICAS[sel.value]; box.hidden = sel.value !== "admin";
+      if(sel.value === "admin" && !salas) DB.listarSalas().then(l => { salas = l.filter(x => x.id !== SALA_GLOBAL_ID).sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR")); listarSalas(); }).catch(e => { m.querySelector("#uSalas").innerHTML = `<p class="erro">${esc(erroMsg(e))}</p>`; }); };
+    sel.onchange = atualizarPapel; atualizarPapel();
+    const pk = m.querySelector("#uPapelOk");
+    if(pk) pk.onclick = async ()=>{
+      const papel = sel.value, er = m.querySelector("#uErro"); er.textContent = "";
+      let marcadas = [];
+      if(papel === "admin"){
+        if(!salas){ er.textContent = "Aguarde a lista de salas carregar."; return; }
+        marcadas = [...m.querySelectorAll("#uSalas input:checked")].map(x => x.value);
+        if(!marcadas.length){ er.textContent = "Escolha pelo menos uma sala para esta pessoa administrar."; return; }
+      }
+      ocupado(pk, true);
+      try{
+        // Salas: põe ou tira a pessoa da lista de administradores de cada uma
+        const todas = salas || (await DB.listarSalas()).filter(x => x.id !== SALA_GLOBAL_ID);
+        for(const x of todas){
+          const era = (x.admins || []).includes(u.id), fica = papel === "admin" && marcadas.includes(x.id);
+          if(era === fica) continue;
+          x.admins = fica ? (x.admins || []).concat(u.id) : (x.admins || []).filter(id => id !== u.id);
+          await DB.salvarSala(x.id, { admins: x.admins });
+          if(fica) await DB.salvarMembro({ salaId: x.id, uid: u.id, nome: u.nome || "", profeta: u.profeta || "", status: "ativo", papel: "admin", quando: Date.now() });
+        }
+        const dados = { master: papel === "master", admin: papel !== "usuario" }; if(papel !== "usuario") dados.aprovado = true;
+        await DB.salvarUsuario(u.id, dados); Object.assign(u, dados);
+        aviso(papel === "master" ? `${u.nome} agora é master` : papel === "admin" ? `${u.nome} administra ${marcadas.length} ${marcadas.length === 1 ? "sala" : "salas"}` : `${u.nome} voltou a ser usuário comum`);
+        ocupado(pk, false);
+      }catch(e){ er.textContent = erroMsg(e); ocupado(pk, false); }
+    };
     const ex = m.querySelector("#uExcluir"); if(ex) ex.onclick = async ()=>{ if(await confirmar("Excluir usuário", `Excluir ${u.nome}? Isso não pode ser desfeito.`, "Excluir")){ try{ try{ for(const mm of await DB.membrosDoUsuario(u.id)) await DB.excluirMembro(mm.salaId, u.id); }catch(e2){} await DB.excluirUsuario(u.id); fechar(); aviso("Usuário excluído"); }catch(e){ m.querySelector("#uErro").textContent = erroMsg(e); } } };
   }, depois);
 }
@@ -2699,14 +2787,14 @@ function admCadastrar(){
     <div class="field"><label for="nUEmail">E-mail</label><input type="email" id="nUEmail"></div>
     <div class="field"><label for="nUSenha">Senha inicial (mínimo 6)</label><input type="text" id="nUSenha" autocomplete="off"></div>
     <div class="linha-sw"><div class="txt"><strong>Já aprovado</strong><span>Pode jogar imediatamente</span></div><button class="switch" role="switch" aria-checked="true" id="nUAprov"></button></div>
-    <div class="linha-sw"><div class="txt"><strong>Administrador</strong><span>Acesso ao menu Admin</span></div><button class="switch" role="switch" aria-checked="false" id="nUAdm"></button></div>
+    <p class="note">Para tornar a pessoa administradora de uma sala ou master, crie a conta e depois edite o nível de acesso dela em Usuários.</p>
     <p class="erro" id="nUErro"></p><div class="btn-row"><button class="btn btn-main" id="nUOk">Criar conta</button></div></section>`;
   $("admC").querySelectorAll(".switch").forEach(sw=> sw.onclick = ()=> sw.setAttribute("aria-checked", String(sw.getAttribute("aria-checked")!=="true")));
   $("nUOk").onclick = async ()=>{
     const nome = $("nUNome").value.trim(), email = $("nUEmail").value.trim(), senha = $("nUSenha").value, er = $("nUErro");
     if(!nome || !email || senha.length < 6){ er.textContent = "Preencha nome, e-mail e uma senha com 6+ caracteres."; return; }
     ocupado($("nUOk"), true);
-    try{ await DB.criarUsuarioAdmin(nome, email, senha, $("nUAprov").getAttribute("aria-checked")==="true", $("nUAdm").getAttribute("aria-checked")==="true"); aviso("Conta criada para " + nome); admCadastrar(); }
+    try{ await DB.criarUsuarioAdmin(nome, email, senha, $("nUAprov").getAttribute("aria-checked")==="true", false); aviso("Conta criada para " + nome); admCadastrar(); }
     catch(e){ er.textContent = erroMsg(e); ocupado($("nUOk"), false); }
   };
 }
@@ -3195,7 +3283,7 @@ function admIcone(){
    ADMIN: RESULTADOS (acompanhamento do quiz)
    ============================================================ */
 let admResLic = "", admResDia = -1, admResSala = "*";
-function admResultados(){ return painelResultados($("admC"), { admin:true }); }
+function admResultados(){ return painelResultados($("admC"), ehMaster() ? { admin:true } : { salas: SALAS.filter(ehAdminSala) }); }
 /* opt.admin: mostra o filtro de sala (todas as salas). opt.salaFixa: mostra só os resultados dos membros daquela sala (para o dono da sala). */
 async function painelResultados(c, opt){
   opt = opt || {};
@@ -3205,6 +3293,7 @@ async function painelResultados(c, opt){
   let res, usuarios, salasTodas = [], membrosSala = null, salaSel = opt.salaFixa || null;
   try{
     if(opt.admin){ salasTodas = (await DB.listarSalas().catch(()=>[])).filter(x => x.id !== SALA_GLOBAL_ID).sort((a,b)=> String(a.nome).localeCompare(String(b.nome),"pt-BR")); if(admResSala !== "*") salaSel = salasTodas.find(x => x.id === admResSala) || null; if(!salaSel) admResSala = "*"; }
+    else if(opt.salas){ salasTodas = opt.salas; salaSel = salasTodas.find(x => x.id === admResSala) || salasTodas[0] || null; if(!salaSel){ c.innerHTML = `<section class="panel"><p class="vazio">Você ainda não administra nenhuma sala.</p></section>`; return; } admResSala = salaSel.id; }
     if(salaSel && !salaSel.global){
       // Uma sala: só os membros dela e os resultados deles
       const ms = (await DB.membrosDaSala(salaSel.id)).filter(m => m.status === "ativo");
@@ -3224,12 +3313,12 @@ async function painelResultados(c, opt){
   const rs = res.filter(r => todas ? LICOES.some(x => x.id === r.licaoId) : r.licaoId === admResLic);
   const pct = (a,b) => b ? Math.round(100*a/b) : 0;
   const nome = r => (uMap[r.uid] && uMap[r.uid].nome) || r.nome || "?";
-  const avatar = r => avatarSVG((uMap[r.uid] && uMap[r.uid].profeta) || r.profeta || PROFETAS[0].id);
+  const avatar = r => avatarSVG((uMap[r.uid] && uMap[r.uid].profeta) || r.profeta || PROFETA_PADRAO);
   const diaDe = r => { const l = LICOES.find(x => x.id === r.licaoId); return l ? l.dias.find(d => d.data === r.data) : null; };
   const rotuloDia = r => { const d = diaDe(r); const l = LICOES.find(x => x.id === r.licaoId); return (todas && l ? l.numero + " · " : "") + (d ? d.nome : r.data); };
 
   let h = `<section class="panel" style="padding:12px 14px">
-    ${opt.admin ? `<div class="field" style="margin:0 0 10px"><label for="arSala">Sala</label><select id="arSala"><option value="*" ${admResSala==="*"?"selected":""}>Todas as salas (7world)</option>${salasTodas.map(x => `<option value="${esc(x.id)}" ${x.id===admResSala?"selected":""}>${esc(x.nome)}</option>`).join("")}</select></div>` : ""}
+    ${opt.admin || (opt.salas && salasTodas.length > 1) ? `<div class="field" style="margin:0 0 10px"><label for="arSala">Sala</label><select id="arSala">${opt.admin ? `<option value="*" ${admResSala==="*"?"selected":""}>Todas as salas (7world)</option>` : ""}${salasTodas.map(x => `<option value="${esc(x.id)}" ${x.id===admResSala?"selected":""}>${esc(x.nome)}</option>`).join("")}</select></div>` : ""}
     <div class="field" style="margin:0"><label for="arLic">Lição</label><select id="arLic">
       ${LICOES.map(l => `<option value="${esc(l.id)}" ${l.id===admResLic?"selected":""}>${esc(l.numero)}: ${esc(l.titulo)}${l===LICOES[indiceLicaoAtual()]?" (esta semana)":""}</option>`).join("")}
       <option value="*" ${todas?"selected":""}>Trimestre inteiro (todas as lições)</option></select></div></section>`;
@@ -3361,11 +3450,13 @@ function normalizarCodigo(c){ return String(c || "").toUpperCase().replace(/[^A-
 function salaAtual(){ return SALA || SALA_GLOBAL; }
 function novoMembro(salaId, status, papel){ return { salaId, uid: usuario.uid, nome: perfil.nome || "", profeta: perfil.profeta || "", status, papel: papel || "membro", quando: Date.now() }; }
 function ehDonoSala(s){ return !!(s && !s.global && usuario && s.dono === usuario.uid); }
-function podeGerenciarSala(s){ return !!s && (ehAdmin() || ehDonoSala(s)); }
+function podeGerenciarSala(s){ return !!s && (ehMaster() || (!s.global && (ehDonoSala(s) || ehAdminSala(s)))); }
+/* Incluir qualquer usuário direto na sala: só o master e o administrador atribuído àquela sala */
+function podeIncluirNaSala(s){ return !!s && !s.global && (ehMaster() || ehAdminSala(s)); }
 function minhasParticipacoes(){ return SALAS.filter(x => !x.global).length + SALAS_PEDIDOS.length; }
 function badgesSala(s){
   return (s.global ? '<span class="badge adm">Global</span>' : s.publica ? '<span class="badge ok">Pública</span>' : '<span class="badge warn">Privada</span>')
-    + (ehDonoSala(s) ? '<span class="badge">Você criou</span>' : "");
+    + (ehDonoSala(s) ? '<span class="badge">Você criou</span>' : "") + (ehAdminSala(s) ? '<span class="badge adm">Você administra</span>' : "");
 }
 
 async function carregarSalas(){
@@ -3375,7 +3466,7 @@ async function carregarSalas(){
     const mems = await DB.membrosDoUsuario(eu);
     // Sala global: o admin cria o documento na primeira vez; todo mundo entra sozinho
     let global = null; try{ global = await DB.getSala(SALA_GLOBAL_ID); }catch(e){}
-    if(!global && ehAdmin()){
+    if(!global && ehMaster()){
       const doc = { nome: SALA_GLOBAL.nome, codigo: SALA_GLOBAL.codigo, publica: true, global: true, dono: eu, donoNome: perfil.nome || "", descricao: SALA_GLOBAL.descricao, criadaEm: Date.now() };
       try{ await DB.salvarSala(SALA_GLOBAL_ID, doc); global = Object.assign({ id: SALA_GLOBAL_ID }, doc); }catch(e){}
     }
@@ -3393,9 +3484,10 @@ async function carregarSalas(){
     ativas.sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR"));
     SALAS = [salaG].concat(ativas); SALAS_PEDIDOS = pedidos;
     // Mantém meu nome/profeta atualizados nas salas
-    mems.forEach(m => { if(m.nome !== (perfil.nome || "") || m.profeta !== (perfil.profeta || "")) DB.salvarMembro({ salaId: m.salaId, uid: eu, nome: perfil.nome || "", profeta: perfil.profeta || "" }).catch(()=>{}); });
+    const nv = typeof nivelAtual === "function" ? nivelAtual() : 0;
+    mems.forEach(m => { if(m.nome !== (perfil.nome || "") || m.profeta !== (perfil.profeta || "") || (m.nivel || 0) !== nv) DB.salvarMembro({ salaId: m.salaId, uid: eu, nome: perfil.nome || "", profeta: perfil.profeta || "", nivel: nv }).catch(()=>{}); });
     // Solicitações esperando a minha aprovação (salas privadas que eu criei)
-    const minhas = SALAS.filter(x => ehDonoSala(x) && !x.publica);
+    const minhas = SALAS.filter(x => !x.global && !x.publica && podeGerenciarSala(x));
     const listas = await Promise.all(minhas.map(x => DB.membrosDaSala(x.id).catch(() => [])));
     minhas.forEach((x, i) => { x.pendentes = listas[i].filter(m => m.status === "pendente").length; SALAS_PENDENTES += x.pendentes; });
   }catch(e){
@@ -3443,10 +3535,10 @@ function limparCacheResultados(){ resCache = {}; }
 /* Nome e profeta de cada pessoa da sala, a partir dos membros e dos próprios resultados (sem listar todos os usuários) */
 function pessoasDaSala(s, res){
   const m = {};
-  (res || []).forEach(r => { const a = m[r.uid]; if(!a || (r.quando || 0) >= a.q) m[r.uid] = { nome: r.nome || (a && a.nome) || "?", profeta: r.profeta || (a && a.profeta) || "", q: r.quando || 0 }; });
+  (res || []).forEach(r => { const a = m[r.uid]; if(!a || (r.quando || 0) >= a.q) m[r.uid] = { nome: r.nome || (a && a.nome) || "?", profeta: r.profeta || (a && a.profeta) || "", nivel: Math.max(r.nivel || 0, (a && a.nivel) || 0), q: r.quando || 0 }; else if((r.nivel || 0) > (a.nivel || 0)) a.nivel = r.nivel; });
   const c = s && membrosCache[s.id];
-  if(c) c.lista.forEach(x => { m[x.uid] = { nome: x.nome || (m[x.uid] && m[x.uid].nome) || "?", profeta: x.profeta || (m[x.uid] && m[x.uid].profeta) || "", q: 0 }; });
-  if(usuario && perfil && m[usuario.uid]) m[usuario.uid] = { nome: perfil.nome || "?", profeta: perfil.profeta || "", q: 0 };
+  if(c) c.lista.forEach(x => { m[x.uid] = { nome: x.nome || (m[x.uid] && m[x.uid].nome) || "?", profeta: x.profeta || (m[x.uid] && m[x.uid].profeta) || "", nivel: Math.max(x.nivel || 0, (m[x.uid] && m[x.uid].nivel) || 0), q: 0 }; });
+  if(usuario && perfil && m[usuario.uid]) m[usuario.uid] = { nome: perfil.nome || "?", profeta: perfil.profeta || "", nivel: meuNivel(), q: 0 };
   return m;
 }
 async function novoCodigoSala(){
@@ -3492,15 +3584,15 @@ async function telaSalas(recarregar){
         ${!s.global && !ehDonoSala(s) ? `<button class="btn btn-ghost btn-sm" data-sair="${esc(s.id)}">Sair</button>` : ""}
       </div></article>`;
   };
-  app.innerHTML = `<div class="result-area">
-    <header class="hero" style="padding-bottom:14px"><div class="tag"><span class="box">Salas</span><span class="date">${ehAdmin() ? "sem limite (admin)" : `${part} de ${MAX_SALAS_PARTICIPA} · criadas ${criadas} de ${MAX_SALAS_CRIADAS}`}</span></div>
+  app.innerHTML = `<div class="result-area duas"><div class="lado">
+    <header class="hero" style="padding-bottom:14px"><div class="tag"><span class="box">Salas</span><span class="date">${ehMaster() ? "sem limite (master)" : `${part} de ${MAX_SALAS_PARTICIPA} · criadas ${criadas} de ${MAX_SALAS_CRIADAS}`}</span></div>
       <h1 class="rolo-h">Minhas<span class="hl">Salas</span></h1>
-      <p>Cada sala tem a sua própria corrida. Crie uma para a sua classe, convide a turma pelo código ou pelo link, e corram juntos. A sala ativa é a que aparece na Corrida e no Início.</p></header>
+      <p>Cada sala tem a sua corrida, equipes e mural. A sala ativa é a que aparece na Corrida e no Início.</p></header>
     ${SALAS_ERRO ? `<section class="panel"><p class="erro" style="margin:0">Não deu para carregar as salas agora (${esc(SALAS_ERRO)}). Por enquanto você continua na sala global.</p></section>` : ""}
-    <div class="btn-row sala-botoes"><button class="btn btn-main" id="slCriar">Criar sala</button><button class="btn btn-ghost" id="slCodigo">Entrar com código</button><button class="btn btn-ghost" id="slPublicas">Procurar salas públicas</button></div>
-    <div class="salas-grid">${SALAS.map(cartao).join("")}</div>
+    <div class="sala-barra"><button class="btn btn-main" id="slCriar">+ Criar sala</button><button class="btn btn-ghost" id="slCodigo">Entrar com código</button><button class="btn btn-ghost" id="slPublicas">Salas públicas</button></div></div>
+    <div class="principal"><div class="salas-grid">${SALAS.map(cartao).join("")}</div>
     ${SALAS_PEDIDOS.length ? `<section class="panel"><h3 class="h3">Aguardando aprovação</h3><ul class="lista">${SALAS_PEDIDOS.map(s => `<li><div class="info"><strong>${esc(s.nome)}</strong><span>Sala privada${s.donoNome ? " de " + esc(s.donoNome) : ""}. O dono precisa aprovar a sua entrada.</span></div><button class="btn btn-ghost btn-sm" data-cancelar="${esc(s.id)}">Cancelar</button></li>`).join("")}</ul></section>` : ""}
-  </div>`;
+  </div></div>`;
   const achar = id => SALAS.find(x => x.id === id) || SALAS_PEDIDOS.find(x => x.id === id);
   $("slCriar").onclick = modalCriarSala;
   $("slCodigo").onclick = () => modalEntrarCodigo("");
@@ -3520,7 +3612,7 @@ async function telaSalas(recarregar){
 
 /* ---------- Criar ---------- */
 async function modalCriarSala(){
-  if(!ehAdmin()){
+  if(!ehMaster()){
     let criadas = SALAS.filter(x => ehDonoSala(x)).length;
     try{ criadas = Math.max(criadas, (await DB.salasDoDono(usuario.uid)).filter(x => x.id !== SALA_GLOBAL_ID).length); }catch(e){}
     if(criadas >= MAX_SALAS_CRIADAS){ modal("Limite de salas", `<p>Você já criou ${MAX_SALAS_CRIADAS} salas, que é o máximo por pessoa. Para criar outra, exclua uma das suas salas em <b>Gerenciar</b>.</p>`); return; }
@@ -3604,8 +3696,8 @@ function confirmarEntrada(s){
   });
 }
 async function entrarNaSala(s){
-  if(!ehAdmin() && minhasParticipacoes() >= MAX_SALAS_PARTICIPA) throw new Error(`Você já participa de ${MAX_SALAS_PARTICIPA} salas (fora a global), que é o máximo. Saia de uma para entrar em outra.`);
-  const direto = s.publica || ehAdmin() || s.dono === usuario.uid;
+  if(!ehMaster() && minhasParticipacoes() >= MAX_SALAS_PARTICIPA) throw new Error(`Você já participa de ${MAX_SALAS_PARTICIPA} salas (fora a global), que é o máximo. Saia de uma para entrar em outra.`);
+  const direto = s.publica || ehMaster() || s.dono === usuario.uid || ehAdminSala(s);
   await DB.salvarMembro(novoMembro(s.id, direto ? "ativo" : "pendente", s.dono === usuario.uid ? "dono" : "membro"));
   await carregarSalas();
   if(direto){ definirSala(s.id); aviso(`Você entrou na sala ${s.nome}!`); }
@@ -3659,7 +3751,7 @@ function modalGerenciarSala(s){
       delete membrosCache[s.id];
       const pend = membros.filter(x => x.status === "pendente").sort((a,b) => (a.quando||0) - (b.quando||0));
       const ativos = membros.filter(x => x.status === "ativo").sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR"));
-      const linha = (x, tipo) => `<li><div class="em">${avatarSVG(x.profeta || PROFETAS[0].id)}</div><div class="info"><strong>${esc(x.nome || "(sem nome)")}${x.uid === usuario.uid ? " (você)" : ""}</strong><span>${x.uid === s.dono ? "Criou a sala" : tipo === "p" ? "Pediu para entrar" : "Membro"}</span></div>
+      const linha = (x, tipo) => `<li><div class="em">${avatarSVG(x.profeta || PROFETA_PADRAO, null, x.nivel)}</div><div class="info"><strong>${esc(x.nome || "(sem nome)")}${x.uid === usuario.uid ? " (você)" : ""}</strong><span>${x.uid === s.dono ? "Criou a sala" : tipo === "p" ? "Pediu para entrar" : (s.admins || []).includes(x.uid) ? "Administrador da sala" : "Membro"}</span></div>
         ${tipo === "p" ? `<button class="btn btn-ok btn-sm" data-aprovar="${esc(x.uid)}">Aprovar</button><button class="btn btn-ghost btn-sm" data-recusar="${esc(x.uid)}">Recusar</button>` : (!s.global && x.uid !== s.dono ? `<button class="btn btn-ghost btn-sm" data-remover="${esc(x.uid)}">Remover</button>` : "")}</li>`;
       c.innerHTML = `
         ${pend.length ? `<h3 class="h3">Pedidos de entrada (${pend.length})</h3><ul class="lista">${pend.map(x => linha(x, "p")).join("")}</ul>${pend.length > 1 ? `<div class="btn-row uma" style="margin-bottom:14px"><button class="btn btn-ok btn-sm" id="gsTodos" style="width:100%">Aprovar todos</button></div>` : `<div style="height:10px"></div>`}` : (!s.global && !s.publica ? `<p class="note" style="margin:0 0 12px">Nenhum pedido de entrada no momento.</p>` : "")}
@@ -3672,11 +3764,11 @@ function modalGerenciarSala(s){
         <div class="btn-row"><button class="btn btn-main" id="gsSalvar">Salvar</button><button class="btn btn-ghost" id="gsConvidar">Convidar (código ${esc(s.codigo)})</button></div>`}
         <h3 class="h3" style="margin-top:16px">Membros (${ativos.length})</h3>
         ${ativos.length ? `<ul class="lista gs-membros">${ativos.map(x => linha(x, "a")).join("")}</ul>` : `<p class="vazio">Ninguém na sala ainda.</p>`}
-        ${ehAdmin() && !s.global ? `<h3 class="h3" style="margin-top:16px">Incluir usuários</h3>
-          <p class="muted small" style="margin:0 0 8px">Como admin, você coloca qualquer usuário aprovado direto na sala, sem ele precisar do código nem de aprovação.</p>
+        ${podeIncluirNaSala(s) ? `<h3 class="h3" style="margin-top:16px">Incluir usuários</h3>
+          <p class="muted small" style="margin:0 0 8px">Como ${ehMaster() ? "master" : "administrador desta sala"}, você coloca qualquer pessoa com conta aprovada direto na sala, sem ela precisar do código nem de aprovação.</p>
           <div class="field" style="margin-bottom:8px"><input type="search" id="gsBusca" placeholder="Buscar pelo nome ou e-mail" aria-label="Buscar usuário" value="${esc(busca)}"></div>
           <div id="gsAdd"><p class="vazio">Carregando usuários…</p></div>` : ""}
-        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost" id="gsRes">Ver resultados da sala</button>${s.global ? "" : `<button class="btn btn-danger" id="gsExcluir">Excluir sala</button>`}</div>`;
+        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost" id="gsRes">Ver resultados da sala</button>${s.global || !(ehMaster() || ehDonoSala(s)) ? "" : `<button class="btn btn-danger" id="gsExcluir">Excluir sala</button>`}</div>`;
       let publica = !!s.publica;
       c.querySelectorAll("[data-tipo]").forEach(b => b.onclick = () => { publica = b.dataset.tipo === "1"; c.querySelectorAll("[data-tipo]").forEach(x => x.setAttribute("aria-selected", String(x === b))); });
       const sv = c.querySelector("#gsSalvar");
@@ -3710,7 +3802,7 @@ function modalGerenciarSala(s){
           const fora = todosUsuarios.filter(u => (u.aprovado || u.admin) && !dentro.has(u.id)).sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR"));
           const achados = fora.filter(u => !q || norm(u.nome).includes(q) || norm(u.email).includes(q));
           const mostra = achados.slice(0, 20);
-          add.innerHTML = mostra.length ? `<ul class="lista gs-membros">${mostra.map(u => `<li><div class="em">${avatarSVG(u.profeta || PROFETAS[0].id)}</div><div class="info"><strong>${esc(u.nome || "(sem nome)")}</strong><span>${esc(u.email || "")}${pend.some(x => x.uid === u.id) ? " · pediu para entrar" : ""}</span></div><button class="btn btn-main btn-sm" data-incluir="${esc(u.id)}">Incluir</button></li>`).join("")}</ul>${achados.length > mostra.length ? `<p class="note">Mostrando 20 de ${achados.length}. Use a busca para achar os outros.</p>` : ""}`
+          add.innerHTML = mostra.length ? `<ul class="lista gs-membros">${mostra.map(u => `<li><div class="em">${avatarSVG(u.profeta || PROFETA_PADRAO)}</div><div class="info"><strong>${esc(u.nome || "(sem nome)")}</strong><span>${esc(u.email || "")}${pend.some(x => x.uid === u.id) ? " · pediu para entrar" : ""}</span></div><button class="btn btn-main btn-sm" data-incluir="${esc(u.id)}">Incluir</button></li>`).join("")}</ul>${achados.length > mostra.length ? `<p class="note">Mostrando 20 de ${achados.length}. Use a busca para achar os outros.</p>` : ""}`
             : `<p class="vazio">${fora.length ? "Nenhum usuário com esse nome ou e-mail." : "Todos os usuários aprovados já estão nesta sala."}</p>`;
           add.querySelectorAll("[data-incluir]").forEach(b => b.onclick = async () => {
             const u = todosUsuarios.find(x => x.id === b.dataset.incluir); if(!u) return;
@@ -3753,6 +3845,17 @@ function telaResultadosSala(s){
    ============================================================ */
 async function admSalas(){
   const c = $("admC"); c.innerHTML = `<section class="panel"><p class="vazio">Carregando salas…</p></section>`;
+  if(!ehMaster()){
+    // Administrador de sala: só as salas que o master atribuiu a ele
+    const minhas = SALAS.filter(ehAdminSala);
+    const listas = await Promise.all(minhas.map(x => DB.membrosDaSala(x.id).catch(() => [])));
+    if(!$("admC")) return;
+    c.innerHTML = `<section class="panel"><h3 class="h3">Salas que você administra (${minhas.length})</h3>
+      <p class="muted small">Em Gerenciar você aprova pedidos, inclui qualquer pessoa com conta, remove membros e vê os resultados da sala.</p>
+      ${minhas.length ? `<ul class="lista">${minhas.map((x, i) => { const at = listas[i].filter(m => m.status === "ativo").length, pe = listas[i].filter(m => m.status === "pendente").length; return `<li><div class="info"><strong>${esc(x.nome)}</strong><span>${badgesSala(x)} código ${esc(x.codigo || "")} · ${at} ${at === 1 ? "membro" : "membros"}${pe ? ` · <b>${pe} pedido${pe > 1 ? "s" : ""}</b>` : ""}</span></div><button class="btn btn-ghost btn-sm" data-gs="${esc(x.id)}">Gerenciar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma sala atribuída a você no momento.</p>`}</section>`;
+    c.querySelectorAll("[data-gs]").forEach(b => b.onclick = () => modalGerenciarSala(minhas.find(x => x.id === b.dataset.gs)));
+    return;
+  }
   try{
     const [salas, usuarios] = await Promise.all([DB.listarSalas(), DB.listarUsuarios()]);
     const uMap = {}; usuarios.forEach(u => uMap[u.id] = u);
@@ -3761,7 +3864,7 @@ async function admSalas(){
     const contagens = await Promise.all(lista.map(s => s.global ? Promise.resolve(null) : DB.membrosDaSala(s.id).catch(() => [])));
     if(!$("admC")) return;
     c.innerHTML = `<section class="panel"><div class="inline" style="justify-content:space-between"><h3 class="h3" style="margin:0">Todas as salas (${lista.length})</h3><button class="btn btn-main btn-sm" id="asCriar">Criar sala</button></div>
-      <p class="muted small">Como admin, você cria quantas salas quiser e pode gerenciar qualquer sala. Cada pessoa cria até ${MAX_SALAS_CRIADAS} e participa de até ${MAX_SALAS_PARTICIPA} (fora a global).</p>
+      <p class="muted small">Como master, você vê todas as salas criadas por qualquer pessoa, cria quantas quiser e gerencia qualquer uma. Para dar a alguém a administração de uma sala, edite a pessoa em Usuários. Cada pessoa cria até ${MAX_SALAS_CRIADAS} e participa de até ${MAX_SALAS_PARTICIPA} (fora a global).</p>
       ${lista.length ? `<ul class="lista">${lista.map((s, i) => { const ms = contagens[i]; const at = ms ? ms.filter(x => x.status === "ativo").length : usuarios.filter(u => u.aprovado || u.admin).length; const pe = ms ? ms.filter(x => x.status === "pendente").length : 0;
         return `<li><div class="info"><strong>${esc(s.nome)}</strong><span>${badgesSala(s)} código ${esc(s.codigo || "")} · ${at} ${at === 1 ? "membro" : "membros"}${pe ? ` · <b>${pe} pedido${pe > 1 ? "s" : ""}</b>` : ""}${s.global ? "" : " · criada por " + esc((uMap[s.dono] && uMap[s.dono].nome) || s.donoNome || "?")}</span></div><button class="btn btn-ghost btn-sm" data-gs="${esc(s.id)}">Gerenciar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma sala ainda.</p>`}</section>`;
     $("asCriar").onclick = modalCriarSala;
@@ -3790,12 +3893,32 @@ PROFETAS.push(
   { id:"zacarias", nome:"Zacarias", bg:"#F08A4B", pele:"#9C6440", cabelo:"#2B1B12", barba:"curta", veste:"#5B4FC9", cob:{t:"faixa",c:"#8FE6FF"}, emb:"candelabro", nivel:9, fala:"Ouvi de Deus: não por força nem por violência, mas pelo meu Espírito.", ref:"Zacarias 4:6" }
 );
 PROFETAS.sort((a,b)=> a.nome.localeCompare(b.nome, "pt-BR"));
+const PROFETA_PADRAO = PROFETAS.find(p => !p.nivel).id;   // boneco usado quando a pessoa ainda não escolheu (nunca um profeta raro)
 Object.assign(FALAS, {
   enoque:["Eu andava com Deus todos os dias. Caminhe com Ele hoje também!", "Um passo por dia: foi assim que a minha caminhada com Deus ficou longa.", "Anunciei que o Senhor vem com milhares de anjos. Ele vem mesmo!", "Andar com Deus é conversar com Ele no caminho. Já conversou hoje?", "Deus gosta de companhia. Separe um tempo só para vocês dois."],
   noe:["Obedeci mesmo quando ninguém entendia. Vale a pena confiar em Deus!", "Levei anos construindo a arca. Coisa grande se faz um dia de cada vez.", "Deus fechou a porta da arca e cuidou de nós. Ele cuida de você.", "Depois da chuva, Deus colocou o arco-íris no céu. A promessa dEle não falha.", "Preguei enquanto construía. Seu estudo de hoje também é um testemunho."],
   abraao:["Saí sem saber para onde ia, só porque Deus chamou. Confie no caminho!", "Olhei para as estrelas e cri na promessa. Deus cumpre o que diz.", "Fui chamado amigo de Deus. Ele quer ser seu amigo também.", "Montei altares por onde passei. Reserve hoje o seu momento com Deus.", "No monte, aprendi: o Senhor proverá. Ele provê para você também."],
   zacarias:["Deus disse: voltem para mim, e eu voltarei para vocês. Hoje é um bom dia!", "Não por força nem por violência, mas pelo Espírito de Deus. Peça ajuda a Ele!", "Não despreze os pequenos começos. Seu estudo de hoje conta!", "Anunciei um Rei humilde, montado num jumentinho. Era Jesus!", "Deus me deu visões de esperança para animar o povo. Anime alguém hoje."]
 });
+
+/* ---------- Boneco: selo do nível perto do pé e brilho dourado nos profetas conquistados ---------- */
+function avatarSVG(id, rotulo, nivel){
+  const p = acharProfeta(id) || acharProfeta(PROFETA_PADRAO);
+  const lbl = String(rotulo || p.nome).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const raro = !!p.nivel, nv = Math.floor(+nivel || 0);
+  const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
+  const brilho = raro ? `<g class="av-raro" fill="#FFE27A">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}</g>` : "";
+  const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
+  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${raro ? ", profeta raro" : ""}" shape-rendering="crispEdges">${brilho}${spriteMiolo(p)}${selo}</svg>`;
+}
+let _nvMemo = { k: "", v: 0 };
+function meuNivel(){
+  if(!perfil) return 0;
+  const k = Object.keys(RES).length + "|" + (perfil.missoes || 0) + "|" + SALAS.length + "|" + (perfil.muralPosts || 0) + "|" + (perfil.temEquipe ? 1 : 0);
+  if(_nvMemo.k !== k) _nvMemo = { k, v: nivelAtual() };
+  return _nvMemo.v;
+}
+function meuAvatar(){ return avatarSVG(perfil.profeta, null, meuNivel()); }
 
 /* ---------- Estatísticas do jogador (base das missões e da análise) ---------- */
 function estatisticas(){
@@ -3978,7 +4101,7 @@ function telaMissoes(vindoDe){
   tabAtual = "inicio"; atualizarCasca(); pararTimer();
   const st = estatisticas(), feitas = missoesFeitas(st), nv = nivelDe(feitas), prox = MISSOES[feitas] || null;
   const noNivel = feitas % 5, faltam = prox ? 5 - noNivel : 0;
-  app.innerHTML = `<div class="result-area">
+  app.innerHTML = `<div class="result-area duas"><div class="lado">
     <header class="hero" style="padding-bottom:10px"><div class="tag"><span class="box">Missões</span><span class="date">${feitas} de ${MISSOES.length} cumpridas</span></div>
       <h1 class="rolo-h">Trilha do<span class="hl">Profeta</span></h1></header>
     <section class="panel ms-resumo">
@@ -3991,10 +4114,11 @@ function telaMissoes(vindoDe){
       </div>
     </section>
     <section class="panel"><span class="hoje-lbl">Suas ajudas</span>${chipsAjudas()}<p class="muted small" style="margin:8px 0 0">As ajudas são ganhas nas missões e aparecem durante o quiz.</p></section>
-    <section class="panel trilha-wrap"><div class="trilha" id="trilha"></div></section>
-    <div class="btn-row uma"><button class="btn btn-ghost" id="msVoltar">Voltar para o início</button></div>
+    <div class="btn-row uma so-largo"><button class="btn btn-ghost" id="msVoltar2">Voltar para o início</button></div></div>
+    <div class="principal"><section class="panel trilha-wrap"><div class="trilha" id="trilha"></div></section>
+    <div class="btn-row uma so-estreito"><button class="btn btn-ghost" id="msVoltar">Voltar para o início</button></div></div>
   </div>`;
-  $("msVoltar").onclick = () => nav("inicio");
+  $("msVoltar").onclick = $("msVoltar2").onclick = () => nav("inicio");
   const el = $("trilha"), larg = Math.min(el.clientWidth || 340, 560), N = MISSOES.length;
   const alt = posTrilha(N, larg).y + 70;
   el.style.height = alt + "px";
@@ -4009,7 +4133,7 @@ function telaMissoes(vindoDe){
     if(portal) h += `<div class="tr-nivel ${feita ? "on" : ""} ${p.x > larg / 2 ? "esq" : "dir"}" style="top:${p.y}px">Nível ${m.n / 5 + 1}<small>${esc(nomeNivel(m.n / 5 + 1))}</small></div>`;
     else if(m.n === 1) h += `<div class="tr-nivel ${feita ? "on" : ""} ${p.x > larg / 2 ? "esq" : "dir"}" style="top:${p.y}px">Nível 1<small>${esc(nomeNivel(1))}</small></div>`;
   });
-  h += `<div class="tr-profeta" id="trProfeta">${avatarSVG(perfil.profeta)}</div>`;
+  h += `<div class="tr-profeta" id="trProfeta">${meuAvatar()}</div>`;
   el.innerHTML = h;
   el.style.width = larg + "px";
   // O profeta caminha da posição anterior até a missão atual
@@ -4088,7 +4212,7 @@ function cartaoDesempenho(){
   const acAtual = a.atual && a.atual.acerto != null ? a.atual.acerto : a.geral;
   const barras = a.ultimos.length ? `<div class="dz-barras" role="img" aria-label="Acerto nos últimos ${a.ultimos.length} quizzes">${a.ultimos.map(r => { const p = r.total ? Math.round(100 * r.acertos / r.total) : 0; return `<div title="${dataCurta(r.data)}: ${r.acertos} de ${r.total}"><i style="height:${Math.max(8, p)}%" class="${r.noPrazo ? "" : "tarde"}"></i><small>${dataCurta(r.data).slice(0, 2)}</small></div>`; }).join("")}</div><p class="muted small" style="margin:4px 0 0">Acerto nos seus últimos ${a.ultimos.length} ${a.ultimos.length === 1 ? "quiz" : "quizzes"}</p>` : "";
   return `<section class="panel dz"><div class="cq-head"><span class="hoje-lbl">Meu desempenho <span class="dz-priv">só você vê</span></span>${a.porLicao.length ? `<button class="btn btn-ghost btn-sm" id="dzMais">Detalhes</button>` : ""}</div>
-    <div class="fala dz-fala">${avatarSVG(perfil.profeta)}<div class="balao mini"><p>${esc(a.fala)}</p></div></div>
+    <div class="fala dz-fala">${meuAvatar()}<div class="balao mini"><p>${esc(a.fala)}</p></div></div>
     ${st.quizzes ? `<div class="dz-stats">
       ${bloco(acAtual != null ? acAtual + "%" : "—", "de acerto nesta lição", sobe(a.dAc, " a mais") || (a.melhorAcerto > (acAtual || 0) ? `<em>seu melhor: ${a.melhorAcerto}%</em>` : ""))}
       ${bloco(st.seq, st.seq === 1 ? "dia seguido" : "dias seguidos", `<em>recorde: ${st.melhorSeq}</em>`)}
@@ -4099,7 +4223,7 @@ function cartaoDesempenho(){
 }
 function modalDesempenho(){
   const a = analiseDesempenho();
-  modal("Meu desempenho", `<div class="fala dz-fala">${avatarSVG(perfil.profeta)}<div class="balao mini"><p>${esc(a.fala)}</p></div></div>
+  modal("Meu desempenho", `<div class="fala dz-fala">${meuAvatar()}<div class="balao mini"><p>${esc(a.fala)}</p></div></div>
     <ul class="lista" style="margin-top:12px">${a.porLicao.slice().reverse().map(x => `<li><div class="pos">${x.L.n}</div><div class="info"><strong>${esc(x.L.titulo)}</strong><span>${x.n} de 7 dias · ${x.prazo} no prazo${x.acerto != null ? " · " + x.acerto + "% de acerto" : ""}</span></div><div class="pts">${fmt(x.media)}</div></li>`).join("")}</ul>
     <p class="note">O número à direita é a sua média de pontos por quiz em cada lição. Estes dados aparecem só para você.</p>`);
 }
@@ -4141,7 +4265,7 @@ function ligarMapaTrimestre(aoEscolher){
    ============================================================ */
 function mostrarTutorial(aoFim){
   const telas = [
-    { arte: `<div class="tu-arte"><div class="track" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.3">${avatarSVG(perfil.profeta)}</div></div></div>`,
+    { arte: `<div class="tu-arte"><div class="track" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.3">${meuAvatar()}</div></div></div>`,
       t: "Um passo por dia", d: "Estude a lição do dia, responda o quiz e o seu profeta dá um passo na corrida. São 7 passos por semana, de sábado a sexta." },
     { arte: `<div class="tu-arte"><div class="tu-relogio">⏳</div><div class="tu-pilulas"><span class="pill ok">No prazo: 1 passo</span><span class="pill late">Atrasado: meio passo</span></div></div>`,
       t: "Fique de olho no prazo", d: "O quiz de cada dia vale até a meia-noite. Feito depois, vale metade dos pontos e meio passo. Cada resposta fica salva: se precisar sair, você continua de onde parou." },
@@ -4249,7 +4373,7 @@ async function equipesDaSala(s, forcar){
   equipesCache[s.id] = { lista, em: Date.now() };
   return lista;
 }
-function podeGerenciarEquipe(e, s){ return ehAdmin() || ehDonoSala(s) || e.criadaPor === usuario.uid; }
+function podeGerenciarEquipe(e, s){ return ehMaster() || ehDonoSala(s) || ehAdminSala(s) || e.criadaPor === usuario.uid; }
 
 async function telaEquipes(sala, cfg){
   const corpo = $("rkCorpo"); if(!corpo) return;
@@ -4266,7 +4390,8 @@ async function telaEquipes(sala, cfg){
     }).sort((a, b) => b.media - a.media || b.total - a.total || String(a.e.nome).localeCompare(String(b.e.nome), "pt-BR"));
     const minha = linhas.find(x => x.ms.includes(eu));
     const nomeDe = (e, u) => (u === eu ? perfil.nome : (pessoas[u] && pessoas[u].nome) || (e.pessoas && e.pessoas[u] && e.pessoas[u].nome) || "?");
-    const profDe = (e, u) => (u === eu ? perfil.profeta : (pessoas[u] && pessoas[u].profeta) || (e.pessoas && e.pessoas[u] && e.pessoas[u].profeta) || PROFETAS[0].id);
+    const profDe = (e, u) => (u === eu ? perfil.profeta : (pessoas[u] && pessoas[u].profeta) || (e.pessoas && e.pessoas[u] && e.pessoas[u].profeta) || PROFETA_PADRAO);
+    const nivDe = (e, u) => (u === eu ? meuNivel() : Math.max((pessoas[u] && pessoas[u].nivel) || 0, (e.pessoas && e.pessoas[u] && e.pessoas[u].nivel) || 0));
     const emEquipe = new Set(linhas.flatMap(x => x.ms));
     const semEquipe = membros ? [...membros].filter(u => !emEquipe.has(u)).length : null;
     let h = `<section class="panel"><div class="cq-head"><h2 class="h3" style="font-size:30px;margin:0">Ranking das equipes</h2><button class="btn btn-main btn-sm" id="eqCriar">Criar equipe</button></div>
@@ -4277,7 +4402,7 @@ async function telaEquipes(sala, cfg){
         return `<article class="equipe ${souDela ? "minha" : ""}" style="--cor:${esc(e.cor || CORES_EQUIPE[0])}">
           <div class="eq-top"><div class="eq-pos">${k + 1}º</div><div class="eq-nome"><h3>${esc(e.nome)}</h3><span>${x.ms.length} ${x.ms.length === 1 ? "jovem" : "jovens"} · ${fmt(x.total)} pts no total · ${x.quizzes} ${x.quizzes === 1 ? "quiz" : "quizzes"}</span></div>
             <div class="eq-media"><b>${fmt(x.media)}</b><span>média por jovem</span></div></div>
-          ${x.ms.length ? `<div class="chips eq-membros">${mostra.map(u => `<span class="chip">${avatarSVG(profDe(e, u))}${esc(nomeDe(e, u))}${porUid[u] ? `<em>${fmt(porUid[u].pts)}</em>` : ""}</span>`).join("")}${x.ms.length > mostra.length ? `<span class="chip">+${x.ms.length - mostra.length}</span>` : ""}</div>` : `<p class="muted small" style="margin:8px 0 0">Equipe sem ninguém ainda.</p>`}
+          ${x.ms.length ? `<div class="chips eq-membros">${mostra.map(u => `<span class="chip">${avatarSVG(profDe(e, u), null, nivDe(e, u))}${esc(nomeDe(e, u))}${porUid[u] ? `<em>${fmt(porUid[u].pts)}</em>` : ""}</span>`).join("")}${x.ms.length > mostra.length ? `<span class="chip">+${x.ms.length - mostra.length}</span>` : ""}</div>` : `<p class="muted small" style="margin:8px 0 0">Equipe sem ninguém ainda.</p>`}
           <div class="sala-acoes">${souDela ? `<button class="btn btn-ghost btn-sm" data-eqsair="${esc(e.id)}">Sair da equipe</button>` : `<button class="btn ${minha ? "btn-ghost" : "btn-main"} btn-sm" data-eqentrar="${esc(e.id)}">${minha ? "Trocar para esta" : "Entrar"}</button>`}${podeGerenciarEquipe(e, sala) ? `<button class="btn btn-ghost btn-sm" data-eqger="${esc(e.id)}">Gerenciar</button>` : ""}</div>
         </article>`; }).join("")}</div>`;
     if(semEquipe) h += `<p class="rodape">${semEquipe} ${semEquipe === 1 ? "jovem da sala ainda está" : "jovens da sala ainda estão"} sem equipe${minha ? "" : ". Entre em uma para os seus pontos contarem!"}</p>`;
@@ -4294,7 +4419,7 @@ async function entrarNaEquipe(sala, e, equipes){
   if(!e) return;
   const eu = usuario.uid;
   for(const o of equipes) if(o.id !== e.id && (o.membros || []).includes(eu)) await DB.sairEquipe(o.id, eu);
-  await DB.entrarEquipe(e.id, eu, { nome: perfil.nome || "", profeta: perfil.profeta || "" });
+  await DB.entrarEquipe(e.id, eu, { nome: perfil.nome || "", profeta: perfil.profeta || "", nivel: meuNivel() });
   delete equipesCache[sala.id];
   if(!perfil.temEquipe){ perfil.temEquipe = true; DB.salvarUsuario(eu, { temEquipe: true }).catch(()=>{}); }
   tocar("ajuda"); aviso(`Você entrou na equipe ${e.nome}!`);
@@ -4353,7 +4478,7 @@ async function publicarNoMural(post, btn){
   const sala = salaAtual(), agora = Date.now(), id = [sala.id, usuario.uid, post.tipo, post.ref].join("_").replace(/[^A-Za-z0-9_.-]/g, "-");
   if(btn) ocupado(btn, true);
   try{
-    await DB.salvarPost(id, { salaId: sala.id, salaMes: sala.id + "|" + mesDe(agora), uid: usuario.uid, nome: perfil.nome || "", profeta: perfil.profeta || "", tipo: post.tipo, ref: String(post.ref), ic: post.ic || "✨", titulo: post.titulo, texto: post.texto || "", quando: agora });
+    await DB.salvarPost(id, { salaId: sala.id, salaMes: sala.id + "|" + mesDe(agora), uid: usuario.uid, nome: perfil.nome || "", profeta: perfil.profeta || "", nivel: meuNivel(), tipo: post.tipo, ref: String(post.ref), ic: post.ic || "✨", titulo: post.titulo, texto: post.texto || "", quando: agora });
     const meus = lsGet(KEY + ":mural:" + usuario.uid, []);
     if(!meus.includes(id)){ meus.push(id); lsSet(KEY + ":mural:" + usuario.uid, meus.slice(-200)); perfil.muralPosts = (perfil.muralPosts || 0) + 1; DB.salvarUsuario(usuario.uid, { muralPosts: perfil.muralPosts }).catch(()=>{}); }
     tocar("ajuda"); aviso(`Publicado no mural da sala ${sala.nome}`);
@@ -4369,12 +4494,12 @@ function postDaConquista(c){ return { tipo: "conquista", ref: c.id, ic: c.ic, ti
 async function telaMural(){
   tabAtual = "salas"; atualizarCasca(); pararTimer();
   const sala = salaAtual(), eu = usuario.uid;
-  app.innerHTML = `<div class="result-area">
+  app.innerHTML = `<div class="result-area duas"><div class="lado">
     <header class="hero" style="padding-bottom:10px"><div class="tag"><span class="box">${esc(sala.nome)}</span><span class="date">Mural</span></div>
       <h1 class="rolo-h">Mural da<span class="hl">Sala</span></h1>
       <p>Compartilhe o que você conquistou e anime quem está na corrida com você.</p></header>
-    <section class="panel" style="padding:12px 14px"><div class="sala-sel" style="margin:0"><div class="field" style="margin:0"><label for="muSala">Sala</label><select id="muSala">${SALAS.map(x => `<option value="${esc(x.id)}" ${x.id === sala.id ? "selected" : ""}>${esc(x.nome)}${x.global ? " (global)" : ""}</option>`).join("")}</select></div><button class="btn btn-main btn-sm" id="muNovo">Compartilhar</button></div></section>
-    <div id="muCorpo"><section class="panel"><p class="vazio">Carregando o mural…</p></section></div></div>`;
+    <section class="panel" style="padding:12px 14px"><div class="sala-sel" style="margin:0"><div class="field" style="margin:0"><label for="muSala">Sala</label><select id="muSala">${SALAS.map(x => `<option value="${esc(x.id)}" ${x.id === sala.id ? "selected" : ""}>${esc(x.nome)}${x.global ? " (global)" : ""}</option>`).join("")}</select></div><button class="btn btn-main btn-sm" id="muNovo">Compartilhar</button></div></section></div>
+    <div class="principal" id="muCorpo"><section class="panel"><p class="vazio">Carregando o mural…</p></section></div></div>`;
   $("muSala").onchange = e => { definirSala(e.target.value); telaMural(); };
   $("muNovo").onclick = modalCompartilharMural;
   try{
@@ -4385,7 +4510,7 @@ async function telaMural(){
     const desenhar = () => {
       corpo.innerHTML = `<div class="mural">${posts.map(p => { const rc = p.reacoes || {};
         return `<article class="post ${p.uid === eu ? "meu" : ""}" data-post="${esc(p.id)}">
-          <div class="post-top"><div class="em">${avatarSVG(p.profeta || PROFETAS[0].id)}</div><div class="info"><strong>${esc(p.nome || "?")}${p.uid === eu ? " (você)" : ""}</strong><span>${haQuanto(p.quando || 0)}</span></div>${p.uid === eu || ehAdmin() || ehDonoSala(sala) ? `<button class="post-x" data-apagar="${esc(p.id)}" aria-label="Apagar publicação">✕</button>` : ""}</div>
+          <div class="post-top"><div class="em">${avatarSVG(p.profeta || PROFETA_PADRAO, null, p.uid === eu ? meuNivel() : p.nivel)}</div><div class="info"><strong>${esc(p.nome || "?")}${p.uid === eu ? " (você)" : ""}</strong><span>${haQuanto(p.quando || 0)}</span></div>${p.uid === eu || ehMaster() || ehDonoSala(sala) || ehAdminSala(sala) ? `<button class="post-x" data-apagar="${esc(p.id)}" aria-label="Apagar publicação">✕</button>` : ""}</div>
           <div class="post-corpo"><div class="ic">${esc(p.ic || "✨")}</div><div><b>${esc(p.titulo)}</b>${p.texto ? `<span>${esc(p.texto)}</span>` : ""}</div></div>
           <div class="post-reacoes">${REACOES.map(([k, ic, nome]) => { const l = rc[k] || [], on = l.includes(eu); return `<button type="button" class="reacao ${on ? "on" : ""}" data-reagir="${k}" aria-pressed="${on}" title="${nome}"><span>${ic}</span>${nome}${l.length ? `<b>${l.length}</b>` : ""}</button>`; }).join("")}</div>
         </article>`; }).join("")}</div>`;
