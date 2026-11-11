@@ -735,12 +735,10 @@ ol.passos li{margin-bottom:8px}
   .qtext{font-size:30px}
   .estudo-area{max-width:780px;margin:0 auto}
   .estudo{font-size:18px}
-  .profetas{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
   .emojis{grid-template-columns:repeat(auto-fill,minmax(58px,1fr))}
   .modal-bg{place-items:center}
   .modal{max-width:640px;border-radius:22px}
   .menu-conta{grid-template-columns:1fr 1fr}
-  .admin-area{max-width:900px;margin:0 auto}
   .grid2{grid-template-columns:1fr 1fr 1fr 1fr}
   .btn-row{grid-template-columns:1fr 1fr}
   .btn-row .btn{width:100%}
@@ -763,7 +761,6 @@ ol.passos li{margin-bottom:8px}
   .result-area.duas .salas-grid,.result-area.duas .mural,.result-area.duas .equipes{margin-top:0}
   .so-largo{display:grid}.so-estreito{display:none}
   .home{grid-template-columns:minmax(340px,440px) minmax(0,1fr)}
-  .admin-area{max-width:1100px}
   .menu-conta{grid-template-columns:1fr 1fr}
 }
 @media (min-width:1400px){
@@ -774,6 +771,95 @@ ol.passos li{margin-bottom:8px}
 }
 @media (min-width:1700px){ .wrap{max-width:1640px} }
 
+
+
+/* ---------- Escolha do profeta: comuns em 52×60, raros em 92×100 no fim da lista ---------- */
+.profetas{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px}
+.profetas .prof{font-size:12.5px;padding:8px 2px 6px}
+.profetas .prof .avatar{width:52px;height:60px}
+.prof-tit{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;font-size:22px;margin:20px 0 10px;padding-top:14px;border-top:1px solid var(--panel-line)}
+.prof-tit small{font-family:"Barlow","Segoe UI",Arial,sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0;color:var(--muted);text-transform:none}
+.profetas.raros{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+.profetas .prof.raro{font-size:14px;padding:10px 6px 8px;background:linear-gradient(180deg,rgba(242,190,46,.24),rgba(242,190,46,.07));border-color:rgba(242,190,46,.5)}
+.profetas .prof.raro .avatar{width:92px;height:100px}
+.prof.raro em{color:#FFE27A}
+.prof.raro.bloq em{color:var(--warn)}
+.prof.raro[aria-pressed="true"]{background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(242,190,46,.22));border-color:#fff}
+.profetas .prof.lendario{background:linear-gradient(180deg,rgba(255,243,184,.4),rgba(242,190,46,.14));border-color:#FFE27A;box-shadow:0 0 20px rgba(255,226,122,.4)}
+.avatar.lendario{filter:drop-shadow(0 0 1.5px #FFF3B8) drop-shadow(0 0 8px rgba(255,226,122,.95))}
+.prof.bloq .avatar.lendario{filter:grayscale(1) brightness(.75)}
+@media (max-width:599px){ .profetas.raros{grid-template-columns:1fr 1fr} .profetas .prof.lendario{grid-column:1/-1} }
+@media (min-width:900px){ .profetas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))} .profetas.raros{grid-template-columns:repeat(auto-fill,minmax(128px,1fr))} .profetas .prof{font-size:13px} }
+
+/* ---------- Admin: menu de seções + conteúdo em grade, usando a largura toda ---------- */
+.admin-area{display:grid;gap:14px;min-width:0}
+.adm-menu .h2{font-size:30px;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+.adm-menu .h2 .badge{font-family:"Barlow","Segoe UI",Arial,sans-serif;margin:0}
+.adm-sub{margin:-2px 0 10px}
+.adm-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.adm-nav.poucas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.adm-grp{display:none}
+.adm-nav button{position:relative;display:grid;justify-items:center;align-content:center;gap:3px;min-height:60px;padding:7px 3px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid var(--panel-line);color:var(--muted);font-weight:700;font-size:11.5px;line-height:1.15;text-align:center}
+.adm-nav button .ic{font-size:20px;line-height:1}
+.adm-nav button[aria-selected="true"]{background:#fff;color:var(--deep);border-color:#fff}
+.adm-n{position:absolute;top:4px;right:5px;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:var(--warn);color:#2A2000;font-size:11px;font-weight:800;display:grid;place-items:center}
+.adm-c{display:grid;gap:14px;align-content:start;min-width:0}
+.adm-c > .panel{margin:0;min-width:0}
+.adm-cab{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:10px}
+.adm-cab .h3{margin:0}
+.adm-topo{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.adm-topo input[type=text]{flex:1 1 220px;min-width:0}
+.adm-filtros{display:flex;gap:6px;flex-wrap:wrap}
+.chip-f{background:rgba(255,255,255,.1);border:1px solid var(--panel-line);color:var(--muted);border-radius:999px;padding:8px 12px;font-weight:700;font-size:13.5px;white-space:nowrap}
+.chip-f b{font-weight:800;opacity:.8;margin-left:2px}
+.chip-f[aria-pressed="true"]{background:#fff;color:var(--deep);border-color:#fff}
+.adm-campos{display:grid;gap:0 12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.adm-acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.adm-acoes .btn{width:auto;flex:1 1 170px}
+.adm-duo{display:grid;gap:0 28px}
+.ar-filtro{padding:12px 14px;display:grid;gap:10px}
+.ar-filtro .field{margin:0}
+.qgrade{display:grid;gap:12px;margin-bottom:12px}
+.qgrade .qcard{margin:0}
+.lista .info .badge{display:inline-block;margin-top:3px}
+.prof.raro.bloq{opacity:.86}
+.prof.raro.bloq .avatar.raro{filter:grayscale(1) brightness(.9)}
+.profetas .prof.raro.bloq em{color:#fff;background:rgba(0,0,0,.28);border-radius:99px;padding:1px 8px}
+.prof.raro em{font-size:11.5px}
+/* listas em colunas (usuários, salas, resultado por jovem) */
+.lista.cols{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.lista.cols li,.lista.cols li:first-child{border:1px solid var(--panel-line);border-radius:14px;padding:10px 12px;background:rgba(0,0,0,.1)}
+.lista.cols li.vazio{grid-column:1/-1;border:0;background:none;padding:10px 0}
+.lista.cols li.eu{background:rgba(255,255,255,.1)}
+@media (min-width:700px){
+  .ar-filtro{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .adm-acoes .btn{flex:0 1 auto;min-width:190px}
+}
+@media (min-width:900px){
+  .wrap:has(.admin-area){max-width:none}
+  .admin-area{grid-template-columns:212px minmax(0,1fr);gap:20px;align-items:start}
+  .adm-menu{position:sticky;top:84px;background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--radius-lg);padding:14px 10px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .adm-menu .h2{padding:0 8px;font-size:28px;margin-bottom:2px}
+  .adm-sub{padding:0 8px}
+  .adm-nav,.adm-nav.poucas{grid-template-columns:1fr;gap:2px}
+  .adm-grp{display:block;font-size:11px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);padding:12px 10px 4px}
+  .adm-nav button{display:flex;justify-content:flex-start;align-items:center;min-height:42px;gap:10px;padding:8px 10px;font-size:15px;text-align:left;background:transparent;border-color:transparent;border-radius:12px}
+  .adm-nav button:hover{background:rgba(255,255,255,.1);color:#fff}
+  .adm-nav button[aria-selected="true"]:hover{background:#fff;color:var(--deep)}
+  .adm-nav button .ic{font-size:18px;width:24px;text-align:center;flex:none}
+  .adm-n{position:static;margin-left:auto}
+  .adm-campos.tit{grid-template-columns:2fr 1.5fr 1fr}
+  .adm-topo input[type=text]{max-width:440px}
+  .adm-topo #uNovo{margin-left:auto}
+}
+@media (min-width:1100px){
+  .adm-c{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:16px}
+  .adm-c > .panel.larga{grid-column:1/-1}
+  .adm-duo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .adm-c .ar-stats{grid-template-columns:repeat(6,1fr)}
+  .adm-c .qgrade{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1500px){ .admin-area{grid-template-columns:232px minmax(0,1fr);gap:24px} .adm-c .qgrade{grid-template-columns:repeat(3,minmax(0,1fr))} }
 
 @media (prefers-reduced-motion:reduce){.cd-num.anim,.cd-num.vai,.cd-ring,.cd-in .avatar,.modal,.modal-bg{animation:none}}
 </style>
@@ -1548,9 +1634,14 @@ function telaPendente(){
 function telaProfeta(){
   const tinha = !!perfil.profeta;
   let escolhido = perfil.profeta || "";
+  const botaoProfeta = p => { const livre = profetaLiberado(p);
+    return `<button type="button" class="prof ${p.nivel ? "raro" : ""} ${p.lendario ? "lendario" : ""} ${livre ? "" : "bloq"}" data-p="${p.id}" ${livre ? "" : `data-nivel="${p.nivel}"`} aria-pressed="${p.id===escolhido}">${avatarSVG(p.id)}<span>${esc(p.nome)}</span>${p.nivel ? `<em>${livre ? (p.lendario ? "★ Lendário" : "★ Raro") : "🔒 Nível " + p.nivel}</em>` : ""}</button>`; };
   app.innerHTML = `<div class="estudo-area"><section class="panel"><h2 class="h2">${perfil.profeta ? "Trocar profeta" : "Escolha seu profeta"}</h2>
     <p class="sub-h">Ele vai correr com você no rolo e comentar seus resultados.</p>
-    <div class="field"><div class="profetas" role="group" aria-label="Profetas">${PROFETAS.map(p=>{ const livre = profetaLiberado(p); return `<button type="button" class="prof ${livre ? "" : "bloq"}" data-p="${p.id}" ${livre ? "" : `data-nivel="${p.nivel}"`} aria-pressed="${p.id===escolhido}">${avatarSVG(p.id)}<span>${esc(p.nome)}</span>${livre ? "" : `<em>🔒 Nível ${p.nivel}</em>`}</button>`; }).join("")}</div>
+    <div class="field">
+      <div class="profetas" role="group" aria-label="Profetas">${PROFETAS.filter(p => !p.nivel).map(botaoProfeta).join("")}</div>
+      <h3 class="prof-tit"><span aria-hidden="true">✨</span> Profetas raros <small>liberados ao subir de nível nas missões</small></h3>
+      <div class="profetas raros" role="group" aria-label="Profetas raros">${PROFETAS.filter(p => p.nivel).map(botaoProfeta).join("")}</div>
     <div class="fala" id="fala" aria-live="polite" hidden></div></div>
     <div class="btn-row"><button class="btn btn-main" id="pOk">Confirmar</button>${perfil.profeta ? `<button class="btn btn-ghost" id="pVoltar">Voltar</button>` : ""}</div></section></div>`;
   const mostrarFala = (rolar)=>{
@@ -2676,19 +2767,45 @@ function compartilharConquista(c, btn){ return gerarCartao(x => desenharConquist
 /* ============================================================
    ADMIN
    ============================================================ */
-let admTab = "usuarios";
-const ADM_TABS = [["resultados","📊 Resultados"],["salas","🏫 Salas"],["usuarios","👥 Usuários"],["aprovar","✅ Aprovar usuário"],["cadastrar","➕ Cadastrar usuário"],["licao","📥 Cadastrar lição"],["perguntas","📝 Cadastrar perguntas"],["icone","🖼️ Ícone do site"]];
-/* Master vê tudo. Admin de sala vê só Resultados e Salas, restritos às salas que administra. */
+let admTab = "usuarios", admUFiltro = "todos";
+const ADM_TABS = [
+  ["resultados", "📊", "Resultados", "Acompanhar"], ["salas", "🏫", "Salas", "Acompanhar"],
+  ["usuarios", "👥", "Usuários", "Pessoas"], ["aprovar", "✅", "Aprovar", "Pessoas"], ["cadastrar", "➕", "Novo usuário", "Pessoas"],
+  ["licao", "📥", "Importar lição", "Conteúdo"], ["perguntas", "📝", "Perguntas", "Conteúdo"],
+  ["icone", "🖼️", "Ícone do site", "Aparência"]];
+let admPend = null;                      // contas aguardando aprovação (preenchido quando a lista de usuários é carregada)
+function marcarPendentes(usuarios){
+  admPend = usuarios.filter(u => !u.aprovado && !u.admin && !u.master).length;
+  const b = document.querySelector('.adm-nav [data-t="aprovar"]'); if(!b) return;
+  const n = b.querySelector(".adm-n"); if(n) n.remove();
+  if(admPend) b.insertAdjacentHTML("beforeend", `<span class="adm-n" aria-label="${admPend} aguardando">${admPend}</span>`);
+}
+/* Painel sozinho na linha ocupa a largura toda (a grade do admin tem 2 colunas em telas largas) */
+function ajustarGradeAdmin(c){
+  if(!c || !c.classList.contains("adm-c")) return;
+  let col = 0, ant = null;
+  [...c.children].forEach(el => {
+    if(el.classList.contains("larga")){ if(col === 1 && ant) ant.classList.add("larga"); col = 0; ant = null; return; }
+    if(col === 0){ col = 1; ant = el; } else { col = 0; ant = null; }
+  });
+  if(col === 1 && ant) ant.classList.add("larga");
+}
 function telaAdmin(){
   const master = ehMaster();
   if(!master && !souAdminDeSala()){ nav("inicio"); return; }
-  const abas = master ? ADM_TABS : [["resultados","📊 Resultados"],["salas","🏫 Minhas salas"]];
+  const abas = master ? ADM_TABS : [["resultados", "📊", "Resultados", ""], ["salas", "🏫", "Minhas salas", ""]];
   if(!abas.some(([k]) => k === admTab)) admTab = abas[0][0];
-  app.innerHTML = `<div class="admin-area"><h2 class="h2">${master ? "Admin · Master" : "Admin da sala"}</h2>
-    ${master ? "" : `<p class="muted small" style="margin:-6px 0 12px">Você administra: <b>${SALAS.filter(ehAdminSala).map(x => esc(x.nome)).join(", ")}</b>.</p>`}
-    <div class="tabs" role="tablist">${abas.map(([k,t])=>`<button role="tab" aria-selected="${admTab===k}" data-t="${k}">${t}</button>`).join("")}</div>
-    <div id="admC"></div></div>`;
-  app.querySelectorAll("[data-t]").forEach(b=> b.onclick = ()=>{ admTab = b.dataset.t; telaAdmin(); });
+  let grupo = "";
+  app.innerHTML = `<div class="admin-area">
+    <aside class="adm-menu">
+      <h2 class="h2">Admin <span class="badge ${master ? "adm" : ""}">${master ? "master" : "sala"}</span></h2>
+      ${master ? "" : `<p class="muted small adm-sub">Você administra: <b>${SALAS.filter(ehAdminSala).map(x => esc(x.nome)).join(", ")}</b>.</p>`}
+      <div class="adm-nav ${abas.length <= 2 ? "poucas" : ""}" role="tablist" aria-label="Seções do admin">${abas.map(([k, ic, t, g]) => {
+        const cab = g && g !== grupo ? `<span class="adm-grp">${g}</span>` : ""; grupo = g || grupo;
+        return `${cab}<button role="tab" aria-selected="${admTab === k}" data-t="${k}"><span class="ic" aria-hidden="true">${ic}</span><span class="tx">${t}</span>${k === "aprovar" && admPend ? `<span class="adm-n" aria-label="${admPend} aguardando">${admPend}</span>` : ""}</button>`; }).join("")}</div>
+    </aside>
+    <div id="admC" class="adm-c adm-${admTab}"></div></div>`;
+  app.querySelectorAll(".adm-nav [data-t]").forEach(b=> b.onclick = ()=>{ admTab = b.dataset.t; telaAdmin(); });
   ({resultados:admResultados, salas:admSalas, usuarios:admUsuarios, aprovar:admAprovar, cadastrar:admCadastrar, licao:admLicao, perguntas:admPerguntas, icone:admIcone}[admTab])();
 }
 function linhaUsuario(u, pendente){
@@ -2700,16 +2817,24 @@ async function admUsuarios(){
   const c = $("admC"); c.innerHTML = `<section class="panel"><p class="vazio">Carregando…</p></section>`;
   let usuarios = [];
   try{ usuarios = (await DB.listarUsuarios()).sort((a,b)=> ((b.master?2:0)+(b.admin?1:0))-((a.master?2:0)+(a.admin?1:0)) || String(a.nome).localeCompare(String(b.nome),"pt-BR")); }catch(e){ c.innerHTML = `<section class="panel"><p class="erro">${esc(erroMsg(e))}</p></section>`; return; }
+  marcarPendentes(usuarios);
   const busca = lsGet(KEY+":busca","");
-  c.innerHTML = `<section class="panel"><div class="field"><input type="text" id="uBusca" placeholder="Buscar por nome ou e-mail" value="${esc(busca)}"></div>
-    <p class="muted small">${usuarios.length} usuário(s) · ${usuarios.filter(u=>!u.aprovado).length} pendente(s)</p>
-    <ul class="lista" id="uLista"></ul></section>`;
+  const grupos = { todos: u => true, pend: u => !u.aprovado, adm: u => u.admin || u.master };
+  const cont = k => usuarios.filter(grupos[k]).length;
+  if(!grupos[admUFiltro]) admUFiltro = "todos";
+  c.innerHTML = `<section class="panel larga"><div class="adm-topo">
+      <input type="text" id="uBusca" placeholder="Buscar por nome ou e-mail" value="${esc(busca)}" aria-label="Buscar usuário">
+      <div class="adm-filtros" role="group" aria-label="Filtrar usuários">${[["todos","Todos"],["pend","Pendentes"],["adm","Admins"]].map(([k,t]) => `<button type="button" class="chip-f" data-f="${k}" aria-pressed="${admUFiltro === k}">${t} <b>${cont(k)}</b></button>`).join("")}</div>
+      <button class="btn btn-main btn-sm" id="uNovo">➕ Novo usuário</button></div>
+    <ul class="lista cols" id="uLista"></ul></section>`;
   const render = ()=>{
     const q = $("uBusca").value.trim().toLowerCase(); lsSet(KEY+":busca", q);
-    const f = usuarios.filter(u => !q || String(u.nome).toLowerCase().includes(q) || String(u.email).toLowerCase().includes(q));
+    const f = usuarios.filter(grupos[admUFiltro]).filter(u => !q || String(u.nome).toLowerCase().includes(q) || String(u.email).toLowerCase().includes(q));
     $("uLista").innerHTML = f.length ? f.map(u=>linhaUsuario(u,false)).join("") : `<li class="vazio">Nenhum usuário encontrado.</li>`;
     $("uLista").querySelectorAll("[data-editar]").forEach(b=> b.onclick = ()=> modalUsuario(usuarios.find(u=>u.id===b.dataset.editar), admUsuarios));
   };
+  c.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { admUFiltro = b.dataset.f; c.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); render(); });
+  $("uNovo").onclick = () => { admTab = "cadastrar"; telaAdmin(); };
   $("uBusca").oninput = render; render();
 }
 function modalUsuario(u, depois){
@@ -2771,8 +2896,9 @@ function modalUsuario(u, depois){
 async function admAprovar(){
   const c = $("admC"); c.innerHTML = `<section class="panel"><p class="vazio">Carregando…</p></section>`;
   try{
-    const pend = (await DB.listarUsuarios()).filter(u=>!u.aprovado && !u.admin).sort((a,b)=> (a.criadoEm||0)-(b.criadoEm||0));
-    c.innerHTML = `<section class="panel"><h3 class="h3">Aguardando aprovação</h3>${pend.length ? `<ul class="lista">${pend.map(u=>linhaUsuario(u,true)).join("")}</ul>${pend.length > 1 ? `<div class="btn-row uma" style="margin-top:10px"><button class="btn btn-ok" id="apTodos">Aprovar todos (${pend.length})</button></div>` : ""}` : `<p class="vazio">Nenhum usuário pendente. 🎉</p>`}</section>
+    const todosU = await DB.listarUsuarios(); marcarPendentes(todosU);
+    const pend = todosU.filter(u=>!u.aprovado && !u.admin).sort((a,b)=> (a.criadoEm||0)-(b.criadoEm||0));
+    c.innerHTML = `<section class="panel"><div class="adm-cab"><h3 class="h3">Aguardando aprovação${pend.length ? " (" + pend.length + ")" : ""}</h3>${pend.length > 1 ? `<button class="btn btn-ok btn-sm" id="apTodos">Aprovar todos</button>` : ""}</div>${pend.length ? `<ul class="lista">${pend.map(u=>linhaUsuario(u,true)).join("")}</ul>` : `<p class="vazio">Nenhum usuário pendente. 🎉</p>`}</section>
       <section class="panel"><h3 class="h3">Novas contas</h3>
         <label class="check"><input type="checkbox" id="apAuto" ${CONFIG.aprovacaoAuto ? "checked" : ""}><span>Aprovar novas contas automaticamente</span></label>
         <p class="note">Ligado: quem criar a conta já entra direto no jogo e na sala global 7world, sem esperar aprovação (bom quando há jovens de outras igrejas). Desligado: cada conta nova espera você aprovar aqui.</p></section>`;
@@ -2782,13 +2908,16 @@ async function admAprovar(){
   }catch(e){ c.innerHTML = `<section class="panel"><p class="erro">${esc(erroMsg(e))}</p></section>`; }
 }
 function admCadastrar(){
-  $("admC").innerHTML = `<section class="panel"><h3 class="h3">Cadastrar usuário</h3><p class="muted small">Crie a conta para alguém que não consegue se cadastrar sozinho. A pessoa entra com o e-mail e a senha que você definir e pode trocá-la depois em Minha conta.</p>
-    <div class="field"><label for="nUNome">Nome</label><input type="text" id="nUNome" maxlength="30"></div>
-    <div class="field"><label for="nUEmail">E-mail</label><input type="email" id="nUEmail"></div>
-    <div class="field"><label for="nUSenha">Senha inicial (mínimo 6)</label><input type="text" id="nUSenha" autocomplete="off"></div>
+  $("admC").innerHTML = `<section class="panel larga"><h3 class="h3">Cadastrar usuário</h3><p class="muted small">Crie a conta para alguém que não consegue se cadastrar sozinho. A pessoa entra com o e-mail e a senha que você definir e pode trocá-la depois em Minha conta.</p>
+    <div class="adm-campos">
+      <div class="field"><label for="nUNome">Nome</label><input type="text" id="nUNome" maxlength="30"></div>
+      <div class="field"><label for="nUEmail">E-mail</label><input type="email" id="nUEmail"></div>
+      <div class="field"><label for="nUSenha">Senha inicial (mínimo 6)</label><input type="text" id="nUSenha" autocomplete="off"></div>
+    </div>
     <div class="linha-sw"><div class="txt"><strong>Já aprovado</strong><span>Pode jogar imediatamente</span></div><button class="switch" role="switch" aria-checked="true" id="nUAprov"></button></div>
     <p class="note">Para tornar a pessoa administradora de uma sala ou master, crie a conta e depois edite o nível de acesso dela em Usuários.</p>
-    <p class="erro" id="nUErro"></p><div class="btn-row"><button class="btn btn-main" id="nUOk">Criar conta</button></div></section>`;
+    <p class="erro" id="nUErro"></p><div class="adm-acoes"><button class="btn btn-main" id="nUOk">Criar conta</button><button class="btn btn-ghost" id="nUVer">Ver usuários</button></div></section>`;
+  $("nUVer").onclick = () => { admTab = "usuarios"; telaAdmin(); };
   $("admC").querySelectorAll(".switch").forEach(sw=> sw.onclick = ()=> sw.setAttribute("aria-checked", String(sw.getAttribute("aria-checked")!=="true")));
   $("nUOk").onclick = async ()=>{
     const nome = $("nUNome").value.trim(), email = $("nUEmail").value.trim(), senha = $("nUSenha").value, er = $("nUErro");
@@ -2955,19 +3084,21 @@ function normalizarPerguntas(dias){
 }
 function admLicao(){
   const tri = lsGet(KEY+":tri", ""), ini = lsGet(KEY+":ini", "");
-  $("admC").innerHTML = `<section class="panel"><h3 class="h3">Cadastrar lição (importar PDF)</h3>
+  $("admC").innerHTML = `<section class="panel larga"><h3 class="h3">Cadastrar lição (importar PDF)</h3>
     <p class="muted small">Envie o PDF do trimestre. O site separa as lições e os dias, guarda as páginas como imagem (a aba Estudar fica igual ao PDF) e o texto. As perguntas entram depois, em <b>Cadastrar perguntas</b>, pela planilha.</p>
+    <div class="adm-duo"><div class="adm-a">
     <div class="field"><label for="iPdf">Arquivo PDF da lição</label><input type="file" id="iPdf" accept="application/pdf,.pdf"></div>
-    <div class="grid2">
+    <div class="adm-campos">
       <div class="field"><label for="iTri">Trimestre (código)</label><input type="text" id="iTri" placeholder="ex.: 2027-t1" value="${esc(tri)}"></div>
       <div class="field"><label for="iIni">Sábado da Lição 1</label><input type="date" id="iIni" value="${esc(ini)}"></div>
       <div class="field"><label for="iLic">Quantidade de lições</label><input type="number" id="iLic" min="1" max="14" value="13"></div>
-    </div>
+    </div></div><div class="adm-b">
     <div class="linha-sw"><div class="txt"><strong>Guardar as páginas como imagem</strong><span>A aba Estudar mostra cada página igual ao PDF (tirinha, diagramação). Demora alguns minutos e usa mais espaço no banco</span></div><button class="switch" role="switch" aria-checked="true" id="iImg"></button></div>
     <div class="linha-sw"><div class="txt"><strong>Publicar ao importar</strong><span>Ligado: o texto já aparece em Estudar. Enquanto a planilha de perguntas não for importada, valem as perguntas que já vêm no site (se houver para esse trimestre)</span></div><button class="switch" role="switch" aria-checked="true" id="iPub"></button></div>
     <div class="linha-sw"><div class="txt"><strong>Substituir lições já cadastradas</strong><span>Desligado: pula as lições desse trimestre que já existem</span></div><button class="switch" role="switch" aria-checked="false" id="iSubst"></button></div>
+    </div></div>
     <p class="erro" id="iErro"></p>
-    <div class="btn-row uma"><button class="btn btn-main" id="iGo">Importar lições</button></div>
+    <div class="adm-acoes"><button class="btn btn-main" id="iGo">Importar lições</button></div>
     <div id="iProg" hidden><div class="prog"><i id="iBar"></i></div><div class="log" id="iLog"></div></div>
   </section>`;
   $("admC").querySelectorAll(".switch").forEach(sw=> sw.onclick = ()=> sw.setAttribute("aria-checked", String(sw.getAttribute("aria-checked")!=="true")));
@@ -3134,18 +3265,17 @@ async function admPerguntas(){
     const triPad = lsGet(KEY+":tri", TRIMESTRE_BASE), iniPad = lsGet(KEY+":ini", "") || (triPad === TRIMESTRE_BASE ? LICOES_DADOS[0].inicio : "");
     c.innerHTML = `<section class="panel"><h3 class="h3">Planilha de perguntas</h3>
       <p class="muted small">Baixe o modelo, preencha até <b>10 perguntas por dia</b> (aba "Perguntas") e importe aqui. Depois escolha, em cada lição, quantas perguntas aparecem para o jogador e publique.</p>
-      <div class="btn-row uma"><button class="btn btn-ghost" id="pModelo">⬇️ Baixar modelo de planilha (.xlsx)</button></div>
-      <div class="grid2" style="margin-top:14px"><div class="field"><label for="pTri">Trimestre (código)</label><input type="text" id="pTri" placeholder="ex.: 2026-t4" value="${esc(triPad)}"></div><div class="field"><label for="pIni">Sábado da Lição 1</label><input type="date" id="pIni" value="${esc(iniPad)}"></div></div>
+      <div class="adm-acoes" style="margin-top:0"><button class="btn btn-ghost" id="pModelo">⬇️ Baixar modelo de planilha (.xlsx)</button></div>
+      <div class="adm-campos" style="margin-top:14px"><div class="field"><label for="pTri">Trimestre (código)</label><input type="text" id="pTri" placeholder="ex.: 2026-t4" value="${esc(triPad)}"></div><div class="field"><label for="pIni">Sábado da Lição 1</label><input type="date" id="pIni" value="${esc(iniPad)}"></div></div>
       <div class="field"><label for="pArq">Planilha preenchida (.xlsx)</label><input type="file" id="pArq" accept=".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div>
       <div class="linha-sw"><div class="txt"><strong>Substituir perguntas existentes</strong><span>Desligado: acrescenta às que a lição já tem</span></div><button class="switch" role="switch" aria-checked="true" id="pSubst"></button></div>
       <p class="erro" id="pErro"></p>
-      <div class="btn-row uma"><button class="btn btn-main" id="pGo">Importar planilha</button></div>
+      <div class="adm-acoes"><button class="btn btn-main" id="pGo">Importar planilha</button></div>
       <div id="pProg" ${logPlanilha ? "" : "hidden"}><div class="log" id="pLog">${esc(logPlanilha)}</div></div>
     </section>
-    <section class="panel"><h3 class="h3">Lições cadastradas</h3>
+    <section class="panel"><div class="adm-cab"><h3 class="h3">Lições cadastradas${lics.length ? " (" + lics.length + ")" : ""}</h3><button class="btn btn-ghost btn-sm" id="vNova">+ Lição em branco</button></div>
       ${lics.length ? `<ul class="lista">${lics.map(l=>{ const t = (l.dias||[]).reduce((s,d)=>s+(d?d.length:0),0); return `<li><div class="pos">${l.n}</div><div class="info"><strong>${esc(l.titulo)}</strong><span>${esc(l.trimestre)} · começa ${dataCurta(l.inicio)} · ${t} perguntas</span><span>${l.status==="publicada"?'<span class="badge ok">publicada</span>':'<span class="badge warn">rascunho</span>'}</span></div><button class="btn btn-ghost btn-sm" data-abrir="${esc(l.id)}">Revisar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma lição cadastrada ainda. Importe uma planilha acima ou o PDF em "Cadastrar lição".</p>`}
-      <p class="note">As ${LICOES_DADOS.length} lições do trimestre ${TRIMESTRE_BASE} já vêm dentro do arquivo e não precisam ser cadastradas.</p>
-      <div class="btn-row"><button class="btn btn-ghost" id="vNova">Criar lição em branco</button></div></section>`;
+      <p class="note">As ${LICOES_DADOS.length} lições do trimestre ${TRIMESTRE_BASE} já vêm dentro do arquivo e não precisam ser cadastradas.</p></section>`;
     c.querySelectorAll("[data-abrir]").forEach(b=> b.onclick = ()=>{ valId = b.dataset.abrir; valDia = 0; admPerguntas(); });
     $("pModelo").onclick = async ()=>{ ocupado($("pModelo"), true); try{ await baixarModelo(); }catch(e){ aviso(e.message || String(e)); } ocupado($("pModelo"), false); };
     $("pSubst").onclick = ()=> $("pSubst").setAttribute("aria-checked", String($("pSubst").getAttribute("aria-checked")!=="true"));
@@ -3172,21 +3302,21 @@ async function admPerguntas(){
   L.dias = normalizarPerguntas(L.dias); L.temas = (L.temas && L.temas.length===7) ? L.temas : NOMES_DIAS.slice(); L.resumos = L.resumos || []; L.textos = L.textos || []; L.qtd = (Array.isArray(L.qtd) && L.qtd.length===7) ? L.qtd.map(v=>+v||5) : [5,5,5,5,5,5,5];
   const render = ()=>{
     const qs = L.dias[valDia];
-    c.innerHTML = `<section class="panel">
+    c.innerHTML = `<section class="panel larga">
       <div class="inline" style="justify-content:space-between;margin-bottom:10px"><button class="linkish" id="vVoltar">‹ Todas as lições</button>${L.status==="publicada"?'<span class="badge ok">publicada</span>':'<span class="badge warn">rascunho</span>'}</div>
-      <div class="field"><label for="vTitulo">Título da lição</label><input type="text" id="vTitulo" value="${esc(L.titulo)}"></div>
-      <div class="grid2"><div class="field"><label for="vDatas">Datas (texto)</label><input type="text" id="vDatas" value="${esc(L.datas||"")}" placeholder="26 de setembro a 2 de outubro"></div><div class="field"><label for="vIni">Sábado inicial</label><input type="date" id="vIni" value="${esc(L.inicio)}"></div></div>
-      <div class="tabs" role="tablist">${NOMES_DIAS.map((d,k)=>`<button role="tab" aria-selected="${k===valDia}" data-d="${k}">${CURTOS[k]} (${L.dias[k].length})</button>`).join("")}</div>
+      <div class="adm-campos tit"><div class="field"><label for="vTitulo">Título da lição</label><input type="text" id="vTitulo" value="${esc(L.titulo)}"></div>
+      <div class="field"><label for="vDatas">Datas (texto)</label><input type="text" id="vDatas" value="${esc(L.datas||"")}" placeholder="26 de setembro a 2 de outubro"></div><div class="field"><label for="vIni">Sábado inicial</label><input type="date" id="vIni" value="${esc(L.inicio)}"></div></div>
+      <div class="tabs dias-adm" role="tablist">${NOMES_DIAS.map((d,k)=>`<button role="tab" aria-selected="${k===valDia}" data-d="${k}">${CURTOS[k]} (${L.dias[k].length})</button>`).join("")}</div>
       <div class="field"><label for="vTema">Tema de ${NOMES_DIAS[valDia]}</label><input type="text" id="vTema" value="${esc(L.temas[valDia])}"></div>
       <div class="field"><label for="vResumo">Resumo do dia (aparece em Estudar)</label><textarea id="vResumo">${esc(L.resumos[valDia]||"")}</textarea></div>
       <details style="margin-bottom:14px"><summary class="muted" style="cursor:pointer;font-weight:700">Texto do dia (${fmt((L.textos[valDia]||"").length)} caracteres)</summary><textarea id="vTexto" style="min-height:160px;margin-top:8px">${esc(L.textos[valDia]||"")}</textarea></details>
       <h3 class="h3">Perguntas de ${NOMES_DIAS[valDia]}</h3>
       <div class="linha-sw" style="border-top:0;padding-top:0"><div class="txt"><strong>Perguntas que aparecem para o jogador</strong><span>${qs.filter(q=>!q.reflexao).length} objetiva(s) cadastrada(s)${qs.some(q=>q.reflexao) ? " + reflexão (sempre no fim)" : ""}. Cada pessoa recebe um sorteio diferente.</span></div><input type="number" id="vQtd" min="1" max="10" value="${L.qtd[valDia]}" style="width:84px;text-align:center;padding:10px"></div>
-      <div id="vQs">${qs.map((q,i)=>cardPergunta(q,i)).join("")}</div>
+      <div id="vQs" class="qgrade">${qs.map((q,i)=>cardPergunta(q,i)).join("")}</div>
       ${qs.length ? "" : `<p class="vazio">Nenhuma pergunta neste dia.</p>`}
       <div class="inline"><button class="btn btn-ghost btn-sm" id="vAddQ">+ Pergunta objetiva</button><button class="btn btn-ghost btn-sm" id="vAddR">+ Reflexão</button></div>
       <p class="erro" id="vErro"></p>
-      <div class="btn-row">
+      <div class="adm-acoes">
         <button class="btn btn-main" id="vSalvar">Salvar alterações</button>
         <button class="btn ${L.status==="publicada"?"btn-warn":"btn-ok"}" id="vPub">${L.status==="publicada"?"Despublicar (voltar a rascunho)":"Publicar para todos"}</button>
         <button class="btn btn-danger" id="vExcluir">Excluir lição</button>
@@ -3252,14 +3382,14 @@ async function recarregarLicoes(){
 /* ---------- Ícone do site ---------- */
 function admIcone(){
   const atual = CONFIG.icone || "";
-  const prev = url => `<div class="icone-prev"><img src="${url || ICONE_PADRAO}" alt="Ícone atual"><div class="mini"><span class="aba-fake"><img src="${url || ICONE_PADRAO}" alt="">Quiz da Lição Jovem</span><span class="muted small">Assim aparece na aba do navegador e na tela inicial do celular.</span></div></div>`;
-  $("admC").innerHTML = `<section class="panel"><h3 class="h3">Ícone do site</h3>
-    <p class="muted small">Escolha uma imagem quadrada (PNG, JPG ou SVG, de preferência 512×512). Ela vira o ícone da aba do navegador, dos favoritos e do atalho na tela inicial do celular, para todo mundo que abrir o site.</p>
-    <div id="icPrev">${prev(atual)}</div>
+  const prev = url => `<div class="icone-prev"><img src="${url || ICONE_PADRAO}" alt="Ícone atual"><div class="mini"><span class="aba-fake"><img src="${url || ICONE_PADRAO}" alt="">Corrida do Rolo</span><span class="muted small">Assim aparece na aba do navegador e na tela inicial do celular.</span></div></div>`;
+  $("admC").innerHTML = `<section class="panel larga"><h3 class="h3">Ícone do site</h3>
+    <div class="adm-duo"><div class="adm-a"><p class="muted small" style="margin-top:0">Escolha uma imagem quadrada (PNG, JPG ou SVG, de preferência 512×512). Ela vira o ícone da aba do navegador, dos favoritos e do atalho na tela inicial do celular, para todo mundo que abrir o site.</p>
+    <div id="icPrev">${prev(atual)}</div></div><div class="adm-b">
     <div class="field"><label for="icArq">Nova imagem</label><input type="file" id="icArq" accept="image/png,image/jpeg,image/webp,image/svg+xml,.png,.jpg,.jpeg,.webp,.svg"></div>
     <p class="erro" id="icErro"></p>
-    <div class="btn-row"><button class="btn btn-main" id="icSalvar" disabled>Salvar ícone</button><button class="btn btn-ghost" id="icPadrao" ${atual?"":"disabled"}>Voltar ao ícone padrão</button></div>
-  </section>`;
+    <div class="adm-acoes"><button class="btn btn-main" id="icSalvar" disabled>Salvar ícone</button><button class="btn btn-ghost" id="icPadrao" ${atual?"":"disabled"}>Voltar ao ícone padrão</button></div>
+    </div></div></section>`;
   let novo = "";
   $("icArq").onchange = async e => {
     const f = e.target.files && e.target.files[0]; if(!f) return;
@@ -3317,14 +3447,14 @@ async function painelResultados(c, opt){
   const diaDe = r => { const l = LICOES.find(x => x.id === r.licaoId); return l ? l.dias.find(d => d.data === r.data) : null; };
   const rotuloDia = r => { const d = diaDe(r); const l = LICOES.find(x => x.id === r.licaoId); return (todas && l ? l.numero + " · " : "") + (d ? d.nome : r.data); };
 
-  let h = `<section class="panel" style="padding:12px 14px">
-    ${opt.admin || (opt.salas && salasTodas.length > 1) ? `<div class="field" style="margin:0 0 10px"><label for="arSala">Sala</label><select id="arSala">${opt.admin ? `<option value="*" ${admResSala==="*"?"selected":""}>Todas as salas (7world)</option>` : ""}${salasTodas.map(x => `<option value="${esc(x.id)}" ${x.id===admResSala?"selected":""}>${esc(x.nome)}</option>`).join("")}</select></div>` : ""}
-    <div class="field" style="margin:0"><label for="arLic">Lição</label><select id="arLic">
+  let h = `<section class="panel larga ar-filtro">
+    ${opt.admin || (opt.salas && salasTodas.length > 1) ? `<div class="field"><label for="arSala">Sala</label><select id="arSala">${opt.admin ? `<option value="*" ${admResSala==="*"?"selected":""}>Todas as salas (7world)</option>` : ""}${salasTodas.map(x => `<option value="${esc(x.id)}" ${x.id===admResSala?"selected":""}>${esc(x.nome)}</option>`).join("")}</select></div>` : ""}
+    <div class="field"><label for="arLic">Lição</label><select id="arLic">
       ${LICOES.map(l => `<option value="${esc(l.id)}" ${l.id===admResLic?"selected":""}>${esc(l.numero)}: ${esc(l.titulo)}${l===LICOES[indiceLicaoAtual()]?" (esta semana)":""}</option>`).join("")}
       <option value="*" ${todas?"selected":""}>Trimestre inteiro (todas as lições)</option></select></div></section>`;
 
   if(!rs.length){
-    h += `<section class="panel"><p class="vazio">Ninguém ${salaSel ? "da sala " + esc(salaSel.nome) + " " : ""}fez quiz ${todas ? "neste trimestre" : "desta lição"} ainda.</p></section>`;
+    h += `<section class="panel larga"><p class="vazio">Ninguém ${salaSel ? "da sala " + esc(salaSel.nome) + " " : ""}fez quiz ${todas ? "neste trimestre" : "desta lição"} ainda.</p></section>`;
     c.innerHTML = h; ligarFiltros(); return;
   }
 
@@ -3335,7 +3465,7 @@ async function painelResultados(c, opt){
   const mediaPts = Math.round(rs.reduce((a,r) => a + (r.pts||0), 0) / rs.length);
   const gabaritos = rs.filter(r => r.total > 0 && r.acertos === r.total).length;
   const semDetalhe = rs.filter(r => !Array.isArray(r.resp) || !r.resp.length).length;
-  h += `<section class="panel"><h3 class="h3">Visão geral${L ? " · " + esc(L.numero) : " · Trimestre"}${salaSel ? " · " + esc(salaSel.nome) : ""}</h3>
+  h += `<section class="panel larga"><h3 class="h3">Visão geral${L ? " · " + esc(L.numero) : " · Trimestre"}${salaSel ? " · " + esc(salaSel.nome) : ""}</h3>
     <div class="stats ar-stats">
       <div class="stat"><b>${pessoas}</b><span>${pessoas===1?"jovem fez quiz":"jovens fizeram quiz"}</span></div>
       <div class="stat"><b>${rs.length}</b><span>${rs.length===1?"quiz feito":"quizzes feitos"}</span></div>
@@ -3417,9 +3547,10 @@ async function painelResultados(c, opt){
   const porU = {};
   rs.forEach(r => { const u = porU[r.uid] || (porU[r.uid] = { r, n:0, ac:0, tot:0, pts:0, prazo:0 }); u.n++; u.ac += r.acertos||0; u.tot += r.total||0; u.pts += r.pts||0; if(r.noPrazo) u.prazo++; });
   const ul = Object.values(porU).sort((a,b) => b.pts - a.pts || pct(b.ac,b.tot) - pct(a.ac,a.tot));
-  h += `<section class="panel"><h3 class="h3">Por jovem</h3><ul class="lista">${ul.map((u,i) => `<li><div class="em">${avatar(u.r)}</div><div class="info"><strong>${i+1}º ${esc(nome(u.r))}</strong><span>${u.n} ${u.n===1?"quiz":"quizzes"} · ${u.prazo} no prazo · ${pct(u.ac,u.tot)}% de acerto (${u.ac} de ${u.tot})</span></div><div class="pts">${fmt(u.pts)}</div></li>`).join("")}</ul></section>`;
+  h += `<section class="panel larga"><h3 class="h3">Por jovem</h3><ul class="lista cols">${ul.map((u,i) => `<li><div class="em">${avatar(u.r)}</div><div class="info"><strong>${i+1}º ${esc(nome(u.r))}</strong><span>${u.n} ${u.n===1?"quiz":"quizzes"} · ${u.prazo} no prazo · ${pct(u.ac,u.tot)}% de acerto (${u.ac} de ${u.tot})</span></div><div class="pts">${fmt(u.pts)}</div></li>`).join("")}</ul></section>`;
 
   c.innerHTML = h;
+  ajustarGradeAdmin(c);
   ligarFiltros();
   function ligarFiltros(){
     const l = c.querySelector("#arLic"); if(l) l.onchange = e => { admResLic = e.target.value; deNovo(); };
@@ -3850,22 +3981,22 @@ async function admSalas(){
     const minhas = SALAS.filter(ehAdminSala);
     const listas = await Promise.all(minhas.map(x => DB.membrosDaSala(x.id).catch(() => [])));
     if(!$("admC")) return;
-    c.innerHTML = `<section class="panel"><h3 class="h3">Salas que você administra (${minhas.length})</h3>
+    c.innerHTML = `<section class="panel larga"><h3 class="h3">Salas que você administra (${minhas.length})</h3>
       <p class="muted small">Em Gerenciar você aprova pedidos, inclui qualquer pessoa com conta, remove membros e vê os resultados da sala.</p>
-      ${minhas.length ? `<ul class="lista">${minhas.map((x, i) => { const at = listas[i].filter(m => m.status === "ativo").length, pe = listas[i].filter(m => m.status === "pendente").length; return `<li><div class="info"><strong>${esc(x.nome)}</strong><span>${badgesSala(x)} código ${esc(x.codigo || "")} · ${at} ${at === 1 ? "membro" : "membros"}${pe ? ` · <b>${pe} pedido${pe > 1 ? "s" : ""}</b>` : ""}</span></div><button class="btn btn-ghost btn-sm" data-gs="${esc(x.id)}">Gerenciar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma sala atribuída a você no momento.</p>`}</section>`;
+      ${minhas.length ? `<ul class="lista cols">${minhas.map((x, i) => { const at = listas[i].filter(m => m.status === "ativo").length, pe = listas[i].filter(m => m.status === "pendente").length; return `<li><div class="info"><strong>${esc(x.nome)}</strong><span>${badgesSala(x)} código ${esc(x.codigo || "")} · ${at} ${at === 1 ? "membro" : "membros"}${pe ? ` · <b>${pe} pedido${pe > 1 ? "s" : ""}</b>` : ""}</span></div><button class="btn btn-ghost btn-sm" data-gs="${esc(x.id)}">Gerenciar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma sala atribuída a você no momento.</p>`}</section>`;
     c.querySelectorAll("[data-gs]").forEach(b => b.onclick = () => modalGerenciarSala(minhas.find(x => x.id === b.dataset.gs)));
     return;
   }
   try{
     const [salas, usuarios] = await Promise.all([DB.listarSalas(), DB.listarUsuarios()]);
-    const uMap = {}; usuarios.forEach(u => uMap[u.id] = u);
+    const uMap = {}; usuarios.forEach(u => uMap[u.id] = u); marcarPendentes(usuarios);
     const lista = salas.map(s => s.id === SALA_GLOBAL_ID ? Object.assign({}, SALA_GLOBAL, s, { global: true, publica: true }) : s)
       .sort((a,b) => (b.global ? 1 : 0) - (a.global ? 1 : 0) || String(a.nome).localeCompare(String(b.nome), "pt-BR"));
     const contagens = await Promise.all(lista.map(s => s.global ? Promise.resolve(null) : DB.membrosDaSala(s.id).catch(() => [])));
     if(!$("admC")) return;
-    c.innerHTML = `<section class="panel"><div class="inline" style="justify-content:space-between"><h3 class="h3" style="margin:0">Todas as salas (${lista.length})</h3><button class="btn btn-main btn-sm" id="asCriar">Criar sala</button></div>
+    c.innerHTML = `<section class="panel larga"><div class="adm-cab"><h3 class="h3">Todas as salas (${lista.length})</h3><button class="btn btn-main btn-sm" id="asCriar">➕ Criar sala</button></div>
       <p class="muted small">Como master, você vê todas as salas criadas por qualquer pessoa, cria quantas quiser e gerencia qualquer uma. Para dar a alguém a administração de uma sala, edite a pessoa em Usuários. Cada pessoa cria até ${MAX_SALAS_CRIADAS} e participa de até ${MAX_SALAS_PARTICIPA} (fora a global).</p>
-      ${lista.length ? `<ul class="lista">${lista.map((s, i) => { const ms = contagens[i]; const at = ms ? ms.filter(x => x.status === "ativo").length : usuarios.filter(u => u.aprovado || u.admin).length; const pe = ms ? ms.filter(x => x.status === "pendente").length : 0;
+      ${lista.length ? `<ul class="lista cols">${lista.map((s, i) => { const ms = contagens[i]; const at = ms ? ms.filter(x => x.status === "ativo").length : usuarios.filter(u => u.aprovado || u.admin).length; const pe = ms ? ms.filter(x => x.status === "pendente").length : 0;
         return `<li><div class="info"><strong>${esc(s.nome)}</strong><span>${badgesSala(s)} código ${esc(s.codigo || "")} · ${at} ${at === 1 ? "membro" : "membros"}${pe ? ` · <b>${pe} pedido${pe > 1 ? "s" : ""}</b>` : ""}${s.global ? "" : " · criada por " + esc((uMap[s.dono] && uMap[s.dono].nome) || s.donoNome || "?")}</span></div><button class="btn btn-ghost btn-sm" data-gs="${esc(s.id)}">Gerenciar</button></li>`; }).join("")}</ul>` : `<p class="vazio">Nenhuma sala ainda.</p>`}</section>`;
     $("asCriar").onclick = modalCriarSala;
     c.querySelectorAll("[data-gs]").forEach(b => b.onclick = () => modalGerenciarSala(lista.find(x => x.id === b.dataset.gs)));
@@ -3874,7 +4005,7 @@ async function admSalas(){
 
 /* ============================================================
    MISSÕES, NÍVEIS, AJUDAS, PROFETAS DESBLOQUEÁVEIS, SONS
-   - 40 missões numeradas, cumpridas em ordem. A cada 5 missões, um nível.
+   - 45 missões numeradas, cumpridas em ordem. A cada 5 missões, um nível.
    - Algumas missões dão ajudas para usar no quiz; alguns níveis liberam profetas novos.
    - O progresso (perfil.missoes) nunca volta para trás.
    ============================================================ */
@@ -3884,20 +4015,24 @@ Object.assign(ICONES, {
   nuvem:{p:{w:"#F4F1EA",c:"#CFE9F5"},m:["......",".ww...","wwww..","wwwwww","cwwwwc","......"]},
   arca:{p:{b:"#8A5A2B",y:"#E8C07A"},m:["..yy..",".yyyy.","..bb..","bbbbbb","bbbbbb",".bbbb."]},
   estrelas:{p:{y:"#F2BE2E"},m:["y...y.","......","..y...",".yyy..","..y...","y....y"]},
-  candelabro:{p:{y:"#F2BE2E",r:"#F08A4B"},m:["r.r.r.","y.y.y.","y.y.y.",".yyy..","..y...",".yyy.."]}
+  candelabro:{p:{y:"#F2BE2E",r:"#F08A4B"},m:["r.r.r.","y.y.y.","y.y.y.",".yyy..","..y...",".yyy.."]},
+  coroa:{p:{y:"#F2BE2E",o:"#C98A12",r:"#E0483C",w:"#FFF3B8"},m:["......","y.yy.y","yyyyyy","ywrrwy","oyyyyo","......"]}
 });
 PROFETAS.push(
   { id:"enoque",   nome:"Enoque",   bg:"#8FE6FF", pele:"#C68A5E", cabelo:"#ECE7DC", barba:"longa", veste:"#F4F1EA", cob:null, emb:"nuvem", nivel:3, fala:"Andei com Deus dia após dia, e Ele me levou para morar com Ele.", ref:"Gênesis 5:24" },
   { id:"noe",      nome:"Noé",      bg:"#1C9FD0", pele:"#B5774C", cabelo:"#A8A8A8", barba:"longa", veste:"#8A6A3E", cob:{t:"capuz",c:"#2E2B6E"}, emb:"arca", nivel:5, fala:"Construí a arca do jeito que Deus mandou, mesmo sem ver uma nuvem no céu.", ref:"Gênesis 6:22" },
   { id:"abraao",   nome:"Abraão",   bg:"#2E2B6E", pele:"#C68A5E", cabelo:"#C9C9C9", barba:"longa", veste:"#B5462F", cob:{t:"faixa",c:"#F2BE2E"}, emb:"estrelas", nivel:7, fala:"Deus me mostrou as estrelas e prometeu uma família que ninguém consegue contar.", ref:"Gênesis 15:5" },
-  { id:"zacarias", nome:"Zacarias", bg:"#F08A4B", pele:"#9C6440", cabelo:"#2B1B12", barba:"curta", veste:"#5B4FC9", cob:{t:"faixa",c:"#8FE6FF"}, emb:"candelabro", nivel:9, fala:"Ouvi de Deus: não por força nem por violência, mas pelo meu Espírito.", ref:"Zacarias 4:6" }
+  { id:"zacarias", nome:"Zacarias", bg:"#F08A4B", pele:"#9C6440", cabelo:"#2B1B12", barba:"curta", veste:"#5B4FC9", cob:{t:"faixa",c:"#8FE6FF"}, emb:"candelabro", nivel:9, fala:"Ouvi de Deus: não por força nem por violência, mas pelo meu Espírito.", ref:"Zacarias 4:6" },
+  { id:"messias",  nome:"Messias",  bg:"#FFE27A", pele:"#B5774C", cabelo:"#4A2E1B", barba:"curta", longo:true, veste:"#FBF8F0", cob:null, emb:"coroa", nivel:10, lendario:true, manto:"#B5261E", fala:"Eu sou o caminho, a verdade e a vida.", ref:"João 14:6" }
 );
-PROFETAS.sort((a,b)=> a.nome.localeCompare(b.nome, "pt-BR"));
+/* Ordem da lista: primeiro os profetas comuns (alfabética), depois os raros, do mais fácil ao mais raro (Messias por último). */
+PROFETAS.sort((a,b)=> ((a.nivel || 0) - (b.nivel || 0)) || a.nome.localeCompare(b.nome, "pt-BR"));
 const PROFETA_PADRAO = PROFETAS.find(p => !p.nivel).id;   // boneco usado quando a pessoa ainda não escolheu (nunca um profeta raro)
 Object.assign(FALAS, {
   enoque:["Eu andava com Deus todos os dias. Caminhe com Ele hoje também!", "Um passo por dia: foi assim que a minha caminhada com Deus ficou longa.", "Anunciei que o Senhor vem com milhares de anjos. Ele vem mesmo!", "Andar com Deus é conversar com Ele no caminho. Já conversou hoje?", "Deus gosta de companhia. Separe um tempo só para vocês dois."],
   noe:["Obedeci mesmo quando ninguém entendia. Vale a pena confiar em Deus!", "Levei anos construindo a arca. Coisa grande se faz um dia de cada vez.", "Deus fechou a porta da arca e cuidou de nós. Ele cuida de você.", "Depois da chuva, Deus colocou o arco-íris no céu. A promessa dEle não falha.", "Preguei enquanto construía. Seu estudo de hoje também é um testemunho."],
   abraao:["Saí sem saber para onde ia, só porque Deus chamou. Confie no caminho!", "Olhei para as estrelas e cri na promessa. Deus cumpre o que diz.", "Fui chamado amigo de Deus. Ele quer ser seu amigo também.", "Montei altares por onde passei. Reserve hoje o seu momento com Deus.", "No monte, aprendi: o Senhor proverá. Ele provê para você também."],
+  messias:["Venham a mim todos os que estão cansados, e eu darei descanso a vocês.", "Eu sou a luz do mundo. Quem me segue não anda em trevas.", "Busquem primeiro o Reino de Deus, e tudo o mais será acrescentado.", "Eu estou com vocês todos os dias, até o fim dos tempos.", "Examinem as Escrituras: são elas que falam de mim."],
   zacarias:["Deus disse: voltem para mim, e eu voltarei para vocês. Hoje é um bom dia!", "Não por força nem por violência, mas pelo Espírito de Deus. Peça ajuda a Ele!", "Não despreze os pequenos começos. Seu estudo de hoje conta!", "Anunciei um Rei humilde, montado num jumentinho. Era Jesus!", "Deus me deu visões de esperança para animar o povo. Anime alguém hoje."]
 });
 
@@ -3905,11 +4040,15 @@ Object.assign(FALAS, {
 function avatarSVG(id, rotulo, nivel){
   const p = acharProfeta(id) || acharProfeta(PROFETA_PADRAO);
   const lbl = String(rotulo || p.nome).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
-  const raro = !!p.nivel, nv = Math.floor(+nivel || 0);
+  const raro = !!p.nivel, lend = !!p.lendario, nv = Math.floor(+nivel || 0);
   const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
-  const brilho = raro ? `<g class="av-raro" fill="#FFE27A">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}</g>` : "";
+  const aura = lend ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
+  const brilho = raro ? `<g class="av-raro" fill="${lend ? "#FFF3B8" : "#FFE27A"}">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}${lend ? mais(10, -.2, 1) + mais(-.2, 11, 1) + mais(21.4, 23, 1) + mais(1.2, 24.5, 1) : ""}</g>` : "";
+  /* manto atravessado no peito (só no Messias): faixa diagonal desenhada por cima da veste */
+  let manto = "";
+  if(p.manto){ const esc2 = tom(p.manto, -.22); for(let r = 16; r <= 24; r++){ const x0 = Math.min(12, 5 + Math.floor((r - 16) * .9)); manto += `<rect x="${x0}" y="${r}" width="2" height="1" fill="${p.manto}"/><rect x="${x0 + 2}" y="${r}" width="1" height="1" fill="${esc2}"/>`; } }
   const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
-  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${raro ? ", profeta raro" : ""}" shape-rendering="crispEdges">${brilho}${spriteMiolo(p)}${selo}</svg>`;
+  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", profeta lendário" : raro ? ", profeta raro" : ""}" shape-rendering="crispEdges">${aura}${brilho}${spriteMiolo(p)}${manto}${selo}</svg>`;
 }
 let _nvMemo = { k: "", v: 0 };
 function meuNivel(){
@@ -3941,7 +4080,7 @@ function estatisticas(){
 }
 
 /* ---------- Missões ---------- */
-const NIVEIS = ["Visitante", "Aprendiz", "Ouvinte", "Discípulo", "Mensageiro", "Atalaia", "Escriba", "Arauto", "Vidente", "Profeta"];
+const NIVEIS = ["Visitante", "Aprendiz", "Ouvinte", "Discípulo", "Mensageiro", "Atalaia", "Escriba", "Arauto", "Vidente", "Profeta", "Embaixador"];
 const AJUDAS = {
   meio:   { nome: "Meio a meio",     ic: "✂️", d: "Elimina duas respostas erradas da pergunta." },
   dobro:  { nome: "Pontos em dobro", ic: "⚡", d: "Dobra os pontos da sua próxima resposta certa." },
@@ -3996,7 +4135,13 @@ const MISSOES = [
   _ms("Três semanas completas", "Complete 3 lições com os 7 dias no prazo.", "semanas", 3),
   _ms("Catorze seguidos", "Faça o quiz no prazo 14 dias seguidos.", "melhorSeq", 14, { tipo: "dobro", q: 3 }),
   _ms("Cento e cinquenta mil", "Some 150.000 pontos.", "pontos", 150000),
-  _ms("Sessenta quizzes", "Faça 60 quizzes.", "quizzes", 60, { tipo: "profeta", id: "zacarias" })
+  _ms("Sessenta quizzes", "Faça 60 quizzes.", "quizzes", 60, { tipo: "profeta", id: "zacarias" }),
+  /* Nível 9: a reta final, para chegar ao nível 10 e liberar o profeta mais raro */
+  _ms("Trezentas certas", "Acerte 300 perguntas no total.", "acertos", 300),
+  _ms("Doze gabaritos", "Gabarite 12 quizzes.", "gabaritos", 12, { tipo: "chance", q: 3 }),
+  _ms("Vinte e um seguidos", "Faça o quiz no prazo 21 dias seguidos.", "melhorSeq", 21),
+  _ms("Duzentos e cinquenta mil", "Some 250.000 pontos.", "pontos", 250000, { tipo: "dobro", q: 3 }),
+  _ms("Fiel até o fim", "Complete 6 lições com os 7 dias no prazo.", "semanas", 6, { tipo: "profeta", id: "messias" })
 ];
 MISSOES.forEach((m, i) => { m.n = i + 1; });
 
