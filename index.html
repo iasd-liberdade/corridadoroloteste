@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261117.132855">
+<meta name="versao" content="20261117.143410">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1948,6 +1948,40 @@ html{overscroll-behavior-y:contain}
 .rf-pe{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:5px 2px 0;font-size:11px;opacity:.85}
 .rf-pe small{display:inline-flex;align-items:center;gap:5px}
 
+/* Pronto? cabe na tela do celular (a palavra é mais larga que os números) */
+.cd .cd-num.palavra{font-size:clamp(64px,23vw,170px);max-width:96vw}
+/* Início: ganhar moedas compacto e, na mesma linha, a sequência e o nível */
+.hm-linha{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}
+.hm-linha .cg-atalho{width:auto;margin:0;padding:6px 12px 6px 9px;flex:0 1 auto;font-size:12px}
+.hm-linha .cg-atalho span{flex:none}
+.hm-linha .hm-chips,.inicio-grid.hm .hm-linha .hm-chips{flex-direction:row;flex-wrap:nowrap;max-width:none}
+/* Loja: só o ícone de ganhar moedas, no lugar do total */
+.cg-loja{flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:16px;border:1.5px solid rgba(255,226,122,.55);background:rgba(0,0,0,.25);cursor:pointer}
+.cg-loja .cg-ic-mais{width:34px;height:34px}
+.cg-loja:hover{background:rgba(0,0,0,.35)}
+.lj-topo.cat .cg-loja{width:44px;height:44px;border-radius:14px}
+.lj-topo.cat .cg-loja .cg-ic-mais{width:26px;height:26px}
+/* janela ganhar moedas: itens clicáveis e valor com a moedinha */
+button.cg-item{width:100%;margin:0;background:none;border:0;border-top:1px solid rgba(255,255,255,.12);color:inherit;font-family:inherit;text-align:left;cursor:pointer;align-items:flex-start}
+button.cg-item:hover{background:rgba(255,255,255,.05)}
+.cg-tx{display:block}
+.cg-l1{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cg-l1 b{font-size:12.5px;font-weight:700}
+.cg-l1 em{font-style:normal;white-space:nowrap}
+.cg-val{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:800;color:var(--ouro,#F2BE2E)}
+.cg-val .moeda{width:11.5px;height:11.5px}
+.cg-val small{font-size:10px;font-weight:600;opacity:.75;margin-left:2px}
+.cg-seta{flex:none;align-self:center;opacity:.5;font-size:15px;padding-left:2px}
+/* moedas ganhas: caixinha na tela */
+.mg-caixa{position:fixed;left:50%;top:84px;z-index:119;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:16px;background:rgba(30,26,72,.94);border:1.5px solid rgba(255,226,122,.6);color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.35);transform:translateX(-50%);animation:mg-entra .35s cubic-bezier(.2,1.3,.4,1) both;max-width:calc(100vw - 32px)}
+.mg-caixa .moeda{width:26px;height:26px;flex:none}
+.mg-caixa b{display:block;font-size:15px;color:#FFE27A}
+.mg-caixa small{display:block;font-size:11.5px;opacity:.85}
+.mg-caixa.sai{animation:mg-sai .3s ease-in both}
+@keyframes mg-entra{from{opacity:0;transform:translate(-50%,-14px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+@keyframes mg-sai{to{opacity:0;transform:translate(-50%,-10px) scale(.95)}}
+@media (prefers-reduced-motion:reduce){.mg-caixa,.mg-caixa.sai{animation:none}}
+
 /* login */
 .logo-login{padding:18px 0 6px}
 .logo-login p{font-size:14px;margin-top:10px}
@@ -2981,7 +3015,7 @@ function ocupado(btn, sim){ if(!btn) return; btn.disabled = sim; if(sim){ btn.da
 function contagem(dia, cb){
   const rapido = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const el = document.createElement("div"); el.className = "cd";
-  el.innerHTML = `<div class="cd-ring"></div><div class="cd-in">${meuAvatar()}<div class="cd-dia">${esc(dia.nome)} · ${esc(dia.tema)}</div><div class="cd-num" id="cdNum">Pronto?</div><div class="cd-sub" id="cdSub">Leu a lição de hoje? Então vamos!</div></div>`;
+  el.innerHTML = `<div class="cd-ring"></div><div class="cd-in">${meuAvatar()}<div class="cd-dia">${esc(dia.nome)} · ${esc(dia.tema)}</div><div class="cd-num palavra" id="cdNum">Pronto?</div><div class="cd-sub" id="cdSub">Leu a lição de hoje? Então vamos!</div></div>`;
   document.body.appendChild(el);
   const passos = [["3","Prepare-se…"],["2","Mantenha a calma…"],["1","Quanto mais rápido, mais pontos!"],["VAI!",""]];
   let k = -1;
@@ -3501,9 +3535,9 @@ function telaInicio(){
   const link = (id, t, extra) => `<button type="button" class="hm-link" id="${id}" ${extra || ""}>${t} <span aria-hidden="true">›</span></button>`;
   let html = `<div class="inicio-grid hm"><div>`;
   /* saudação: avatar, nome e a fala do dia numa linha só */
-  html += `<header class="hm-ola"><div class="hm-av${classeMoldura(minhaMoldura())}">${meuAvatar()}</div><div class="hm-ola-tx"><small>${saudacao()}</small><h2>${esc(String(perfil.nome || "").split(" ")[0])}</h2>${fala ? `<p>“${esc(fala)}”</p>` : ""}</div>
-    <div class="hm-chips"><span class="hm-chip" title="Sequência no prazo">${st >= 5 ? "🔥" : "⚡"} ${st}</span><span class="hm-chip ouro" title="Nível ${nv}: ${esc(nomeNivel(nv))}">Nv ${nv}</span></div></header>`;
-  if(typeof htmlMoedasInicio === "function") html += htmlMoedasInicio();          // ganhar moedas (abre a janelinha com os contadores)
+  html += `<header class="hm-ola"><div class="hm-av${classeMoldura(minhaMoldura())}">${meuAvatar()}</div><div class="hm-ola-tx"><small>${saudacao()}</small><h2>${esc(String(perfil.nome || "").split(" ")[0])}</h2>${fala ? `<p>“${esc(fala)}”</p>` : ""}</div></header>`;
+  /* linha fina: ganhar moedas à esquerda; sequência e nível à direita */
+  html += `<div class="hm-linha">${typeof htmlMoedasInicio === "function" ? htmlMoedasInicio() : ""}<div class="hm-chips"><span class="hm-chip" title="Sequência no prazo">${st >= 5 ? "🔥" : "⚡"} ${st}</span><span class="hm-chip ouro" title="Nível ${nv}: ${esc(nomeNivel(nv))}">Nv ${nv}</span></div></div>`;
   html += typeof htmlDesafiosInicio === "function" ? htmlDesafiosInicio() : "";
   if(typeof htmlSuperQuizInicio === "function") html += htmlSuperQuizInicio();         // super quiz: o relógio fica sempre no alto
   /* hoje */
@@ -4138,7 +4172,7 @@ function telaEstudarDias(){
     <h2 class="pg-tit">${esc(d.tema)}</h2>
     ${corpo}
     <div class="btn-row uma">${(s==="hoje"||s==="atrasado") && d.perguntas.length ? `<button class="btn btn-main" id="estJogar">Fazer o quiz de ${esc(d.nome)}</button>` : s==="feito" ? `<button class="btn btn-ghost" id="estVer">Ver meu resultado</button>` : ""}</div>
-    ${d.data <= hoje() ? `<button type="button" class="rf-botao" id="estReflexao"><span aria-hidden="true">💭</span><span>Compartilhar uma reflexão sobre ${esc(d.nome.toLowerCase())} no mural</span>${(perfil.reflexoesDias || []).includes(L.id + "|" + d.data) ? `<em class="rf-ok">✓</em>` : MAIS2}</button>` : ""}
+    ${d.data <= hoje() ? `<button type="button" class="rf-botao" id="estReflexao"><span aria-hidden="true">💭</span><span>Compartilhar uma reflexão sobre ${esc(d.nome.toLowerCase())} no mural</span>${d.data !== hoje() ? "" : (perfil.reflexoesDias || []).includes(L.id + "|" + d.data) ? `<em class="rf-ok">✓</em>` : MAIS2}</button>` : ""}
   </section></div>`;
   $("edVoltar").onclick = ()=> voltarParaAsLicoes(L);
   ligarAbasDaLicao(L);
@@ -6761,7 +6795,7 @@ function conferirMissoesNovas(){
     m.querySelector("#msTrilha").onclick = () => { fechar(); telaMissoes(antes); };
     m.querySelector("#msOk").onclick = fechar;
     const mu = m.querySelector("#msMural"); if(mu) mu.onclick = () => publicarNoMural(subiu ? { tipo: "nivel", ref: "n" + nvAgora, ic: "⭐", titulo: `Subiu para o nível ${nvAgora}: ${nomeNivel(nvAgora)}`, texto: `${agora} missões cumpridas` } : { tipo: "missao", ref: "m" + agora, ic: "🎯", titulo: `Chegou à casa ${novas[novas.length-1].casa} do mapa ${MAPAS[novas[novas.length-1].mapa].nome}: ${novas[novas.length-1].t}`, texto: novas[novas.length-1].d }, mu);
-  }, parar);
+  }, () => { parar(); const v = novas.reduce((t, x) => t + moedasDaCasa(x.n), 0); if(typeof ganhouMoedas === "function") setTimeout(() => ganhouMoedas(v, novas.length === 1 ? "Missão cumprida" : novas.length + " missões cumpridas"), 250); });
 }
 
 /* ============================================================
@@ -7457,7 +7491,7 @@ async function publicarNoMural(post, btn){
    REFLEXÃO SOBRE A LIÇÃO (texto livre no mural, sempre ligado a um dia de uma lição)
    - No Estudar: botão "Compartilhar reflexão" no dia aberto.
    - No Mural: a caixa "Compartilhe uma reflexão" no alto do feed (escolhe o dia).
-   - Moedas: +2 por dia de lição (a 1ª reflexão de cada dia paga; as outras do mesmo dia não).
+   - Moedas: +2 só pela reflexão do dia de hoje (a 1ª de hoje). Dias anteriores podem ser comentados, mas não pagam.
    ============================================================ */
 const REFLEXAO_MAX = 500, REFLEXAO_MIN = 10;
 const chaveReflexao = (L, d) => L.id + "|" + d.data;
@@ -7483,7 +7517,7 @@ function modalReflexao(L, k){
       <p class="erro" id="rfErro"></p>
       <div class="btn-row"><button type="button" class="btn btn-main" id="rfOk">Publicar no mural</button><button type="button" class="btn btn-ghost" id="rfNao">Cancelar</button></div></div>`, (m, fechar) => {
     const tx = m.querySelector("#rfTx"), conta = m.querySelector("#rfConta"), premio = m.querySelector("#rfPremio"), erro = m.querySelector("#rfErro");
-    const pintarPremio = () => { premio.innerHTML = pago(sel) ? "Moedas deste dia já recebidas ✓" : `Primeira reflexão deste dia ${MAIS2}`; };
+    const pintarPremio = () => { premio.innerHTML = sel.d.data !== hoje() ? "Só a reflexão do dia de hoje vale moedas" : pago(sel) ? "Moedas de hoje já recebidas ✓" : `Reflexão de hoje ${MAIS2}`; };
     pintarPremio(); setTimeout(() => tx.focus(), 60);
     tx.oninput = () => { conta.textContent = tx.value.length + "/" + REFLEXAO_MAX; erro.textContent = ""; };
     const s2 = m.querySelector("#rfSel"); if(s2) s2.onchange = () => { sel = opcoes[+s2.value]; pintarPremio(); };
@@ -7501,11 +7535,13 @@ function modalReflexao(L, k){
 }
 /* moedas da reflexão: uma vez por dia de lição */
 function pagarReflexao(o){
+  if(o.d.data !== hoje()) return;                                    // só a reflexão do dia de hoje vale moedas
   const k = chaveReflexao(o.L, o.d), lista = (perfil.reflexoesDias || []).slice(); if(lista.includes(k)) return;
   lista.push(k); perfil.reflexoesDias = lista; DB.salvarUsuario(usuario.uid, { reflexoesDias: lista }).catch(()=>{});
-  setTimeout(() => { aviso("+2 moedas pela reflexão da lição!"); tocar("moeda"); }, 900);
-  if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
+  setTimeout(() => ganhouMoedas(2, "Reflexão da lição de hoje"), 900);
 }
+/* o selo +2 aparece só enquanto a reflexão de hoje ainda pode pagar */
+function reflexaoDeHojePaga(){ const L = LICOES[indiceLicaoAtual()], d = L && L.dias ? L.dias.find(x => x.data === hoje()) : null; return !d || (perfil.reflexoesDias || []).includes(chaveReflexao(L, d)); }
 /* abre o Estudar no dia da reflexão */
 function abrirDiaDaReflexao(licaoId, data){
   const L = LICOES.find(x => x.id === licaoId); if(!L){ aviso("Essa lição não está mais disponível."); return; }
@@ -7610,7 +7646,7 @@ async function telaMural(focoId){
   app.innerHTML = `<div class="result-area duas"><div class="lado">
     ${SALAS.length + SALAS_OUTRAS.length > 1 ? botaoVoltar("muVoltar", "a lista de salas") : ""}${cabPagina(esc(sala.nome), "Mural", "Mural da sala", "Reflexões sobre a lição e conquistas da turma.")}
     </div>
-    <div class="principal"><div class="fd-nova"><span class="fd-av">${meuAvatar()}</span><button type="button" class="fd-campo" id="muReflexao"><span>Compartilhe uma reflexão sobre a lição…</span>${MAIS2}</button><button type="button" class="fd-conq" id="muNovo" title="Compartilhar uma conquista" aria-label="Compartilhar uma conquista">🏅</button></div>
+    <div class="principal"><div class="fd-nova"><span class="fd-av">${meuAvatar()}</span><button type="button" class="fd-campo" id="muReflexao"><span>Compartilhe uma reflexão sobre a lição…</span>${reflexaoDeHojePaga() ? "" : MAIS2}</button><button type="button" class="fd-conq" id="muNovo" title="Compartilhar uma conquista" aria-label="Compartilhar uma conquista">🏅</button></div>
     <div id="muCorpo"><section class="panel"><p class="vazio">Carregando o mural…</p></section></div></div></div>`;
   $("muNovo").onclick = modalCompartilharMural;
   $("muReflexao").onclick = () => modalReflexao();
@@ -8407,8 +8443,8 @@ function contarReacaoDada(d){
   if(!perfil || !usuario) return;
   const antes = moedasDeReacoes(), n = Math.max(0, reacoesDadas() + d); perfil.reacoesDadas = n;
   DB.salvarUsuario(usuario.uid, { reacoesDadas: n }).catch(()=>{});
-  if(moedasDeReacoes() > antes){ aviso(`+1 moeda: ${REACOES_POR_MOEDA} reações no mural!`); tocar("moeda"); }
-  if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
+  if(moedasDeReacoes() > antes) ganhouMoedas(moedasDeReacoes() - antes, `${REACOES_POR_MOEDA} reações no mural`);
+  else if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
 }
 /* Reações dadas antes desta regra existir: contadas uma vez só (perfil.reacoesRetro marca que já foi feito) */
 let _retroReacoes = false;
@@ -8422,9 +8458,8 @@ async function conferirReacoesAntigas(){
     perfil.reacoesDadas = novo; perfil.reacoesRetro = 1;
     await DB.salvarUsuario(eu, { reacoesDadas: novo, reacoesRetro: 1 });
     const ganhou = moedasDeReacoes() - antes;
-    if(ganhou > 0){ aviso(`+${ganhou} ${ganhou === 1 ? "moeda" : "moedas"} pelas ${novo} reações que você já deu no mural!`); tocar("moeda"); }
-    if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
-    const b = $("inMoedas"); if(b){ const v = b.querySelector("b"); if(v) v.textContent = moedas(); }
+    if(ganhou > 0) ganhouMoedas(ganhou, `Pelas ${novo} reações que você já deu no mural`);
+    else if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
   }catch(e){ _retroReacoes = false; }          // não deu agora (sem internet): tenta de novo na próxima abertura do Início
 }
 const moedasDeReflexoes = () => 2 * ((perfil && perfil.reflexoesDias) || []).length;      // +2 pela 1ª reflexão de cada dia de lição
@@ -8464,8 +8499,7 @@ function telaLoja(){
     const emUso = { a: perfil.acess && comprado("a:" + perfil.acess) && LOJA_AC[perfil.acess] ? LOJA_AC[perfil.acess].nome : "", p: (acharProfeta(perfil.profeta) || {}).preco ? acharProfeta(perfil.profeta).nome : "",
       m: (extraDaLoja("m", minhaMoldura()) || {}).nome, t: (extraDaLoja("t", minhaPista()) || {}).nome, v: (extraDaLoja("v", meuMovimento()) || {}).nome, c: (extraDaLoja("c", minhaFesta()) || {}).nome };
     app.innerHTML = `<div class="estudo-area">
-      <div class="lj-topo">${cabPagina("Loja", "", "Loja do Rolo", "Ganhe moedas nos acertos do quiz, nas missões, na semana completa no prazo e nos desafios.")}${saldoHtml}</div>
-      ${htmlMoedasInicio()}
+      <div class="lj-topo">${cabPagina("Loja", "", "Loja do Rolo", "Ganhe moedas nos acertos do quiz, nas missões, na semana completa no prazo e nos desafios.")}${htmlMoedasInicio(true)}</div>
       <div class="lj-cats">${LOJA_CATS.map(c => { const l = c.lista(), meus = l.filter(x => comprado(c.k + ":" + x.id)).length;
         return `<button type="button" class="lj-cat" data-cat="${c.k}">${amostra[c.k]}<b>${c.nome}</b><small>${l.length} ${l.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}</small>${emUso[c.k] ? `<em>em uso: ${esc(emUso[c.k])}</em>` : ""}<span class="lj-cat-seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
       <p class="note center">Moedas ganhas até hoje: ${moedasGanhas()} · gastas: ${moedasGastas()}</p></div>`;
@@ -8491,7 +8525,7 @@ function telaLoja(){
   const nota = cat.k === "v" ? `<p class="lj-nota">Vale para qualquer personagem, inclusive os comuns. Sem movimento comprado, o personagem fica parado na raia.</p>`
     : cat.k === "a" ? `<p class="lj-nota">Um acessório por vez. A maioria fica na mão; a coroa vai na cabeça, as asas nas costas e a ovelha no chão.</p>` : "";
   app.innerHTML = `<div class="estudo-area">
-    <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${saldoHtml}</div>${htmlMoedasInicio()}
+    <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${htmlMoedasInicio(true)}</div>
     ${cabPagina("Loja", `${itens.length} ${itens.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}`, cat.nome, cat.sub.charAt(0).toUpperCase() + cat.sub.slice(1) + ".")}
     <section class="panel pg-card">${nota}<div class="lj-grade ${cat.k === "t" ? "pistas" : ""}">${itens.map(cartao).join("")}</div></section></div>`;
   desenharAmostras();
@@ -8669,60 +8703,119 @@ function festejar(id, ms){
    COMO GANHAR MOEDAS (atalho no Início): cada jeito de ganhar, com contador, a próxima missão e as contagens regressivas
    ============================================================ */
 const MOEDA_MAIS = `<svg class="cg-ic-mais" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="12" r="8.5" fill="#C98A12"/><circle cx="10.5" cy="11.3" r="8" fill="#F2BE2E"/><circle cx="10.5" cy="11.3" r="5.6" fill="none" stroke="#FFE58A" stroke-width="1.3"/><path d="M8.2 8.6c1.4-1 3.4-1 4.6 0" stroke="#FFF3B0" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="18.2" cy="17.6" r="5.2" fill="#2BA486" stroke="#FFFFFF" stroke-width="1.4"/><path d="M18.2 15v5.2M15.6 17.6h5.2" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/></svg>`;
-function htmlMoedasInicio(){
-  return `<button type="button" class="cg-atalho" id="inMoedas">${MOEDA_MAIS}<span>Ganhar moedas</span><b>${moedas()}</b><i aria-hidden="true">›</i></button>`;
+function htmlMoedasInicio(soIcone){
+  return soIcone ? `<button type="button" class="cg-loja" id="inMoedas" aria-label="Ganhar moedas" title="Ganhar moedas">${MOEDA_MAIS}</button>`
+    : `<button type="button" class="cg-atalho" id="inMoedas">${MOEDA_MAIS}<span>Ganhar moedas</span><i aria-hidden="true">›</i></button>`;
 }
 function ligarMoedasInicio(){ const b = $("inMoedas"); if(b) b.onclick = () => { tocar("toque"); modalComoGanhar(); }; }
 let cgTimer = null;
 function modalComoGanhar(){
   const agora = new Date(), barra = pct => `<span class="cg-barra"><i style="width:${Math.max(0, Math.min(100, pct))}%"></i></span>`;
-  const linha = (ic, titulo, valor, sub, extra) => `<div class="cg-item"><span class="cg-ic" aria-hidden="true">${ic}</span><div class="cg-tx"><p><b>${titulo}</b><em>${valor}</em></p>${sub ? `<small>${sub}</small>` : ""}${extra || ""}</div></div>`;
+  const val = (n, extra) => `<span class="cg-val">${n}<i class="moeda" aria-hidden="true"></i>${extra ? `<small>${extra}</small>` : ""}</span>`;
+  const linha = (id, ic, titulo, valor, sub, extra) => `<button type="button" class="cg-item" data-ir="${id}"><span class="cg-ic" aria-hidden="true">${ic}</span><span class="cg-tx"><span class="cg-l1"><b>${titulo}</b><em>${valor}</em></span>${sub ? `<small>${sub}</small>` : ""}${extra || ""}</span><span class="cg-seta" aria-hidden="true">›</span></button>`;
   const relogio = ate => `<b class="cg-rel" data-ate="${ate}">${tempoAte(ate - Date.now())}</b>`;
-  /* 1. reações */
+  const L = LICOES[indiceLicaoAtual()], fut = L && licaoFutura(L), hojeIdx = L && !fut && L.dias ? L.dias.findIndex(d => d.data === hoje()) : -1, dHoje = hojeIdx >= 0 ? L.dias[hojeIdx] : null;
+  const itens = [];
+  /* reflexão (só a do dia de hoje paga) */
+  const nRef = ((perfil && perfil.reflexoesDias) || []).length, refHoje = dHoje && (perfil.reflexoesDias || []).includes(L.id + "|" + dHoje.data);
+  itens.push(linha("reflexao", "💭", "Reflexão da lição no mural", val("+2"),
+    `${dHoje ? (refHoje ? "Hoje: já compartilhada ✓" : `Hoje: sobre ${esc(dHoje.nome.toLowerCase())}, ${esc(dHoje.tema)}`) : "Só a reflexão do dia de hoje vale moedas"} · ${nRef} até hoje`));
+  /* reações */
   const nr = reacoesDadas(), resto = nr % REACOES_POR_MOEDA;
-  const reac = linha("💬", "Reagir no mural", `+1 a cada ${REACOES_POR_MOEDA}`,
-    `${resto} de ${REACOES_POR_MOEDA} para a próxima · ${nr} ${nr === 1 ? "reação" : "reações"} até hoje (+${moedasDeReacoes()})`, barra(100 * resto / REACOES_POR_MOEDA));
-  /* 1b. reflexão da lição */
-  const Lr = LICOES[indiceLicaoAtual()], dHoje = Lr && Lr.dias ? Lr.dias.find(d => d.data === hoje()) : null, nRef = ((perfil && perfil.reflexoesDias) || []).length;
-  const refl = linha("💭", "Reflexão da lição no mural", "+2",
-    `${dHoje ? ((perfil.reflexoesDias || []).includes(Lr.id + "|" + dHoje.data) ? "Hoje: já compartilhada ✓" : "Hoje: ainda não compartilhada") + " · " : ""}vale 1 por dia de lição · ${nRef} até hoje`);
-  /* 2. semana completa */
-  const L = LICOES[indiceLicaoAtual()], fut = L && licaoFutura(L), feitas = L && !fut ? noPrazo(L) : 0, sc = semanasCompletas();
-  const sem = linha("📅", "Semana completa no prazo", `+${MOEDAS_SEMANA}`,
+  itens.push(linha("reacoes", "💬", "Reagir no mural", val("+1"),
+    `A cada ${REACOES_POR_MOEDA} reações · ${resto} de ${REACOES_POR_MOEDA} para a próxima · ${nr} até hoje`, barra(100 * resto / REACOES_POR_MOEDA)));
+  /* semana completa */
+  const feitas = L && !fut ? noPrazo(L) : 0, sc = semanasCompletas();
+  itens.push(linha("semana", "📅", "Semana completa no prazo", val("+" + MOEDAS_SEMANA),
     !L ? "Sem lição cadastrada." : fut ? "A próxima lição começa no sábado." : feitas >= 7 ? `Esta semana: completa ✓ · ${sc} ${sc === 1 ? "semana" : "semanas"} até hoje` : `Esta semana: ${feitas} de 7 no prazo · ${sc} ${sc === 1 ? "semana completa" : "semanas completas"} até hoje`,
-    L && !fut ? barra(100 * feitas / 7) : "");
-  /* 3. missões */
-  let mis = "";
+    L && !fut ? barra(100 * feitas / 7) : ""));
+  /* missões */
   try{
-    const f = missoesFeitas(), prox = MISSOES[f] || null, pg = prox ? progressoMissao(prox) : null, v = prox ? moedasDaCasa(prox.n || f + 1) : 0;
-    mis = linha("🗺️", "Cumprir uma missão", prox ? `+${v}` : "+2",
+    const f = missoesFeitas(), prox = MISSOES[f] || null, pg = prox ? progressoMissao(prox) : null, v = prox ? moedasDaCasa(prox.n || f + 1) : 2;
+    itens.push(linha("missao", "🗺️", "Cumprir uma missão", val("+" + v),
       prox ? `Próxima: <b>${prox.casa}. ${esc(prox.t)}</b>` : "Todas as missões cumpridas.",
-      prox ? `<small class="cg-faz">O que fazer: ${esc(prox.d)}</small><small>${fmt(pg.v)} de ${fmt(pg.alvo)}</small>` + barra(pg.pct) + `<small class="cg-nota">2 por missão; as casas 5 e 10 de cada território valem 5 e 10.</small>` : "");
+      prox ? `<small class="cg-faz">O que fazer: ${esc(prox.d)}</small><small>${fmt(pg.v)} de ${fmt(pg.alvo)}</small>` + barra(pg.pct) + `<small class="cg-nota">2 por missão; as casas 5 e 10 de cada território valem 5 e 10.</small>` : ""));
   }catch(e){}
-  /* 4. quiz cedo */
+  /* quiz cedo */
   const oito = new Date(agora); oito.setHours(DOBRO_CEDO_HORA, 0, 0, 0);
-  const Lh = L && !fut ? L.dias.find(d => d.data === hoje()) : null, feitoHoje = Lh && resDe(L, Lh);
-  const cedo = linha("⏰", `Quiz do dia antes das ${DOBRO_CEDO_HORA}h`, "acerto × 2",
-    agora < oito ? (feitoHoje ? `Hoje você já fez ${quizCedo(feitoHoje) ? "a tempo ✓" : "o quiz"}.` : `Vale agora · termina em ${relogio(oito.getTime())}`) : "Amanhã, da meia-noite às 8h. Fora desse horário, 1 moeda por acerto.");
-  /* 5. super quiz */
-  let sup = "";
+  const feitoHoje = dHoje && resDe(L, dHoje);
+  itens.push(linha("cedo", "⏰", `Quiz do dia antes das ${DOBRO_CEDO_HORA}h`, val("×2", "por acerto"),
+    agora < oito ? (feitoHoje ? `Hoje você já fez ${quizCedo(feitoHoje) ? "a tempo ✓" : "o quiz"}.` : `Vale agora · termina em ${relogio(oito.getTime())}`) : "Amanhã, da meia-noite às 8h. Fora desse horário, 1 por acerto."));
+  /* super quiz */
   try{
     const j = janelaSuper(), sq = meuSuper(j.id);
-    sup = linha("🏁", "Super quiz das missões", `1 casa a cada ${SQ_POR_CASA} acertos`,
-      j.aberto ? (sq && sq.fim ? `Feito nesta semana · o próximo abre em ${relogio(j.ini.getTime() + 7 * 864e5)}` : `Aberto · fecha em ${relogio(j.fim.getTime())}`) : `Abre em ${relogio(j.ini.getTime())} · sexta, ${SQ_HORA}h`);
+    itens.push(linha("super", "🏁", "Super quiz das missões", `<span class="cg-val">1 casa<small>a cada ${SQ_POR_CASA} acertos</small></span>`,
+      j.aberto ? (sq && sq.fim ? `Feito nesta semana · o próximo abre em ${relogio(j.ini.getTime() + 7 * 864e5)}` : `Aberto · fecha em ${relogio(j.fim.getTime())}`) : `Abre em ${relogio(j.ini.getTime())} · sexta, ${SQ_HORA}h`));
+  }catch(e){}
+  /* desafios */
+  try{
+    const abertos = DESAFIOS.filter(d => { const e = estadoDoDesafio(d); return e === "pendente" || e === "andamento"; }).length, saldoD = moedasDeDesafios();
+    itens.push(linha("desafios", "⚔️", "Desafiar um amigo", val("+" + DES_APOSTAS[0] + " a " + DES_APOSTAS[DES_APOSTAS.length - 1]),
+      `Quem fizer mais pontos no quiz do dia leva as moedas apostadas · ${abertos ? `${abertos} em aberto · ` : ""}saldo ${saldoD > 0 ? "+" : ""}${saldoD}`));
   }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
-      ${refl}${reac}${sem}${mis}${cedo}${sup}
-      <p class="cg-rodape">Também valem: 1 moeda por acerto em qualquer quiz e os desafios entre amigos.</p>
+      ${itens.join("")}
+      <p class="cg-rodape">Também vale 1 moeda por acerto em qualquer quiz. Toque num item para ir até ele.</p>
       <button type="button" class="btn btn-ghost btn-sm cg-ok" id="cgOk">Entendi</button></div>`, (m, fechar) => {
     m.querySelector("#cgOk").onclick = fechar;
+    m.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => { tocar("toque"); fechar(); setTimeout(() => irParaGanhar(b.dataset.ir), 60); });
     clearInterval(cgTimer);
     cgTimer = setInterval(() => {
       if(!m.isConnected){ clearInterval(cgTimer); return; }
       m.querySelectorAll(".cg-rel").forEach(el => { el.textContent = tempoAte(+el.dataset.ate - Date.now()); });
     }, 1000);
   }, () => clearInterval(cgTimer));
+}
+/* cada item da janela leva para o lugar onde se ganha aquela moeda */
+function irParaGanhar(k){
+  const L = LICOES[indiceLicaoAtual()], i = L && L.dias ? L.dias.findIndex(d => d.data === hoje()) : -1;
+  const estudarHoje = () => { if(!L){ nav("inicio"); return; } estudoLicao = L; estudoDia = i >= 0 ? i : -1; estudoVista = "dias"; window.scrollTo(0, 0); nav("estudar"); };
+  if(k === "reflexao"){ if(L && i >= 0 && typeof modalReflexao === "function") modalReflexao(L, i); else nav("mural"); return; }
+  if(k === "reacoes"){ window.scrollTo(0, 0); nav("mural"); return; }
+  if(k === "semana"){ estudarHoje(); return; }
+  if(k === "missao"){ missoesVista = "atual"; mapaAberto = -1; window.scrollTo(0, 0); nav("missoes"); return; }
+  if(k === "cedo"){ const d = L && i >= 0 ? L.dias[i] : null;
+    if(d && !resDe(L, d) && d.perguntas && d.perguntas.length){ LICAO = L; tabAtual = "quiz"; atualizarCasca(); iniciar(i); } else estudarHoje(); return; }
+  if(k === "super"){ if(typeof modalRegrasSuper === "function") modalRegrasSuper(); return; }
+  if(k === "desafios"){
+    if(typeof desafiosParaResponder === "function" && desafiosParaResponder().length){ modalDesafios(); return; }
+    corridaVista = "pista"; window.scrollTo(0, 0); nav("ranking");
+    setTimeout(() => aviso("Toque no personagem de um amigo na pista e escolha Desafiar."), 500);
+  }
+}
+
+/* ---------- Moedas ganhas: caixinha na tela e as moedas voando até o total lá em cima ---------- */
+let _mgFila = Promise.resolve();
+function ganhouMoedas(n, motivo){
+  n = Math.floor(+n || 0); if(n <= 0 || typeof document === "undefined") return;
+  _mgFila = _mgFila.then(() => new Promise(pronto => {
+    const topo = $("topoMoedas"), total = moedas(), antes = Math.max(0, total - n);
+    const cx = document.createElement("div"); cx.className = "mg-caixa"; cx.setAttribute("role", "status");
+    cx.innerHTML = `<i class="moeda" aria-hidden="true"></i><span><b>+${n} ${n === 1 ? "moeda" : "moedas"}</b><small>${esc(motivo || "")}</small></span>`;
+    document.body.appendChild(cx); tocar("moeda");
+    const pulo = el => { if(!el) return; el.classList.remove("pulo"); void el.offsetWidth; el.classList.add("pulo"); };
+    const terminar = () => { if(moedasAnim && moedasAnim.el === cx) moedasAnim = null; pintarMoedasTopo(); pulo(topo);
+      setTimeout(() => { cx.classList.add("sai"); setTimeout(() => { cx.remove(); pronto(); }, 350); }, 1300); };
+    const semAnim = !topo || topo.hidden || !document.body.animate || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(semAnim){ pintarMoedasTopo(); setTimeout(terminar, 600); return; }
+    moedasAnim = { el: cx, v: antes }; pintarMoedasTopo();
+    const qtd = Math.min(n, 10); let chegou = 0;
+    setTimeout(() => {
+      for(let k = 0; k < qtd; k++) setTimeout(() => {
+        const de = cx.querySelector(".moeda").getBoundingClientRect(), ate = topo.querySelector(".moeda").getBoundingClientRect();
+        const m = document.createElement("i"); m.className = "moeda moeda-voa"; m.setAttribute("aria-hidden", "true"); document.body.appendChild(m);
+        const x0 = de.left + de.width / 2 - 11, y0 = de.top + de.height / 2 - 11, x1 = ate.left + ate.width / 2 - 11, y1 = ate.top + ate.height / 2 - 11, lado = (k % 2 ? 1 : -1) * (20 + (k % 3) * 10);
+        const a = m.animate([
+          { transform: `translate(${x0}px,${y0}px) scale(.6)`, opacity: 0 },
+          { transform: `translate(${x0 + lado}px,${y0 - 26}px) scale(1.1)`, opacity: 1, offset: .25 },
+          { transform: `translate(${x1}px,${y1}px) scale(.8)`, opacity: 1 }
+        ], { duration: 720, easing: "cubic-bezier(.45,0,.55,1)", fill: "forwards" });
+        const pousar = () => { m.remove(); chegou++; if(moedasAnim && moedasAnim.el === cx){ moedasAnim.v = antes + Math.round(n * chegou / qtd); pintarMoedasTopo(); } pulo(topo); if(chegou === qtd) terminar(); };
+        a.onfinish = pousar; a.oncancel = pousar;
+      }, k * 120);
+    }, 450);
+  })).catch(() => {});
 }
 
 /* ============================================================
@@ -9015,7 +9108,7 @@ function anunciarDesafio(d, v, a, b){
       <div class="des-placar"><div><div class="des-av">${meuAvatar()}</div><b>Você</b><span>${pts(a)}</span></div><i>×</i><div><div class="des-av">${avatarSVG(personagemDe(o.boneco, 0), o.nome)}</div><b>${esc(o.nome || "Jogador")}</b><span>${pts(b)}</span></div></div>
       <p class="des-moedas">${v ? `<i class="moeda" aria-hidden="true"></i><b>${v > 0 ? "+" : "−"}${Math.abs(v)} moedas</b>` : "Ninguém ganha nem perde moedas."}</p>
       <p class="muted small">${esc(d.diaNome || "")}${d.licaoNome ? " · " + esc(d.licaoNome) : ""}</p>
-      <div class="btn-row uma"><button class="btn btn-main" id="dfOk">Continuar</button></div></div>`, (m, fechar) => { m.querySelector("#dfOk").onclick = fechar; });
+      <div class="btn-row uma"><button class="btn btn-main" id="dfOk">Continuar</button></div></div>`, (m, fechar) => { m.querySelector("#dfOk").onclick = fechar; }, () => { if(v > 0 && typeof ganhouMoedas === "function") ganhouMoedas(v, "Desafio vencido"); });
 }
 /* o dia em que o desafio pode valer: hoje, se nenhum dos dois jogou ainda; senão amanhã */
 async function diaParaDesafiar(uidOutro){
@@ -9305,7 +9398,7 @@ function fimSuperQuiz(soVer){
       ${outros.length ? `<ul class="sq-premios">${outros.map(m => `<li>Casa ${m.casa}: ${esc(textoPremio(m.premio))}</li>`).join("")}</ul>` : ""}
     </section>
     <div class="res-acoes"><button class="btn btn-main" id="sqTrilha">Ver a trilha</button><button class="btn btn-ghost" id="sqInicio">Início</button></div></div>`;
-  if(nc && !soVer){ tocar(nvB > nvA ? "subiu" : "missao"); if(typeof confetes === "function") confetes(); }
+  if(nc && !soVer){ tocar(nvB > nvA ? "subiu" : "missao"); if(typeof confetes === "function") confetes(); if(moedasCasas && typeof ganhouMoedas === "function") setTimeout(() => ganhouMoedas(moedasCasas, "Casas do super quiz"), 1200); }
   $("sqTrilha").onclick = () => { missoesVista = "atual"; mapaAberto = -1; nav("missoes"); };
   $("sqInicio").onclick = () => nav("inicio");
 }
