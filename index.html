@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261117.143410">
+<meta name="versao" content="20261117.193427">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1982,6 +1982,70 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 @keyframes mg-sai{to{opacity:0;transform:translate(-50%,-10px) scale(.95)}}
 @media (prefers-reduced-motion:reduce){.mg-caixa,.mg-caixa.sai{animation:none}}
 
+/* ---------- álbum de figurinhas (teste) ---------- */
+.alb-prog{margin:-4px 0 12px}.alb-prog .hm-barra{display:block}.alb-prog small{display:block;margin-top:5px;font-size:12px;color:var(--muted)}
+.alb-pacotes{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border-color:rgba(255,226,122,.6)}
+.alb-pac-ic{font-size:30px;animation:alb-bal 1.6s ease-in-out infinite}
+@keyframes alb-bal{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) translateY(-2px)}}
+.alb-pac-tx{flex:1;min-width:0}.alb-pac-tx b{display:block;font-size:15px}.alb-pac-tx small{font-size:12px;color:var(--muted)}
+.alb-pac-bt{display:flex;flex-direction:column;gap:6px}
+.alb-trocas{padding:12px 14px;margin-bottom:12px}.alb-trocas .hm-sub{margin:6px 0 0}
+.tr-ul{margin:8px 0 0}.tr-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.12)}
+.tr-tx{flex:1;min-width:0}.tr-tx > small{display:block;font-size:11.5px;color:var(--muted);margin-bottom:4px}
+.tr-par{display:flex;align-items:center;gap:8px}.tr-par > i{font-style:normal;opacity:.7}
+.tr-lado{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1px 6px;min-width:0;flex:1}.tr-lado em{grid-column:1/3;font-style:normal;font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.04em}
+.tr-lado b{font-size:12px;line-height:1.15;overflow:hidden;text-overflow:ellipsis}
+.tr-fig{width:30px;height:36px;border-radius:6px;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}.tr-fig img{max-width:100%;max-height:100%;image-rendering:pixelated}
+.tr-fig.r-rara{box-shadow:0 0 0 1.5px #F2BE2E}.tr-fig.r-lendaria{box-shadow:0 0 0 1.5px #FF8AD8}
+.tr-acoes{display:flex;flex-direction:column;gap:5px;flex:none}
+.alb-abas{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.alb-abas::-webkit-scrollbar{display:none}
+.alb-abas button{flex:none;display:grid;gap:1px;padding:7px 12px;border-radius:12px;border:1px solid var(--panel-line);background:var(--panel);color:#fff;font-family:inherit;text-align:left;cursor:pointer;border-bottom:3px solid var(--pg)}
+.alb-abas button b{font-size:12.5px;white-space:nowrap}.alb-abas button small{font-size:11px;color:var(--muted)}
+.alb-abas button[aria-selected="true"]{background:#fff;color:#22183A}.alb-abas button[aria-selected="true"] small{color:#5B5680}
+.alb-pagina{border-top:4px solid var(--pg)}
+.alb-pg-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.alb-pg-cab b{display:block;font-size:17px}.alb-pg-cab small{font-size:12px;color:var(--muted)}
+.alb-premio{display:inline-flex;align-items:center;gap:4px;flex:none;padding:4px 9px;border-radius:99px;background:rgba(242,190,46,.18);color:#FFE27A;font-size:11.5px;font-weight:800}.alb-premio .moeda{width:12px;height:12px}
+.alb-premio.pago{background:rgba(43,164,134,.3);color:#9FF0D2}
+.alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px}
+.fig{position:relative;display:grid;justify-items:center;gap:3px;padding:16px 4px 8px;border-radius:12px;border:2px solid rgba(255,255,255,.85);background:linear-gradient(170deg,color-mix(in srgb,var(--pg) 70%,#fff 0%),color-mix(in srgb,var(--pg) 55%,#1d1848));color:#fff;font-family:inherit;text-align:center;cursor:pointer;min-width:0;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+div.fig{cursor:default}
+.fig-n{position:absolute;left:5px;top:3px;font-size:10px;font-weight:800;opacity:.85}
+.fig-x{position:absolute;right:-5px;top:-6px;min-width:22px;padding:1px 5px;border-radius:99px;background:#22183A;border:1.5px solid #FFE27A;color:#FFE27A;font-style:normal;font-size:11px;font-weight:800}
+.fig-img{width:100%;height:64px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.2);overflow:hidden}
+.fig-img img{height:60px;width:auto;max-width:100%;image-rendering:pixelated;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.fig-img.obj img{height:auto;width:auto;max-height:46px;max-width:70%}
+.fig b{font-size:11.5px;line-height:1.15;min-height:26px;display:grid;align-items:center;padding:0 2px}
+.fig-r{font-style:normal;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#FFE27A}
+.fig.r-rara{border-color:#F2BE2E;box-shadow:0 0 0 1px #C98A12,0 3px 10px rgba(242,190,46,.35)}
+.fig.r-lendaria{border-color:transparent;background:linear-gradient(170deg,color-mix(in srgb,var(--pg) 70%,#fff 0%),color-mix(in srgb,var(--pg) 55%,#1d1848)) padding-box,linear-gradient(120deg,#FF8AD8,#FFE27A,#8FE6FF,#B48CF0,#FF8AD8) border-box;background-size:auto,300% 100%;animation:fig-holo 4s linear infinite;box-shadow:0 3px 14px rgba(255,138,216,.45)}
+.fig.r-lendaria .fig-r{color:#FFD0F0}
+@keyframes fig-holo{to{background-position:0 0,300% 0}}
+.fig.falta{background:rgba(0,0,0,.18);border:2px dashed rgba(255,255,255,.28);box-shadow:none;animation:none;color:rgba(255,255,255,.55)}
+.fig.falta .fig-img{background:rgba(255,255,255,.06);font:800 26px "Bebas Neue","Arial Narrow",sans-serif;color:rgba(255,255,255,.3)}
+.fig.falta .fig-r{color:rgba(255,226,122,.6)}
+.fig.grande{width:170px;padding:22px 8px 12px;margin:0 auto}.fig.grande .fig-img{height:130px}.fig.grande .fig-img img{height:122px}.fig.grande .fig-img.obj img{max-height:90px;height:90px}.fig.grande b{font-size:16px}.fig.grande .fig-n{font-size:13px}
+.fig-det{text-align:center}.fig-det-ref{margin:12px 0 6px;font-size:13px;color:var(--muted)}.fig-det-fala{margin:0 0 8px;font-style:italic;font-size:14px}
+.fig.mini{padding:13px 2px 5px;border-radius:9px;gap:1px}.fig.mini .fig-img{height:40px}.fig.mini .fig-img img{height:38px}.fig.mini .fig-img.obj img{max-height:28px}.fig.mini b{font-size:9.5px;min-height:20px}.fig.mini .fig-r{display:none}
+.fig.mini.sel{outline:3px solid #fff;outline-offset:1px}
+.fig.mini.boa::after{content:"";position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:#3EE0A0;border:1.5px solid #fff}
+.tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:7px;max-height:210px;overflow-y:auto;padding:3px}
+.tr-tit{margin:12px 0 6px;font-size:13px}.tr-tit small{opacity:.7;font-size:11px}
+.tr-lista{display:grid;gap:6px}.tr-membro{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:left;cursor:pointer}
+.tr-membro b{flex:1;font-size:14px}.tr-membro i{font-style:normal;opacity:.6}.tr-av .avatar{width:28px;height:36px;display:block}
+/* pacote abrindo */
+.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:900px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:6px 4px}
+.pac-carta{position:relative;transform-style:preserve-3d;animation:pac-vira .7s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(.35s + var(--i) * .32s)}
+.pac-frente{backface-visibility:hidden;position:relative}
+.pac-verso{position:absolute;inset:0;border-radius:12px;background:repeating-linear-gradient(45deg,#3D3399 0 8px,#5B4FC9 8px 16px);border:2px solid #FFE27A;display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
+.pac-verso span{font:800 34px "Bebas Neue","Arial Narrow",sans-serif;color:#FFE27A}
+@keyframes pac-vira{from{transform:rotateY(180deg) scale(.85)}to{transform:rotateY(0) scale(1)}}
+.pac-nova,.pac-rep{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap}
+.pac-nova{background:#3EE0A0;color:#06382A}.pac-rep{background:rgba(0,0,0,.55);color:#fff}
+.pac-resumo{text-align:center;margin:20px 0 12px;font-size:14px}
+.alb-inicio{cursor:pointer}.alb-inicio .hm-barra{display:block;margin:8px 0 6px}.alb-inicio .hm-sub{margin:0}
+.alb-botao{background:linear-gradient(135deg,#FFE27A,#F2BE2E)!important;color:#3A2A00!important}
+@media (prefers-reduced-motion:reduce){.pac-carta,.alb-pac-ic,.fig.r-lendaria{animation:none}.pac-verso{display:none}}
+
 /* login */
 .logo-login{padding:18px 0 6px}
 .logo-login p{font-size:14px;margin-top:10px}
@@ -2476,6 +2540,11 @@ function dbFirebase(){
     async meusDesafios(uid, meses){ const ks = meses.map(m => uid + "|" + m); const [a, b] = await Promise.all([lista(col("desafios").where("deMes","in",ks)), lista(col("desafios").where("paraMes","in",ks))]); return a.concat(b); },
     async responderDesafio(id, status){ await col("desafios").doc(id).update({ status, respondido: Date.now() }); },
     async cancelarDesafio(id){ await col("desafios").doc(id).delete(); },
+    /* trocas de figurinhas do álbum */
+    async criarTroca(d){ const r = await col("trocas").add(d); return r.id; },
+    async minhasTrocas(uid){ const [a, b] = await Promise.all([lista(col("trocas").where("de","==",uid)), lista(col("trocas").where("para","==",uid))]); return a.concat(b); },
+    async responderTroca(id, status){ await col("trocas").doc(id).update({ status, respondido: Date.now() }); },
+    async cancelarTroca(id){ await col("trocas").doc(id).delete(); },
     async getConfig(){ const d = await col("config").doc("geral").get(); return d.exists ? d.data() : {}; },
     async salvarConfig(c){ await col("config").doc("geral").set(c, {merge:true}); },
     // Salas (turmas) e seus membros. Membro: id = salaId_uid, status "ativo" | "pendente"
@@ -2586,6 +2655,10 @@ function dbLocal(){
     async meusDesafios(uid, meses){ const d = ler().desafios || {}; return Object.keys(d).filter(k => (d[k].de === uid || d[k].para === uid) && meses.includes(d[k].mes)).map(k => Object.assign({id:k}, d[k])); },
     async responderDesafio(id, status){ const d = ler(); if(d.desafios && d.desafios[id]){ Object.assign(d.desafios[id], { status, respondido: Date.now() }); gravar(d); } },
     async cancelarDesafio(id){ const d = ler(); if(d.desafios){ delete d.desafios[id]; gravar(d); } },
+    async criarTroca(x){ const d = ler(), id = "t" + Date.now().toString(36) + Math.floor(Math.random()*1e4); (d.trocas = d.trocas || {})[id] = x; gravar(d); return id; },
+    async minhasTrocas(uid){ const d = ler().trocas || {}; return Object.keys(d).filter(k => d[k].de === uid || d[k].para === uid).map(k => Object.assign({id:k}, d[k])); },
+    async responderTroca(id, status){ const d = ler(); if(d.trocas && d.trocas[id]){ Object.assign(d.trocas[id], { status, respondido: Date.now() }); gravar(d); } },
+    async cancelarTroca(id){ const d = ler(); if(d.trocas){ delete d.trocas[id]; gravar(d); } },
     async getConfig(){ return ler().config || {}; },
     async salvarConfig(c){ const d = ler(); d.config = Object.assign(d.config||{}, c); gravar(d); },
     async getSala(id){ const d = ler(); return (d.salas||{})[id] ? Object.assign({id}, d.salas[id]) : null; },
@@ -3200,7 +3273,7 @@ function nav(tab){
   if(typeof carregarNotificacoes === "function") carregarNotificacoes();        // confere reações novas (no máximo a cada 90 s)
   if(typeof conferirDesafios === "function" && Date.now() - desafiosEm > 3 * MIN) conferirDesafios().catch(()=>{});      // e desafios (no máximo a cada 3 min)
   setTimeout(() => conferirVersao(false), 400);                                 // e se subiu versão nova do jogo (no máximo a cada 2 min)
-  ({ inicio: telaInicio, estudar: telaEstudar, quiz: telaQuiz, ranking: telaRanking, missoes: () => telaMissoes(), salas: telaSalas, mural: telaMuralSalas, conta: telaConta, admin: telaAdmin, loja: telaLoja }[tab] || telaInicio)();
+  ({ inicio: telaInicio, estudar: telaEstudar, quiz: telaQuiz, ranking: telaRanking, missoes: () => telaMissoes(), salas: telaSalas, mural: telaMuralSalas, conta: telaConta, admin: telaAdmin, loja: telaLoja, album: () => telaAlbum() }[tab] || telaInicio)();
 }
 document.querySelectorAll("#nav button").forEach(b => b.onclick = ()=>{ const t = b.dataset.tab; if(t === "estudar") estudoVista = "livros"; if(t === "ranking") corridaVista = "salas"; if(t === "loja") lojaCat = ""; if(t === "missoes") missoesVista = "mapas"; nav(t); });   // pelo menu, a Lição abre na estante de livros, e a Corrida na escolha da sala
 /* Tocar no personagem abre a Minha conta; tocar de novo fecha e volta para a tela (e a altura) em que a pessoa estava */
@@ -3439,7 +3512,8 @@ function conquistas(){
     { ic:"🕊️", id:"fiel", t:"Fiel na reta", d:"3 semanas completas", on: LICOES.filter(L => L.dias.every(d => resDe(L,d) && resDe(L,d).noPrazo)).length >= 3 },
     { ic:"💎", id:"tesouro", t:"Tesouro", d:"20.000 pontos no trimestre", on: totalTrimestre() >= 20000 },
     { ic:"📖", id:"rolo", t:"Rolo inteiro", d:"Todos os dias do trimestre", on: LICOES.length > 0 && LICOES.every(L => L.dias.every(d => resDe(L,d))) },
-    { ic:"💰", id:"rico", t:"Rico", d:"Ganhou 1.000 moedas no total", on: typeof moedasGanhas === "function" && moedasGanhas() >= 1000 }
+    { ic:"💰", id:"rico", t:"Rico", d:"Ganhou 1.000 moedas no total", on: typeof moedasGanhas === "function" && moedasGanhas() >= 1000 },
+    { ic:"🎴", id:"colecionador", t:"Colecionador", d:"Completou o álbum de figurinhas", on: typeof albumCompleto === "function" && albumCompleto() }
   ];
 }
 /* ---------- Conquistas novas: aparecem uma única vez, com confetes ---------- */
@@ -3566,6 +3640,7 @@ function telaInicio(){
   html += `<section class="panel hm-card" id="inCorrida">${cab("Corrida do Rolo")}<p class="hm-sub">Calculando sua posição…</p></section>`;
   /* missões */
   html += cartaoMissoesMin();
+  if(typeof htmlAlbumInicio === "function") html += htmlAlbumInicio();          // álbum de figurinhas
   /* conquistas: uma fileira que rola para o lado */
   const cq = conquistas(), ganhas = cq.filter(c => c.on).length;
   html += `<section class="panel hm-card">${cab(`Conquistas <em>${ganhas}/${cq.length}</em>`, ganhas ? link("cqShare", "Compartilhar") : "")}
@@ -3581,6 +3656,7 @@ function telaInicio(){
   if(typeof dicaDaLoja === "function") dicaDaLoja();          // aponta a Loja no menu, uma vez por pessoa
   if(typeof ligarSuperQuizInicio === "function") ligarSuperQuizInicio();
   if(typeof ligarMoedasInicio === "function"){ ligarMoedasInicio(); conferirReacoesAntigas(); }
+  if(typeof ligarAlbumInicio === "function") ligarAlbumInicio();
   const jog = $("inJogar"); if(jog) jog.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); iniciar(hojeIdx); };
   const ver = $("inVer"); if(ver) ver.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); telaResultado(hojeIdx); };
   const ct = $("inContagem");
@@ -4028,6 +4104,7 @@ function telaResultado(i, novo, extra){
     </section>
     ${balaoFala(falaResultado(r))}
     <div class="res-acoes">
+      ${typeof pacotesFechados === "function" && pacotesFechados().includes(LICAO.id + "|" + dia.data) ? `<button class="btn btn-main alb-botao" id="rPacote">🎴 Abrir o pacote de figurinhas</button>` : ""}
       <button class="btn btn-main" id="selfie">📸 Selfie com o resultado</button>
       <button class="btn btn-wa" id="wa">Enviar no grupo</button>
       <button class="btn btn-ghost" id="rMural">Publicar no mural</button>
@@ -4037,6 +4114,7 @@ function telaResultado(i, novo, extra){
   $("wa").onclick = async ()=>{ ocupado($("wa"), true); try{ await compartilharCartao(i); }catch(e){ aviso("Não deu para gerar a imagem."); } ocupado($("wa"), false); };
   $("voltar").onclick = ()=>{ quizAbrindo = false; quizVista = "semana"; nav("quiz"); };
   $("selfie").onclick = ()=> telaSelfie(i);
+  const rp = $("rPacote"); if(rp) rp.onclick = ()=>{ rp.remove(); abrirPacotes([LICAO.id + "|" + dia.data]); };
   $("verPontos2").onclick = modalPontuacao;
   $("rMural").onclick = ()=> publicarNoMural(postDoResultado(LICAO, dia, r), $("rMural"));
   window.scrollTo(0,0);
@@ -8202,7 +8280,7 @@ Object.assign(CINTOS, { sansao:"#5A3A22", davi:"#8A5A2B" });
 Object.assign(CINTOS, { adao:"#5A3A22", farao:"#F2BE2E", josenazare:"#5A3A22", raabe:"#E8483C", pedro:"#8A5A2B" });
 Object.assign(MANTOS, { josue:"#8E3222", pedro:"#E8D9B5" });
 
-gerarSprite.POSES = POSES;
+gerarSprite.POSES = POSES; gerarSprite.ICONES = ICONES; gerarSprite.scale2x = scale2x;
 return gerarSprite;
 }
 const gerarSpriteModelo = _fabricaSprites();
@@ -8463,7 +8541,7 @@ async function conferirReacoesAntigas(){
   }catch(e){ _retroReacoes = false; }          // não deu agora (sem internet): tenta de novo na próxima abertura do Início
 }
 const moedasDeReflexoes = () => 2 * ((perfil && perfil.reflexoesDias) || []).length;      // +2 pela 1ª reflexão de cada dia de lição
-function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes() + moedasDeReflexoes(); }
+function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes() + moedasDeReflexoes() + (typeof moedasDeAlbum === "function" ? moedasDeAlbum() : 0); }
 function moedasGastas(){ const c = (perfil && perfil.compras) || {}; return Object.keys(c).reduce((s, k) => s + (+c[k] || 0), 0); }
 function moedas(){ return Math.max(0, moedasGanhas() - moedasGastas() - (typeof moedasEmJogo === "function" ? moedasEmJogo() : 0)); }
 const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
@@ -8571,7 +8649,7 @@ function meuResumoPublico(){
   const rs = Object.values(RES);
   return { uid: usuario.uid, tipo: "perfil", salaId: "", salaMes: "perfil|" + usuario.uid, titulo: "Seu perfil", nome: perfil.nome || "", profeta: meuBoneco(), nivel: meuNivel(), moldura: minhaMoldura(), pista: minhaPista(),
     pts: rs.reduce((s, r) => s + (r.pts || 0), 0), quizzes: rs.length, acertos: rs.reduce((s, r) => s + (r.acertos || 0), 0), casas: missoesFeitas(), seq: sequencia(),
-    conquistas: conquistas().filter(c => c.on).map(c => c.id) };
+    conquistas: conquistas().filter(c => c.on).map(c => c.id), album: typeof albumPublico === "function" ? albumPublico() : "" };
 }
 /* grava o resumo só quando algo mudou (uma escrita por quiz, mais ou menos) */
 function sincronizarPerfilPublico(){
@@ -8753,6 +8831,12 @@ function modalComoGanhar(){
     itens.push(linha("desafios", "⚔️", "Desafiar um amigo", val("+" + DES_APOSTAS[0] + " a " + DES_APOSTAS[DES_APOSTAS.length - 1]),
       `Quem fizer mais pontos no quiz do dia leva as moedas apostadas · ${abertos ? `${abertos} em aberto · ` : ""}saldo ${saldoD > 0 ? "+" : ""}${saldoD}`));
   }catch(e){}
+  /* álbum */
+  try{
+    const inv = albumInventario(), pagas = (perfil.albumPag || []).length, f = pacotesFechados().length;
+    itens.push(linha("album", "🎴", "Completar páginas do álbum", val("+" + ALBUM_MOEDAS_PAGINA),
+      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_PAGINAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: +${ALBUM_MOEDAS_FIM}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
+  }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
       ${itens.join("")}
@@ -8777,6 +8861,7 @@ function irParaGanhar(k){
   if(k === "missao"){ missoesVista = "atual"; mapaAberto = -1; window.scrollTo(0, 0); nav("missoes"); return; }
   if(k === "cedo"){ const d = L && i >= 0 ? L.dias[i] : null;
     if(d && !resDe(L, d) && d.perguntas && d.perguntas.length){ LICAO = L; tabAtual = "quiz"; atualizarCasca(); iniciar(i); } else estudarHoje(); return; }
+  if(k === "album"){ window.scrollTo(0, 0); nav("album"); return; }
   if(k === "super"){ if(typeof modalRegrasSuper === "function") modalRegrasSuper(); return; }
   if(k === "desafios"){
     if(typeof desafiosParaResponder === "function" && desafiosParaResponder().length){ modalDesafios(); return; }
@@ -9401,6 +9486,278 @@ function fimSuperQuiz(soVer){
   if(nc && !soVer){ tocar(nvB > nvA ? "subiu" : "missao"); if(typeof confetes === "function") confetes(); if(moedasCasas && typeof ganhouMoedas === "function") setTimeout(() => ganhouMoedas(moedasCasas, "Casas do super quiz"), 1200); }
   $("sqTrilha").onclick = () => { missoesVista = "atual"; mapaAberto = -1; nav("missoes"); };
   $("sqInicio").onclick = () => nav("inicio");
+}
+
+/* ============================================================
+   ÁLBUM DE FIGURINHAS BÍBLICO (versão de teste)
+   - 97 figurinhas: os 53 personagens e 44 objetos bíblicos, em 6 páginas por tema. Raridades: comum, rara e lendária.
+   - Cada quiz do dia feito dá 1 pacote com 3 figurinhas. O sorteio é fixo por jogador e por dia (uid + lição + dia),
+     então não muda se a pessoa reabrir o jogo, e não precisa gravar nada no servidor para "ganhar" o pacote.
+     O que fica no perfil: albumAbertos (pacotes já abertos), albumTrocas (o que saiu e o que entrou em cada troca),
+     albumPag (páginas já premiadas) e albumFim (álbum completo premiado).
+   - Trocas: só com quem é da mesma sala. Quem propõe oferece uma repetida e pede uma figurinha; o outro aceita ou recusa.
+     Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
+   - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
+   ============================================================ */
+const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 3, ALBUM_MAX_PROPOSTAS = 5;
+const ALBUM_OBJ = {
+  folha: ["Folha de Figueira", "Gênesis 3:7"], flor: ["Flor do Éden", "Gênesis 2:9"], nuvem: ["Nuvem de Enoque", "Gênesis 5:24"], arca: ["Arca de Noé", "Gênesis 6:14"],
+  pomba_ramo: ["Pomba com o Ramo", "Gênesis 8:11"], estrelas: ["Estrelas da Promessa", "Gênesis 15:5"], tenda: ["Tenda de Abraão", "Gênesis 18:1"], trigo: ["Feixes de Trigo", "Gênesis 37:7"], cetro: ["Cetro do Faraó", "Êxodo 5:2"],
+  tabuas: ["Tábuas da Lei", "Êxodo 31:18"], cajado: ["Cajado de Moisés", "Êxodo 4:2"], tamborim: ["Tamborim de Miriã", "Êxodo 15:20"], candelabro: ["Candelabro de Ouro", "Êxodo 25:31"], trombeta: ["Trombeta de Jericó", "Josué 6:20"],
+  cordao: ["Cordão Escarlate", "Josué 2:18"], palmeira: ["Palmeira de Débora", "Juízes 4:5"], jarro: ["Jarro de Gideão", "Juízes 7:16"], coluna: ["Colunas do Templo", "Juízes 16:29"],
+  chifre: ["Chifre de Azeite", "1 Samuel 16:13"], harpa: ["Harpa de Davi", "1 Samuel 16:23"], coroa: ["Coroa do Rei", "2 Samuel 5:3"], ovelha: ["Ovelha do Pastor", "2 Samuel 12:3"], chama: ["Fogo do Céu", "1 Reis 18:38"],
+  brasa: ["Brasa do Altar", "Isaías 6:6"], rolo: ["Rolo de Jeremias", "Jeremias 36:2"],
+  livro: ["Livro da Lei", "2 Reis 22:8"], torre: ["Torre de Vigia", "Habacuque 2:1"], roda: ["Rodas de Ezequiel", "Ezequiel 1:16"], leao: ["Leão da Cova", "Daniel 6:22"], gafanhoto: ["Gafanhoto", "Joel 1:4"], peixe: ["Grande Peixe", "Jonas 1:17"], lamparina: ["Lâmpada", "Salmo 119:105"],
+  onda: ["Águas do Jordão", "Mateus 3:6"], manjedoura: ["Manjedoura", "Lucas 2:7"], estrela: ["Estrela de Belém", "Mateus 2:9"], martelo: ["Martelo do Carpinteiro", "Mateus 13:55"], pao: ["Pão da Vida", "João 6:35"], rede: ["Rede de Pesca", "Lucas 5:6"],
+  pomba: ["Pomba do Batismo", "Mateus 3:16"], ovelha_chao: ["Ovelha Perdida", "Lucas 15:4"],
+  carta: ["Carta aos Irmãos", "2 Timóteo 1:2"], asas: ["Asas de Anjo", "Salmo 91:4"], pena: ["Pena do Escritor", "Salmo 45:1"], coracao: ["Coração Novo", "Ezequiel 36:26"]
+};
+const ALBUM_PAGINAS = [
+  { id: "eden", nome: "Do Éden ao Egito", ref: "Gênesis", cor: "#3E9B4F", p: ["adao", "eva", "enoque", "noe", "abraao", "sara", "jose", "farao"], o: ["folha", "flor", "nuvem", "arca", "pomba_ramo", "estrelas", "tenda", "trigo", "cetro"] },
+  { id: "exodo", nome: "Êxodo e Conquista", ref: "Êxodo a Rute", cor: "#C9773F", p: ["moises", "miria", "josue", "raabe", "debora", "gideao", "sansao", "rute"], o: ["tabuas", "cajado", "tamborim", "candelabro", "trombeta", "cordao", "palmeira", "jarro", "coluna"] },
+  { id: "reis", nome: "Reis e Profetas", ref: "Samuel a Jeremias", cor: "#7B6CF0", p: ["samuel", "davi", "salomao", "nata", "jo", "elias", "eliseu", "isaias", "jeremias", "amos", "miqueias"], o: ["chifre", "harpa", "coroa", "ovelha", "chama", "brasa", "rolo"] },
+  { id: "exilio", nome: "Exílio e Retorno", ref: "Ezequiel a Neemias", cor: "#1C9FD0", p: ["hulda", "habacuque", "ezequiel", "daniel", "ester", "esdras", "neemias", "zacarias", "joel", "jonas"], o: ["livro", "torre", "roda", "leao", "gafanhoto", "peixe", "lamparina"] },
+  { id: "jesus", nome: "Jesus e os Evangelhos", ref: "Mateus a João", cor: "#E8505D", p: ["isabel", "ana", "joao", "maria", "josenazare", "messias", "pedro", "madalena", "zaqueu"], o: ["onda", "manjedoura", "estrela", "martelo", "pao", "rede", "pomba", "ovelha_chao"] },
+  { id: "igreja", nome: "Igreja e Missão", ref: "Atos ao Apocalipse", cor: "#2BA486", p: ["filha", "lidia", "timoteo", "barnabe", "paulo", "joaoap", "ellen"], o: ["carta", "asas", "pena", "coracao"] }
+];
+const ALBUM_LENDARIAS = new Set(["p:messias", "o:arca", "o:tabuas"]);
+const ALBUM_RARAS_OBJ = new Set(["candelabro", "coroa", "harpa", "estrela", "manjedoura", "asas", "pao", "trombeta", "estrelas", "leao"]);
+const ALBUM_PESO = { comum: 10, rara: 5, lendaria: 2.5 }, ALBUM_ROT = { comum: "Comum", rara: "Rara", lendaria: "Lendária" };
+/* lista numerada de todas as figurinhas */
+const ALBUM_CARTAS = []; const ALBUM_IDX = {};
+ALBUM_PAGINAS.forEach((pg, pi) => { pg.cartas = [];
+  pg.p.map(x => "p:" + x).concat(pg.o.map(x => "o:" + x)).forEach(id => {
+    const [t, k] = id.split(":"), pr = t === "p" ? acharProfeta(k) : null; if(t === "p" && !pr) return; if(t === "o" && !ALBUM_OBJ[k]) return;
+    const c = { id, t, k, n: ALBUM_CARTAS.length + 1, pg: pi, nome: pr ? pr.nome : ALBUM_OBJ[k][0], ref: pr ? (pr.ref || "") : ALBUM_OBJ[k][1],
+      rar: ALBUM_LENDARIAS.has(id) ? "lendaria" : (pr ? (pr.nivel || pr.preco ? "rara" : "comum") : (ALBUM_RARAS_OBJ.has(k) ? "rara" : "comum")) };
+    ALBUM_CARTAS.push(c); ALBUM_IDX[id] = c; pg.cartas.push(c); }); });
+
+/* ---------- Sorteio fixo de cada pacote ---------- */
+function albumRng(txt){
+  let h = 1779033703 ^ txt.length; for(let i = 0; i < txt.length; i++){ h = Math.imul(h ^ txt.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  let a = (h ^= h >>> 16) >>> 0;
+  return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+function pacoteDe(chave){
+  const rnd = albumRng(usuario.uid + "|album1|" + chave), saiu = [];
+  while(saiu.length < ALBUM_POR_PACOTE){
+    const resto = ALBUM_CARTAS.filter(c => !saiu.includes(c.id)), total = resto.reduce((s, c) => s + ALBUM_PESO[c.rar], 0); let x = rnd() * total;
+    for(const c of resto){ x -= ALBUM_PESO[c.rar]; if(x <= 0){ saiu.push(c.id); break; } }
+  }
+  return saiu;
+}
+const albumAbertos = () => (perfil && perfil.albumAbertos) || [];
+/* pacotes ganhos e ainda fechados: um por quiz do dia feito (do mais antigo ao mais novo) */
+function pacotesFechados(){ const ab = new Set(albumAbertos()); return Object.keys(RES).filter(k => !ab.has(k)).sort((a, b) => (RES[a].quando || 0) - (RES[b].quando || 0)); }
+/* quantas de cada figurinha eu tenho: pacotes abertos, mais o que entrou e menos o que saiu nas trocas */
+function albumInventario(){
+  const inv = {}; albumAbertos().forEach(k => pacoteDe(k).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
+  const t = (perfil && perfil.albumTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
+  return inv;
+}
+const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).length;
+const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
+function albumCompleto(){ try{ return !!(perfil && perfil.albumFim); }catch(e){ return false; } }
+function moedasDeAlbum(){ return ((perfil && perfil.albumPag) || []).length * ALBUM_MOEDAS_PAGINA + (perfil && perfil.albumFim ? ALBUM_MOEDAS_FIM : 0); }
+/* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
+function albumPublico(){ const inv = albumInventario(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); }
+/* páginas recém-completadas: paga as moedas (uma vez por página) e o prêmio do álbum inteiro */
+function conferirPaginasDoAlbum(){
+  const inv = albumInventario(), pagas = (perfil.albumPag || []).slice(); let mudou = false;
+  ALBUM_PAGINAS.forEach(pg => { if(!pagas.includes(pg.id) && pg.cartas.every(c => (inv[c.id] || 0) > 0)){ pagas.push(pg.id); mudou = true; setTimeout(() => ganhouMoedas(ALBUM_MOEDAS_PAGINA, "Página completa: " + pg.nome), 600); } });
+  const novo = {}; if(mudou){ perfil.albumPag = pagas; novo.albumPag = pagas; }
+  if(!perfil.albumFim && pagas.length === ALBUM_PAGINAS.length){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; setTimeout(() => { ganhouMoedas(ALBUM_MOEDAS_FIM, "Álbum completo!"); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900); }
+  if(Object.keys(novo).length) DB.salvarUsuario(usuario.uid, novo).catch(()=>{});
+}
+
+/* ---------- Desenho das figurinhas ---------- */
+const _figImg = {};
+function figImagem(c){
+  if(_figImg[c.id]) return _figImg[c.id];
+  let u = "";
+  try{
+    if(c.t === "p") u = spriteHD(acharProfeta(c.k)).url;
+    else { const ic = gerarSpriteModelo.ICONES[c.k]; let m = ic.m; for(let i = 0; i < 2; i++) m = gerarSpriteModelo.scale2x(m);
+      const h = m.length, w = m[0].length, cv = document.createElement("canvas"), k = 3; cv.width = w * k; cv.height = h * k; const x = cv.getContext("2d");
+      for(let r = 0; r < h; r++) for(let q = 0; q < w; q++){ const ch = m[r][q]; if(ch !== "." && ic.p[ch]){ x.fillStyle = ic.p[ch]; x.fillRect(q * k, r * k, k, k); } }
+      u = cv.toDataURL("image/png"); }
+  }catch(e){}
+  return (_figImg[c.id] = u);
+}
+/* a figurinha: n = quantas eu tenho (0 = espaço vazio do álbum). As imagens entram depois (data-figimg), para a tela abrir na hora */
+function htmlFigurinha(c, n, opts){
+  opts = opts || {};
+  const tem = n > 0, tag = opts.botao === false ? "div" : "button";
+  return `<${tag} ${tag === "button" ? 'type="button"' : ""} class="fig r-${c.rar} ${tem ? "tem" : "falta"} ${opts.cls || ""}" data-fig="${c.id}" ${opts.attr || ""} style="--pg:${ALBUM_PAGINAS[c.pg].cor}" aria-label="${esc(c.nome)}${tem ? "" : ", falta"}">
+    <span class="fig-n">${c.n}</span>${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}
+    <span class="fig-img ${c.t === "o" ? "obj" : ""}" ${tem ? `data-figimg="${c.id}"` : ""}>${tem ? "" : "?"}</span>
+    <b>${esc(c.nome)}</b>${c.rar !== "comum" ? `<i class="fig-r">${c.rar === "lendaria" ? "★ lendária" : "rara"}</i>` : ""}</${tag}>`;
+}
+function desenharFigurinhas(raiz){
+  const els = [...(raiz || document).querySelectorAll("[data-figimg]")]; let k = 0;
+  const passo = () => { const fim = Math.min(els.length, k + 6); for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const u = figImagem(ALBUM_IDX[e.dataset.figimg]); if(u) e.innerHTML = `<img src="${u}" alt="">`; e.removeAttribute("data-figimg"); } if(k < els.length) setTimeout(passo, 20); };
+  passo();
+}
+function modalFigurinha(id){
+  const c = ALBUM_IDX[id], n = albumInventario()[id] || 0, pg = ALBUM_PAGINAS[c.pg], pr = c.t === "p" ? acharProfeta(c.k) : null;
+  modal("Figurinha " + c.n, `<div class="fig-det">${htmlFigurinha(c, n, { botao: false, cls: "grande", semConta: true })}
+      <p class="fig-det-ref">${esc(c.ref)} · ${ALBUM_ROT[c.rar]} · página “${esc(pg.nome)}”</p>
+      ${pr && pr.fala && n > 0 ? `<p class="fig-det-fala">“${esc(pr.fala)}”</p>` : ""}
+      <p class="muted small">${n > 1 ? `Você tem ${n}: ${n - 1} ${n - 1 === 1 ? "repetida" : "repetidas"} para trocar.` : n === 1 ? "Você tem esta figurinha." : "Você ainda não tem. Ela pode sair num pacote ou vir numa troca."}</p></div>`, m => desenharFigurinhas(m));
+}
+
+/* ---------- Abrir pacotes ---------- */
+async function abrirPacotes(chaves){
+  chaves = (chaves || []).filter(k => !albumAbertos().includes(k)); if(!chaves.length) return;
+  const antes = albumInventario(), cartas = []; chaves.forEach(k => pacoteDe(k).forEach(id => cartas.push(id)));
+  const lista = albumAbertos().concat(chaves); perfil.albumAbertos = lista;
+  DB.salvarUsuario(usuario.uid, { albumAbertos: lista }).catch(()=>{});
+  const visto = Object.assign({}, antes), itens = cartas.map(id => { const nova = !(visto[id] > 0); visto[id] = (visto[id] || 0) + 1; return { c: ALBUM_IDX[id], nova }; });
+  const novas = itens.filter(x => x.nova).length; tocar("ajuda");
+  modal(chaves.length === 1 ? "Pacote de figurinhas" : chaves.length + " pacotes de figurinhas", `<div class="pac">
+      <div class="pac-grade ${itens.length > 6 ? "muitas" : ""}">${itens.map((x, i) => `<div class="pac-carta" style="--i:${Math.min(i, 14)}"><div class="pac-verso"><span>?</span></div><div class="pac-frente">${htmlFigurinha(x.c, 1, { botao: false })}${x.nova ? `<em class="pac-nova">NOVA</em>` : `<em class="pac-rep">repetida</em>`}</div></div>`).join("")}</div>
+      <p class="pac-resumo">${novas ? `<b>${novas} ${novas === 1 ? "figurinha nova" : "figurinhas novas"}</b> no álbum` : "Só repetidas desta vez: guarde para trocar!"}${itens.length - novas && novas ? ` · ${itens.length - novas} ${itens.length - novas === 1 ? "repetida" : "repetidas"}` : ""}</p>
+      <div class="btn-row"><button type="button" class="btn btn-main" id="pacAlbum">Ver o álbum</button><button type="button" class="btn btn-ghost" id="pacOk">Continuar</button></div></div>`, (m, fechar) => {
+    desenharFigurinhas(m);
+    if(itens.some(x => x.nova && x.c.rar !== "comum")) setTimeout(() => tocar("subiu"), 700);
+    m.querySelector("#pacOk").onclick = fechar;
+    m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p) albumPagina = p.c.pg; nav("album"); };
+  }, () => { conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); if(tabAtual === "album") telaAlbum(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e) e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } });
+}
+
+/* ---------- Trocas (só com a própria sala) ---------- */
+let TROCAS = [], trocasEm = 0, trocasOk = true;
+const trocaNotas = () => (perfil && perfil.albumTrocas) || {};
+async function carregarTrocas(forcar){
+  if(!usuario || !perfil) return TROCAS;
+  if(!forcar && Date.now() - trocasEm < 60000) return TROCAS;
+  try{ TROCAS = (await DB.minhasTrocas(usuario.uid)).sort((a, b) => (b.criado || 0) - (a.criado || 0)); trocasOk = true; trocasEm = Date.now(); }
+  catch(e){ if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; return TROCAS; }
+  /* trocas que eu propus e foram aceitas: anoto o meu lado (sai a que ofereci, entra a que pedi) */
+  const notas = Object.assign({}, trocaNotas()); let mudou = 0;
+  TROCAS.forEach(t => { if(t.status === "aceito" && t.de === usuario.uid && !notas[t.id]){ notas[t.id] = [t.dou, t.quero]; mudou++;
+    const c = ALBUM_IDX[t.quero]; aviso(`${t.paraNome || "Seu amigo"} aceitou a troca: você recebeu ${c ? c.nome : "a figurinha"}!`); } });
+  if(mudou){ perfil.albumTrocas = notas; DB.salvarUsuario(usuario.uid, { albumTrocas: notas }).catch(()=>{}); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
+  return TROCAS;
+}
+const trocasParaMim = () => TROCAS.filter(t => t.para === usuario.uid && t.status === "pendente");
+const trocasMinhasAbertas = () => TROCAS.filter(t => t.de === usuario.uid && t.status === "pendente");
+/* repetidas livres: não conta a que já está oferecida numa proposta aberta */
+function repetidasLivres(inv){ const r = {}; ALBUM_CARTAS.forEach(c => { const n = (inv[c.id] || 0) - 1; if(n > 0) r[c.id] = n; }); trocasMinhasAbertas().forEach(t => { if(r[t.dou]) r[t.dou]--; }); return r; }
+async function responderTroca(id, aceitar){
+  const t = TROCAS.find(x => x.id === id); if(!t || t.status !== "pendente") return;
+  const inv = albumInventario();
+  if(aceitar && !((inv[t.quero] || 0) > 0)){ aviso("Você não tem mais a figurinha pedida nesta troca."); return; }
+  if(aceitar && (inv[t.quero] || 0) === 1 && !(await confirmar("Aceitar a troca", `Você só tem uma ${ALBUM_IDX[t.quero].nome}. Se trocar, ela sai do seu álbum. Trocar mesmo assim?`, "Trocar"))) return;
+  try{ await DB.responderTroca(id, aceitar ? "aceito" : "recusado"); }catch(e){ aviso(erroMsg(e)); return; }
+  t.status = aceitar ? "aceito" : "recusado";
+  if(aceitar){ const notas = Object.assign({}, trocaNotas(), { [id]: [t.quero, t.dou] }); perfil.albumTrocas = notas; DB.salvarUsuario(usuario.uid, { albumTrocas: notas }).catch(()=>{});
+    tocar("ajuda"); aviso(`Troca feita: você recebeu ${ALBUM_IDX[t.dou].nome}!`); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
+  else aviso("Troca recusada.");
+  if(tabAtual === "album") telaAlbum();
+}
+async function cancelarTroca(id){ try{ await DB.cancelarTroca(id); TROCAS = TROCAS.filter(t => t.id !== id); aviso("Proposta cancelada."); }catch(e){ aviso(erroMsg(e)); } if(tabAtual === "album") telaAlbum(); }
+function linhaTroca(t){
+  const minha = t.de === usuario.uid, dou = ALBUM_IDX[t.dou], quero = ALBUM_IDX[t.quero]; if(!dou || !quero) return "";
+  const mini = c => `<span class="tr-fig r-${c.rar}" data-figimg="${c.id}"></span><b>${esc(c.nome)}</b>`;
+  return `<li class="tr-item"><div class="tr-tx"><small>${minha ? `Você propôs para ${esc(t.paraNome || "?")}` : `${esc(t.deNome || "?")} propõe`}</small>
+      <div class="tr-par"><span class="tr-lado"><em>${minha ? "você dá" : "você recebe"}</em>${mini(dou)}</span><i aria-hidden="true">⇄</i><span class="tr-lado"><em>${minha ? "você recebe" : "você dá"}</em>${mini(quero)}</span></div></div>
+    <div class="tr-acoes">${minha ? `<button type="button" class="btn btn-sm btn-ghost" data-tr-cancelar="${esc(t.id)}">Cancelar</button>` : `<button type="button" class="btn btn-sm btn-main" data-tr-aceitar="${esc(t.id)}">Aceitar</button><button type="button" class="btn btn-sm btn-ghost" data-tr-recusar="${esc(t.id)}">Recusar</button>`}</div></li>`;
+}
+/* propor uma troca: 1) escolhe o amigo da sala; 2) escolhe a figurinha dele e a repetida que oferece */
+async function modalTrocar(){
+  if(semSala()){ modal("Trocar figurinhas", `<p>Para trocar figurinhas você precisa estar numa sala. Entre na sala da sua turma em Minha conta → Salas.</p>`); return; }
+  if(!trocasOk){ modal("Trocar figurinhas", `<p>As trocas ainda não foram liberadas: o administrador precisa publicar as regras novas do Firestore.</p>`); return; }
+  if(trocasMinhasAbertas().length >= ALBUM_MAX_PROPOSTAS){ aviso(`Você já tem ${ALBUM_MAX_PROPOSTAS} propostas esperando resposta. Cancele uma ou espere.`); return; }
+  const sala = salaAtual();
+  modal("Trocar figurinhas", `<div class="tr-modal" id="trModal"><p class="vazio">Carregando a sala…</p></div>`, async (m, fechar) => {
+    const el = m.querySelector("#trModal");
+    let membros = [];
+    try{ await membrosAtivos(sala); membros = ((membrosCache[sala.id] || {}).lista || []).filter(x => x.uid !== usuario.uid); }catch(e){}
+    if(!el.isConnected) return;
+    if(!membros.length){ el.innerHTML = `<p class="vazio">Ainda não há outras pessoas na sala ${esc(sala.nome)} para trocar.</p>`; return; }
+    const passo1 = () => {
+      el.innerHTML = `<p class="muted small" style="margin-top:0">Com quem da sala <b>${esc(sala.nome)}</b> você quer trocar?</p><div class="tr-lista">${membros.map(x => `<button type="button" class="tr-membro" data-uid="${esc(x.uid)}"><span class="tr-av">${avatarSVG(personagemDe(x.profeta, x.nivel), x.nome, 0)}</span><b>${esc(x.nome || "?")}</b><i aria-hidden="true">›</i></button>`).join("")}</div>`;
+      el.querySelectorAll("[data-uid]").forEach(b => b.onclick = () => passo2(membros.find(x => x.uid === b.dataset.uid)));
+    };
+    const passo2 = async outro => {
+      el.innerHTML = `<p class="vazio">Olhando o álbum de ${esc(outro.nome || "?")}…</p>`;
+      let pub = null; try{ pub = await perfilPublico(outro.uid); }catch(e){}
+      if(!el.isConnected) return;
+      const txt = pub && typeof pub.album === "string" ? pub.album : "", dele = {}; ALBUM_CARTAS.forEach((c, i) => { dele[c.id] = +txt[i] || 0; });
+      const inv = albumInventario(), livres = repetidasLivres(inv);
+      const pedir = ALBUM_CARTAS.filter(c => dele[c.id] > 1).sort((a, b) => ((inv[a.id] || 0) > 0) - ((inv[b.id] || 0) > 0) || a.n - b.n);
+      const dar = ALBUM_CARTAS.filter(c => livres[c.id] > 0).sort((a, b) => (dele[a.id] > 0) - (dele[b.id] > 0) || a.n - b.n);
+      const voltar = `<button type="button" class="pg-voltar" id="trVoltar"><span aria-hidden="true">‹</span>Escolher outra pessoa</button>`;
+      if(!txt){ el.innerHTML = voltar + `<p class="vazio">${esc(outro.nome || "Essa pessoa")} ainda não abriu o álbum nesta versão do jogo.</p>`; el.querySelector("#trVoltar").onclick = passo1; return; }
+      if(!pedir.length || !dar.length){ el.innerHTML = voltar + `<p class="vazio">${!pedir.length ? `${esc(outro.nome || "Essa pessoa")} não tem figurinhas repetidas agora.` : "Você não tem figurinhas repetidas livres para oferecer."}</p>`; el.querySelector("#trVoltar").onclick = passo1; return; }
+      let quero = "", dou = "";
+      const grade = (lista, sel, attr, marca) => `<div class="tr-grade">${lista.map(c => htmlFigurinha(c, 1, { cls: "mini" + (c.id === sel ? " sel" : "") + (marca(c) ? " boa" : ""), attr: `${attr}="${c.id}"`, semConta: true })).join("")}</div>`;
+      const pintar = () => {
+        el.innerHTML = voltar + `<p class="tr-tit">1. Escolha uma repetida de <b>${esc(outro.nome || "?")}</b> <small>(com ponto verde: falta no seu álbum)</small></p>${grade(pedir, quero, "data-quero", c => !((inv[c.id] || 0) > 0))}
+          <p class="tr-tit">2. Escolha uma repetida sua para dar <small>(com ponto verde: falta no álbum dele)</small></p>${grade(dar, dou, "data-dou", c => !(dele[c.id] > 0))}
+          <p class="erro" id="trErro"></p><div class="btn-row uma"><button type="button" class="btn btn-main" id="trPropor" ${quero && dou ? "" : "disabled"}>Propor a troca</button></div>`;
+        desenharFigurinhas(el);
+        el.querySelector("#trVoltar").onclick = passo1;
+        el.querySelectorAll("[data-quero]").forEach(b => b.onclick = () => { quero = b.dataset.quero; pintar(); });
+        el.querySelectorAll("[data-dou]").forEach(b => b.onclick = () => { dou = b.dataset.dou; pintar(); });
+        el.querySelector("#trPropor").onclick = async () => {
+          if(quero === dou){ el.querySelector("#trErro").textContent = "Escolha figurinhas diferentes."; return; }
+          const b = el.querySelector("#trPropor"); ocupado(b, true);
+          try{ const d = { de: usuario.uid, deNome: perfil.nome || "", para: outro.uid, paraNome: outro.nome || "", dou, quero, status: "pendente", salaId: sala.id, criado: Date.now() };
+            d.id = await DB.criarTroca(d); TROCAS.unshift(d); tocar("ajuda"); fechar(); aviso(`Proposta enviada para ${outro.nome || "seu amigo"}.`); if(tabAtual === "album") telaAlbum(); }
+          catch(e){ ocupado(b, false); if(/permission|insufficient/i.test(String(e && (e.code || e.message)))){ trocasOk = false; el.querySelector("#trErro").textContent = "As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore."; } else el.querySelector("#trErro").textContent = erroMsg(e); }
+        };
+      };
+      pintar();
+    };
+    passo1();
+  });
+}
+
+/* ---------- Tela do álbum ---------- */
+let albumPagina = 0;
+function telaAlbum(){
+  tabAtual = "album"; atualizarCasca(); pararTimer();
+  const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados();
+  if(albumPagina < 0 || albumPagina >= ALBUM_PAGINAS.length) albumPagina = 0;
+  const pg = ALBUM_PAGINAS[albumPagina], naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, pagas = perfil.albumPag || [];
+  const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas();
+  app.innerHTML = `<div class="estudo-area alb">
+    ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbum de figurinhas", "Cada quiz do dia dá um pacote com 3 figurinhas. Troque as repetidas com a sua sala.")}
+    <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_PAGINAS.length} páginas completas${perfil.albumFim ? " · álbum completo ✓" : ""}</small></div>
+    ${fechados.length ? `<section class="panel alb-pacotes"><div class="alb-pac-ic" aria-hidden="true">🎴</div><div class="alb-pac-tx"><b>${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}</b><small>${ALBUM_POR_PACOTE} figurinhas em cada</small></div><div class="alb-pac-bt"><button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}</div></section>` : ""}
+    <section class="panel alb-trocas"><div class="hm-cab"><span>Trocas${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span><button type="button" class="hm-link" id="albTrocar">Trocar figurinhas <span aria-hidden="true">›</span></button></div>
+      ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>
+    <div class="alb-abas" role="tablist">${ALBUM_PAGINAS.map((p, i) => { const n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}"><b>${esc(p.nome)}</b><small>${n}/${p.cartas.length}${pagas.includes(p.id) ? " ✓" : ""}</small></button>`; }).join("")}</div>
+    <section class="panel pg-card alb-pagina" style="--pg:${pg.cor}"><div class="alb-pg-cab"><div><b>${esc(pg.nome)}</b><small>${esc(pg.ref)} · ${naPg} de ${pg.cartas.length}</small></div><span class="alb-premio ${pagas.includes(pg.id) ? "pago" : ""}">${pagas.includes(pg.id) ? "✓ completa" : `completa: +${ALBUM_MOEDAS_PAGINA}`}${pagas.includes(pg.id) ? "" : MOEDA}</span></div>
+      <div class="alb-grade">${pg.cartas.map(c => htmlFigurinha(c, inv[c.id] || 0)).join("")}</div></section>
+    <p class="note center">Álbum completo: +${ALBUM_MOEDAS_FIM} moedas e a conquista Colecionador.</p></div>`;
+  desenharFigurinhas(app);
+  app.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => { albumPagina = +b.dataset.pg; tocar("toque"); telaAlbum(); });
+  app.querySelectorAll(".alb-grade [data-fig]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.fig));
+  const ab = $("albAbrir"); if(ab) ab.onclick = () => abrirPacotes(fechados.slice(0, 1));
+  const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
+  $("albTrocar").onclick = modalTrocar;
+  app.querySelectorAll("[data-tr-aceitar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trAceitar, true));
+  app.querySelectorAll("[data-tr-recusar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trRecusar, false));
+  app.querySelectorAll("[data-tr-cancelar]").forEach(b => b.onclick = () => cancelarTroca(b.dataset.trCancelar));
+  /* confere as trocas (propostas novas e respostas) sem travar a tela */
+  if(Date.now() - trocasEm > 60000){ const a = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length;
+    carregarTrocas(true).then(() => { const d = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length; if(tabAtual === "album" && a !== d && !document.querySelector(".modal-bg")) telaAlbum(); }); }
+}
+
+/* ---------- Cartão do álbum no Início ---------- */
+function htmlAlbumInicio(){
+  const inv = albumInventario(), tenho = albumColadas(inv), f = pacotesFechados().length, tr = trocasParaMim().length;
+  return `<section class="panel hm-card alb-inicio" id="inAlbum" role="button" tabindex="0"><div class="hm-cab"><span>Álbum de figurinhas <em>${tenho}/${ALBUM_CARTAS.length}</em></span><span class="hm-link">Abrir <span aria-hidden="true">›</span></span></div>
+    <span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span>
+    <p class="hm-sub">${f ? `<b>🎴 ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}</b>` : "Faça o quiz do dia para ganhar um pacote."}${tr ? ` · <b>${tr} ${tr === 1 ? "proposta de troca" : "propostas de troca"}</b>` : ""}</p></section>`;
+}
+function ligarAlbumInicio(){
+  const e = $("inAlbum"); if(!e) return;
+  e.onclick = () => { tocar("toque"); nav("album"); }; e.onkeydown = ev => { if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); e.click(); } };
+  if(Date.now() - trocasEm > 3 * 60000) carregarTrocas().then(() => { const x = $("inAlbum"); if(x && tabAtual === "inicio"){ x.outerHTML = htmlAlbumInicio(); const y = $("inAlbum"); if(y){ y.onclick = () => { tocar("toque"); nav("album"); }; } } });
 }
 
 </script>
