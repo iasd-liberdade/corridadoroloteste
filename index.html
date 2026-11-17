@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261117.193427">
+<meta name="versao" content="20261117.200620">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1995,7 +1995,7 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 .tr-par{display:flex;align-items:center;gap:8px}.tr-par > i{font-style:normal;opacity:.7}
 .tr-lado{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1px 6px;min-width:0;flex:1}.tr-lado em{grid-column:1/3;font-style:normal;font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.04em}
 .tr-lado b{font-size:12px;line-height:1.15;overflow:hidden;text-overflow:ellipsis}
-.tr-fig{width:30px;height:36px;border-radius:6px;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}.tr-fig img{max-width:100%;max-height:100%;image-rendering:pixelated}
+.tr-fig{width:32px;height:40px;border-radius:7px;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}.tr-fig img{max-width:92%;max-height:92%;image-rendering:pixelated}.tr-fig img.hd{image-rendering:auto}
 .tr-fig.r-rara{box-shadow:0 0 0 1.5px #F2BE2E}.tr-fig.r-lendaria{box-shadow:0 0 0 1.5px #FF8AD8}
 .tr-acoes{display:flex;flex-direction:column;gap:5px;flex:none}
 .alb-abas{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.alb-abas::-webkit-scrollbar{display:none}
@@ -2006,37 +2006,69 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 .alb-pg-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.alb-pg-cab b{display:block;font-size:17px}.alb-pg-cab small{font-size:12px;color:var(--muted)}
 .alb-premio{display:inline-flex;align-items:center;gap:4px;flex:none;padding:4px 9px;border-radius:99px;background:rgba(242,190,46,.18);color:#FFE27A;font-size:11.5px;font-weight:800}.alb-premio .moeda{width:12px;height:12px}
 .alb-premio.pago{background:rgba(43,164,134,.3);color:#9FF0D2}
-.alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px}
-.fig{position:relative;display:grid;justify-items:center;gap:3px;padding:16px 4px 8px;border-radius:12px;border:2px solid rgba(255,255,255,.85);background:linear-gradient(170deg,color-mix(in srgb,var(--pg) 70%,#fff 0%),color-mix(in srgb,var(--pg) 55%,#1d1848));color:#fff;font-family:inherit;text-align:center;cursor:pointer;min-width:0;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:12px}
+/* figurinha moderna: fundo com luz da cor da página, desenho grande, placa de vidro com o nome, gema da raridade e brilho de foil */
+.fig{--bx:30%;--by:20%;position:relative;display:block;aspect-ratio:5/7;min-width:0;padding:0;border:0;border-radius:14px;overflow:hidden;isolation:isolate;color:#fff;font-family:inherit;text-align:left;cursor:pointer;
+  background:linear-gradient(180deg,var(--pg),#2A2560);
+  background:radial-gradient(120% 85% at 50% 8%,color-mix(in srgb,var(--pg) 78%,#fff) 0%,var(--pg) 42%,color-mix(in srgb,var(--pg) 35%,#141034) 100%);
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 6px 14px rgba(10,8,40,.35);transition:transform .18s ease,box-shadow .18s ease}
 div.fig{cursor:default}
-.fig-n{position:absolute;left:5px;top:3px;font-size:10px;font-weight:800;opacity:.85}
-.fig-x{position:absolute;right:-5px;top:-6px;min-width:22px;padding:1px 5px;border-radius:99px;background:#22183A;border:1.5px solid #FFE27A;color:#FFE27A;font-style:normal;font-size:11px;font-weight:800}
-.fig-img{width:100%;height:64px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.2);overflow:hidden}
-.fig-img img{height:60px;width:auto;max-width:100%;image-rendering:pixelated;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
-.fig-img.obj img{height:auto;width:auto;max-height:46px;max-width:70%}
-.fig b{font-size:11.5px;line-height:1.15;min-height:26px;display:grid;align-items:center;padding:0 2px}
-.fig-r{font-style:normal;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#FFE27A}
-.fig.r-rara{border-color:#F2BE2E;box-shadow:0 0 0 1px #C98A12,0 3px 10px rgba(242,190,46,.35)}
-.fig.r-lendaria{border-color:transparent;background:linear-gradient(170deg,color-mix(in srgb,var(--pg) 70%,#fff 0%),color-mix(in srgb,var(--pg) 55%,#1d1848)) padding-box,linear-gradient(120deg,#FF8AD8,#FFE27A,#8FE6FF,#B48CF0,#FF8AD8) border-box;background-size:auto,300% 100%;animation:fig-holo 4s linear infinite;box-shadow:0 3px 14px rgba(255,138,216,.45)}
-.fig.r-lendaria .fig-r{color:#FFD0F0}
-@keyframes fig-holo{to{background-position:0 0,300% 0}}
-.fig.falta{background:rgba(0,0,0,.18);border:2px dashed rgba(255,255,255,.28);box-shadow:none;animation:none;color:rgba(255,255,255,.55)}
-.fig.falta .fig-img{background:rgba(255,255,255,.06);font:800 26px "Bebas Neue","Arial Narrow",sans-serif;color:rgba(255,255,255,.3)}
-.fig.falta .fig-r{color:rgba(255,226,122,.6)}
-.fig.grande{width:170px;padding:22px 8px 12px;margin:0 auto}.fig.grande .fig-img{height:130px}.fig.grande .fig-img img{height:122px}.fig.grande .fig-img.obj img{max-height:90px;height:90px}.fig.grande b{font-size:16px}.fig.grande .fig-n{font-size:13px}
-.fig-det{text-align:center}.fig-det-ref{margin:12px 0 6px;font-size:13px;color:var(--muted)}.fig-det-fala{margin:0 0 8px;font-style:italic;font-size:14px}
-.fig.mini{padding:13px 2px 5px;border-radius:9px;gap:1px}.fig.mini .fig-img{height:40px}.fig.mini .fig-img img{height:38px}.fig.mini .fig-img.obj img{max-height:28px}.fig.mini b{font-size:9.5px;min-height:20px}.fig.mini .fig-r{display:none}
-.fig.mini.sel{outline:3px solid #fff;outline-offset:1px}
-.fig.mini.boa::after{content:"";position:absolute;right:4px;top:4px;width:9px;height:9px;border-radius:50%;background:#3EE0A0;border:1.5px solid #fff}
+button.fig.tem:hover{transform:translateY(-3px)}
+button.fig:active{transform:scale(.97)}
+.fig-fundo{position:absolute;inset:0;z-index:-1;background:repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,255,255,.1) 0 9deg,transparent 9deg 18deg);-webkit-mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%);mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%)}
+.fig-n{position:absolute;left:7px;top:6px;z-index:2;padding:1px 6px;border-radius:99px;background:rgba(10,8,40,.38);font-size:9.5px;font-weight:800;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.fig-gema{position:absolute;right:6px;top:5px;z-index:2;width:17px;height:17px;display:grid;place-items:center;border-radius:50%;background:rgba(10,8,40,.38)}
+.fig-gema svg{width:11px;height:11px}
+.fig-img{position:absolute;left:0;right:0;top:9%;bottom:29%;display:grid;place-items:center}
+.fig-img::after{content:"";position:absolute;left:22%;right:22%;bottom:1%;height:8%;border-radius:50%;background:rgba(10,8,40,.3);filter:blur(3px);z-index:-1}
+.fig-img img{position:absolute;left:2%;top:0;width:96%;height:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 3px rgba(10,8,40,.35))}
+.fig-img img.hd{image-rendering:auto}
+.fig-img.obj img{left:20%;top:18%;width:60%;height:64%}
+.fig.tem .fig-img.obj{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.62) 0,rgba(255,255,255,.3) 30%,transparent 58%)}
+.fig-placa{position:absolute;left:5px;right:5px;bottom:5px;display:grid;gap:0;padding:5px 7px 6px;border-radius:10px;background:rgba(12,10,44,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.28)}
+.fig-placa b{font-size:10.5px;line-height:1.12;font-weight:800;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.fig-placa small{font-size:8.5px;line-height:1.2;opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fig-x{position:absolute;right:6px;bottom:44px;z-index:3;min-width:20px;padding:1px 6px;border-radius:99px;background:#FFE27A;color:#3A2A00;font-style:normal;font-size:10.5px;font-weight:800;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+/* rara: moldura dourada e um brilho que atravessa */
+.fig.r-rara.tem{box-shadow:0 0 0 2px #F2BE2E,0 0 0 3.5px rgba(201,138,18,.9),0 6px 16px rgba(242,190,46,.38)}
+.fig-brilho{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.5) 50%,transparent 62%);background-size:260% 100%;background-position:120% 0;animation:fig-foil 4.6s ease-in-out infinite;mix-blend-mode:soft-light}
+@keyframes fig-foil{0%,55%{background-position:120% 0}85%,100%{background-position:-60% 0}}
+/* lendária: moldura holográfica que gira as cores e reflexo colorido */
+.fig.r-lendaria.tem{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55);animation:fig-holo 5s linear infinite}
+@keyframes fig-holo{0%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55)}33%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FFE27A,0 0 18px 4px rgba(255,226,122,.55)}66%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #8FE6FF,0 0 18px 4px rgba(143,230,255,.55)}100%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55)}}
+.fig.r-lendaria .fig-brilho{background:linear-gradient(115deg,rgba(255,138,216,.0) 20%,rgba(255,138,216,.55) 36%,rgba(255,226,122,.55) 48%,rgba(143,230,255,.55) 60%,rgba(180,140,240,.0) 78%);background-size:260% 100%;mix-blend-mode:overlay;animation-duration:3.6s}
+/* espaço vazio: só a sombra do desenho */
+.fig.falta{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(10,8,40,.22));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2);animation:none}
+.fig.falta .fig-fundo{display:none}
+.fig.falta .fig-img img{filter:brightness(0);opacity:.24}
+.fig.falta .fig-img::after{display:none}
+.fig.falta .fig-n{background:none;font-size:11px;opacity:.7}
+.fig.falta .fig-gema{background:none;opacity:.45}
+.fig.falta .fig-placa{background:none;border-top-color:rgba(255,255,255,.12);backdrop-filter:none;-webkit-backdrop-filter:none}
+.fig.falta .fig-placa b{opacity:.6;font-weight:700}.fig.falta .fig-placa small{opacity:.4}
+/* figurinha grande (janela de detalhe), que inclina com o dedo */
+.fig-palco{perspective:900px;padding:8px 0 4px;display:grid;place-items:center;touch-action:none}
+.fig.grande{width:min(230px,64vw);border-radius:20px;transition:transform .12s ease-out}
+.fig.grande .fig-n{left:12px;top:11px;font-size:13px;padding:2px 9px}.fig.grande .fig-gema{right:11px;top:10px;width:28px;height:28px}.fig.grande .fig-gema svg{width:18px;height:18px}
+.fig.grande .fig-placa{left:9px;right:9px;bottom:9px;padding:9px 12px 10px;border-radius:14px}.fig.grande .fig-placa b{font-size:18px}.fig.grande .fig-placa small{font-size:12px}
+.fig.grande.tem::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at var(--bx) var(--by),rgba(255,255,255,.34),transparent 45%)}
+.fig-det{text-align:center}.fig-det-ref{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:14px 0 8px}.fig-det-fala{margin:0 0 8px;font-style:italic;font-size:14px}
+.fig-chip{padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--pg,#6B62B8) 60%,transparent);border:1px solid rgba(255,255,255,.25);font-size:11.5px;font-weight:700}
+.fig-chip.r-rara{background:rgba(242,190,46,.22);border-color:#F2BE2E;color:#FFE27A}.fig-chip.r-lendaria{background:linear-gradient(90deg,rgba(255,138,216,.35),rgba(255,226,122,.35),rgba(143,230,255,.35));border-color:#fff}
+/* figurinha pequena (na escolha da troca) */
+.fig.mini{border-radius:10px}.fig.mini .fig-n{left:4px;top:3px;font-size:8px;padding:0 4px}.fig.mini .fig-gema{right:3px;top:3px;width:13px;height:13px}.fig.mini .fig-gema svg{width:8px;height:8px}
+.fig.mini .fig-img{top:10%;bottom:26%}.fig.mini .fig-placa{left:3px;right:3px;bottom:3px;padding:3px 4px;border-radius:7px}.fig.mini .fig-placa b{font-size:8.5px}.fig.mini .fig-placa small{display:none}
+.fig.mini.sel{outline:3px solid #fff;outline-offset:2px}
+.fig.mini.boa::before{content:"";position:absolute;left:50%;top:3px;transform:translateX(-50%);z-index:3;width:8px;height:8px;border-radius:50%;background:#3EE0A0;box-shadow:0 0 0 1.5px #fff}
 .tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:7px;max-height:210px;overflow-y:auto;padding:3px}
 .tr-tit{margin:12px 0 6px;font-size:13px}.tr-tit small{opacity:.7;font-size:11px}
 .tr-lista{display:grid;gap:6px}.tr-membro{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:left;cursor:pointer}
 .tr-membro b{flex:1;font-size:14px}.tr-membro i{font-style:normal;opacity:.6}.tr-av .avatar{width:28px;height:36px;display:block}
 /* pacote abrindo */
-.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:900px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:6px 4px}
+.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:900px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:8px 6px 14px}
 .pac-carta{position:relative;transform-style:preserve-3d;animation:pac-vira .7s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(.35s + var(--i) * .32s)}
 .pac-frente{backface-visibility:hidden;position:relative}
-.pac-verso{position:absolute;inset:0;border-radius:12px;background:repeating-linear-gradient(45deg,#3D3399 0 8px,#5B4FC9 8px 16px);border:2px solid #FFE27A;display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
+.pac-verso{position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at 50% 40%,#7B6CF0,#2E2B6E 75%);box-shadow:inset 0 0 0 2px #FFE27A,inset 0 0 0 5px rgba(255,255,255,.12);display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
 .pac-verso span{font:800 34px "Bebas Neue","Arial Narrow",sans-serif;color:#FFE27A}
 @keyframes pac-vira{from{transform:rotateY(180deg) scale(.85)}to{transform:rotateY(0) scale(1)}}
 .pac-nova,.pac-rep{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap}
@@ -2044,7 +2076,7 @@ div.fig{cursor:default}
 .pac-resumo{text-align:center;margin:20px 0 12px;font-size:14px}
 .alb-inicio{cursor:pointer}.alb-inicio .hm-barra{display:block;margin:8px 0 6px}.alb-inicio .hm-sub{margin:0}
 .alb-botao{background:linear-gradient(135deg,#FFE27A,#F2BE2E)!important;color:#3A2A00!important}
-@media (prefers-reduced-motion:reduce){.pac-carta,.alb-pac-ic,.fig.r-lendaria{animation:none}.pac-verso{display:none}}
+@media (prefers-reduced-motion:reduce){.pac-carta,.alb-pac-ic,.fig.r-lendaria.tem,.fig-brilho{animation:none}.pac-verso{display:none}.fig-brilho{display:none}}
 
 /* login */
 .logo-login{padding:18px 0 6px}
@@ -9571,39 +9603,62 @@ function conferirPaginasDoAlbum(){
 }
 
 /* ---------- Desenho das figurinhas ---------- */
+/* personagem da figurinha: o mesmo desenho do jogo, mas sempre pedido também em 992×1000 (id próprio, sem o gesto dos raros) */
+const figPersonagem = c => { const p = acharProfeta(c.k); return Object.assign({}, p, { id: p.id + "#fig", modelo: p.modelo || p.id, nivel: 0, preco: 0, semGuardar: true }); };      // semGuardar: não ocupa o armazenamento pequeno do aparelho
 const _figImg = {};
 function figImagem(c){
   if(_figImg[c.id]) return _figImg[c.id];
   let u = "";
   try{
-    if(c.t === "p") u = spriteHD(acharProfeta(c.k)).url;
-    else { const ic = gerarSpriteModelo.ICONES[c.k]; let m = ic.m; for(let i = 0; i < 2; i++) m = gerarSpriteModelo.scale2x(m);
-      const h = m.length, w = m[0].length, cv = document.createElement("canvas"), k = 3; cv.width = w * k; cv.height = h * k; const x = cv.getContext("2d");
-      for(let r = 0; r < h; r++) for(let q = 0; q < w; q++){ const ch = m[r][q]; if(ch !== "." && ic.p[ch]){ x.fillStyle = ic.p[ch]; x.fillRect(q * k, r * k, k, k); } }
-      u = cv.toDataURL("image/png"); }
+    if(c.t === "p") return (_figImg[c.id] = spriteHD(figPersonagem(c)).url);          // 122×130 na hora; o de 992×1000 troca sozinho
+    const ic = gerarSpriteModelo.ICONES[c.k]; let m = ic.m; for(let i = 0; i < 3; i++) m = gerarSpriteModelo.scale2x(m);
+    const h = m.length, w = m[0].length, cv = document.createElement("canvas"), k = 2; cv.width = w * k; cv.height = h * k; const x = cv.getContext("2d");
+    for(let r = 0; r < h; r++) for(let q = 0; q < w; q++){ const ch = m[r][q]; if(ch !== "." && ic.p[ch]){ x.fillStyle = ic.p[ch]; x.fillRect(q * k, r * k, k, k); } }
+    u = cv.toDataURL("image/png");
   }catch(e){}
   return (_figImg[c.id] = u);
 }
-/* a figurinha: n = quantas eu tenho (0 = espaço vazio do álbum). As imagens entram depois (data-figimg), para a tela abrir na hora */
+const FIG_GEMA = { rara: `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l5 5-5 9-5-9z" fill="#FFE27A"/><path d="M8 1l5 5H3z" fill="#FFF6C8"/><path d="M8 15l5-9H8z" fill="#E0A82A"/></svg>`,
+  lendaria: `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .8l2.1 4.6 5 .6-3.7 3.4 1 5L8 11.9 3.6 14.4l1-5L.9 6l5-.6z" fill="#fff"/></svg>` };
+/* a figurinha: n = quantas eu tenho (0 = espaço vazio do álbum, com a sombra do desenho). As imagens entram depois (data-figimg), para a tela abrir na hora */
 function htmlFigurinha(c, n, opts){
   opts = opts || {};
   const tem = n > 0, tag = opts.botao === false ? "div" : "button";
   return `<${tag} ${tag === "button" ? 'type="button"' : ""} class="fig r-${c.rar} ${tem ? "tem" : "falta"} ${opts.cls || ""}" data-fig="${c.id}" ${opts.attr || ""} style="--pg:${ALBUM_PAGINAS[c.pg].cor}" aria-label="${esc(c.nome)}${tem ? "" : ", falta"}">
-    <span class="fig-n">${c.n}</span>${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}
-    <span class="fig-img ${c.t === "o" ? "obj" : ""}" ${tem ? `data-figimg="${c.id}"` : ""}>${tem ? "" : "?"}</span>
-    <b>${esc(c.nome)}</b>${c.rar !== "comum" ? `<i class="fig-r">${c.rar === "lendaria" ? "★ lendária" : "rara"}</i>` : ""}</${tag}>`;
+    <span class="fig-fundo" aria-hidden="true"></span>
+    <span class="fig-n">${String(c.n).padStart(2, "0")}</span>${c.rar !== "comum" ? `<span class="fig-gema" title="${ALBUM_ROT[c.rar]}">${FIG_GEMA[c.rar]}</span>` : ""}
+    <span class="fig-img ${c.t === "o" ? "obj" : ""}" data-figimg="${c.id}"></span>
+    <span class="fig-placa"><b>${esc(c.nome)}</b><small>${esc(c.ref || "")}</small></span>
+    ${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}${tem && c.rar !== "comum" ? `<span class="fig-brilho" aria-hidden="true"></span>` : ""}</${tag}>`;
 }
 function desenharFigurinhas(raiz){
   const els = [...(raiz || document).querySelectorAll("[data-figimg]")]; let k = 0;
-  const passo = () => { const fim = Math.min(els.length, k + 6); for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const u = figImagem(ALBUM_IDX[e.dataset.figimg]); if(u) e.innerHTML = `<img src="${u}" alt="">`; e.removeAttribute("data-figimg"); } if(k < els.length) setTimeout(passo, 20); };
+  const passo = () => { const fim = Math.min(els.length, k + 6);
+    for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const c = ALBUM_IDX[e.dataset.figimg], u = figImagem(c); e.removeAttribute("data-figimg"); if(!u) continue;
+      const tem = !e.closest(".falta"), img = document.createElement("img"); img.alt = ""; img.src = u; e.appendChild(img);
+      if(c.t === "p" && tem) figEmAlta(img, c); }
+    if(k < els.length) setTimeout(passo, 20); };
   passo();
+}
+/* troca o desenho pequeno pelo de 992×1000 quando ele fica pronto (as figurinhas que faltam ficam só com a sombra) */
+async function figEmAlta(img, c){
+  const q = figPersonagem(c);
+  for(let i = 0; i < 10 && img.isConnected; i++){ const r = await HD.esperar(q); if(r && r.u){ if(img.isConnected){ img.src = r.u; img.classList.add("hd"); } return; } if(!HD.ativo) return; }
 }
 function modalFigurinha(id){
   const c = ALBUM_IDX[id], n = albumInventario()[id] || 0, pg = ALBUM_PAGINAS[c.pg], pr = c.t === "p" ? acharProfeta(c.k) : null;
-  modal("Figurinha " + c.n, `<div class="fig-det">${htmlFigurinha(c, n, { botao: false, cls: "grande", semConta: true })}
-      <p class="fig-det-ref">${esc(c.ref)} · ${ALBUM_ROT[c.rar]} · página “${esc(pg.nome)}”</p>
+  modal("Figurinha " + c.n, `<div class="fig-det"><div class="fig-palco">${htmlFigurinha(c, n, { botao: false, cls: "grande", semConta: true })}</div>
+      <p class="fig-det-ref"><span class="fig-chip r-${c.rar}">${ALBUM_ROT[c.rar]}</span><span class="fig-chip" style="--pg:${pg.cor}">${esc(pg.nome)}</span></p>
       ${pr && pr.fala && n > 0 ? `<p class="fig-det-fala">“${esc(pr.fala)}”</p>` : ""}
-      <p class="muted small">${n > 1 ? `Você tem ${n}: ${n - 1} ${n - 1 === 1 ? "repetida" : "repetidas"} para trocar.` : n === 1 ? "Você tem esta figurinha." : "Você ainda não tem. Ela pode sair num pacote ou vir numa troca."}</p></div>`, m => desenharFigurinhas(m));
+      <p class="muted small">${n > 1 ? `Você tem ${n}: ${n - 1} ${n - 1 === 1 ? "repetida" : "repetidas"} para trocar.` : n === 1 ? "Você tem esta figurinha." : "Você ainda não tem. Ela pode sair num pacote ou vir numa troca."}</p></div>`, m => {
+    desenharFigurinhas(m);
+    /* a figurinha grande inclina com o dedo (ou o mouse), como uma carta de verdade */
+    const palco = m.querySelector(".fig-palco"), carta = palco.querySelector(".fig");
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const mexer = e => { const r = palco.getBoundingClientRect(), x = ((e.clientX - r.left) / r.width - .5), y = ((e.clientY - r.top) / r.height - .5);
+      carta.style.transform = `rotateY(${(x * 22).toFixed(1)}deg) rotateX(${(-y * 18).toFixed(1)}deg)`; carta.style.setProperty("--bx", (50 + x * 80).toFixed(0) + "%"); carta.style.setProperty("--by", (50 + y * 80).toFixed(0) + "%"); };
+    palco.addEventListener("pointermove", mexer); palco.addEventListener("pointerleave", () => { carta.style.transform = ""; });
+  });
 }
 
 /* ---------- Abrir pacotes ---------- */
