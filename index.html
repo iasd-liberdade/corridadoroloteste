@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261117.121035">
+<meta name="versao" content="20261117.132855">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1921,6 +1921,32 @@ html{overscroll-behavior-y:contain}
 .cg-rodape{margin:8px 0 2px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12);font-size:10.5px;opacity:.6}
 .cg-ok{align-self:center;margin-top:6px;font-size:12px;padding:6px 18px;min-height:0}
 .modal:has(.cg) .modal-h h3{font-size:17px}
+
+/* mural em forma de feed: caixa de reflexão, texto livre e o dia da lição */
+/* feed numa coluna só, como numa rede social (também no computador) */
+.mural,.result-area.duas .mural{grid-template-columns:minmax(0,1fr)!important;max-width:640px}
+.fd-nova{max-width:640px}
+.mais2{display:inline-flex;align-items:center;gap:2px;flex:none;padding:1px 5px 1px 2px;border-radius:99px;background:rgba(242,190,46,.18);color:#FFE27A;font-size:10px;font-weight:800;line-height:1.2;letter-spacing:.01em}
+.mais2 .moeda{width:11px;height:11px}
+.fd-nova{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;margin:0 0 12px;padding:10px 12px;border-radius:var(--radius-lg);border:1px solid var(--panel-line);background:var(--panel);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.fd-nova .fd-av .avatar{width:30px;height:39px;display:block}
+.fd-campo{flex:1;min-width:0;display:flex;align-items:center;gap:8px;padding:9px 12px 9px 14px;border:0;border-radius:99px;background:rgba(255,255,255,.12);color:var(--muted);font-family:inherit;font-size:13.5px;text-align:left;cursor:pointer}
+.fd-campo span:first-child{flex:1;min-width:0}
+.fd-campo:hover{background:rgba(255,255,255,.18)}
+.fd-conq{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.12);font-size:17px;cursor:pointer}
+.fd-conq:hover{background:rgba(255,255,255,.2)}
+.fd-texto{margin:10px 2px 10px;font-size:15px;line-height:1.5;white-space:pre-line;word-break:break-word}
+.fd-licao{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 10px;padding:8px 10px;border-radius:12px;border:0;background:rgba(0,0,0,.16);color:inherit;font-family:inherit;font-size:12px;text-align:left;cursor:pointer}
+.fd-licao span:nth-child(2){flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.9}
+.fd-licao i{font-style:normal;opacity:.6}
+.rf-botao{display:flex;align-items:center;gap:8px;width:100%;margin-top:10px;padding:9px 12px;border-radius:12px;border:1px dashed rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:inherit;font-family:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer}
+.rf-botao span:nth-child(2){flex:1}
+.rf-ok{font-style:normal;font-size:12px;opacity:.7}
+.rf-dia{display:flex;gap:8px;margin:0 0 10px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.16);font-size:12.5px}
+.rf-rot{display:block;margin:0 0 4px;font-size:12px;opacity:.8}
+.rf textarea{width:100%;box-sizing:border-box;min-height:120px;padding:10px 12px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.95);color:#1d1b3a;font-family:inherit;font-size:15px;line-height:1.45;resize:vertical}
+.rf-pe{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:5px 2px 0;font-size:11px;opacity:.85}
+.rf-pe small{display:inline-flex;align-items:center;gap:5px}
 
 /* login */
 .logo-login{padding:18px 0 6px}
@@ -4112,6 +4138,7 @@ function telaEstudarDias(){
     <h2 class="pg-tit">${esc(d.tema)}</h2>
     ${corpo}
     <div class="btn-row uma">${(s==="hoje"||s==="atrasado") && d.perguntas.length ? `<button class="btn btn-main" id="estJogar">Fazer o quiz de ${esc(d.nome)}</button>` : s==="feito" ? `<button class="btn btn-ghost" id="estVer">Ver meu resultado</button>` : ""}</div>
+    ${d.data <= hoje() ? `<button type="button" class="rf-botao" id="estReflexao"><span aria-hidden="true">💭</span><span>Compartilhar uma reflexão sobre ${esc(d.nome.toLowerCase())} no mural</span>${(perfil.reflexoesDias || []).includes(L.id + "|" + d.data) ? `<em class="rf-ok">✓</em>` : MAIS2}</button>` : ""}
   </section></div>`;
   $("edVoltar").onclick = ()=> voltarParaAsLicoes(L);
   ligarAbasDaLicao(L);
@@ -4120,6 +4147,7 @@ function telaEstudarDias(){
   app.querySelectorAll("[data-k]").forEach(b=> b.onclick = ()=>{ estudoDia = +b.dataset.k; telaEstudarDias(); });
   const j = $("estJogar"); if(j) j.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); iniciar(estudoDia); };
   const v = $("estVer"); if(v) v.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); telaResultado(estudoDia); };
+  const rf = $("estReflexao"); if(rf) rf.onclick = ()=> modalReflexao(L, estudoDia);
 }
 
 const PAG_CACHE = {};
@@ -7366,7 +7394,8 @@ function telaMapa(mi, vindoDe){
 
 /* ============================================================
    MURAL (por sala)
-   Publicações prontas (resultado, conquista, missão, nível, sequência, retrospectiva), sem texto livre.
+   Feed da sala: reflexões sobre a lição (texto livre, sempre ligadas a um dia de uma lição) e publicações prontas
+   (resultado, conquista, missão, nível, sequência, retrospectiva).
    Reações: amém, parabéns, coração. Coleção mural/{id}, campo salaMes = salaId|AAAA-MM.
    ============================================================ */
 const REACOES = [["amem", "🙏", "Amém"], ["coracao", "❤️", "Amei"], ["parabens", "🎉", "Parabéns"], ["palmas", "👏", "Palmas"], ["fogo", "🔥", "Arrasou"], ["forca", "💪", "Força"], ["gloria", "🙌", "Glória a Deus"], ["uau", "😮", "Uau"], ["riso", "😂", "Haha"]];
@@ -7409,7 +7438,7 @@ async function publicarNoMural(post, btn){
   for(const sala of salas){
     const id = [sala.id, usuario.uid, post.tipo, post.ref].join("_").replace(/[^A-Za-z0-9_.-]/g, "-");
     try{
-      await DB.salvarPost(id, { salaId: sala.id, salaMes: sala.id + "|" + mesDe(agora), uid: usuario.uid, nome: perfil.nome || "", profeta: meuBoneco(), nivel: meuNivel(), tipo: post.tipo, ref: String(post.ref), ic: post.ic || "✨", titulo: post.titulo, texto: post.texto || "", quando: agora });
+      await DB.salvarPost(id, Object.assign({ salaId: sala.id, salaMes: sala.id + "|" + mesDe(agora), uid: usuario.uid, nome: perfil.nome || "", profeta: meuBoneco(), nivel: meuNivel(), tipo: post.tipo, ref: String(post.ref), ic: post.ic || "✨", titulo: post.titulo, texto: post.texto || "", quando: agora }, post.extra || {}));
       ok.push({ sala, id });
     }catch(e){ falhas.push(sala.nome + ": " + erroMsg(e)); }
   }
@@ -7422,6 +7451,65 @@ async function publicarNoMural(post, btn){
   aviso(falhas.length ? `Publicado em ${ok.length} de ${salas.length} salas. Não deu em: ${falhas[0]}` : ok.length === 1 ? `Publicado no mural da sala ${ok[0].sala.nome}` : `Publicado no mural de ${ok.length} salas`);
   if(btn){ btn.textContent = "Publicado ✓"; btn.disabled = true; }
   return true;
+}
+
+/* ============================================================
+   REFLEXÃO SOBRE A LIÇÃO (texto livre no mural, sempre ligado a um dia de uma lição)
+   - No Estudar: botão "Compartilhar reflexão" no dia aberto.
+   - No Mural: a caixa "Compartilhe uma reflexão" no alto do feed (escolhe o dia).
+   - Moedas: +2 por dia de lição (a 1ª reflexão de cada dia paga; as outras do mesmo dia não).
+   ============================================================ */
+const REFLEXAO_MAX = 500, REFLEXAO_MIN = 10;
+const chaveReflexao = (L, d) => L.id + "|" + d.data;
+const MAIS2 = `<span class="mais2" title="Vale 2 moedas" aria-label="vale 2 moedas"><i class="moeda" aria-hidden="true"></i>+2</span>`;
+/* dias que podem receber reflexão: os já começados da lição desta semana e os da lição anterior */
+function diasParaReflexao(){
+  const i = indiceLicaoAtual(), out = [], h = hoje();
+  [i, i - 1].forEach(k => { const L = LICOES[k]; if(!L || !L.dias) return; L.dias.forEach((d, j) => { if(d.data <= h) out.push({ L, d, j }); }); });
+  return out;
+}
+function modalReflexao(L, k){
+  if(!SALAS.length){ modal("Compartilhar reflexão", htmlSemSala("publicar").replace('<div class="result-area">', "<div>")); return; }
+  const opcoes = diasParaReflexao(); let sel = L ? { L, d: L.dias[k], j: k } : (opcoes.find(o => o.d.data === hoje()) || opcoes[opcoes.length ? 0 : -1]);
+  if(L && !opcoes.some(o => o.L === L && o.j === k)) opcoes.unshift(sel);
+  if(!sel || !sel.d){ aviso("Ainda não há lição para refletir."); return; }
+  const pago = o => !!(perfil.reflexoesDias || []).includes(chaveReflexao(o.L, o.d));
+  const rotulo = o => `${o.L.numero} · ${o.d.nome}, ${dataCurta(o.d.data)}: ${o.d.tema}`;
+  modal("Compartilhar reflexão", `<div class="rf">
+      ${L ? `<p class="rf-dia" id="rfDia"><span aria-hidden="true">📖</span>${esc(rotulo(sel))}</p>`
+        : `<label class="rf-rot" for="rfSel">Sobre qual dia da lição?</label><div class="field" style="margin:0 0 10px"><select id="rfSel">${opcoes.map((o, i) => `<option value="${i}" ${o === sel ? "selected" : ""}>${esc(rotulo(o))}</option>`).join("")}</select></div>`}
+      <textarea id="rfTx" maxlength="${REFLEXAO_MAX}" rows="5" placeholder="O que esta lição ensinou para você? Um versículo, um pensamento, uma decisão…"></textarea>
+      <div class="rf-pe"><small id="rfConta">0/${REFLEXAO_MAX}</small><small id="rfPremio"></small></div>
+      <p class="erro" id="rfErro"></p>
+      <div class="btn-row"><button type="button" class="btn btn-main" id="rfOk">Publicar no mural</button><button type="button" class="btn btn-ghost" id="rfNao">Cancelar</button></div></div>`, (m, fechar) => {
+    const tx = m.querySelector("#rfTx"), conta = m.querySelector("#rfConta"), premio = m.querySelector("#rfPremio"), erro = m.querySelector("#rfErro");
+    const pintarPremio = () => { premio.innerHTML = pago(sel) ? "Moedas deste dia já recebidas ✓" : `Primeira reflexão deste dia ${MAIS2}`; };
+    pintarPremio(); setTimeout(() => tx.focus(), 60);
+    tx.oninput = () => { conta.textContent = tx.value.length + "/" + REFLEXAO_MAX; erro.textContent = ""; };
+    const s2 = m.querySelector("#rfSel"); if(s2) s2.onchange = () => { sel = opcoes[+s2.value]; pintarPremio(); };
+    m.querySelector("#rfNao").onclick = fechar;
+    m.querySelector("#rfOk").onclick = async () => {
+      const texto = tx.value.replace(/\n{3,}/g, "\n\n").trim();
+      if(texto.length < REFLEXAO_MIN){ erro.textContent = `Escreva pelo menos ${REFLEXAO_MIN} letras.`; return; }
+      const post = { tipo: "reflexao", ref: sel.L.id + "_" + sel.d.data + "_" + Date.now().toString(36), ic: "💭", titulo: `${sel.L.numero} · ${sel.d.nome}: ${sel.d.tema}`, texto: texto.slice(0, REFLEXAO_MAX),
+        extra: { licaoId: sel.L.id, data: sel.d.data } };
+      const b = m.querySelector("#rfOk");
+      if(await publicarNoMural(post, b)){ fechar(); pagarReflexao(sel); if(tabAtual === "mural") telaMural();
+        const rb = $("estReflexao"), m2 = rb && L && sel.L === L && sel.j === k ? rb.querySelector(".mais2") : null; if(m2) m2.outerHTML = `<em class="rf-ok">✓</em>`; }
+    };
+  });
+}
+/* moedas da reflexão: uma vez por dia de lição */
+function pagarReflexao(o){
+  const k = chaveReflexao(o.L, o.d), lista = (perfil.reflexoesDias || []).slice(); if(lista.includes(k)) return;
+  lista.push(k); perfil.reflexoesDias = lista; DB.salvarUsuario(usuario.uid, { reflexoesDias: lista }).catch(()=>{});
+  setTimeout(() => { aviso("+2 moedas pela reflexão da lição!"); tocar("moeda"); }, 900);
+  if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
+}
+/* abre o Estudar no dia da reflexão */
+function abrirDiaDaReflexao(licaoId, data){
+  const L = LICOES.find(x => x.id === licaoId); if(!L){ aviso("Essa lição não está mais disponível."); return; }
+  const k = L.dias.findIndex(d => d.data === data); estudoLicao = L; estudoDia = k >= 0 ? k : 0; estudoVista = "dias"; window.scrollTo(0, 0); nav("estudar");
 }
 /* Mural pelo menu: quem está em mais de uma sala escolhe de qual sala quer ver o mural */
 /* Escolha da sala antes de abrir o Mural ou a Corrida (quem só tem uma sala vai direto) */
@@ -7520,22 +7608,25 @@ async function telaMural(focoId){
   tabAtual = "mural"; atualizarCasca(); pararTimer();
   const sala = salaAtual(), eu = usuario.uid;
   app.innerHTML = `<div class="result-area duas"><div class="lado">
-    ${SALAS.length + SALAS_OUTRAS.length > 1 ? botaoVoltar("muVoltar", "a lista de salas") : ""}${cabPagina(esc(sala.nome), "Mural", "Mural da sala", "Compartilhe conquistas e anime quem corre com você.")}
-    <div class="btn-row uma mu-acao"><button class="btn btn-main" id="muNovo">Compartilhar</button></div></div>
-    <div class="principal" id="muCorpo"><section class="panel"><p class="vazio">Carregando o mural…</p></section></div></div>`;
+    ${SALAS.length + SALAS_OUTRAS.length > 1 ? botaoVoltar("muVoltar", "a lista de salas") : ""}${cabPagina(esc(sala.nome), "Mural", "Mural da sala", "Reflexões sobre a lição e conquistas da turma.")}
+    </div>
+    <div class="principal"><div class="fd-nova"><span class="fd-av">${meuAvatar()}</span><button type="button" class="fd-campo" id="muReflexao"><span>Compartilhe uma reflexão sobre a lição…</span>${MAIS2}</button><button type="button" class="fd-conq" id="muNovo" title="Compartilhar uma conquista" aria-label="Compartilhar uma conquista">🏅</button></div>
+    <div id="muCorpo"><section class="panel"><p class="vazio">Carregando o mural…</p></section></div></div></div>`;
   $("muNovo").onclick = modalCompartilharMural;
+  $("muReflexao").onclick = () => modalReflexao();
   const muV = $("muVoltar"); if(muV) muV.onclick = telaMuralSalas;
   try{
     const agora = Date.now(), mesAnt = new Date(); mesAnt.setDate(1); mesAnt.setMonth(mesAnt.getMonth() - 1);
     const posts = (await muralDaSalaG(sala.id, [mesDe(agora), mesDe(mesAnt.getTime())])).slice().sort((a, b) => (b.quando || 0) - (a.quando || 0)).slice(0, 60);
     const corpo = $("muCorpo"); if(!corpo || salaAtual().id !== sala.id) return;
-    if(!posts.length){ corpo.innerHTML = `<section class="panel"><p class="vazio">O mural desta sala ainda está vazio. Seja o primeiro a compartilhar!</p></section>`; return; }
+    if(!posts.length){ corpo.innerHTML = `<section class="panel"><p class="vazio">O mural desta sala ainda está vazio. Seja o primeiro: compartilhe uma reflexão sobre a lição!</p></section>`; return; }
     let aberto = null;                                           // publicação com o seletor de reações aberto
     const desenhar = () => {
       corpo.innerHTML = `<div class="mural">${posts.map(p => { const rc = p.reacoes || {};
         return `<article class="post ${p.uid === eu ? "meu" : ""} ${p.id === focoId ? "foco" : ""}" data-post="${esc(p.id)}">
-          <div class="post-top"><div class="em">${avatarSVG(personagemDe(p.profeta, p.uid === eu ? meuNivel() : p.nivel), null, p.uid === eu ? meuNivel() : p.nivel)}</div><div class="info"><strong>${esc(p.nome || "?")}${p.uid === eu ? " (você)" : ""}</strong><span>${haQuanto(p.quando || 0)}</span></div>${p.uid === eu || ehMaster() || ehDonoSala(sala) || ehAdminSala(sala) ? `<button class="post-x" data-apagar="${esc(p.id)}" aria-label="Apagar publicação">✕</button>` : ""}</div>
-          <div class="post-corpo">${p.tipo === "personagem" && acharProfeta(p.ref) ? `<div class="ic pers">${avatarSVG(p.ref)}</div>` : `<div class="ic">${esc(p.ic || "✨")}</div>`}<div><b>${esc(p.titulo)}</b>${p.texto ? `<span>${esc(p.texto)}</span>` : ""}</div></div>
+          <div class="post-top"><div class="em">${avatarSVG(personagemDe(p.profeta, p.uid === eu ? meuNivel() : p.nivel), null, p.uid === eu ? meuNivel() : p.nivel)}</div><div class="info"><strong>${esc(p.nome || "?")}${p.uid === eu ? " (você)" : ""}</strong><span>${haQuanto(p.quando || 0)}${p.tipo === "reflexao" ? " · reflexão da lição" : ""}</span></div>${p.uid === eu || ehMaster() || ehDonoSala(sala) || ehAdminSala(sala) ? `<button class="post-x" data-apagar="${esc(p.id)}" aria-label="Apagar publicação">✕</button>` : ""}</div>
+          ${p.tipo === "reflexao" ? `<p class="fd-texto">${esc(p.texto || "")}</p><button type="button" class="fd-licao" data-lic="${esc(p.licaoId || "")}" data-data="${esc(p.data || "")}"><span aria-hidden="true">📖</span><span>${esc(p.titulo)}</span><i aria-hidden="true">›</i></button>`
+            : `<div class="post-corpo">${p.tipo === "personagem" && acharProfeta(p.ref) ? `<div class="ic pers">${avatarSVG(p.ref)}</div>` : `<div class="ic">${esc(p.ic || "✨")}</div>`}<div><b>${esc(p.titulo)}</b>${p.texto ? `<span>${esc(p.texto)}</span>` : ""}</div></div>`}
           <div class="post-reacoes">${REACOES.filter(([k]) => (rc[k] || []).length).map(([k, ic, nome]) => { const l = rc[k], on = l.includes(eu); return `<button type="button" class="reacao ${on ? "on" : ""}" data-reagir="${k}" aria-pressed="${on}" aria-label="${nome}: ${l.length}" title="${nome}"><span>${ic}</span><b>${l.length}</b></button>`; }).join("")}<button type="button" class="reacao mais" data-reagir-abrir aria-expanded="${aberto === p.id}" aria-label="Reagir"><span>${aberto === p.id ? "✕" : "🙂"}</span>${aberto === p.id ? "Fechar" : "Reagir"}</button></div>
           ${aberto === p.id ? `<div class="reacao-menu" role="group" aria-label="Escolha uma reação">${REACOES.map(([k, ic, nome]) => `<button type="button" class="${(rc[k] || []).includes(eu) ? "on" : ""}" data-reagir="${k}" aria-pressed="${(rc[k] || []).includes(eu)}"><span>${ic}</span><em>${nome}</em></button>`).join("")}</div>` : ""}
         </article>`; }).join("")}</div>`;
@@ -7551,6 +7642,7 @@ async function telaMural(focoId){
           if(p.uid !== eu && antes !== depois && typeof contarReacaoDada === "function") contarReacaoDada(depois ? 1 : -1);
         }catch(e){ if(on) l.splice(l.indexOf(eu), 1); else l.push(eu); desenhar(); aviso(erroMsg(e)); }
       });
+      corpo.querySelectorAll("[data-lic]").forEach(b => b.onclick = () => abrirDiaDaReflexao(b.dataset.lic, b.dataset.data));
       corpo.querySelectorAll("[data-reagir-abrir]").forEach(b => b.onclick = () => { const id = b.closest("[data-post]").dataset.post; aberto = aberto === id ? null : id; desenhar(); });
       corpo.querySelectorAll("[data-apagar]").forEach(b => b.onclick = async () => {
         if(!(await confirmar("Apagar publicação", "Apagar esta publicação do mural?", "Apagar", "btn-warn"))) return;
@@ -8335,7 +8427,8 @@ async function conferirReacoesAntigas(){
     const b = $("inMoedas"); if(b){ const v = b.querySelector("b"); if(v) v.textContent = moedas(); }
   }catch(e){ _retroReacoes = false; }          // não deu agora (sem internet): tenta de novo na próxima abertura do Início
 }
-function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes(); }
+const moedasDeReflexoes = () => 2 * ((perfil && perfil.reflexoesDias) || []).length;      // +2 pela 1ª reflexão de cada dia de lição
+function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes() + moedasDeReflexoes(); }
 function moedasGastas(){ const c = (perfil && perfil.compras) || {}; return Object.keys(c).reduce((s, k) => s + (+c[k] || 0), 0); }
 function moedas(){ return Math.max(0, moedasGanhas() - moedasGastas() - (typeof moedasEmJogo === "function" ? moedasEmJogo() : 0)); }
 const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
@@ -8589,6 +8682,10 @@ function modalComoGanhar(){
   const nr = reacoesDadas(), resto = nr % REACOES_POR_MOEDA;
   const reac = linha("💬", "Reagir no mural", `+1 a cada ${REACOES_POR_MOEDA}`,
     `${resto} de ${REACOES_POR_MOEDA} para a próxima · ${nr} ${nr === 1 ? "reação" : "reações"} até hoje (+${moedasDeReacoes()})`, barra(100 * resto / REACOES_POR_MOEDA));
+  /* 1b. reflexão da lição */
+  const Lr = LICOES[indiceLicaoAtual()], dHoje = Lr && Lr.dias ? Lr.dias.find(d => d.data === hoje()) : null, nRef = ((perfil && perfil.reflexoesDias) || []).length;
+  const refl = linha("💭", "Reflexão da lição no mural", "+2",
+    `${dHoje ? ((perfil.reflexoesDias || []).includes(Lr.id + "|" + dHoje.data) ? "Hoje: já compartilhada ✓" : "Hoje: ainda não compartilhada") + " · " : ""}vale 1 por dia de lição · ${nRef} até hoje`);
   /* 2. semana completa */
   const L = LICOES[indiceLicaoAtual()], fut = L && licaoFutura(L), feitas = L && !fut ? noPrazo(L) : 0, sc = semanasCompletas();
   const sem = linha("📅", "Semana completa no prazo", `+${MOEDAS_SEMANA}`,
@@ -8616,7 +8713,7 @@ function modalComoGanhar(){
   }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
-      ${reac}${sem}${mis}${cedo}${sup}
+      ${refl}${reac}${sem}${mis}${cedo}${sup}
       <p class="cg-rodape">Também valem: 1 moeda por acerto em qualquer quiz e os desafios entre amigos.</p>
       <button type="button" class="btn btn-ghost btn-sm cg-ok" id="cgOk">Entendi</button></div>`, (m, fechar) => {
     m.querySelector("#cgOk").onclick = fechar;
