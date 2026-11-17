@@ -2,10 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261116.191034">
+<meta name="versao" content="20261117.121035">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Quiz da Lição">
 <link rel="icon" id="favicon" href="">
@@ -1746,6 +1747,44 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 @keyframes mov-danca{0%,100%{transform:rotate(-9deg) translateX(-2px)}25%{transform:rotate(0) translateY(-3px)}50%{transform:rotate(9deg) translateX(2px)}75%{transform:rotate(0) translateY(-3px)}}
 @keyframes mov-corrida{0%,100%{transform:rotate(7deg) translate(0,0)}50%{transform:rotate(7deg) translate(2px,-3px)}}
 @keyframes mov-aguia{0%,100%{transform:translateY(-2px);filter:drop-shadow(0 6px 4px rgba(20,18,60,.25))}50%{transform:translateY(-9px);filter:drop-shadow(0 12px 6px rgba(20,18,60,.18)) drop-shadow(0 0 6px rgba(255,255,255,.55))}}
+/* movimentos: quadros desenhados (os braços, as pernas e os objetos nas mãos mudam de verdade) */
+.avatar .av-q2{opacity:0}
+.av-mv .av-q{animation-timing-function:steps(1,end);animation-iteration-count:infinite;animation-duration:.7s}
+.av-mv .av-q1{animation-name:q1-meio}.av-mv .av-q2{animation-name:q2-meio}
+@keyframes q1-meio{0%{opacity:1}50%{opacity:0}100%{opacity:0}}
+@keyframes q2-meio{0%{opacity:0}50%{opacity:1}100%{opacity:1}}
+.av-mv-corrida .av-q{animation-duration:.42s}
+.av-mv-aguia .av-q{animation-duration:.65s}
+.av-mv-tchau .av-q{animation-duration:.56s}
+.av-mv-biceps .av-q{animation-duration:1.4s}
+.av-mv-danca .av-q{animation-duration:1.3s}.av-mv-danca .av-q1{animation-name:q1-danca}.av-mv-danca .av-q2{animation-name:q2-danca}
+@keyframes q1-danca{0%{opacity:1}25%{opacity:0}75%{opacity:1}100%{opacity:1}}
+@keyframes q2-danca{0%{opacity:0}25%{opacity:1}75%{opacity:0}100%{opacity:0}}
+.av-mv-salto .av-q{animation-duration:1.25s}.av-mv-salto .av-q1{animation-name:q1-salto}.av-mv-salto .av-q2{animation-name:q2-salto}
+@keyframes q1-salto{0%{opacity:1}14%{opacity:0}52%{opacity:1}100%{opacity:1}}
+@keyframes q2-salto{0%{opacity:0}14%{opacity:1}52%{opacity:0}100%{opacity:0}}
+.av-mv-beijo .av-q{animation-duration:2.4s}.av-mv-beijo .av-q1{animation-name:q1-beijo}.av-mv-beijo .av-q2{animation-name:q2-beijo}
+@keyframes q1-beijo{0%{opacity:1}45%{opacity:0}100%{opacity:0}}
+@keyframes q2-beijo{0%{opacity:0}45%{opacity:1}100%{opacity:1}}
+.av-coracoes path{opacity:0;transform-box:fill-box;transform-origin:50% 50%;animation:av-coracao 2.4s ease-out infinite}
+.av-coracoes .av-c2{animation-name:av-coracao2}.av-coracoes .av-c3{animation-name:av-coracao3}
+@keyframes av-coracao{0%,46%{opacity:0;transform:translate(0,0) scale(.4)}52%{opacity:1;transform:translate(.6px,-1px) scale(.8)}100%{opacity:0;transform:translate(3px,-9px) scale(1.1)}}
+@keyframes av-coracao2{0%,56%{opacity:0;transform:translate(0,0) scale(.3)}62%{opacity:1;transform:translate(1px,-.6px) scale(.6)}100%{opacity:0;transform:translate(-1.5px,-8px) scale(.9)}}
+@keyframes av-coracao3{0%,66%{opacity:0;transform:translate(0,0) scale(.3)}72%{opacity:1;transform:translate(1px,-.4px) scale(.55)}100%{opacity:0;transform:translate(5px,-6px) scale(.8)}}
+.runner.mov-beijo .avatar{animation:mov-beijo 2.4s ease-in-out infinite}
+@keyframes mov-beijo{0%,40%{transform:rotate(-2deg)}55%,92%{transform:rotate(3deg) translateY(-1px)}}
+.runner.mov-tchau .avatar{animation:mov-tchau 1.12s ease-in-out infinite}
+@keyframes mov-tchau{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+.runner.mov-biceps .avatar{animation:mov-biceps 1.4s steps(1,end) infinite}
+@keyframes mov-biceps{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.04)}100%{transform:translateY(-1px) scale(1.04)}}
+.av-resp{transform-box:fill-box;transform-origin:50% 100%;animation:av-resp 3.4s ease-in-out infinite}
+@keyframes av-resp{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.05)}}
+.av-zz text{opacity:0;animation:av-zz 3.4s ease-out infinite}
+.av-zz text:nth-child(2){animation-delay:.9s}.av-zz text:nth-child(3){animation-delay:1.8s}
+@keyframes av-zz{0%{opacity:0;transform:translate(0,2px)}20%{opacity:1}80%{opacity:.9}100%{opacity:0;transform:translate(2px,-3px)}}
+.av-luz{transform-box:fill-box;transform-origin:50% 50%;animation:av-luz 3s ease-in-out infinite}
+@keyframes av-luz{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.av-mv .av-q,.av-coracoes path,.av-resp,.av-zz text,.av-luz{animation:none}.av-zz text{opacity:1}}
 .lj-av.lj-mov{position:relative;display:block;width:78px;height:86px;border-radius:14px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:2px}
 .lj-av.lj-mov::after{content:"";position:absolute;left:0;right:0;bottom:0;height:20px;background:rgba(20,18,60,.3);border-top:1px solid rgba(255,255,255,.22)}
 .lj-mov .runner{position:absolute;left:17px;top:auto;bottom:10px;width:44px;height:56px;transition:none;z-index:1}
@@ -1855,6 +1894,34 @@ html{overscroll-behavior-y:contain}
 .sq-estado b{font:400 34px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1.5px;font-variant-numeric:tabular-nums;color:#FFE27A}
 .sq-estado span{font-size:13px;line-height:1.35;color:var(--soft)}
 .sq-estado span:first-letter{text-transform:uppercase}
+/* como ganhar moedas: atalho fino no Início e janela minimalista, letras pequenas */
+.cg-atalho{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 12px;padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:inherit;font-family:inherit;font-size:12.5px;font-weight:600;line-height:1.2;cursor:pointer;text-align:left}
+.cg-atalho:hover{background:rgba(255,255,255,.12)}
+.cg-atalho .cg-ic-mais{width:20px;height:20px;flex:none}
+.lj-topo + .cg-atalho{margin-top:4px}
+.cg-tx small.cg-faz{opacity:.9}
+.cg-atalho span{flex:1;letter-spacing:.01em}
+.cg-atalho b{font-size:12px;opacity:.85}
+.cg-atalho i{font-style:normal;opacity:.6;font-size:15px}
+.cg{display:flex;flex-direction:column;gap:2px;font-size:12px;line-height:1.35}
+.cg-saldo{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:11.5px;opacity:.85}
+.cg-saldo .moeda{width:14px;height:14px}
+.cg-saldo b{font-size:13px}
+.cg-item{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,.12)}
+.cg-ic{width:20px;flex:none;font-size:14px;line-height:18px;text-align:center}
+.cg-tx{flex:1;min-width:0}
+.cg-tx p{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0}
+.cg-tx p b{font-size:12.5px;font-weight:700}
+.cg-tx p em{font-style:normal;font-size:11px;font-weight:700;color:var(--ouro,#F2BE2E);white-space:nowrap}
+.cg-tx small{display:block;margin-top:2px;font-size:11px;opacity:.75}
+.cg-tx small.cg-nota{font-size:10px;opacity:.55;margin-top:3px}
+.cg-rel{font-variant-numeric:tabular-nums;font-weight:700;opacity:1}
+.cg-barra{display:block;height:3px;margin-top:5px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
+.cg-barra i{display:block;height:100%;border-radius:2px;background:var(--ouro,#F2BE2E)}
+.cg-rodape{margin:8px 0 2px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12);font-size:10.5px;opacity:.6}
+.cg-ok{align-self:center;margin-top:6px;font-size:12px;padding:6px 18px;min-height:0}
+.modal:has(.cg) .modal-h h3{font-size:17px}
+
 /* login */
 .logo-login{padding:18px 0 6px}
 .logo-login p{font-size:14px;margin-top:10px}
@@ -2366,6 +2433,8 @@ function dbFirebase(){
     // Mural da sala: posts por mês (campo salaMes = salaId|AAAA-MM); reações = listas de uids
     async muralDaSala(salaId, meses){ const out = []; for(const m of meses) out.push(...await lista(col("mural").where("salaMes","==",salaId + "|" + m))); return out; },
     async meusPosts(uid){ return lista(col("mural").where("uid","==",uid)); },
+    /* publicações em que a pessoa reagiu (uma consulta por tipo de reação; usado uma vez só, para pagar as reações antigas) */
+    async postsReagidos(uid, tipos){ const m = {}; for(const t of tipos){ (await lista(col("mural").where("reacoes." + t, "array-contains", uid))).forEach(p => { m[p.id] = p; }); } return Object.values(m); },
     async getPost(id){ const d = await col("mural").doc(id).get(); return d.exists ? Object.assign({id:d.id}, d.data()) : null; },
     async salvarPerfilPublico(uid, dados){ await col("mural").doc("perfil_" + uid).set(dados, {merge:true}); },
     async salvarPost(id, dados){ await col("mural").doc(id).set(dados, {merge:true}); },
@@ -2472,6 +2541,7 @@ function dbLocal(){
     async excluirMembro(salaId, uid){ const d = ler(); if(d.membros) delete d.membros[salaId + "_" + uid]; gravar(d); },
     async muralDaSala(salaId, meses){ const d = ler(), set = new Set(meses.map(m => salaId + "|" + m)); return Object.keys(d.mural||{}).map(k=>Object.assign({id:k}, d.mural[k])).filter(p=>set.has(p.salaMes)); },
     async meusPosts(uid){ const d = ler(); return Object.keys(d.mural||{}).map(k=>Object.assign({id:k}, d.mural[k])).filter(p=>p.uid===uid); },
+    async postsReagidos(uid, tipos){ const d = ler(); return Object.keys(d.mural||{}).map(k=>Object.assign({id:k}, d.mural[k])).filter(p=>tipos.some(t=>((p.reacoes||{})[t]||[]).includes(uid))); },
     async getPost(id){ const d = ler(); return (d.mural||{})[id] ? Object.assign({id}, d.mural[id]) : null; },
     async salvarPerfilPublico(uid, dados){ const d = ler(); d.mural = d.mural || {}; d.mural["perfil_" + uid] = Object.assign(d.mural["perfil_" + uid] || {}, dados); gravar(d); },
     async salvarPost(id, dados){ const d = ler(); d.mural = d.mural || {}; d.mural[id] = Object.assign(d.mural[id]||{}, dados); gravar(d); },
@@ -2513,7 +2583,7 @@ const GUARDA = (() => {
     const db = await abrir(); if(!db) return undefined;
     return new Promise(res => { try{ const t = db.transaction("kv", modo), rq = fn(t.objectStore("kv")); t.oncomplete = () => res(rq && rq.result); t.onerror = t.onabort = () => res(undefined); }catch(e){ res(undefined); } });
   };
-  const naMem = k => k.indexOf("pag:") !== 0;        // as páginas (imagens) não ficam também na memória
+  const naMem = k => k.indexOf("pag:") !== 0 && k.indexOf("sp992:") !== 0;        // as páginas e os desenhos grandes (imagens) não ficam também na memória
   return {
     async get(k){ if(mem.has(k)) return mem.get(k); const v = await tx("readonly", s => s.get(k)); if(v !== undefined && naMem(k)) mem.set(k, v); return v; },
     async set(k, v){ if(naMem(k)) mem.set(k, v); await tx("readwrite", s => s.put(v, k)); },
@@ -3407,6 +3477,7 @@ function telaInicio(){
   /* saudação: avatar, nome e a fala do dia numa linha só */
   html += `<header class="hm-ola"><div class="hm-av${classeMoldura(minhaMoldura())}">${meuAvatar()}</div><div class="hm-ola-tx"><small>${saudacao()}</small><h2>${esc(String(perfil.nome || "").split(" ")[0])}</h2>${fala ? `<p>“${esc(fala)}”</p>` : ""}</div>
     <div class="hm-chips"><span class="hm-chip" title="Sequência no prazo">${st >= 5 ? "🔥" : "⚡"} ${st}</span><span class="hm-chip ouro" title="Nível ${nv}: ${esc(nomeNivel(nv))}">Nv ${nv}</span></div></header>`;
+  if(typeof htmlMoedasInicio === "function") html += htmlMoedasInicio();          // ganhar moedas (abre a janelinha com os contadores)
   html += typeof htmlDesafiosInicio === "function" ? htmlDesafiosInicio() : "";
   if(typeof htmlSuperQuizInicio === "function") html += htmlSuperQuizInicio();         // super quiz: o relógio fica sempre no alto
   /* hoje */
@@ -3449,6 +3520,7 @@ function telaInicio(){
   const est = $("inEstudar"); if(est) est.onclick = ()=>{ estudoLicao = L; estudoDia = hojeIdx >= 0 ? hojeIdx : -1; estudoVista = "dias"; nav("estudar"); };
   if(typeof dicaDaLoja === "function") dicaDaLoja();          // aponta a Loja no menu, uma vez por pessoa
   if(typeof ligarSuperQuizInicio === "function") ligarSuperQuizInicio();
+  if(typeof ligarMoedasInicio === "function"){ ligarMoedasInicio(); conferirReacoesAntigas(); }
   const jog = $("inJogar"); if(jog) jog.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); iniciar(hojeIdx); };
   const ver = $("inVer"); if(ver) ver.onclick = ()=>{ LICAO = L; tabAtual = "quiz"; atualizarCasca(); telaResultado(hojeIdx); };
   const ct = $("inContagem");
@@ -3476,7 +3548,7 @@ async function posicaoCorrida(L){
     const fmt1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR");
     el.innerHTML = `<div class="hm-cab"><span>Corrida do Rolo</span><button type="button" class="hm-link" id="inRolo">Ver pista <span aria-hidden="true">›</span></button></div>
       <div class="hm-pos"><b>${pos ? pos + "º" : "—"}</b><div><strong>${pos ? `de ${ordem.length} na pista` : !souMembroDaSala(sala) ? "Você só está vendo esta sala" : ordem.length ? "Entre na pista!" : "Pista vazia: seja o primeiro!"}</strong><span>${!souMembroDaSala(sala) ? `${ordem.length} ${ordem.length === 1 ? "corredor" : "corredores"} na pista` : `${fmt1(meus)} ${meus === 1 ? "passo" : "passos"}`} · ${esc(L.numero)}</span></div><button type="button" class="hm-chip sala" id="inSala" title="Trocar de sala">${esc(sala.nome)}</button></div>
-      <div class="track hm-track${classePista(minhaPista())}" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner${classeMovimento(meuMovimento(), meuBoneco(), meuNivel())}" style="--p:${Math.min(1, meus/7)}">${meuAvatar()}</div></div>`;
+      <div class="track hm-track${classePista(minhaPista())}" style="--seg:7"><span class="flag" aria-hidden="true">🏁</span><div class="runner${classeMovimento(meuMovimento(), meuBoneco(), meuNivel())}" style="--p:${Math.min(1, meus/7)}">${avatarSVG(meuBoneco(), null, meuNivel(), null, movDe(meuMovimento(), meuBoneco(), meuNivel()))}</div></div>`;
     $("inRolo").onclick = ()=>{ corridaVista = "pista"; nav("ranking"); };
     $("inSala").onclick = ()=> nav("salas");
   }catch(e){ el.innerHTML = `<div class="hm-cab"><span>Corrida do Rolo</span></div><p class="hm-sub">${esc(erroMsg(e))}</p>`; }
@@ -4145,7 +4217,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
     h += `<div class="escala" style="grid-template-columns:repeat(${colunas.length},1fr)">${colunas.map(c=>`<span title="${esc(c.titulo)}">${esc(c.rotulo)}</span>`).join("")}</div><ol class="lanes">`;
     ids.forEach((id,k)=>{ const j = jov[id];
       h += `<li class="lane ${id===usuario.uid?"eu":""}"><div class="lane-top"><strong>${k<3 && j.passos>0 ? `<span class="pos">${k+1}º</span>` : ""}${esc(j.nome)}${id===usuario.uid?" (você)":""}</strong><span>${fmt1(j.passos)} ${j.passos===1?"passo":"passos"} · ${fmt(j.pts)} pts</span></div>
-        <div class="track${classePista(j.pista)}" style="--seg:${colunas.length}"><span class="flag" aria-hidden="true">🏁</span><div class="runner${classeMovimento(j.mov, j.profeta, j.nivel)}" style="--p:${Math.min(1, j.passos/TOTAL)}" role="button" tabindex="0" data-perfil="${esc(id)}" data-nome="${esc(j.nome)}" data-boneco="${esc(j.profeta || "")}" data-nivel="${j.nivel || 0}" title="Ver o perfil de ${esc(j.nome)}">${avatarSVG(personagemDe(j.profeta, j.nivel), j.nome, j.nivel)}</div></div></li>`; });
+        <div class="track${classePista(j.pista)}" style="--seg:${colunas.length}"><span class="flag" aria-hidden="true">🏁</span><div class="runner${classeMovimento(j.mov, j.profeta, j.nivel)}" style="--p:${Math.min(1, j.passos/TOTAL)}" role="button" tabindex="0" data-perfil="${esc(id)}" data-nome="${esc(j.nome)}" data-boneco="${esc(j.profeta || "")}" data-nivel="${j.nivel || 0}" title="Ver o perfil de ${esc(j.nome)}">${avatarSVG(personagemDe(j.profeta, j.nivel), j.nome, j.nivel, null, movDe(j.mov, j.profeta, j.nivel))}</div></div></li>`; });
     h += `</ol>`;
   }
   h += `</section>`;
@@ -4402,15 +4474,15 @@ function nomeArquivo(i){
 let PROFETA_IMG = null;
 function carregarProfetaImg(){
   /* Monta o personagem num canvas (480×620): enfeites de fundo, o boneco em pixel art e o selo do nível */
-  return new Promise(res => {
-    const p = acharProfeta(perfil.profeta) || acharProfeta(PROFETA_PADRAO), sp = spriteHD(p), nv = meuNivel();
+  return new Promise(async res => {
+    const p = acharProfeta(perfil.profeta) || acharProfeta(PROFETA_PADRAO), sp = await spriteMelhor(p), nv = meuNivel();
     const fundo = avatarSVG(p.id, null, 0).replace(/<image [^>]*\/>/g, "").replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace(/class="avatar[^"]*"/, 'width="480" height="620"');
     const carregar = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
     Promise.all([carregar("data:image/svg+xml;charset=utf-8," + encodeURIComponent(fundo)), carregar(sp.url)]).then(([enfeite, boneco]) => {
       const cv = document.createElement("canvas"); cv.width = 480; cv.height = 620;
       const x = cv.getContext("2d"), u = 20, larg = 30 * sp.W / sp.H;   // u: pixels por unidade do desenho (24×31 unidades, origem em -1,-1)
       if(enfeite) x.drawImage(enfeite, 0, 0, 480, 620);
-      if(boneco){ x.imageSmoothingEnabled = false; x.drawImage(boneco, (11 - larg / 2 + 1) * u, u, larg * u, 30 * u); x.imageSmoothingEnabled = true; }
+      if(boneco){ x.imageSmoothingEnabled = sp.W > 400; x.imageSmoothingQuality = "high"; x.drawImage(boneco, (11 - larg / 2 + 1) * u, u, larg * u, 30 * u); x.imageSmoothingEnabled = true; }
       if(nv > 0){
         x.beginPath(); x.arc(20.3 * u, 27 * u, 3.7 * u, 0, Math.PI * 2); x.fillStyle = "#F2BE2E"; x.fill(); x.lineWidth = .7 * u; x.strokeStyle = "#3A2A00"; x.stroke();
         x.fillStyle = "#3A2A00"; x.font = "700 " + (5.2 * u) + "px Arial, Helvetica, sans-serif"; x.textAlign = "center"; x.textBaseline = "alphabetic"; x.fillText(String(nv), 20.3 * u, 28.8 * u);
@@ -4594,7 +4666,7 @@ function desenharPersonagem(x, p, img){
   // o boneco, em pixel art nítido
   const ih = 580, iw = ih * img.width / img.height;
   x.fillStyle = "rgba(20,18,60,.3)"; x.beginPath(); x.ellipse(cx, cy + ih / 2 - 16, iw * .34, 22, 0, 0, Math.PI * 2); x.fill();
-  x.imageSmoothingEnabled = false; x.drawImage(img, cx - iw / 2, cy - ih / 2, iw, ih); x.imageSmoothingEnabled = true;
+  x.imageSmoothingEnabled = img.height > 700; x.imageSmoothingQuality = "high"; x.drawImage(img, cx - iw / 2, cy - ih / 2, iw, ih); x.imageSmoothingEnabled = true;   // o desenho de 992×1000 é reduzido com suavidade
   // nome, selo e fala
   x.textAlign = "center"; x.textBaseline = "alphabetic"; x.fillStyle = "#fff";
   let tam = 150; x.font = tam + "px " + BB; while(x.measureText(p.nome.toUpperCase()).width > W - 144 && tam > 70){ tam -= 4; x.font = tam + "px " + BB; }
@@ -4610,7 +4682,7 @@ function desenharPersonagem(x, p, img){
   x.restore();
 }
 async function compartilharPersonagem(p, btn){
-  const img = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = spriteHD(p).url; });
+  const img = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); spriteMelhor(p).then(sp => { i.src = sp.url; }); });
   if(!img){ aviso("Não deu para montar a imagem."); return; }
   return gerarCartao(x => desenharPersonagem(x, p, img), "personagem-" + slug(p.nome) + ".jpg", btn);
 }
@@ -6204,7 +6276,11 @@ const GESTOS = { nuvem: "sobe", pao: "sobe", coroa: "sobe", estrelas: "brilha", 
 /* ---------- Boneco: selo do nível perto do pé e brilho dourado nos profetas conquistados ---------- */
 /* nivel: nível de quem usa o boneco (mostra o selo e, se já tiver conquistado, o acessório do personagem).
    nvAcess: para mostrar o acessório sem o selo (na escolha do personagem e nos prêmios do mapa). */
-function avatarSVG(id, rotulo, nivel, nvAcess){
+/* Movimentos da loja: os quadros (poses) que o personagem alterna na raia. Cada quadro é um desenho próprio, com os braços,
+   as pernas e os objetos de verdade nas mãos. */
+const MOV_QUADROS = { marcha: ["passoA", "passoB"], salto: ["agacha", "salto"], danca: ["dancaA", "dancaB"], corrida: ["corridaA", "corridaB"], aguia: ["asasA", "asasB"],
+  beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"] };
+function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   /* id pode vir como "personagem~acessório" (acessório da loja em uso); um terceiro pedaço "~v" marca amostra da vitrine */
   const partes = String(id || "").split("~"), p0 = acharProfeta(partes[0]) || acharProfeta(PROFETA_PADRAO), nv = Math.floor(+nivel || 0);
   const acLoja = partes[1] && typeof LOJA_AC !== "undefined" ? LOJA_AC[partes[1]] : null;
@@ -6213,20 +6289,46 @@ function avatarSVG(id, rotulo, nivel, nvAcess){
   const lbl = String(rotulo || p.nome).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch])) + (acLoja ? ", com " + acLoja.nome.toLowerCase() : ac ? ", " + ac.rotulo : "");
   const raro = !!p.nivel, lend = !!p.lendario;
   const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
-  const aura = lend ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
+  const aura = lend && !(mov === "dormir" && !montado) ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
   const brilho = raro ? `<g class="av-raro" fill="${lend ? "#FFF3B8" : "#FFE27A"}">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}${lend ? mais(10, -.2, 1) + mais(-.2, 11, 1) + mais(21.4, 23, 1) + mais(1.2, 24.5, 1) : ""}</g>` : "";
-  /* o boneco vem dos modelos em pixel art (52×60 nos comuns, 122×130 nos raros e nos da loja), encaixado no mesmo espaço de antes; a segunda imagem é a piscada */
-  const sp = spriteHD(p), larg = (30 * sp.W / sp.H).toFixed(2), x0 = (11 - 15 * sp.W / sp.H).toFixed(2);
+  /* o boneco vem dos modelos em pixel art (52×60 nos comuns; os conquistados e comprados aparecem em 122×130 e trocam sozinhos
+     para 992×1000 quando o desenho grande fica pronto), encaixado no mesmo espaço de antes; a segunda imagem é a piscada */
   const atraso = (p0.id.split("").reduce((t, ch) => t + ch.charCodeAt(0), 0) % 37) / 10;
-  const img = (cls, href, extra) => `<image class="${cls}" href="${href}" x="${x0}" y="0" width="${larg}" height="30" preserveAspectRatio="none"${extra || ""}/>`;
-  /* raros: a cada 5 segundos o personagem dá um pulinho e faz um gesto com o objeto que segura (cada objeto tem o seu) */
-  const gesto = sp.emb ? (GESTOS[p.emb] || "acena") : "";
-  const ox = sp.emb ? (+x0 + sp.ex * larg).toFixed(2) : 0, oy = sp.emb ? ((gesto === "brilha" ? sp.ey : sp.eb) * 30).toFixed(2) : 0;
-  const corpo = sp.emb ? img("av-olho", sp.base) + img("av-pisca", sp.baseFechado) + img("av-emb av-g-" + gesto, sp.emb, ` style="transform-origin:${ox}px ${oy}px"`) : img("av-olho", sp.url) + img("av-pisca", sp.fechado);
+  /* imagem de um desenho: usa o de 992×1000 se já estiver pronto; senão o pequeno, marcado para a troca */
+  const desenho = q => { const sp = spriteHD(q), hd = HD.pronto(q);
+    const W = hd ? hd.W : sp.W, H = hd ? hd.H : sp.H, larg = 30 * W / H, x0 = 11 - larg / 2;
+    const href = { u: hd ? hd.u : sp.url, f: hd ? hd.f : sp.fechado, b: hd ? hd.b : sp.base, bf: hd ? hd.bf : sp.baseFechado, e: hd ? hd.e : sp.emb };
+    return { sp, hd, larg, x0, ex: hd && hd.ex != null ? hd.ex : sp.ex, ey: hd && hd.ey != null ? hd.ey : sp.ey, eb: hd && hd.eb != null ? hd.eb : sp.eb,
+      img: (cls, k, extra) => `<image class="${cls}" href="${href[k]}" x="${x0.toFixed(2)}" y="0" width="${larg.toFixed(2)}" height="30" preserveAspectRatio="none"${!hd && especialHD(q) ? ` data-hd="${esc(q.id)}" data-hk="${k}"` : ""}${extra || ""}/>` }; };
+  const quadros = mov && !montado && MOV_QUADROS[mov] ? MOV_QUADROS[mov] : null;     // qualquer personagem com movimento comprado (os quadros saem em 992×1000)
+  let corpo, temGesto = false;
+  if(quadros){
+    /* movimento da loja: os quadros se alternam (só a pose muda; o resto da animação vem do movimento da raia) */
+    const fr = quadros.map(pose => desenho(Object.assign({}, p, { id: p.id + "@" + pose, pose, semGuardar: false })));
+    if(mov === "dormir"){
+      corpo = `<g class="av-dorme"><rect x="-1.4" y="21.2" width="6.4" height="4.6" rx="2.2" fill="#F4F1EA" stroke="#B9B3D9" stroke-width=".35" shape-rendering="geometricPrecision"/>`
+        + `<g class="av-resp"><g transform="translate(11 23.2) rotate(-90) scale(.8) translate(-11 -15)">${fr[0].img("av-q", "u")}</g>`
+        + `<g shape-rendering="geometricPrecision"><rect x="10.4" y="18.4" width="13.2" height="10.2" rx="2.2" fill="#6F62E0" stroke="#2E2B6E" stroke-width=".45"/><path d="M13.6 18.6v9.8M17.4 18.6v9.8M21.2 18.6v9.8" stroke="#8F84F0" stroke-width=".7"/><rect x="10.4" y="18.4" width="2.6" height="10.2" rx="1.2" fill="#F4F1EA" stroke="#2E2B6E" stroke-width=".45"/></g></g>`
+        + `<g class="av-zz" fill="#FFFFFF" stroke="#2E2B6E" stroke-width=".35" paint-order="stroke" font-family="Arial,Helvetica,sans-serif" font-weight="700"><text x="2.5" y="17" font-size="3.4">z</text><text x="4.6" y="13.6" font-size="4.2">z</text><text x="7" y="9.6" font-size="5">Z</text></g></g>`;
+    } else {
+      const extra = mov === "beijo" ? `<g class="av-coracoes" fill="#FF5C7A" stroke="#FFFFFF" stroke-width=".3"><path class="av-c1" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/><path class="av-c2" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/><path class="av-c3" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/></g>`
+        : "";
+      const luz = mov === "orar" ? `<g class="av-luz" shape-rendering="geometricPrecision"><ellipse cx="11" cy="9" rx="10" ry="10" fill="#FFF3B8" opacity=".35"/><ellipse cx="11" cy="9" rx="6.5" ry="6.5" fill="#FFFBE6" opacity=".45"/><g stroke="#FFE27A" stroke-width=".6" stroke-linecap="round" opacity=".8"><path d="M11 -2.6v2.4M3 1l1.6 1.6M19 1l-1.6 1.6M-.8 8.6h2.2M20.6 8.6h2.2"/></g></g>` : "";
+      corpo = luz + `<g class="av-mv av-mv-${mov}">${fr.map((d, i) => d.img(fr.length > 1 ? "av-q av-q" + (i + 1) : "av-q", "u")).join("")}</g>` + extra;
+    }
+  } else {
+    const d = desenho(p);
+    /* raros: a cada 5 segundos o personagem dá um pulinho e faz um gesto com o objeto que segura (cada objeto tem o seu) */
+    const gesto = d.sp.emb ? (GESTOS[p.emb] || "acena") : "";
+    const ox = d.sp.emb ? (d.x0 + d.ex * d.larg).toFixed(2) : 0, oy = d.sp.emb ? ((gesto === "brilha" ? d.ey : d.eb) * 30).toFixed(2) : 0;
+    temGesto = !!d.sp.emb;
+    corpo = d.sp.emb ? d.img("av-olho", "b") + d.img("av-pisca", "bf") + d.img("av-emb av-g-" + gesto, "e", ` data-g="${gesto}" style="transform-origin:${ox}px ${oy}px"`) : d.img("av-olho", "u") + d.img("av-pisca", "f");
+  }
   /* montado: o personagem fica menor e mais alto, e o jumentinho é desenhado na frente das pernas dele */
+  const sombra = mov === "dormir" && quadros ? `<ellipse cx="11" cy="28.2" rx="11" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>` : `<ellipse cx="11" cy="28.2" rx="6.75" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>`;
   const boneco = montado
     ? `<ellipse cx="11" cy="28.4" rx="9.4" ry="1.1" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/><g class="av-corpo"><g transform="translate(1.3 2.4) scale(.7)">${corpo}</g><image class="av-montaria" href="${JUMENTO_PNG}" x="-.5" y="11.5" width="23" height="17" preserveAspectRatio="none"/></g>`
-    : `<ellipse cx="11" cy="28.2" rx="6.75" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>` + (sp.emb ? `<g class="av-corpo">${corpo}</g>` : corpo);
+    : sombra + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo);
   const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
   return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
 }
@@ -7440,9 +7542,14 @@ async function telaMural(focoId){
       corpo.querySelectorAll("[data-reagir]").forEach(b => b.onclick = async () => {
         const id = b.closest("[data-post]").dataset.post, p = posts.find(x => x.id === id), k = b.dataset.reagir;
         p.reacoes = p.reacoes || {}; const l = p.reacoes[k] || (p.reacoes[k] = []), on = !l.includes(eu);
+        const reagi = () => Object.keys(p.reacoes).some(q => (p.reacoes[q] || []).includes(eu)), antes = reagi();
         if(on) l.push(eu); else l.splice(l.indexOf(eu), 1);
+        const depois = reagi();
         aberto = null; if(on) tocar("toque"); desenhar();
-        try{ await DB.reagirPost(id, k, eu, on); }catch(e){ if(on) l.splice(l.indexOf(eu), 1); else l.push(eu); desenhar(); aviso(erroMsg(e)); }
+        try{ await DB.reagirPost(id, k, eu, on);
+          /* moedas: conta 1 por publicação de outra pessoa (mais de um emoji no mesmo post não soma; tirar a reação desconta) */
+          if(p.uid !== eu && antes !== depois && typeof contarReacaoDada === "function") contarReacaoDada(depois ? 1 : -1);
+        }catch(e){ if(on) l.splice(l.indexOf(eu), 1); else l.push(eu); desenhar(); aviso(erroMsg(e)); }
       });
       corpo.querySelectorAll("[data-reagir-abrir]").forEach(b => b.onclick = () => { const id = b.closest("[data-post]").dataset.post; aberto = aberto === id ? null : id; desenhar(); });
       corpo.querySelectorAll("[data-apagar]").forEach(b => b.onclick = async () => {
@@ -7483,7 +7590,7 @@ document.addEventListener("visibilitychange", () => { if(!document.hidden && typ
    - Personagens raros e os da loja: modelo de 122×130 pixels.
    O motor fica isolado dentro de uma função para não misturar nomes com o resto do jogo.
    ============================================================ */
-const gerarSpriteModelo = (() => {
+function _fabricaSprites(){      /* a fábrica inteira também vai para o ajudante em segundo plano (Worker) que desenha na qualidade 992×1000 */
 const MANTOS = { jesus:"#B8323F", moises:"#E8D9B5", elias:"#4A3A2E", eliseu:"#8A6A3E", isaias:"#E8505D", ezequiel:"#F2E6C8", daniel:"#F2BE2E", nata:"#5B4FC9", habacuque:"#2E2B6E", miqueias:"#1C9FD0", jonas:"#2E2B6E" };
 const CINTOS = { joao:"#5A3A22", moises:"#F2BE2E", ellen:"#2E2B6E", jose:"#8A5A2B" };
 const FEMININAS = new Set(["miria","debora","hulda","ana","isabel","ellen","filha","maria"]);
@@ -7557,6 +7664,7 @@ const F = {
   U:(...f)=>_bb((x,y)=>f.some(g=>g(x,y)), f.every(g=>g.bb) ? [Math.min(...f.map(g=>g.bb[0])),Math.min(...f.map(g=>g.bb[1])),Math.max(...f.map(g=>g.bb[2])),Math.max(...f.map(g=>g.bb[3]))] : null),
   I:(...f)=>{ const bs=f.filter(g=>g.bb).map(g=>g.bb); return _bb((x,y)=>f.every(g=>g(x,y)), bs.length ? [Math.max(...bs.map(b=>b[0])),Math.max(...bs.map(b=>b[1])),Math.min(...bs.map(b=>b[2])),Math.min(...bs.map(b=>b[3]))] : null); },
   N:f=>_bb((x,y)=>!f(x,y),null),
+  C:(x0,y0,x1,y1,r)=>{ const dx=x1-x0, dy=y1-y0, L=dx*dx+dy*dy||1e-9; return _bb((x,y)=>{ let t=((x-x0)*dx+(y-y0)*dy)/L; t=t<0?0:t>1?1:t; const ex=x-x0-t*dx, ey=y-y0-t*dy; return ex*ex+ey*ey<=r*r; },[Math.min(x0,x1)-r,Math.min(y0,y1)-r,Math.max(x0,x1)+r,Math.max(y0,y1)+r]); },
   M:f=>_bb((x,y)=>f(32-x,y), f.bb ? [32-f.bb[2],f.bb[1],32-f.bb[0],f.bb[3]] : null)   // espelho horizontal
 };
 function scale2x(m){
@@ -7569,8 +7677,42 @@ function scale2x(m){
     o.push(a,b); }
   return o;
 }
+/* ---- POSES dos movimentos da loja ----
+   e/d: braço do lado esquerdo/direito da tela: c = cotovelo, m = mão (unidades do modelo 32×40); t = jeito da mão
+   (p: fechada segurando, a: aberta, b: dedos na boca, j: mãos juntas); s:false = a mão está ocupada e não segura objeto.
+   pe: levanta o pé (esquerdo, direito); olhos:"f" = fechados; ajoelha: o corpo desce e as pernas somem sob a túnica;
+   semObj: guarda os objetos (dormindo); boca:"bico" = beijo; bi: tamanho do músculo do braço. */
+const POSES = {
+  passoA:  { e:{c:[8.7,26.4],m:[10,29.3]},  d:{c:[23.6,26.4],m:[24.5,30.1]}, pe:[-.9,0] },
+  passoB:  { e:{c:[8.4,26.4],m:[7.5,30.1]}, d:{c:[23.3,26.4],m:[22,29.3]},   pe:[0,-.9] },
+  corridaA:{ e:{c:[7.1,25.9],m:[9.8,23.5]}, d:{c:[24.7,25.7],m:[25.5,29.5]}, pe:[-1.5,0] },
+  corridaB:{ e:{c:[7.3,25.7],m:[6.5,29.5]}, d:{c:[24.9,25.9],m:[22.2,23.5]}, pe:[0,-1.5] },
+  agacha:  { e:{c:[7.8,26.2],m:[6.4,29.3]}, d:{c:[24.2,26.2],m:[25.6,29.3]} },
+  salto:   { e:{c:[7,19],m:[5.5,15.1]},     d:{c:[25,19],m:[26.5,15.1]} },
+  dancaA:  { e:{c:[6.5,19.5],m:[7.3,15.4]}, d:{c:[26.2,23.8],m:[28.6,21.4]}, pe:[0,-1] },
+  dancaB:  { e:{c:[5.8,23.8],m:[3.4,21.4]}, d:{c:[25.5,19.5],m:[24.7,15.4]}, pe:[-1,0] },
+  asasA:   { e:{c:[5.5,20.5],m:[1.9,18.2]}, d:{c:[26.5,20.5],m:[30.1,18.2]} },
+  asasB:   { e:{c:[5.3,23.9],m:[1.7,25.7]}, d:{c:[26.7,23.9],m:[30.3,25.7]} },
+  beijoA:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[24.4,25.4],m:[18.9,17.9],t:"b",s:false}, olhos:"f", boca:"bico" },
+  beijoB:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[25.8,21.2],m:[29.2,18.4],t:"a",s:false}, boca:"bico" },
+  tchauA:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[25.7,19.3],m:[25.4,14.9],t:"a",s:false} },
+  tchauB:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[25.7,19.3],m:[27.8,15.5],t:"a",s:false} },
+  bicepsA: { e:{c:[5.1,22.3],m:[5.3,17.7],s:false}, d:{c:[26.9,22.3],m:[26.7,17.7],s:false}, bi:1 },
+  bicepsB: { e:{c:[4.9,22],m:[5.7,16.9],s:false},   d:{c:[27.1,22],m:[26.3,16.9],s:false},   bi:1.7 },
+  orar:    { e:{c:[11,27.4],m:[15.4,23.4],t:"j",s:false}, d:{c:[21,27.4],m:[16.6,23.4],t:"j",s:false}, olhos:"f", ajoelha:2.6 },
+  dormir:  { e:{c:[8.8,26.4],m:[9.6,29.9]}, d:{c:[23.2,26.4],m:[22.4,29.9]}, olhos:"f", semObj:1 }
+};
+/* onde a mão segura cada objeto: [linha, coluna] dentro do desenho do objeto (1 quadradinho = 1 unidade) */
+const PEGA = { tabuas:[7.2,4.5], tamborim:[7.4,4], palmeira:[8.2,4.8], chifre:[6.8,2], chama:[8.3,4], jarro:[5.6,1.4], livro:[6.2,1.2], brasa:[1.2,1.4],
+  rolo:[4,1], roda:[7.6,4.5], leao:[6.6,4.5], peixe:[3,9.4], onda:[8,4], ovelha:[4,4.5], cajado:[8.5,3.5], gafanhoto:[5,4.5], torre:[9,3.5], estrela:[7.4,4.5],
+  lamparina:[4.4,5], coracao:[6.4,4.5], pena:[8.6,1.4], trigo:[6.6,4.5], manjedoura:[5.8,5], pao:[4.2,5.5], pomba:[6,5], nuvem:[5,4.5], arca:[6.4,5],
+  estrelas:[7.2,4.5], candelabro:[8.8,4.5], flor:[8,4.2], coroa:[5,4.5], tenda:[6.2,4.5], folha:[8.2,4.5], cetro:[9.5,3.5], trombeta:[6.6,4.4],
+  cordao:[8.6,4.5], martelo:[8.2,4.5], rede:[1.2,4.5], coluna:[8.5,3.5], harpa:[7.4,2], carta:[5,1.2], pomba_ramo:[8.6,6.4] };
+const FIXOS = new Set(["coroa_cab","ovelha_chao","asas"]);       // acessórios com lugar próprio (cabeça, chão, costas): não vão na mão
+const pegar = (k, hx, hy) => { const ic = ICONES[k], g = PEGA[k] || [ic.m.length - 1.5, ic.m[0].length / 2]; return [hy - g[0], hx - g[1]]; };
 function gerarSprite(p, W, H){
-  const s=Math.min(W/32,H/40), ox=(W-32*s)/2, oy=H-40*s;
+  const PO = p.pose ? POSES[p.pose] || null : null, dyK = PO && PO.ajoelha || 0;
+  const s=Math.min(W/32,H/40), ox=(W-32*s)/2, oy=H-40*s+dyK*s;
   const tier = s<1.15?0:(s<1.4?1:(s<1.7?2:(s<3?3:4)));
   const ot = tier===4 ? Math.max(1,Math.round(s/3.2)) : 1;
   const G=Array.from({length:H},()=>Array(W).fill(null)), T=Array.from({length:H},()=>Array(W).fill(null));
@@ -7608,19 +7750,25 @@ function gerarSprite(p, W, H){
   if(cob==="veu"||cob==="capuz"){ const fim=cob==="veu"?31:25; camada(RR(5.8,8,26.2,fim,3,2),{b:C.d,s:mistura(C.d,"#1A1030",.3),d:mistura(C.d,"#1A1030",.5),l:C.s},"tras"); }
   if(longo) camada(RR(6,8,26,27.5,4,2.5),{b:cabelo.s,s:cabelo.d,d:mistura(cabelo.d,"#1A1030",.35),l:cabelo.b},"tras");
   /* pernas */
-  camada(Rt(11,34.5,15,36),pele,"pele",{plano:1}); camada(Rt(17,34.5,21,36),{b:pele.s},"pele",{plano:1});
-  camada(RR(10,35.6,15.2,37,.8,.8),"#6B4A33","sand"); camada(RR(16.8,35.6,22,37,.8,.8),"#4E3424","sand");
-  /* túnica */
-  const tunica=P([[11.2,20],[20.8,20],[22.2,21.2],[22.2,28],[24.4,35],[7.6,35],[9.8,28],[9.8,21.2]]);
+  const pe = PO && PO.pe || [0,0];
+  const pernaE=d=>{ camada(Rt(11,34.5+d,15,36+d),pele,"pele",{plano:1}); camada(RR(10,35.6+d,15.2,37+d,.8,.8),"#6B4A33","sand"); };
+  const pernaD=d=>{ camada(Rt(17,34.5+d,21,36+d),{b:pele.s},"pele",{plano:1}); camada(RR(16.8,35.6+d,22,37+d,.8,.8),"#4E3424","sand"); };
+  if(!dyK){ if(pe[0]>=0) pernaE(0); if(pe[1]>=0) pernaD(0); }
+  /* túnica (ajoelhado: a barra encosta no chão) */
+  const tunica0=P([[11.2,20],[20.8,20],[22.2,21.2],[22.2,28],[24.4,35],[7.6,35],[9.8,28],[9.8,21.2]]);
+  const tunica = dyK ? I(tunica0,Rt(0,0,40,37-dyK)) : tunica0;
   camada(tunica,V,"veste",{dx:2,dy:.6});
   camada(I(tunica,Rt(0,33.7,40,35)),y=>({b:V(y).d,s:mistura(V(y).d,"#1A1030",.3),d:mistura(V(y).d,"#1A1030",.5),l:V(y).s}),"barra",{dx:2,dy:0,hx:.9,hy:0});
-  /* braços */
+  if(!dyK){ if(pe[0]<0) pernaE(pe[0]); if(pe[1]<0) pernaD(pe[1]); }     // o pé levantado aparece na frente da barra
+  /* braços (nas poses, os braços são desenhados no fim, por cima do corpo) */
+  if(!PO){
   const bracoE=P([[7.8,21],[11,21],[11,29.2],[6.8,29.2],[7,26]]);
   camada(bracoE,V,"veste",{dx:1.2,dy:.5});
   camada(I(bracoE,Rt(0,28.2,40,29.2)),y=>({b:V(y).s,s:V(y).d,d:V(y).d,l:V(y).b}),"punho",{dy:0,dx:1.2});
   camada(E(9,30.1,1.4,1.1),pele,"pele",{dx:.8,dy:.6});
   const bracoD=P([[21,21],[24,21.5],[25,27.2],[21,27.2]]);
   camada(bracoD,y=>({b:V(y).s,s:V(y).d,d:mistura(V(y).d,"#1A1030",.35),l:V(y).b}),"veste",{dx:1.2,dy:.5});
+  }
   /* manto */
   if(manto){
     const m=P([[8,20.4],[13.6,19.8],[23.2,30],[23.2,32.4],[19.6,32.4],[7.6,23.4]]);
@@ -7711,8 +7859,12 @@ function gerarSprite(p, W, H){
       frente.forEach(k=>{ const r=Math.floor(k/W),c=k%W; [[1,0],[-1,0],[0,1],[0,-1]].forEach(([a,b])=>{ const rr=r+a,cc=c+b; if(rr<0||rr>=H||cc<0||cc>=W) return; const kk=rr*W+cc; if(!mask.has(kk)&&G[rr][cc]&&G[rr][cc]!==le){ G[rr][cc]=le; nova.add(kk); } }); });
       frente=nova; }
   };
-  if(ICONES[p.emb2]) emblema(ICONES[p.emb2], p.emb2o || ICONES[p.emb2].o, p.emb2atras);   // segundo objeto (acessório), do outro lado
+  const ic2=ICONES[p.emb2], naMao2 = ic2 && !FIXOS.has(p.emb2);
+  if(!PO){
+  /* segundo objeto (acessório): na mão esquerda, que é desenhada de novo por cima para segurar de verdade */
+  if(ic2) emblema(ic2, naMao2 ? pegar(p.emb2, 9, 30.1) : (p.emb2o || ic2.o), p.emb2atras);
   if(ic) emblema(ic, ic.o);
+  if(naMao2){ camada(E(9,30.1,1.55,1.25),mistura(pele.d,"#1A1030",.45),"",{plano:1}); camada(E(9,30.1,1.4,1.1),pele,"pele",{dx:.8,dy:.6}); }
   // mão direita
   if(tier<4){
   for(let py=Y(25.9);py<Y(28);py++) for(let px=X(21.9);px<X(25);px++) G[py][px] = py===Y(28)-1 ? pele.s : (px===X(21.9)&&py===Y(25.9) ? pele.l : pele.b);
@@ -7720,6 +7872,7 @@ function gerarSprite(p, W, H){
   } else {
     camada(RR(21.7,25.7,25.2,28.2,1,1),pele,"pele",{dx:.9,dy:.7,hx:.5,hy:.5});
     camada(U(Rt(22.6,26.5,24.9,26.68),Rt(22.6,27.25,24.9,27.43)),pele.s,"",{});
+  }
   }
 
   // rosto
@@ -7777,6 +7930,54 @@ function gerarSprite(p, W, H){
   else if(tier===2){ put(my,cx-2,dark); put(my,cx-1,dark); put(my,cx,dark); put(my,cx+1,dark); put(my+1,cx-1,lip); put(my+1,cx,lip); }
   else if(tier===1){ put(my,cx-1,dark); put(my,cx,dark); put(my+1,cx-1,lip); put(my+1,cx,lip); }
   else { put(my,cx-1,dark); put(my,cx,lip); }
+  }
+
+  /* ---- pose: braços, objetos na mão e mãos ---- */
+  if(PO){
+    const linha=mistura(V(24).d,"#1A1030",.62), linhaPele=mistura(pele.d,"#1A1030",.45);
+    if(PO.boca==="bico"){ camada(E(16,17.3,1.3,.62),pele.b,"",{plano:1}); camada(E(16,17.4,.78,.68),"#7A2E3A","",{plano:1}); camada(E(16,17.4,.5,.42),"#C9506A","",{plano:1}); camada(E(15.85,17.25,.16,.12),"#F2A0B0","",{plano:1}); }
+    const SH={e:[9.4,22.6],d:[22.6,22.6]};
+    const tom={e:V, d:y=>({b:V(y).s,s:V(y).d,d:mistura(V(y).d,"#1A1030",.35),l:V(y).b})};
+    /* quem segura o quê: o acessório fica na mão esquerda e o objeto do personagem na direita; mão ocupada passa para a outra ou o objeto vai para o chão */
+    const livre={e:PO.e.s!==false, d:PO.d.s!==false}, chao=37-dyK, objs=[];
+    const colocar=(k,pref,atras)=>{ if(!k||!ICONES[k]) return; const icx=ICONES[k];
+      if(FIXOS.has(k)){ const o=(k===p.emb2&&p.emb2o)||icx.o; objs.push({icx,o:o[0]>25?[o[0]-dyK,o[1]]:o,atras,fixo:1}); return; }
+      if(PO.semObj) return;
+      const m = livre[pref] ? pref : (livre[pref==="e"?"d":"e"] ? (pref==="e"?"d":"e") : null);
+      if(m){ livre[m]=false; objs.push({icx,o:pegar(k,PO[m].m[0],PO[m].m[1]),mao:m}); }
+      else { const h=icx.m.length, w=icx.m[0].length; objs.push({icx,o:pref==="e"?[chao-h,Math.max(-2.2,7.4-w)]:[chao-h,Math.min(24.6,34.2-w)],chao:1}); } };
+    colocar(p.emb2,"e",p.emb2atras); colocar(p.emb,"d");
+    objs.filter(o=>o.atras).forEach(o=>emblema(o.icx,o.o,true));
+    objs.filter(o=>o.chao).forEach(o=>emblema(o.icx,o.o));
+    ["e","d"].forEach(l=>{ const A=PO[l], S=SH[l], c=A.c, m=A.m, r=1.6, meio=[(S[0]+c[0])/2,(S[1]+c[1])/2];
+      const forma=U(F.C(S[0],S[1],c[0],c[1],r),F.C(c[0],c[1],m[0],m[1],r*.93));
+      camada(U(F.C(meio[0],meio[1],c[0],c[1],r+.32),F.C(c[0],c[1],m[0],m[1],r*.93+.32)),linha,"",{plano:1});
+      camada(forma,tom[l],"veste",{dx:1.2,dy:.5});
+      if(PO.bi){ const b=PO.bi, bx=S[0]+(c[0]-S[0])*.55, by=S[1]+(c[1]-S[1])*.55-.9; camada(E(bx,by-.2*b,1.5+.25*b,.75+.45*b),linha,"",{plano:1}); camada(E(bx,by-.2*b,1.25+.25*b,.55+.45*b),tom[l],"veste",{dx:.8,dy:.6}); }
+      const pq=[c[0]+(m[0]-c[0])*.7,c[1]+(m[1]-c[1])*.7];
+      camada(I(forma,F.C(pq[0],pq[1],m[0],m[1],r*1.05)),y=>({b:tom[l](y).s,s:tom[l](y).d,d:tom[l](y).d,l:tom[l](y).b}),"punho",{dx:1,dy:.4});
+    });
+    objs.filter(o=>!o.atras&&!o.chao).forEach(o=>emblema(o.icx,o.o));
+    ["e","d"].forEach(l=>{ const A=PO[l], [hx,hy]=A.m, t=A.t||"p", lado=l==="e"?-1:1, cor=l==="e"?pele:{b:pele.b,s:pele.s,d:pele.d,l:pele.b};
+      if(t==="a"){            // mão aberta (tchau / mandando o beijo): palma, quatro dedos separados e o polegar
+        const dedos=[-.95,-.32,.32,.95].map((d,i)=>F.C(hx+d*1.05,hy-.4,hx+d*1.35,hy-2.25+Math.abs(i-1.5)*.35,.36));
+        const pol=F.C(hx-lado*1.1,hy+.5,hx-lado*2.1,hy-.5,.38), palma=E(hx,hy+.25,1.3,1.1);
+        camada(U(E(hx,hy+.25,1.62,1.42),...[-.95,-.32,.32,.95].map((d,i)=>F.C(hx+d*1.05,hy-.4,hx+d*1.35,hy-2.25+Math.abs(i-1.5)*.35,.66)),F.C(hx-lado*1.1,hy+.5,hx-lado*2.1,hy-.5,.68)),linhaPele,"",{plano:1});
+        camada(U(palma,pol,...dedos),cor,"pele",{dx:.6,dy:.5,hx:.4,hy:.4});
+      } else if(t==="j"){     // mãos juntas, dedos para cima (orando)
+        const mao=E(hx+(l==="e"?.55:-.55),hy-.5,.75,1.75);
+        camada(E(hx+(l==="e"?.55:-.55),hy-.5,1.05,2.05),linhaPele,"",{plano:1});
+        camada(mao,cor,"pele",{dx:.6,dy:.5,hx:.4,hy:.4});
+        if(l==="d") camada(Rt(15.93,hy-2,16.07,hy+.9),pele.d,"",{plano:1});
+      } else if(t==="b"){     // dedos encostados na boca
+        camada(U(E(hx,hy,1.4,1.3),E(hx-1.15,hy-.35,1.05,.75)),linhaPele,"",{plano:1});
+        camada(U(E(hx,hy,1.1,1),E(hx-1.15,hy-.35,.8,.5)),cor,"pele",{dx:.6,dy:.5,hx:.4,hy:.4});
+      } else {                // mão fechada (segurando)
+        camada(E(hx,hy,1.62,1.38),linhaPele,"",{plano:1});
+        camada(E(hx,hy,1.38,1.16),cor,"pele",{dx:.8,dy:.6,hx:.5,hy:.5});
+        if(PO.bi) camada(U(Rt(hx-.9,hy-.15,hx+.9,hy+.02),Rt(hx-.9,hy+.45,hx+.9,hy+.62)),pele.s,"",{plano:1});
+      }
+    });
   }
 
   /* contorno colorido */
@@ -7873,20 +8074,25 @@ Object.assign(CINTOS, { sansao:"#5A3A22", davi:"#8A5A2B" });
 Object.assign(CINTOS, { adao:"#5A3A22", farao:"#F2BE2E", josenazare:"#5A3A22", raabe:"#E8483C", pedro:"#8A5A2B" });
 Object.assign(MANTOS, { josue:"#8E3222", pedro:"#E8D9B5" });
 
+gerarSprite.POSES = POSES;
 return gerarSprite;
-})();
+}
+const gerarSpriteModelo = _fabricaSprites();
 
 /* ---------- Do modelo para o jogo: cada personagem vira duas imagens PNG (olhos abertos e piscando) ---------- */
 const _hdCache = {};
-const SPRITE_VERSAO = "t992";            // mude quando o desenho dos personagens mudar, para descartar as imagens guardadas no aparelho
+const SPRITE_VERSAO = "m7";            // mude quando o desenho dos personagens mudar, para descartar as imagens guardadas no aparelho
 /* desenhos da versão anterior guardados no aparelho: saem, para não ocupar espaço à toa */
 try{ for(let i = localStorage.length - 1; i >= 0; i--){ const k = localStorage.key(i); if(k && k.indexOf(KEY + ":boneco:") === 0 && k.indexOf(KEY + ":boneco:" + SPRITE_VERSAO + ":") !== 0) localStorage.removeItem(k); } }catch(e){}
+/* Tudo o que foi conquistado ou comprado (personagem raro, personagem da loja, acessório, quadros dos movimentos) ganha a qualidade 992×1000 */
+const especialHD = p => !!(p && (p.nivel || p.preco || p.emb2 || p.pose || /[+#@]/.test(p.id)));
+const olhosDaPose = pose => { const P = gerarSpriteModelo.POSES[pose]; return P && P.olhos === "f" ? "F" : "O"; };
 function spriteHD(p){
   if(_hdCache[p.id]) return _hdCache[p.id];
-  const raro = !!p.nivel, W = 992, H = 1000, k = 1;   // VERSÃO DE TESTE: todos os personagens em 992×1000   // k: ampliação inteira, para o desenho continuar nítido em qualquer tamanho
+  const raro = !!p.nivel, alta = especialHD(p), W = alta ? 122 : 52, H = alta ? 130 : 60, k = alta ? 3 : 4;   // especiais: 122×130 na hora (e 992×1000 em segundo plano); comuns: 52×60   // k: ampliação inteira, para o desenho continuar nítido em qualquer tamanho
   const chave = KEY + ":boneco:" + SPRITE_VERSAO + ":" + p.id;
-  try{ const g = JSON.parse(localStorage.getItem(chave) || "null"); if(g && g.u && g.f) return (_hdCache[p.id] = Object.assign({ url: g.u, fechado: g.f, W, H }, g.e ? { base: g.b, baseFechado: g.bf, emb: g.e, ex: g.ex, ey: g.ey, eb: g.eb } : {})); }catch(e){}
-  const { G, O, F } = gerarSpriteModelo(p, W, H);
+  try{ const g = JSON.parse(localStorage.getItem(chave) || "null"); if(g && g.u && (g.f || p.pose)) return (_hdCache[p.id] = Object.assign({ url: g.u, fechado: g.f, W, H }, g.e ? { base: g.b, baseFechado: g.bf, emb: g.e, ex: g.ex, ey: g.ey, eb: g.eb } : {})); }catch(e){}
+  const res = gerarSpriteModelo(p, W, H), G = res.G;
   const pq = document.createElement("canvas"); pq.width = W; pq.height = H;
   const xp = pq.getContext("2d"), cv = document.createElement("canvas"); cv.width = W * k; cv.height = H * k;
   const x = cv.getContext("2d"); x.imageSmoothingEnabled = false;
@@ -7900,10 +8106,11 @@ function spriteHD(p){
     x.clearRect(0, 0, cv.width, cv.height); x.drawImage(pq, 0, 0, cv.width, cv.height);
     return cv.toDataURL("image/png");
   };
-  const sp = { url: png(O), fechado: png(F), W, H };
+  /* quadro de movimento: uma imagem só, com os olhos como a pose pede */
+  const sp = p.pose ? { url: png(res[olhosDaPose(p.pose)]), W, H } : { url: png(res.O), fechado: png(res.F), W, H };
   /* Personagens raros fazem um gesto com o objeto que seguram. Para o objeto poder se mexer sozinho, o boneco é desenhado também
      sem ele, e o objeto vira uma imagem à parte (tudo o que muda entre o desenho com e sem o objeto). */
-  if(raro && p.emb){
+  if(raro && p.emb && !p.pose){
     try{
       const sem = gerarSpriteModelo(Object.assign({}, p, { emb: null }), W, H);
       const so = []; let c0 = W, c1 = -1, r0 = H, r1 = -1;
@@ -7915,6 +8122,82 @@ function spriteHD(p){
   if(p.semGuardar) return sp;                       // amostra da vitrine da loja: não ocupa a memória nem o aparelho
   return (_hdCache[p.id] = sp);
 }
+
+/* ---------- Qualidade 992×1000 ----------
+   Desenhar um boneco em 992×1000 leva quase 1 segundo. Para o jogo não travar:
+   - o desenho é feito por um ajudante em segundo plano (Web Worker), um de cada vez;
+   - enquanto ele não fica pronto, aparece o desenho de 122×130, que é trocado sozinho quando o grande chega;
+   - o desenho pronto fica guardado no aparelho (IndexedDB), então cada boneco só é desenhado uma vez.
+   Aparelho sem esse recurso (navegador antigo): continua com o desenho de 122×130. */
+const HD = (() => {
+  const VER = "sp992:" + SPRITE_VERSAO + ":", HW = 992, HH = 1000, prontos = {}, pedidos = {}, esperas = {};
+  let semApoio = typeof Worker === "undefined" || typeof OffscreenCanvas === "undefined" || !OffscreenCanvas.prototype.convertToBlob, fila = [], sq = 0, url = null;
+  const NW = Math.max(1, Math.min(2, ((typeof navigator !== "undefined" && navigator.hardwareConcurrency) || 2) - 1)), ajudantes = [];   // até 2 ajudantes ao mesmo tempo
+  /* versão nova dos desenhos: os guardados da versão anterior saem */
+  const limpo = typeof GUARDA === "undefined" ? Promise.resolve() : GUARDA.get("sp992:versao").then(v => v === SPRITE_VERSAO ? null : GUARDA.limpar("sp992:").then(() => GUARDA.set("sp992:versao", SPRITE_VERSAO))).catch(() => {});
+  const fonte = () => `const gerar=(${_fabricaSprites.toString()})();
+const png=(G,olhos,W,H)=>{ const c=new OffscreenCanvas(W,H), x=c.getContext("2d"), im=x.createImageData(W,H), d=im.data;
+  for(let r=0;r<H;r++){ const gr=G[r], ol=olhos&&olhos[r]; for(let k=0;k<W;k++){ const cor=(ol&&ol[k])||gr[k]; if(!cor) continue; const n=parseInt(cor.slice(1),16), i=(r*W+k)*4; d[i]=n>>16; d[i+1]=(n>>8)&255; d[i+2]=n&255; d[i+3]=255; } }
+  x.putImageData(im,0,0); return c.convertToBlob({type:"image/png"}); };
+onmessage=async e=>{ const {n,p,W,H}=e.data; try{
+  const res=gerar(p,W,H), r={W,H};
+  if(p.pose){ const P=gerar.POSES[p.pose]; r.u=await png(res.G, P&&P.olhos==="f"?res.F:res.O, W,H); }
+  else { r.u=await png(res.G,res.O,W,H); r.f=await png(res.G,res.F,W,H);
+    if(p.nivel && p.emb){ const sem=gerar(Object.assign({},p,{emb:null}),W,H), so=[]; let c0=W,c1=-1,r0=H,r1=-1;
+      for(let a=0;a<H;a++){ const l=[]; for(let c=0;c<W;c++){ const d=res.G[a][c]!==sem.G[a][c]?res.G[a][c]:null; l.push(d); if(d){ if(c<c0)c0=c; if(c>c1)c1=c; if(a<r0)r0=a; if(a>r1)r1=a; } } so.push(l); }
+      if(c1>=0){ r.b=await png(sem.G,sem.O,W,H); r.bf=await png(sem.G,sem.F,W,H); r.e=await png(so,null,W,H); r.ex=(c0+c1+1)/2/W; r.ey=(r0+r1+1)/2/H; r.eb=(r1+1)/H; } } }
+  postMessage({n,r});
+}catch(err){ postMessage({n,erro:String(err&&err.message||err)}); } };`;
+  const novoAjudante = () => {
+    try{ url = url || URL.createObjectURL(new Blob([fonte()], { type: "text/javascript" })); const a = { w: new Worker(url), ocupado: null };
+      a.w.onmessage = e => { const t = a.ocupado; a.ocupado = null; if(t){ if(e.data.r) chegou(t.chave, e.data.r, true); else { delete pedidos[t.chave]; avisar(t.chave, null); } } proximo(); };
+      a.w.onerror = () => { semApoio = true; ajudantes.length = 0; if(a.ocupado) avisar(a.ocupado.chave, null); fila.splice(0).forEach(x => avisar(x.chave, null)); };
+      ajudantes.push(a); return a;
+    }catch(e){ semApoio = true; return null; }
+  };
+  const proximo = () => {
+    while(fila.length && !semApoio){
+      const a = ajudantes.find(x => !x.ocupado) || (ajudantes.length < NW ? novoAjudante() : null); if(!a) return;
+      a.ocupado = fila.pop();   // o pedido mais recente primeiro: é o que está na tela agora
+      a.w.postMessage({ n: ++sq, p: a.ocupado.p, W: HW, H: HH });
+    }
+  };
+  const avisar = (chave, r) => { (esperas[chave] || []).forEach(f => f(r)); delete esperas[chave]; };
+  /* desenho grande pronto: vira endereços de imagem e substitui o desenho pequeno onde ele já estiver na tela */
+  function chegou(chave, r, novo){
+    const u = {}; ["u", "f", "b", "bf", "e"].forEach(k => { if(r[k]) u[k] = URL.createObjectURL(r[k]); });
+    const pr = prontos[chave] = Object.assign({ W: r.W, H: r.H, ex: r.ex, ey: r.ey, eb: r.eb }, u);
+    if(novo && typeof GUARDA !== "undefined") GUARDA.set(VER + chave, r);
+    if(typeof document !== "undefined") document.querySelectorAll('image[data-hd="' + chave.replace(/["\\]/g, "\\$&") + '"]').forEach(im => trocar(im, pr));
+    avisar(chave, pr);
+  }
+  function trocar(im, pr){
+    const k = im.getAttribute("data-hk"), href = pr[k]; if(!href) return;
+    const h = +im.getAttribute("height"), w = +im.getAttribute("width"), x = +im.getAttribute("x"), cx = x + w / 2, larg = h * pr.W / pr.H, nx = cx - larg / 2;
+    im.setAttribute("href", href); im.setAttribute("x", nx.toFixed(2)); im.setAttribute("width", larg.toFixed(2)); im.removeAttribute("data-hd");
+    if(k === "e" && pr.ex != null) im.style.transformOrigin = (nx + pr.ex * larg).toFixed(2) + "px " + ((im.getAttribute("data-g") === "brilha" ? pr.ey : pr.eb) * h).toFixed(2) + "px";
+  }
+  /* pede o desenho grande (se ainda não tiver): primeiro procura o guardado no aparelho, senão manda desenhar */
+  function pedir(p){
+    const chave = p.id; if(prontos[chave] || pedidos[chave] || semApoio) return;
+    pedidos[chave] = 1;
+    const dados = JSON.parse(JSON.stringify(p)); delete dados.semGuardar;
+    limpo.then(() => typeof GUARDA === "undefined" ? null : GUARDA.get(VER + chave)).catch(() => null).then(g => {
+      if(g && g.u){ chegou(chave, g, false); return; }
+      if(semApoio){ delete pedidos[chave]; avisar(chave, null); return; }
+      fila.push({ chave, p: dados }); proximo();
+    });
+  }
+  return {
+    pronto(p){ if(!especialHD(p)) return null; const r = prontos[p.id]; if(!r) pedir(p); return r || null; },
+    /* para as imagens de compartilhar: espera o desenho grande (até 20 s) */
+    esperar(p){ if(!especialHD(p) || semApoio) return Promise.resolve(null); if(prontos[p.id]) return Promise.resolve(prontos[p.id]);
+      return new Promise(ok => { (esperas[p.id] = esperas[p.id] || []).push(ok); setTimeout(() => ok(null), 20000); pedir(p); }); },
+    get ativo(){ return !semApoio; }
+  };
+})();
+/* o melhor desenho disponível de um personagem (para as imagens de compartilhar): o de 992×1000 se der, senão o de 122×130 */
+async function spriteMelhor(p){ const r = await HD.esperar(p); return r ? { url: r.u, fechado: r.f, W: r.W, H: r.H } : spriteHD(p); }
 
 /* ============================================================
    MOEDAS, LOJA E PERFIL DO JOGADOR
@@ -7971,13 +8254,18 @@ const LOJA_FESTAS = [
   { id: "pombas",    nome: "Revoada de Pombas",   ref: "Mateus 3:16",  preco: 40 },
   { id: "fogo",      nome: "Línguas de Fogo",     ref: "Atos 2:3",     preco: 45 }
 ];
-/* Movimentos: o que o personagem fica fazendo na raia da Corrida. Só valem para personagem raro (das missões) ou da loja. */
+/* Movimentos: o que o personagem fica fazendo na raia da Corrida. Valem para qualquer personagem (comum, raro ou da loja), desde que o movimento tenha sido comprado. */
 const LOJA_MOVIMENTOS = [
   { id: "marcha",  nome: "Marcha de Jericó",   ref: "Josué 6:3",       preco: 30 },
   { id: "salto",   nome: "Salto de Alegria",   ref: "Atos 3:8",        preco: 35 },
   { id: "danca",   nome: "Dança de Davi",      ref: "2 Samuel 6:14",   preco: 40 },
   { id: "corrida", nome: "Corrida da Fé",      ref: "Hebreus 12:1",    preco: 45 },
-  { id: "aguia",   nome: "Asas como Águias",   ref: "Isaías 40:31",    preco: 55 }
+  { id: "aguia",   nome: "Asas como Águias",   ref: "Isaías 40:31",    preco: 55 },
+  { id: "tchau",   nome: "Tchauzinho da Paz",  ref: "João 14:27",      preco: 35 },
+  { id: "beijo",   nome: "Beijo da Saudação",  ref: "Romanos 16:16",   preco: 40 },
+  { id: "dormir",  nome: "Sono Tranquilo",     ref: "Salmo 4:8",       preco: 45 },
+  { id: "biceps",  nome: "Força no Senhor",    ref: "Efésios 6:10",    preco: 50 },
+  { id: "orar",    nome: "De Joelhos em Oração", ref: "Daniel 6:10",   preco: 60 }
 ];
 const LOJA_EXTRAS = {
   m: { lista: LOJA_MOLDURAS, campo: "moldura", usar: "Moldura em uso.", tirar: "Moldura guardada." },
@@ -7992,7 +8280,8 @@ const classeMoldura = id => id && extraDaLoja("m", id) ? " mold mold-" + id : ""
 const meuMovimento = () => emUsoDaLoja("v");
 /* o movimento só aparece se o personagem daquele jogador for raro (prêmio das missões) ou da loja */
 function personagemEspecial(boneco, nivel){ const p = acharProfeta(idPuro(personagemDe(boneco, nivel))); return !!(p && (p.nivel || p.preco)); }
-const classeMovimento = (id, boneco, nivel) => id && extraDaLoja("v", id) && personagemEspecial(boneco, nivel) ? " mov-" + id : "";
+const movDe = (id, boneco, nivel) => id && extraDaLoja("v", id) ? id : "";      // sem movimento comprado, o personagem fica parado
+const classeMovimento = (id, boneco, nivel) => movDe(id, boneco, nivel) ? " mov-" + id : "";
 const classePista = id => id && extraDaLoja("t", id) ? " pista-" + id : "";
 const FESTA_ICONE = {
   estrelas:  `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" fill="#FFE27A"/></svg>`,
@@ -8006,8 +8295,9 @@ const idPuro = v => String(v || "").split("~")[0];
 /* como o meu boneco é guardado para os outros verem: personagem + acessório da loja em uso */
 function meuBoneco(){ const p = (perfil && perfil.profeta) || ""; return p && perfil.acess && LOJA_AC[perfil.acess] && comprado("a:" + perfil.acess) ? p + "~" + perfil.acess : p; }
 function comprado(id){ return !!(perfil && perfil.compras && perfil.compras[id] != null); }
-/* De onde vêm as moedas (tudo calculado do que já existe; nada extra é gravado para ganhar):
-   acertos nos quizzes (1 cada) + semanas completas no prazo (bônus) + casas das missões + desafios vencidos (menos os perdidos) */
+/* De onde vêm as moedas (quase tudo calculado do que já existe):
+   acertos nos quizzes (1 cada) + semanas completas no prazo (bônus) + casas das missões + desafios vencidos (menos os perdidos)
+   + 1 a cada 10 reações dadas no mural (contador perfil.reacoesDadas: 1 por publicação de outra pessoa; tirar a reação desconta) */
 const MOEDAS_SEMANA = 10;
 const DOBRO_CEDO_DESDE = "2026-11-16", DOBRO_CEDO_HORA = 8;          // quiz do dia feito no próprio dia antes das 8h: moedas em dobro (a partir desta data)
 function quizCedo(r){ if(!r || !r.noPrazo || !r.quando || String(r.data) < DOBRO_CEDO_DESDE) return false; const q = new Date(r.quando); return dataISO(q) === r.data && q.getHours() < DOBRO_CEDO_HORA; }
@@ -8017,7 +8307,35 @@ function semanasCompletas(){ const m = {}; Object.values(RES).forEach(r => { if(
 function moedasDaCasa(n){ return n % 10 === 0 ? 10 : n % 5 === 0 ? 5 : 2; }          // n = número da casa na jornada inteira; fim de território vale mais
 function moedasDeMissoes(){ let f = 0; try{ f = Math.min(MISSOES.length, missoesFeitas()); }catch(e){} let s = 0; for(let n = 1; n <= f; n++) s += moedasDaCasa(n); return s; }
 function moedasDeDesafios(){ const d = (perfil && perfil.duelos) || {}; return Object.keys(d).reduce((s, k) => s + (+d[k] || 0), 0); }
-function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios(); }
+const REACOES_POR_MOEDA = 10;
+const reacoesDadas = () => Math.max(0, Math.floor(+(perfil && perfil.reacoesDadas) || 0));
+const moedasDeReacoes = () => Math.floor(reacoesDadas() / REACOES_POR_MOEDA);
+/* chamado pelo mural quando eu passo a reagir (+1) ou deixo de reagir (-1) numa publicação de outra pessoa */
+function contarReacaoDada(d){
+  if(!perfil || !usuario) return;
+  const antes = moedasDeReacoes(), n = Math.max(0, reacoesDadas() + d); perfil.reacoesDadas = n;
+  DB.salvarUsuario(usuario.uid, { reacoesDadas: n }).catch(()=>{});
+  if(moedasDeReacoes() > antes){ aviso(`+1 moeda: ${REACOES_POR_MOEDA} reações no mural!`); tocar("moeda"); }
+  if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
+}
+/* Reações dadas antes desta regra existir: contadas uma vez só (perfil.reacoesRetro marca que já foi feito) */
+let _retroReacoes = false;
+async function conferirReacoesAntigas(){
+  if(!perfil || !usuario || perfil.reacoesRetro || _retroReacoes || typeof REACOES === "undefined" || !DB.postsReagidos) return;
+  _retroReacoes = true;
+  try{
+    const eu = usuario.uid, ps = await DB.postsReagidos(eu, REACOES.map(r => r[0]));
+    const n = ps.filter(p => p.uid !== eu && String(p.id).indexOf("perfil_") !== 0).length;      // 1 por publicação de outra pessoa (o perfil não é publicação do mural)
+    const antes = moedasDeReacoes(), novo = Math.max(reacoesDadas(), n);
+    perfil.reacoesDadas = novo; perfil.reacoesRetro = 1;
+    await DB.salvarUsuario(eu, { reacoesDadas: novo, reacoesRetro: 1 });
+    const ganhou = moedasDeReacoes() - antes;
+    if(ganhou > 0){ aviso(`+${ganhou} ${ganhou === 1 ? "moeda" : "moedas"} pelas ${novo} reações que você já deu no mural!`); tocar("moeda"); }
+    if(typeof pintarMoedasTopo === "function") pintarMoedasTopo();
+    const b = $("inMoedas"); if(b){ const v = b.querySelector("b"); if(v) v.textContent = moedas(); }
+  }catch(e){ _retroReacoes = false; }          // não deu agora (sem internet): tenta de novo na próxima abertura do Início
+}
+function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes(); }
 function moedasGastas(){ const c = (perfil && perfil.compras) || {}; return Object.keys(c).reduce((s, k) => s + (+c[k] || 0), 0); }
 function moedas(){ return Math.max(0, moedasGanhas() - moedasGastas() - (typeof moedasEmJogo === "function" ? moedasEmJogo() : 0)); }
 const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
@@ -8040,50 +8358,52 @@ function telaLoja(){
   const saldoHtml = `<div class="lj-saldo" aria-label="${saldo} moedas">${MOEDA}<b>${saldo}</b><small>${saldo === 1 ? "moeda" : "moedas"}</small></div>`;
   const desenharAmostras = () => {      /* os bonecos de amostra são desenhados aos poucos, para a tela abrir na hora */
     const prevs = [...app.querySelectorAll("[data-prev]")]; let k = 0;
-    const desenhar = () => { const fim = Math.min(prevs.length, k + 3); for(; k < fim; k++){ if(!prevs[k].isConnected) return; prevs[k].innerHTML = avatarSVG(prevs[k].dataset.prev, null, 0, 0); } if(k < prevs.length) setTimeout(desenhar, 30); };
+    const desenhar = () => { const fim = Math.min(prevs.length, k + 3); for(; k < fim; k++){ if(!prevs[k].isConnected) return; prevs[k].innerHTML = avatarSVG(prevs[k].dataset.prev, null, 0, 0, prevs[k].dataset.mov || ""); } if(k < prevs.length) setTimeout(desenhar, 30); };
     desenhar();
   };
   /* ---------- 1ª tela: as categorias ---------- */
   if(!cat){
-    const especial0 = personagemEspecial(meuBoneco(), meuNivel());
     const amostra = { a: `<div class="lj-av" data-prev="${esc(eu + "~harpa~v")}"></div>`, p: `<div class="lj-av" data-prev="zaqueu"></div>`,
       m: `<div class="lj-av lj-mold mold mold-ouro" data-prev="${esc(eu)}"></div>`,
       t: `<div class="lj-pista"><div class="track pista-jardim" style="--seg:3"><div class="runner" style="--p:.4" data-prev="${esc(meuBoneco() || eu)}"></div></div></div>`,
-      v: `<div class="lj-av lj-mov"><div class="runner mov-salto" data-prev="${esc(especial0 ? meuBoneco() : "zaqueu")}"></div></div>`,
+      v: `<div class="lj-av lj-mov"><div class="runner mov-tchau" data-mov="tchau" data-prev="${esc(meuBoneco() || eu)}"></div></div>`,
       c: `<div class="lj-festa parada">${FESTA_ICONE.estrelas}</div>` };
     const emUso = { a: perfil.acess && comprado("a:" + perfil.acess) && LOJA_AC[perfil.acess] ? LOJA_AC[perfil.acess].nome : "", p: (acharProfeta(perfil.profeta) || {}).preco ? acharProfeta(perfil.profeta).nome : "",
       m: (extraDaLoja("m", minhaMoldura()) || {}).nome, t: (extraDaLoja("t", minhaPista()) || {}).nome, v: (extraDaLoja("v", meuMovimento()) || {}).nome, c: (extraDaLoja("c", minhaFesta()) || {}).nome };
     app.innerHTML = `<div class="estudo-area">
       <div class="lj-topo">${cabPagina("Loja", "", "Loja do Rolo", "Ganhe moedas nos acertos do quiz, nas missões, na semana completa no prazo e nos desafios.")}${saldoHtml}</div>
+      ${htmlMoedasInicio()}
       <div class="lj-cats">${LOJA_CATS.map(c => { const l = c.lista(), meus = l.filter(x => comprado(c.k + ":" + x.id)).length;
         return `<button type="button" class="lj-cat" data-cat="${c.k}">${amostra[c.k]}<b>${c.nome}</b><small>${l.length} ${l.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}</small>${emUso[c.k] ? `<em>em uso: ${esc(emUso[c.k])}</em>` : ""}<span class="lj-cat-seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
       <p class="note center">Moedas ganhas até hoje: ${moedasGanhas()} · gastas: ${moedasGastas()}</p></div>`;
     desenharAmostras();
     app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { lojaCat = b.dataset.cat; tocar("toque"); window.scrollTo(0, 0); telaLoja(); });
+    ligarMoedasInicio(); conferirReacoesAntigas();
     return;
   }
   /* ---------- 2ª tela: os itens de uma categoria ---------- */
   const botao = (id, preco, emUso, rotUsar) => comprado(id)
     ? `<button type="button" class="btn btn-sm ${emUso ? "btn-ok" : "btn-ghost"}" data-usar="${id}">${emUso ? "✓ Em uso" : rotUsar}</button>`
     : `<button type="button" class="btn btn-sm btn-main ${saldo < preco ? "caro" : ""}" data-comprar="${id}">${MOEDA}${preco}</button>`;
-  const especial = personagemEspecial(meuBoneco(), meuNivel()), amostraMov = especial ? meuBoneco() : "zaqueu";
+  const amostraMov = meuBoneco() || eu;
   const cartao = {
     a: a => `<div class="lj-item ${comprado("a:" + a.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(eu + "~" + a.id + "~v")}"></div><b>${esc(a.nome)}</b><small>${esc(a.ref)}</small>${botao("a:" + a.id, a.preco, perfil.acess === a.id, "Usar")}</div>`,
     p: p => `<div class="lj-item ${comprado("p:" + p.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(p.id)}"></div><b>${esc(p.nome)}</b><small>${esc(p.ref || "")}</small>${botao("p:" + p.id, p.preco, perfil.profeta === p.id, "Usar")}</div>`,
     m: x => `<div class="lj-item ${comprado("m:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mold${classeMoldura(x.id)}" data-prev="${esc(eu)}"></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("m:" + x.id, x.preco, minhaMoldura() === x.id, "Usar")}</div>`,
     t: x => `<div class="lj-item larga ${comprado("t:" + x.id) ? "meu" : ""}"><div class="lj-pista"><div class="track${classePista(x.id)}" style="--seg:4"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.38" data-prev="${esc(meuBoneco() || PROFETA_PADRAO)}"></div></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("t:" + x.id, x.preco, minhaPista() === x.id, "Usar")}</div>`,
-    v: x => `<div class="lj-item ${comprado("v:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mov"><div class="runner mov-${x.id}" data-prev="${esc(amostraMov)}"></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("v:" + x.id, x.preco, meuMovimento() === x.id, "Usar")}</div>`,
+    v: x => `<div class="lj-item ${comprado("v:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mov"><div class="runner mov-${x.id}" data-mov="${x.id}" data-prev="${esc(amostraMov)}"></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("v:" + x.id, x.preco, meuMovimento() === x.id, "Usar")}</div>`,
     c: x => `<div class="lj-item ${comprado("c:" + x.id) ? "meu" : ""}"><button type="button" class="lj-festa" data-festa="${x.id}" title="Ver a comemoração" aria-label="Ver a comemoração ${esc(x.nome)}">${FESTA_ICONE[x.id] || ""}<span>▶ ver</span></button><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("c:" + x.id, x.preco, minhaFesta() === x.id, "Usar")}</div>`
   }[cat.k];
   const itens = cat.lista(), meus = itens.filter(x => comprado(cat.k + ":" + x.id)).length;
-  const nota = cat.k === "v" ? `<p class="lj-nota ${especial ? "" : "alerta"}">${especial ? "Vale com personagem raro ou da loja, como o que você está usando." : "Só aparece com personagem <b>raro</b> (das missões) ou <b>da loja</b>. O seu personagem de agora é comum: você pode comprar, mas o movimento só aparece quando trocar. A amostra abaixo usa o Zaqueu."}</p>`
+  const nota = cat.k === "v" ? `<p class="lj-nota">Vale para qualquer personagem, inclusive os comuns. Sem movimento comprado, o personagem fica parado na raia.</p>`
     : cat.k === "a" ? `<p class="lj-nota">Um acessório por vez. A maioria fica na mão; a coroa vai na cabeça, as asas nas costas e a ovelha no chão.</p>` : "";
   app.innerHTML = `<div class="estudo-area">
-    <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${saldoHtml}</div>
+    <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${saldoHtml}</div>${htmlMoedasInicio()}
     ${cabPagina("Loja", `${itens.length} ${itens.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}`, cat.nome, cat.sub.charAt(0).toUpperCase() + cat.sub.slice(1) + ".")}
     <section class="panel pg-card">${nota}<div class="lj-grade ${cat.k === "t" ? "pistas" : ""}">${itens.map(cartao).join("")}</div></section></div>`;
   desenharAmostras();
   $("ljVoltar").onclick = () => { lojaCat = ""; window.scrollTo(0, 0); telaLoja(); };
+  ligarMoedasInicio();
   app.querySelectorAll("[data-comprar]").forEach(b => b.onclick = () => comprarNaLoja(b.dataset.comprar));
   app.querySelectorAll("[data-usar]").forEach(b => b.onclick = () => usarDaLoja(b.dataset.usar));
   app.querySelectorAll("[data-festa]").forEach(b => b.onclick = () => { tocar("toque"); festejar(b.dataset.festa, 2600); });
@@ -8097,7 +8417,7 @@ function itemDaLoja(id){
 async function comprarNaLoja(id){
   const it = itemDaLoja(id); if(!it || comprado(id)) return;
   const saldo = moedas();
-  if(saldo < it.preco){ aviso(`Faltam ${it.preco - saldo} ${it.preco - saldo === 1 ? "moeda" : "moedas"} para ${it.nome}. Cada resposta certa no quiz vale 1 moeda.`); return; }
+  if(saldo < it.preco){ aviso(`Faltam ${it.preco - saldo} ${it.preco - saldo === 1 ? "moeda" : "moedas"} para ${it.nome}. Veja em \"Ganhar moedas\" como conseguir mais.`); return; }
   if(!(await confirmar("Comprar na loja", `Comprar ${it.nome} por ${it.preco} moedas? Você fica com ${saldo - it.preco}.`, "Comprar"))) return;
   const compras = Object.assign({}, perfil.compras || {}, { [id]: it.preco });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
@@ -8114,7 +8434,6 @@ async function usarDaLoja(id, semAviso){
   try{ await DB.salvarUsuario(usuario.uid, muda); }catch(e){ aviso(erroMsg(e)); }
   if(!semAviso) aviso(tipo === "a" ? (perfil.acess ? "Acessório em uso." : "Acessório guardado.") : g ? (perfil[g.campo] ? g.usar : g.tirar) : "Personagem trocado.");
   if((tipo === "t" || tipo === "v") && typeof carregarSalas === "function") carregarSalas().catch(()=>{});          // os outros veem a minha raia com o tema e o movimento
-  if(tipo === "v" && perfil.mov === k && !personagemEspecial(meuBoneco(), meuNivel())) aviso("Movimento guardado. Ele aparece quando você usar um personagem raro ou da loja.");
   if(tipo === "c" && perfil.festa === k) festejar(k, 2600);
   atualizarCasca(); sincronizarPerfilPublico();
   if(document.querySelector(".lj-grade")) telaLoja();
@@ -8250,6 +8569,63 @@ function festejar(id, ms){
   };
   raf = requestAnimationFrame(quadro); festaParar = parar;
   return parar;
+}
+
+
+/* ============================================================
+   COMO GANHAR MOEDAS (atalho no Início): cada jeito de ganhar, com contador, a próxima missão e as contagens regressivas
+   ============================================================ */
+const MOEDA_MAIS = `<svg class="cg-ic-mais" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="12" r="8.5" fill="#C98A12"/><circle cx="10.5" cy="11.3" r="8" fill="#F2BE2E"/><circle cx="10.5" cy="11.3" r="5.6" fill="none" stroke="#FFE58A" stroke-width="1.3"/><path d="M8.2 8.6c1.4-1 3.4-1 4.6 0" stroke="#FFF3B0" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="18.2" cy="17.6" r="5.2" fill="#2BA486" stroke="#FFFFFF" stroke-width="1.4"/><path d="M18.2 15v5.2M15.6 17.6h5.2" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/></svg>`;
+function htmlMoedasInicio(){
+  return `<button type="button" class="cg-atalho" id="inMoedas">${MOEDA_MAIS}<span>Ganhar moedas</span><b>${moedas()}</b><i aria-hidden="true">›</i></button>`;
+}
+function ligarMoedasInicio(){ const b = $("inMoedas"); if(b) b.onclick = () => { tocar("toque"); modalComoGanhar(); }; }
+let cgTimer = null;
+function modalComoGanhar(){
+  const agora = new Date(), barra = pct => `<span class="cg-barra"><i style="width:${Math.max(0, Math.min(100, pct))}%"></i></span>`;
+  const linha = (ic, titulo, valor, sub, extra) => `<div class="cg-item"><span class="cg-ic" aria-hidden="true">${ic}</span><div class="cg-tx"><p><b>${titulo}</b><em>${valor}</em></p>${sub ? `<small>${sub}</small>` : ""}${extra || ""}</div></div>`;
+  const relogio = ate => `<b class="cg-rel" data-ate="${ate}">${tempoAte(ate - Date.now())}</b>`;
+  /* 1. reações */
+  const nr = reacoesDadas(), resto = nr % REACOES_POR_MOEDA;
+  const reac = linha("💬", "Reagir no mural", `+1 a cada ${REACOES_POR_MOEDA}`,
+    `${resto} de ${REACOES_POR_MOEDA} para a próxima · ${nr} ${nr === 1 ? "reação" : "reações"} até hoje (+${moedasDeReacoes()})`, barra(100 * resto / REACOES_POR_MOEDA));
+  /* 2. semana completa */
+  const L = LICOES[indiceLicaoAtual()], fut = L && licaoFutura(L), feitas = L && !fut ? noPrazo(L) : 0, sc = semanasCompletas();
+  const sem = linha("📅", "Semana completa no prazo", `+${MOEDAS_SEMANA}`,
+    !L ? "Sem lição cadastrada." : fut ? "A próxima lição começa no sábado." : feitas >= 7 ? `Esta semana: completa ✓ · ${sc} ${sc === 1 ? "semana" : "semanas"} até hoje` : `Esta semana: ${feitas} de 7 no prazo · ${sc} ${sc === 1 ? "semana completa" : "semanas completas"} até hoje`,
+    L && !fut ? barra(100 * feitas / 7) : "");
+  /* 3. missões */
+  let mis = "";
+  try{
+    const f = missoesFeitas(), prox = MISSOES[f] || null, pg = prox ? progressoMissao(prox) : null, v = prox ? moedasDaCasa(prox.n || f + 1) : 0;
+    mis = linha("🗺️", "Cumprir uma missão", prox ? `+${v}` : "+2",
+      prox ? `Próxima: <b>${prox.casa}. ${esc(prox.t)}</b>` : "Todas as missões cumpridas.",
+      prox ? `<small class="cg-faz">O que fazer: ${esc(prox.d)}</small><small>${fmt(pg.v)} de ${fmt(pg.alvo)}</small>` + barra(pg.pct) + `<small class="cg-nota">2 por missão; as casas 5 e 10 de cada território valem 5 e 10.</small>` : "");
+  }catch(e){}
+  /* 4. quiz cedo */
+  const oito = new Date(agora); oito.setHours(DOBRO_CEDO_HORA, 0, 0, 0);
+  const Lh = L && !fut ? L.dias.find(d => d.data === hoje()) : null, feitoHoje = Lh && resDe(L, Lh);
+  const cedo = linha("⏰", `Quiz do dia antes das ${DOBRO_CEDO_HORA}h`, "acerto × 2",
+    agora < oito ? (feitoHoje ? `Hoje você já fez ${quizCedo(feitoHoje) ? "a tempo ✓" : "o quiz"}.` : `Vale agora · termina em ${relogio(oito.getTime())}`) : "Amanhã, da meia-noite às 8h. Fora desse horário, 1 moeda por acerto.");
+  /* 5. super quiz */
+  let sup = "";
+  try{
+    const j = janelaSuper(), sq = meuSuper(j.id);
+    sup = linha("🏁", "Super quiz das missões", `1 casa a cada ${SQ_POR_CASA} acertos`,
+      j.aberto ? (sq && sq.fim ? `Feito nesta semana · o próximo abre em ${relogio(j.ini.getTime() + 7 * 864e5)}` : `Aberto · fecha em ${relogio(j.fim.getTime())}`) : `Abre em ${relogio(j.ini.getTime())} · sexta, ${SQ_HORA}h`);
+  }catch(e){}
+  modal("Ganhar moedas", `<div class="cg">
+      <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
+      ${reac}${sem}${mis}${cedo}${sup}
+      <p class="cg-rodape">Também valem: 1 moeda por acerto em qualquer quiz e os desafios entre amigos.</p>
+      <button type="button" class="btn btn-ghost btn-sm cg-ok" id="cgOk">Entendi</button></div>`, (m, fechar) => {
+    m.querySelector("#cgOk").onclick = fechar;
+    clearInterval(cgTimer);
+    cgTimer = setInterval(() => {
+      if(!m.isConnected){ clearInterval(cgTimer); return; }
+      m.querySelectorAll(".cg-rel").forEach(el => { el.textContent = tempoAte(+el.dataset.ate - Date.now()); });
+    }, 1000);
+  }, () => clearInterval(cgTimer));
 }
 
 /* ============================================================
