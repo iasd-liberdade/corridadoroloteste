@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.172906">
+<meta name="versao" content="20261118.183519">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -2216,6 +2216,7 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .carga-nota{margin:8px 0 0;font:600 12.5px/1.4 "Barlow",system-ui,sans-serif;color:rgba(255,255,255,.8)}
 /* álbum em formato de livro: marcadores no alto, capa, folha de papel com argolas e as figurinhas coladas */
 .lv{position:relative;margin:2px 0 14px}
+@media (min-width:700px){.lv,.alb .lv-topo{max-width:600px;margin-left:auto;margin-right:auto}}
 .lv-abas{display:flex;gap:7px;padding:0 14px 0 30px;align-items:flex-end}
 .lv.muitas .lv-abas{gap:6px;padding:0 10px 0 24px}.lv.muitas .lv-abas button b{font-size:17px}.lv.muitas .lv-abas button small{font-size:8.5px;letter-spacing:-.2px}
 .lv-abas button{flex:1 1 0;min-width:0;display:grid;justify-items:center;gap:1px;padding:6px 2px 13px;margin-bottom:-8px;border:0;border-radius:10px 10px 0 0;background:var(--pg);color:#fff;font-family:inherit;cursor:pointer;
@@ -2246,13 +2247,15 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .lv-premio.pago{border:2px solid #1f8a5b;color:#1f8a5b;background:none;transform:rotate(-7deg);text-transform:uppercase;letter-spacing:.08em;border-radius:6px;padding:4px 7px;font-size:11px}
 .lv-sec{display:flex;align-items:center;gap:8px;margin:12px 0 9px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8c7851}
 .lv-sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#c9b98f,transparent)}
-.lv-folha .alb-grade{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:11px 8px}
+.lv-folha .alb-grade{grid-template-columns:repeat(3,minmax(0,1fr));gap:11px 8px;margin-top:12px}
+.vg-q{position:absolute;left:0;right:0;top:calc(150*var(--u));display:block;text-align:center;font:400 calc(250*var(--u))/1 "Bebas Neue","Arial Narrow",sans-serif;color:#cdbf9b}
+.fig.breve{cursor:default}.fig.breve .vg{border-style:dotted;background:rgba(122,96,48,.04)}.fig.breve .vg-nome{color:#a89872}
 .lv-folha .fig.leve .ct{box-shadow:0 0 0 1px rgba(0,0,0,.55),0 3px 6px rgba(60,40,10,.5)}
 .lv-rod{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:10px 26px 0 0;border-top:1px solid #d8caa6;font-size:12px;font-weight:700;color:#7a6642}
 .lv-seta{width:40px;height:40px;border-radius:50%;border:1.5px solid #c9b98f;background:#fbf6e8;color:#3d2b17;font:700 24px/1 "Barlow",sans-serif;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 0 #d8caa6;padding:0 0 3px}
 .lv-seta:disabled{opacity:.3;cursor:default}
 .lv-dobra{position:absolute !important;right:0;bottom:0;width:30px;height:30px;padding:0;border:0;cursor:pointer;background:linear-gradient(315deg,#cdbf9b 0 50%,#fffaf0 50%,#e6dbbd 100%);border-radius:10px 0 12px 0;box-shadow:-2px -2px 4px rgba(60,40,10,.2)}
-@media (min-width:900px){.lv-folha{padding:18px 18px 14px 44px}.lv-argolas{left:10px}.lv-folha .alb-grade{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:14px 12px}.lv-cab h3{font-size:30px}}
+@media (min-width:900px){.lv-folha{padding:18px 18px 14px 44px}.lv-argolas{left:10px}.lv-folha .alb-grade{gap:14px 12px}.lv-cab h3{font-size:30px}}
 /* página virando: a folha gira em volta da lombada */
 .lv-folha.sai,.lv-folha.entra{z-index:3;pointer-events:none;box-shadow:0 0 0 1px rgba(90,70,30,.25),0 18px 40px rgba(20,12,0,.45)}
 .lv-folha.sai{animation:lv-sai .78s cubic-bezier(.45,.08,.3,1) forwards}
@@ -9809,18 +9812,22 @@ const ALBUM_OBJ = {
   livro: ["Livro da Lei", "2 Reis 22:8"], torre: ["Torre de Vigia", "Habacuque 2:1"], roda: ["Rodas de Ezequiel", "Ezequiel 1:16"], leao: ["Leão da Cova", "Daniel 6:22"], gafanhoto: ["Gafanhoto", "Joel 1:4"], peixe: ["Grande Peixe", "Jonas 1:17"], lamparina: ["Lâmpada", "Salmo 119:105"],
   onda: ["Águas do Jordão", "Mateus 3:6"], manjedoura: ["Manjedoura", "Lucas 2:7"], estrela: ["Estrela de Belém", "Mateus 2:9"], martelo: ["Martelo do Carpinteiro", "Mateus 13:55"], pao: ["Pão da Vida", "João 6:35"], rede: ["Rede de Pesca", "Lucas 5:6"],
   pomba: ["Pomba do Batismo", "Mateus 3:16"], ovelha_chao: ["Ovelha Perdida", "Lucas 15:4"],
-  carta: ["Carta aos Irmãos", "2 Timóteo 1:2"], asas: ["Asas de Anjo", "Salmo 91:4"], pena: ["Pena do Escritor", "Salmo 45:1"], coracao: ["Coração Novo", "Ezequiel 36:26"]
+  carta: ["Carta aos Irmãos", "2 Timóteo 1:2"], asas: ["Asas de Anjo", "Salmo 91:4"], pena: ["Pena do Escritor", "Salmo 45:1"], coracao: ["Coração Novo", "Ezequiel 36:26"],
+  /* as 11 que fecharam as páginas 3×3 */
+  tunica: ["Túnica de José", "Gênesis 37:3"], arca_alianca: ["Arca da Aliança", "Êxodo 25:10"], fornalha: ["Fornalha Ardente", "Daniel 3:25"], tumulo: ["Túmulo Vazio", "Mateus 28:6"],
+  barco: ["Barco de Paulo", "Atos 27:41"], escudo: ["Escudo da Fé", "Efésios 6:16"], espada: ["Espada do Espírito", "Efésios 6:17"], sandalias: ["Sandálias do Evangelho", "Efésios 6:15"],
+  ancora: ["Âncora da Esperança", "Hebreus 6:19"], calice: ["Cálice da Ceia", "1 Coríntios 11:26"], coroa_vida: ["Coroa da Vida", "Apocalipse 2:10"]
 };
 const ALBUM_PAGINAS = [
-  { id: "eden", nome: "Do Éden ao Egito", ref: "Gênesis", cor: "#3E9B4F", p: ["adao", "eva", "enoque", "noe", "abraao", "sara", "jose", "farao"], o: ["folha", "flor", "nuvem", "arca", "pomba_ramo", "estrelas", "tenda", "trigo", "cetro"] },
-  { id: "exodo", nome: "Êxodo e Conquista", ref: "Êxodo a Rute", cor: "#C9773F", p: ["moises", "miria", "josue", "raabe", "debora", "gideao", "sansao", "rute"], o: ["tabuas", "cajado", "tamborim", "candelabro", "trombeta", "cordao", "palmeira", "jarro", "coluna"] },
+  { id: "eden", nome: "Do Éden ao Egito", ref: "Gênesis", cor: "#3E9B4F", p: ["adao", "eva", "enoque", "noe", "abraao", "sara", "jose", "farao"], o: ["folha", "flor", "nuvem", "arca", "pomba_ramo", "estrelas", "tenda", "trigo", "cetro", "tunica"] },
+  { id: "exodo", nome: "Êxodo e Conquista", ref: "Êxodo a Rute", cor: "#C9773F", p: ["moises", "miria", "josue", "raabe", "debora", "gideao", "sansao", "rute"], o: ["tabuas", "cajado", "tamborim", "candelabro", "trombeta", "cordao", "palmeira", "jarro", "coluna", "arca_alianca"] },
   { id: "reis", nome: "Reis e Profetas", ref: "Samuel a Jeremias", cor: "#7B6CF0", p: ["samuel", "davi", "salomao", "nata", "jo", "elias", "eliseu", "isaias", "jeremias", "amos", "miqueias"], o: ["chifre", "harpa", "coroa", "ovelha", "chama", "brasa", "rolo"] },
-  { id: "exilio", nome: "Exílio e Retorno", ref: "Ezequiel a Neemias", cor: "#1C9FD0", p: ["hulda", "habacuque", "ezequiel", "daniel", "ester", "esdras", "neemias", "zacarias", "joel", "jonas"], o: ["livro", "torre", "roda", "leao", "gafanhoto", "peixe", "lamparina"] },
-  { id: "jesus", nome: "Jesus e os Evangelhos", ref: "Mateus a João", cor: "#E8505D", p: ["isabel", "ana", "joao", "maria", "josenazare", "messias", "pedro", "madalena", "zaqueu"], o: ["onda", "manjedoura", "estrela", "martelo", "pao", "rede", "pomba", "ovelha_chao"] },
-  { id: "igreja", nome: "Igreja e Missão", ref: "Atos ao Apocalipse", cor: "#2BA486", p: ["filha", "lidia", "timoteo", "barnabe", "paulo", "joaoap", "ellen"], o: ["carta", "asas", "pena", "coracao"] }
+  { id: "exilio", nome: "Exílio e Retorno", ref: "Ezequiel a Neemias", cor: "#1C9FD0", p: ["hulda", "habacuque", "ezequiel", "daniel", "ester", "esdras", "neemias", "zacarias", "joel", "jonas"], o: ["livro", "torre", "roda", "leao", "gafanhoto", "peixe", "lamparina", "fornalha"] },
+  { id: "jesus", nome: "Jesus e os Evangelhos", ref: "Mateus a João", cor: "#E8505D", p: ["isabel", "ana", "joao", "maria", "josenazare", "messias", "pedro", "madalena", "zaqueu"], o: ["onda", "manjedoura", "estrela", "martelo", "pao", "rede", "pomba", "ovelha_chao", "tumulo"] },
+  { id: "igreja", nome: "Igreja e Missão", ref: "Atos ao Apocalipse", cor: "#2BA486", p: ["filha", "lidia", "timoteo", "barnabe", "paulo", "joaoap", "ellen"], o: ["carta", "asas", "pena", "coracao", "barco", "escudo", "espada", "sandalias", "ancora", "calice", "coroa_vida"] }
 ];
 const ALBUM_LENDARIAS = new Set(["p:messias", "o:arca", "o:tabuas"]);
-const ALBUM_RARAS_OBJ = new Set(["candelabro", "coroa", "harpa", "estrela", "manjedoura", "asas", "pao", "trombeta", "estrelas", "leao"]);
+const ALBUM_RARAS_OBJ = new Set(["candelabro", "coroa", "harpa", "estrela", "manjedoura", "asas", "pao", "trombeta", "estrelas", "leao", "arca_alianca", "coroa_vida"]);
 const ALBUM_PESO = { comum: 10, rara: 5, lendaria: 2.5 }, ALBUM_ROT = { comum: "Comum", rara: "Rara", lendaria: "Lendária" };
 /* lista numerada de todas as figurinhas */
 const ALBUM_CARTAS = []; const ALBUM_IDX = {};
@@ -9830,13 +9837,13 @@ ALBUM_PAGINAS.forEach((pg, pi) => { pg.cartas = [];
     const c = { id, t, k, n: ALBUM_CARTAS.length + 1, pg: pi, nome: pr ? pr.nome : ALBUM_OBJ[k][0], ref: pr ? (pr.ref || "") : ALBUM_OBJ[k][1],
       rar: ALBUM_LENDARIAS.has(id) ? "lendaria" : (pr ? (pr.nivel || pr.preco ? "rara" : "comum") : (ALBUM_RARAS_OBJ.has(k) ? "rara" : "comum")) };
     ALBUM_CARTAS.push(c); ALBUM_IDX[id] = c; pg.cartas.push(c); }); });
-/* páginas do álbum: cada tema é dividido em páginas de até 9 figurinhas. Quando cabe, uma página fica com os personagens e a outra
-   com os objetos; quando não cabe, as figurinhas seguem na ordem, 9 por página. A página tem um id próprio (tema:parte). */
+/* páginas do álbum: cada página é uma grade 3×3. As figurinhas do tema seguem na ordem (personagens e depois objetos), 9 por página.
+   Se o tema não fecha a última página, os espaços que sobram ficam como "Em breve" (breve), à espera de figurinhas novas.
+   A página tem um id próprio (tema:parte). */
 const ALBUM_FOLHAS = [], ALBUM_FOLHA_ID = {};
 ALBUM_PAGINAS.forEach((pg, ti) => {
-  const ps = pg.cartas.filter(c => c.t === "p"), os = pg.cartas.filter(c => c.t === "o"); let grupos = [ps, os].filter(g => g.length);
-  if(ps.length > ALBUM_POR_PAGINA || os.length > ALBUM_POR_PAGINA){ grupos = []; for(let i = 0; i < pg.cartas.length; i += ALBUM_POR_PAGINA) grupos.push(pg.cartas.slice(i, i + ALBUM_POR_PAGINA)); }
-  pg.folhas = grupos.map((cartas, k) => { const fo = { id: pg.id + ":" + (k + 1), tema: ti, parte: k + 1, i: ALBUM_FOLHAS.length, cartas };
+  const grupos = []; for(let i = 0; i < pg.cartas.length; i += ALBUM_POR_PAGINA) grupos.push(pg.cartas.slice(i, i + ALBUM_POR_PAGINA));
+  pg.folhas = grupos.map((cartas, k) => { const fo = { id: pg.id + ":" + (k + 1), tema: ti, parte: k + 1, i: ALBUM_FOLHAS.length, cartas, breve: ALBUM_POR_PAGINA - cartas.length };
     cartas.forEach(c => { c.folha = fo.i; }); ALBUM_FOLHAS.push(fo); ALBUM_FOLHA_ID[fo.id] = fo; return fo; });
 });
 /* páginas já premiadas (só as que existem hoje: as anotações do tempo em que a página era o tema inteiro não contam) */
@@ -9911,9 +9918,12 @@ const FIG_FOTOS = new Set(("adao eva enoque noe abraao sara jose farao moises mi
   + "ezequiel daniel ester esdras neemias zacarias joel jonas isabel ana joao maria josenazare messias pedro madalena zaqueu filha lidia timoteo barnabe paulo joaoap ellen").split(" "));
 /* objetos que ja tem a imagem 3D (arquivos o_<objeto>.webp). Os outros usam o desenho do jogo */
 const FIG_FOTOS_OBJ = new Set(("folha flor nuvem arca pomba_ramo estrelas tenda trigo cetro tabuas cajado tamborim candelabro trombeta cordao palmeira jarro coluna " +
-  "chifre harpa coroa ovelha chama brasa rolo livro torre roda leao gafanhoto peixe lamparina onda manjedoura estrela martelo pao rede pomba ovelha_chao carta asas pena coracao").split(" "));
+  "chifre harpa coroa ovelha chama brasa rolo livro torre roda leao gafanhoto peixe lamparina onda manjedoura estrela martelo pao rede pomba ovelha_chao carta asas pena coracao " +
+  "tunica arca_alianca fornalha tumulo barco escudo espada sandalias ancora calice coroa_vida").split(" "));
 const figTemFoto = c => c.t === "p" ? FIG_FOTOS.has(c.k) : FIG_FOTOS_OBJ.has(c.k);
-const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp";
+/* imagens refeitas depois de publicadas: o endereço muda (?v=) para o navegador buscar de novo em vez de usar a guardada */
+const FIG_VERSAO = { "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 2, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2 };
+const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp" + (FIG_VERSAO[c.id] ? "?v=" + FIG_VERSAO[c.id] : "");
 /* titulo curto e objeto de cada personagem */
 const FIG_EXTRA = {
   adao: ["O primeiro homem", "Folha de figueira"], eva: ["Mãe de todos os viventes", "Flor do Éden"], enoque: ["Andou com Deus", "Nuvem"], noe: ["Construtor da arca", "Arca"],
@@ -10018,6 +10028,10 @@ function htmlVaga(c){
     <span class="vg"><b class="vg-n">${String(c.n).padStart(3, "0")}</b><span class="vg-r">${"<i></i>".repeat(gemas)}</span>
       ${foto ? `<img class="vg-som${c.t === "o" ? " obj" : ""}" src="${FIG_DIR}p/${figArquivo(c)}" data-id="${c.id}" data-cls="vg-som${c.t === "o" ? " obj" : ""}" alt="" loading="lazy" decoding="async" onerror="figSemFoto(this)">` : `<span class="vg-som${c.t === "o" ? " obj" : ""}" data-figimg="${c.id}"></span>`}
       <span class="vg-nome" style="--fs:${nm[1]}">${nm[0]}</span></span></button>`;
+}
+/* espaço guardado para uma figurinha que ainda vai ser criada */
+function htmlBreve(){
+  return `<div class="fig vaga breve" aria-label="Figurinha nova em breve"><span class="vg"><span class="vg-q" aria-hidden="true">?</span><span class="vg-nome" style="--fs:58">Em breve</span></span></div>`;
 }
 /* verso da carta: aparece quando a figurinha chega, antes de virar */
 function htmlVerso(){
@@ -10260,13 +10274,11 @@ function htmlCapa(a, k, inv){
 }
 function htmlFolha(i, inv){
   const fo = ALBUM_FOLHAS[i], pg = ALBUM_PAGINAS[fo.tema], a = albumDe(i), pos = a.paginas.indexOf(i), naPg = fo.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = albumPagas().includes(fo.id);
-  const grade = l => `<div class="alb-grade">${l.map(c => (inv[c.id] || 0) > 0 ? htmlFigurinha(c, inv[c.id]) : htmlVaga(c)).join("")}</div>`;
-  const ps = fo.cartas.filter(c => c.t === "p"), os = fo.cartas.filter(c => c.t === "o");
+  const grade = `<div class="alb-grade">${fo.cartas.map(c => (inv[c.id] || 0) > 0 ? htmlFigurinha(c, inv[c.id]) : htmlVaga(c)).join("")}${htmlBreve().repeat(fo.breve)}</div>`;
   return `<div class="lv-folha" data-folha="${i}"><span class="lv-argolas" aria-hidden="true"></span>
     <header class="lv-cab"><span class="lv-selo" aria-hidden="true"><svg viewBox="0 0 24 24">${FIG_ICONE[pg.id]}</svg></span><div><h3>${esc(pg.nome)}</h3><small>${esc(pg.ref)} · ${naPg} de ${fo.cartas.length} figurinhas</small></div>
       <span class="lv-premio ${paga ? "pago" : ""}">${paga ? "✓ completa" : `<small>página completa</small><b>+${ALBUM_MOEDAS_PAGINA}${MOEDA}</b>`}</span></header>
-    ${ps.length ? `<div class="lv-sec">Personagens</div>${grade(ps)}` : ""}
-    ${os.length ? `<div class="lv-sec">Objetos</div>${grade(os)}` : ""}
+    ${grade}
     <footer class="lv-rod"><button type="button" class="lv-seta" data-vira="-1" ${pos === 0 ? "disabled" : ""} aria-label="Página anterior">‹</button><span>Página ${pos + 1} de ${a.paginas.length}</span><button type="button" class="lv-seta" data-vira="1" ${pos === a.paginas.length - 1 ? "disabled" : ""} aria-label="Próxima página">›</button></footer>
     ${pos < a.paginas.length - 1 ? `<button type="button" class="lv-dobra" data-vira="1" aria-label="Virar a página"></button>` : ""}</div>`;
 }
