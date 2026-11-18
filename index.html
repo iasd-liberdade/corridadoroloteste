@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.032615">
+<meta name="versao" content="20261118.115845">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -696,7 +696,7 @@ input[type=file]{width:100%;color:var(--muted);font-size:15px}
 /* Notebook e monitor: o Início vira colunas equilibradas (2, e 3 em telas largas) */
 @media (min-width:900px){ .inicio-grid{display:block;column-count:2;column-gap:18px} .inicio-grid>div{display:contents} .inicio-grid .panel{break-inside:avoid;margin:0 0 18px} .inicio-grid>div+div{margin-top:0} #rkCorpo{margin-top:16px}  }
 /* Abas dos dias (Estudar): sempre numa linha só */
-.tabs.dias{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;overflow:visible}
+.tabs.dias{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;overflow:visible}
 .tabs.dias button{padding:6px 0;font-size:12px;line-height:1.15;white-space:normal;display:grid;justify-items:center;gap:1px;border-radius:12px}
 .tabs.dias button small{font-size:10px;font-weight:600;opacity:.85}
 /* Corrida do Rolo (Ranking) */
@@ -927,6 +927,8 @@ ol.passos li{margin-bottom:8px}
 body{font-size:15.5px}
 .panel{padding:14px;border-radius:18px}
 .panel+.panel{margin-top:10px}
+/* nenhuma caixa encostada na outra: o painel que vem depois de outra caixa (grade, lista, botões…) ganha o mesmo espaço. Depois de um título o espaço já existe. */
+:where(:not(.pg-cab,header,h1,h2,h3,h4,p,label,.pg-voltar)) + .panel{margin-top:10px}
 /* cabeçalho das páginas */
 .pg-cab{padding:2px 2px 10px}
 .pg-rot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font:800 11.5px/1.2 "Barlow",sans-serif;letter-spacing:.9px;text-transform:uppercase;color:var(--soft)}
@@ -1639,6 +1641,9 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 .aba-ponto{position:absolute;top:7px;right:9px;width:9px;height:9px;border-radius:50%;background:#FF5A5F;box-shadow:0 0 0 2px rgba(20,18,60,.55);animation:aba-pulsa 1.6s ease-in-out infinite}
 @keyframes aba-pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 .abas-l + .panel{margin-top:0;border:0;border-top-left-radius:0;border-top-right-radius:0;padding:15px}
+.aba-l:not([aria-selected="true"]){margin-bottom:8px;border-radius:14px}
+.abas-l:has(.aba-l:first-child[aria-selected="true"]) + .panel{border-top-right-radius:18px}
+.abas-l:has(.aba-l:last-child[aria-selected="true"]) + .panel{border-top-left-radius:18px}
 .aba-corpo{animation:aba-entra .22s ease-out}
 @keyframes aba-entra{from{opacity:.4}to{opacity:1}}
 .aba-corpo .hud{margin:2px 0 12px;padding:0 2px 10px;border-bottom:1px solid var(--panel-line)}
@@ -2007,7 +2012,7 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 .alb-premio.pago{background:rgba(43,164,134,.3);color:#9FF0D2}
 .alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:13px 11px}
 /* figurinha: a carta e desenhada num quadro de 500 x 700 e acompanha a largura da figurinha (--u = 1 px do desenho) */
-.fig{--bx:30%;--by:20%;position:relative;display:block;aspect-ratio:5/7;min-width:0;padding:0;border:0;background:none;color:#fff;font-family:inherit;text-align:left;cursor:pointer;border-radius:6.8%/4.86%;
+.fig{position:relative;display:block;aspect-ratio:5/7;min-width:0;padding:0;border:0;background:none;color:#fff;font-family:inherit;text-align:left;cursor:pointer;border-radius:6.8%/4.86%;
   container-type:inline-size;transition:transform .18s ease;-webkit-tap-highlight-color:transparent}
 .fig > .ct{--u:calc(100cqw / 500)}
 div.fig{cursor:default}
@@ -2030,14 +2035,14 @@ button.fig:active{transform:scale(.97)}
 .ct-in{position:relative;width:100%;height:100%;border-radius:calc(23*var(--u));overflow:hidden;background:var(--c1);box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.6),0 0 0 calc(3*var(--u)) rgba(255,255,255,.14) inset}
 .ct-arte,.ct-arte>span,.ct-palco{position:absolute;inset:0}
 .ct-ceu{background:linear-gradient(180deg,var(--c1) 0%,var(--c2) 40%,var(--c3) 68%,var(--c4) 76%)}
-.ct-raios{background:repeating-conic-gradient(from 4deg at 50% 36%,rgba(255,255,255,.20) 0 5deg,transparent 5deg 15deg);mix-blend-mode:soft-light;
+.ct-raios{background:repeating-conic-gradient(from 4deg at 50% 36%,rgba(255,255,255,.07) 0 5deg,transparent 5deg 15deg);
   -webkit-mask:radial-gradient(circle at 50% 36%,#000 0,rgba(0,0,0,.55) 38%,transparent 72%);mask:radial-gradient(circle at 50% 36%,#000 0,rgba(0,0,0,.55) 38%,transparent 72%)}
 .ct-aneis{background:repeating-radial-gradient(circle at 50% 36%,transparent 0 calc(25*var(--u)),rgba(255,255,255,.085) calc(25*var(--u)) calc(26*var(--u)));
   -webkit-mask:radial-gradient(circle at 50% 36%,transparent calc(110*var(--u)),#000 calc(170*var(--u)),transparent calc(330*var(--u)));mask:radial-gradient(circle at 50% 36%,transparent calc(110*var(--u)),#000 calc(170*var(--u)),transparent calc(330*var(--u)))}
 .ct-motivo{background:var(--mt);background-size:var(--mtw) auto;opacity:.13;-webkit-mask:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);mask:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 30%,transparent 62%)}
 .ct-halo{background:radial-gradient(circle at 50% 35%,rgba(var(--lz),.92) 0,rgba(var(--lz),.52) 20%,rgba(var(--ac),.26) 40%,transparent 62%)}
-.ct-foil{background:linear-gradient(112deg,transparent 18%,rgba(255,236,170,0) 30%,rgba(255,240,190,.42) 41%,rgba(255,255,255,.62) 46%,rgba(255,225,150,.34) 52%,transparent 64%,transparent 74%,rgba(255,240,190,.22) 82%,transparent 90%);mix-blend-mode:soft-light}
-.fig.r-lendaria .ct-foil{background:linear-gradient(112deg,rgba(255,122,217,.55),rgba(255,211,110,.5) 22%,rgba(141,255,177,.5) 42%,rgba(111,214,255,.55) 62%,rgba(176,147,255,.55) 82%,rgba(255,122,217,.55));opacity:.95}
+.ct-foil{background:linear-gradient(112deg,transparent 18%,rgba(255,236,170,0) 30%,rgba(255,240,190,.13) 41%,rgba(255,255,255,.2) 46%,rgba(255,225,150,.1) 52%,transparent 64%,transparent 74%,rgba(255,240,190,.07) 82%,transparent 90%)}
+.fig.r-lendaria .ct-foil{background:linear-gradient(112deg,rgba(255,122,217,.55),rgba(255,211,110,.5) 22%,rgba(141,255,177,.5) 42%,rgba(111,214,255,.55) 62%,rgba(176,147,255,.55) 82%,rgba(255,122,217,.55));opacity:.26}
 .ct-part i{position:absolute;border-radius:50%;background:var(--luz)}
 .ct-part b{position:absolute;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
 .fig.r-rara .ct-part b{background:#fff3c4}
@@ -2097,8 +2102,6 @@ button.fig:active{transform:scale(.97)}
 .ct-chips span{display:flex;align-items:center;gap:calc(6*var(--u));height:calc(25*var(--u));padding:0 calc(11*var(--u)) 0 calc(8*var(--u));border-radius:calc(8*var(--u));font-size:calc(12.5*var(--u));font-weight:700;letter-spacing:calc(.2*var(--u));white-space:nowrap;background:rgba(255,255,255,.085);box-shadow:0 0 0 calc(1*var(--u)) rgba(255,255,255,.17) inset}
 .ct-chips svg{flex:none;width:calc(13*var(--u));height:calc(13*var(--u));fill:var(--acc)}
 .ct-rod{position:absolute;left:calc(20*var(--u));right:calc(20*var(--u));bottom:calc(9*var(--u));display:flex;justify-content:space-between;font-size:calc(7.8*var(--u));font-weight:700;letter-spacing:calc(1.7*var(--u));text-transform:uppercase;color:rgba(255,255,255,.46);white-space:nowrap}
-.ct-grao{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%20.9%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");mix-blend-mode:overlay;opacity:.22;pointer-events:none}
-.ct-vidro{position:absolute;inset:0;pointer-events:none;background:linear-gradient(128deg,rgba(255,255,255,.20) 0,rgba(255,255,255,.05) 16%,transparent 30%,transparent 78%,rgba(255,255,255,.07) 100%)}
 /* carta leve (grade do album, pacotes e trocas): sem os enfeites caros, com o nome grande no centro */
 .fig.leve .ct{box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.55),0 calc(22*var(--u)) calc(30*var(--u)) calc(-18*var(--u)) rgba(0,0,0,.8)}
 .fig.leve .ct-palco{transform:translateY(calc(40*var(--u)))}
@@ -2123,7 +2126,6 @@ button.fig:active{transform:scale(.97)}
 /* figurinha grande (janela de detalhe), que inclina com o dedo */
 .fig-palco{perspective:900px;padding:8px 0 6px;display:grid;place-items:center;touch-action:none}
 .fig.grande{width:min(300px,76vw);transition:transform .12s ease-out}
-.fig.grande.tem::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--bx) var(--by),rgba(255,255,255,.28),transparent 45%)}
 .fig-det{text-align:center}.fig-det-fala{margin:12px 0 8px;font-style:italic;font-size:14px}.fig-det .muted{margin-top:10px}
 /* figurinha pequena (na escolha da troca) */
 .fig.mini.sel{outline:3px solid #fff;outline-offset:2px}
@@ -2168,17 +2170,61 @@ img.vg-som.obj{left:calc(110*var(--u));top:calc(150*var(--u));width:calc(280*var
 
 .fig > .vg{--u:calc(100cqw / 500)}
 button.fig.vaga:hover{transform:translateY(-2px)}
+/* capa do álbum */
+.cp-in{position:absolute;inset:0;display:block;border-radius:calc(8*var(--u)) calc(18*var(--u)) calc(18*var(--u)) calc(8*var(--u));overflow:hidden;color:#fff;text-align:center;font-family:"Barlow","Segoe UI",Arial,sans-serif;
+  background:linear-gradient(150deg,var(--c) 0%,var(--c2) 78%);box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.55),0 0 0 calc(3*var(--u)) rgba(255,255,255,.12) inset}
+.cp-couro{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%20.9%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");mix-blend-mode:overlay;opacity:.45}
+.cp-luz{position:absolute;inset:0;background:radial-gradient(circle at 56% 56%,rgba(255,255,255,.34) 0,rgba(255,255,255,.1) 30%,transparent 58%)}
+.cp-raios{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 56% 58%,rgba(255,226,150,.16) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle at 56% 58%,#000 0,rgba(0,0,0,.5) 34%,transparent 60%);mask:radial-gradient(circle at 56% 58%,#000 0,rgba(0,0,0,.5) 34%,transparent 60%)}
+.cp-lomb{position:absolute;left:0;top:0;bottom:0;width:calc(30*var(--u));background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,.2) 70%,rgba(255,255,255,.14) 100%)}
+.cp-lomb::after{content:"";position:absolute;left:calc(8*var(--u));top:calc(14*var(--u));bottom:calc(14*var(--u));width:calc(14*var(--u));background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.6) 0 calc(4*var(--u)),transparent calc(4.6*var(--u))) 0 0/calc(14*var(--u)) calc(30*var(--u)) repeat-y}
+.cp-mold{position:absolute;left:calc(40*var(--u));right:calc(12*var(--u));top:calc(12*var(--u));bottom:calc(12*var(--u));border-radius:calc(10*var(--u));border:max(1PX,calc(2*var(--u))) solid rgba(255,221,130,.85);box-shadow:0 0 0 calc(4*var(--u)) rgba(0,0,0,.18),0 0 0 max(1PX,calc(5.5*var(--u))) rgba(255,221,130,.32)}
+.cp-n{position:absolute;left:calc(40*var(--u));right:calc(12*var(--u));top:calc(26*var(--u));font-size:calc(11*var(--u));font-weight:800;letter-spacing:calc(4*var(--u));text-transform:uppercase;color:#ffe9a8}
+.cp-tit{position:absolute;left:calc(44*var(--u));right:calc(16*var(--u));top:calc(44*var(--u));font-family:"Bebas Neue","Arial Narrow",sans-serif;font-size:calc(41*var(--u));line-height:.92;letter-spacing:calc(2*var(--u));text-transform:uppercase;
+  color:#fff3c9;background:linear-gradient(180deg,#fffbe2 20%,#ffd45c 62%,#c98a1b 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 calc(3*var(--u)) 0 rgba(0,0,0,.4))}
+.cp-sub{position:absolute;left:calc(46*var(--u));right:calc(18*var(--u));top:calc(126*var(--u));font-size:calc(12*var(--u));font-weight:600;line-height:1.25;color:rgba(255,255,255,.88)}
+.cp-arte{position:absolute;left:calc(40*var(--u));right:calc(12*var(--u));top:calc(150*var(--u));height:calc(158*var(--u))}
+.cp-arte img{position:absolute;bottom:0;height:auto;filter:drop-shadow(0 calc(6*var(--u)) calc(5*var(--u)) rgba(0,0,0,.45))}
+.cp-arte img.a{left:calc(-6*var(--u));width:calc(104*var(--u))}.cp-arte img.c{right:calc(-6*var(--u));width:calc(104*var(--u))}.cp-arte img.b{left:50%;width:calc(132*var(--u));margin-left:calc(-66*var(--u));z-index:1}
+.cp-chao{position:absolute;left:calc(56*var(--u));right:calc(28*var(--u));top:calc(292*var(--u));height:calc(24*var(--u));border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.45),transparent 70%)}
+.cp-pe{position:absolute;left:calc(52*var(--u));right:calc(24*var(--u));bottom:calc(24*var(--u))}
+.cp-barra{display:block;height:calc(9*var(--u));border-radius:calc(99*var(--u));background:rgba(0,0,0,.4);box-shadow:0 0 0 calc(1*var(--u)) rgba(255,221,130,.5);overflow:hidden}
+.cp-barra i{display:block;height:100%;border-radius:calc(99*var(--u));background:linear-gradient(90deg,#ffd45c,#fff3c9)}
+.cp-conta{display:flex;justify-content:space-between;align-items:center;margin-top:calc(7*var(--u));font-size:calc(12.5*var(--u));font-weight:800;color:#fff}
+.cp-conta em{font-style:normal;display:inline-flex;align-items:center;gap:calc(3*var(--u));padding:calc(2*var(--u)) calc(8*var(--u));border-radius:calc(99*var(--u));background:rgba(0,0,0,.35);color:#ffe9a8;font-size:calc(11.5*var(--u))}
+.cp-conta em .moeda{width:calc(12*var(--u));height:calc(12*var(--u))}
+.cp-conta em.ok{background:#1f8a5b;color:#fff}
+.cp-brilho{position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.22) 0,rgba(255,255,255,.04) 18%,transparent 32%,transparent 78%,rgba(255,255,255,.08) 100%);pointer-events:none}
+
+/* estante: as capas dos álbuns */
+.est{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px;margin:6px 0 14px}
+@media (min-width:700px){.est{grid-template-columns:repeat(auto-fill,minmax(230px,270px));gap:24px}}
+.cp{position:relative;display:block;aspect-ratio:3/4;min-width:0;padding:0;border:0;background:none;cursor:pointer;container-type:inline-size;border-radius:8px 18px 18px 8px;transition:transform .18s ease;-webkit-tap-highlight-color:transparent;
+  box-shadow:3px 3px 0 #e9dfc6,5px 5px 0 #cdbf9b,0 16px 26px rgba(8,6,30,.5)}
+.cp > .cp-in{--u:calc(100cqw / 300)}
+.cp:hover{transform:translateY(-4px) rotate(-.6deg)}.cp:active{transform:scale(.97)}
+.est-nota{margin:0 0 16px;text-align:center;font-size:12.5px;color:var(--muted)}
+.lv-topo{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.lv-topo .pg-voltar{margin:0;flex:none}
+.lv-topo b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-topo > div{min-width:0}.lv-topo b{display:block;font:400 26px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1px}.lv-topo small{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+.lv.abre .lv-capa{animation:lv-abre .5s cubic-bezier(.2,1.1,.4,1) both}
+@keyframes lv-abre{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.lv.abre .lv-capa{animation:none}}
+/* tela de carregamento quando chega versão nova */
+.carga-tx.atualiza{height:auto}.carga-tx.atualiza span{position:static;display:block;opacity:1;animation:none}
+.carga-nota{margin:8px 0 0;font:600 12.5px/1.4 "Barlow",system-ui,sans-serif;color:rgba(255,255,255,.8)}
 /* álbum em formato de livro: marcadores no alto, capa, folha de papel com argolas e as figurinhas coladas */
 .lv{position:relative;margin:2px 0 14px}
-.lv-abas{display:flex;gap:4px;padding:0 14px 0 30px;align-items:flex-end}
+.lv-abas{display:flex;gap:7px;padding:0 14px 0 30px;align-items:flex-end}
 .lv-abas button{flex:1 1 0;min-width:0;display:grid;justify-items:center;gap:1px;padding:6px 2px 13px;margin-bottom:-8px;border:0;border-radius:10px 10px 0 0;background:var(--pg);color:#fff;font-family:inherit;cursor:pointer;
   filter:brightness(.7) saturate(.85);transform:translateY(6px);transition:transform .2s ease,filter .2s ease;box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -8px 8px rgba(0,0,0,.18)}
 .lv-abas button b{font:400 20px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.5px}
 .lv-abas button small{font-size:9.5px;font-weight:700;opacity:.92;white-space:nowrap}
 .lv-abas button[aria-selected="true"]{filter:none;transform:none}
-.lv-capa{position:relative;z-index:1;padding:9px 11px 14px 9px;border-radius:18px;overflow:hidden;background:#3a2f6b;background:linear-gradient(135deg,color-mix(in srgb,var(--pg) 62%,#1a1230),color-mix(in srgb,var(--pg) 36%,#0e0a20));box-shadow:0 14px 30px rgba(8,6,30,.45),inset 0 1px 0 rgba(255,255,255,.25)}
+.lv-capa{position:relative;z-index:1;padding:9px 11px 14px 9px;border-radius:18px;background:#3a2f6b;background:linear-gradient(135deg,color-mix(in srgb,var(--pg) 62%,#1a1230),color-mix(in srgb,var(--pg) 36%,#0e0a20));box-shadow:0 14px 30px rgba(8,6,30,.45),inset 0 1px 0 rgba(255,255,255,.25)}
 .lv-capa::before{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(255,255,255,.3);border-radius:14px;pointer-events:none}
-.lv-miolo{position:relative;display:grid;perspective:1900px;perspective-origin:0 30%}
+.lv-miolo{position:relative;display:grid;perspective:2600px;perspective-origin:0 40%}
 .lv-folha{grid-area:1/1;position:relative;min-width:0;padding:14px 10px 12px 31px;border-radius:5px 12px 12px 5px;color:#3d2b17;
   background:#f5edd9 radial-gradient(120% 80% at 70% 0,rgba(255,255,255,.55),transparent 60%);box-shadow:2px 2px 0 #e9dfc6,4px 4px 0 #dccfae,6px 6px 0 #cdbf9b,0 0 0 1px rgba(90,70,30,.25);
   transform-origin:0 50%;-webkit-backface-visibility:hidden;backface-visibility:hidden}
@@ -2207,7 +2253,7 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .lv-dobra{position:absolute !important;right:0;bottom:0;width:30px;height:30px;padding:0;border:0;cursor:pointer;background:linear-gradient(315deg,#cdbf9b 0 50%,#fffaf0 50%,#e6dbbd 100%);border-radius:10px 0 12px 0;box-shadow:-2px -2px 4px rgba(60,40,10,.2)}
 @media (min-width:900px){.lv-folha{padding:18px 18px 14px 44px}.lv-argolas{left:10px}.lv-folha .alb-grade{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:14px 12px}.lv-cab h3{font-size:30px}}
 /* página virando: a folha gira em volta da lombada */
-.lv-folha.sai,.lv-folha.entra{z-index:3;pointer-events:none}
+.lv-folha.sai,.lv-folha.entra{z-index:3;pointer-events:none;box-shadow:0 0 0 1px rgba(90,70,30,.25),0 18px 40px rgba(20,12,0,.45)}
 .lv-folha.sai{animation:lv-sai .78s cubic-bezier(.45,.08,.3,1) forwards}
 .lv-folha.entra{animation:lv-entra .78s cubic-bezier(.3,.1,.3,1) both}
 .lv-folha.sai::after,.lv-folha.entra::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(40,25,5,0) 0,rgba(40,25,5,.5) 100%);animation:lv-sombra .78s ease-in forwards}
@@ -2287,7 +2333,6 @@ button.fig.vaga:hover{transform:translateY(-2px)}
     <div class="cb-pista" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i class="cb-fill"></i><span class="cb-corre" aria-hidden="true"><svg class="cg-boneco" viewBox="0 0 9 12" width="27" height="36" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="5" height="1" fill="#3A2416"/><rect x="1" y="1" width="7" height="1" fill="#3A2416"/><rect x="1" y="2" width="7" height="1" fill="#F2BE2E"/><rect x="1" y="3" width="1" height="1" fill="#D9A47A"/><rect x="2" y="3" width="1" height="1" fill="#22183A"/><rect x="3" y="3" width="3" height="1" fill="#D9A47A"/><rect x="6" y="3" width="1" height="1" fill="#22183A"/><rect x="7" y="3" width="1" height="1" fill="#D9A47A"/><rect x="1" y="4" width="7" height="1" fill="#D9A47A"/><rect x="2" y="5" width="5" height="1" fill="#8FE6FF"/><rect x="1" y="6" width="7" height="1" fill="#8FE6FF"/><rect x="0" y="7" width="1" height="1" fill="#D9A47A"/><rect x="1" y="7" width="2" height="1" fill="#8FE6FF"/><rect x="3" y="7" width="3" height="1" fill="#524F9C"/><rect x="6" y="7" width="2" height="1" fill="#8FE6FF"/><rect x="8" y="7" width="1" height="1" fill="#D9A47A"/><rect x="1" y="8" width="7" height="1" fill="#8FE6FF"/><rect x="1" y="9" width="1" height="1" fill="#5CB8D6"/><rect x="2" y="9" width="5" height="1" fill="#8FE6FF"/><rect x="7" y="9" width="1" height="1" fill="#5CB8D6"/><g class="cg-p1"><rect x="2" y="10" width="1" height="1" fill="#D9A47A"/><rect x="6" y="10" width="1" height="1" fill="#D9A47A"/><rect x="1" y="11" width="2" height="1" fill="#6B4A33"/><rect x="6" y="11" width="2" height="1" fill="#6B4A33"/></g><g class="cg-p2"><rect x="3" y="10" width="1" height="1" fill="#D9A47A"/><rect x="5" y="10" width="1" height="1" fill="#D9A47A"/><rect x="3" y="11" width="1" height="1" fill="#6B4A33"/><rect x="5" y="11" width="2" height="1" fill="#6B4A33"/></g></svg></span><span class="cb-flag" aria-hidden="true"></span></div>
     <p class="cb-pct"><b class="cb-n">0%</b></p>
     <p class="carga-tx" aria-hidden="true"><span>Desenrolando o rolo…</span><span>Chamando os personagens…</span><span>Marcando as casas da pista…</span><span>Abrindo a lição da semana…</span><span>Contando as moedas…</span><span>Quase na largada…</span></p>
-    <div class="carga-lento" hidden><p>Está demorando mais que o normal. Confira a sua internet.</p><button type="button" onclick="location.reload()">Tentar de novo</button></div>
   </div>
 </div>
 <header class="topbar" id="topbar" hidden>
@@ -2318,6 +2363,16 @@ button.fig.vaga:hover{transform:translateY(-2px)}
   var app = document.getElementById("app"), el = document.getElementById("carga"), molde = el ? el.innerHTML : "";
   var alvo = 0, teto = 5, visto = 0, raf = 0, antes = 0, dono = false, espera = [], lento = 0;
   var calmo = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  /* versão nova do jogo (a página que já foi aberta neste aparelho com outra versão): avisa que está baixando a atualização */
+  var VER = (document.querySelector('meta[name="versao"]') || {}).content || "", CH = "quiz-licao:v2:verVista", vista = "", jaJogou = false;
+  try{ vista = localStorage.getItem(CH) || ""; for(var i = 0; i < localStorage.length && !jaJogou; i++){ if(String(localStorage.key(i)).indexOf("quiz-licao:v2") === 0) jaJogou = true; } }catch(e){}
+  function marcarVista(){ try{ if(VER) localStorage.setItem(CH, VER); }catch(e){} }
+  window.cargaAtualizando = function(){
+    if(!el) return; var tx = el.querySelector(".carga-tx");
+    if(tx){ tx.className = "carga-tx atualiza"; tx.innerHTML = "<span>Baixando a atualização do jogo…</span>"; }
+    if(!el.querySelector(".carga-nota")){ var n = document.createElement("p"); n.className = "carga-nota"; n.textContent = "Tem novidade nesta versão. Só desta vez pode demorar um pouco mais."; (tx ? tx.parentNode : el).appendChild(n); }
+  };
+  if(VER && ((vista && vista !== VER) || (!vista && jaJogou))) window.cargaAtualizando();
   function pintar(){
     if(!el) return; var p = Math.round(visto), n = el.querySelector(".cb-n"), pista = el.querySelector(".cb-pista");
     el.style.setProperty("--p", visto / 100); if(n) n.textContent = p + "%"; if(pista) pista.setAttribute("aria-valuenow", p);
@@ -2332,9 +2387,10 @@ button.fig.vaga:hover{transform:translateY(-2px)}
     if(visto >= 100) avisar(); else raf = requestAnimationFrame(quadro);
   }
   function rodar(){ if(el && !raf){ antes = performance.now(); raf = requestAnimationFrame(quadro); } }
-  function vigiar(){ clearTimeout(lento); lento = setTimeout(function(){ var l = el && el.querySelector(".carga-lento"); if(l) l.hidden = false; }, 14000); }
+  function vigiar(){ clearTimeout(lento); }
   function fechar(){
     clearTimeout(lento); if(raf){ cancelAnimationFrame(raf); raf = 0; }
+    marcarVista();
     var x = el; el = null; dono = false; alvo = 0; teto = 5; visto = 0; avisar();
     if(x){ x.classList.add("sai"); setTimeout(function(){ x.remove(); }, 450); }
   }
@@ -3312,6 +3368,7 @@ function contagem(dia, cb){
   const el = document.createElement("div"); el.className = "cd";
   el.innerHTML = `<div class="cd-ring"></div><div class="cd-in">${meuAvatar()}<div class="cd-dia">${esc(dia.nome)} · ${esc(dia.tema)}</div><div class="cd-num palavra" id="cdNum">Pronto?</div><div class="cd-sub" id="cdSub">Leu a lição de hoje? Então vamos!</div></div>`;
   document.body.appendChild(el);
+  if(typeof tocar === "function") tocar("pronto");
   const passos = [["3","Prepare-se…"],["2","Mantenha a calma…"],["1","Quanto mais rápido, mais pontos!"],["VAI!",""]];
   let k = -1;
   const prox = ()=>{
@@ -3320,7 +3377,7 @@ function contagem(dia, cb){
     const num = $("cdNum"); if(!num){ cb(); return; }
     const novo = num.cloneNode(false); novo.textContent = passos[k][0];
     novo.className = "cd-num " + (passos[k][0] === "VAI!" ? "vai" : "anim");
-    if(typeof tocar === "function") tocar(passos[k][0] === "VAI!" ? "vai" : "tique");
+    if(typeof tocar === "function") tocar(passos[k][0] === "VAI!" ? "vai" : "conta" + passos[k][0]);
     num.replaceWith(novo);
     if(passos[k][1]) $("cdSub").textContent = passos[k][1];
     setTimeout(prox, rapido ? 350 : (passos[k][0] === "VAI!" ? 650 : 850));
@@ -3443,8 +3500,14 @@ function versaoLegivel(v){
   return `${z(d.getDate())}/${z(d.getMonth() + 1)}/${d.getFullYear()} ${z(d.getHours())}:${z(d.getMinutes())}`;
 }
 /* Minha conta → Atualizar o jogo: recarrega buscando o arquivo de novo no servidor, sem depender da conferência automática */
+/* a tela de carregamento fica à vista enquanto o arquivo novo é baixado (se a internet cair, ela sai sozinha depois de um tempo) */
+function telaAtualizando(){
+  if(typeof barraCarga !== "function"){ aviso("Atualizando o jogo…"); return; }
+  barraCarga(6); if(typeof cargaAtualizando === "function") cargaAtualizando();
+  setTimeout(() => { if(typeof fecharBarra === "function") fecharBarra(); }, 30000);
+}
 function recarregarJogo(){
-  aviso("Atualizando o jogo…");
+  telaAtualizando();
   const u = new URL(location.href); u.searchParams.set("v", String(Date.now()));
   setTimeout(() => location.replace(u.toString()), 400);
 }
@@ -3462,7 +3525,7 @@ function aplicarVersaoNova(manual){
   /* já tentou esta versão há pouco e o servidor ainda entregou a antiga: não fica recarregando em círculo, só deixa o aviso */
   if(!manual && t && t.v === versaoNova && Date.now() - t.em < 15 * 60000){ $("novaVersao").hidden = false; return; }
   lsSet(chave, { v: versaoNova, em: Date.now() });
-  aviso("Atualizando o jogo…");
+  telaAtualizando();
   const u = new URL(location.href); u.searchParams.set("v", versaoNova.replace(/\D/g, ""));      // endereço novo: o navegador busca o arquivo de novo em vez de usar o guardado
   setTimeout(() => location.replace(u.toString()), 500);
 }
@@ -3496,7 +3559,7 @@ function nav(tab){
   if(typeof conferirDesafios === "function" && Date.now() - desafiosEm > 3 * MIN) conferirDesafios().catch(()=>{});      // e desafios (no máximo a cada 3 min)
   if(typeof conferirTrocas === "function") conferirTrocas();                    // e propostas de troca de figurinha (no máximo a cada 3 min)
   setTimeout(() => conferirVersao(false), 400);                                 // e se subiu versão nova do jogo (no máximo a cada 2 min)
-  ({ inicio: telaInicio, estudar: telaEstudar, quiz: telaQuiz, ranking: telaRanking, missoes: () => telaMissoes(), salas: telaSalas, mural: telaMuralSalas, conta: telaConta, admin: telaAdmin, loja: telaLoja, album: () => telaAlbum() }[tab] || telaInicio)();
+  ({ inicio: telaInicio, estudar: telaEstudar, quiz: telaQuiz, ranking: telaRanking, missoes: () => telaMissoes(), salas: telaSalas, mural: telaMuralSalas, conta: telaConta, admin: telaAdmin, loja: telaLoja, album: () => abrirAlbuns() }[tab] || telaInicio)();
 }
 document.querySelectorAll("#nav button").forEach(b => b.onclick = ()=>{ const t = b.dataset.tab; if(t === "estudar") estudoVista = "livros"; if(t === "ranking") corridaVista = "salas"; if(t === "loja") lojaCat = ""; if(t === "missoes") missoesVista = "mapas"; nav(t); });   // pelo menu, a Lição abre na estante de livros, e a Corrida na escolha da sala
 /* Tocar no personagem abre a Minha conta; tocar de novo fecha e volta para a tela (e a altura) em que a pessoa estava */
@@ -6966,7 +7029,11 @@ const TONS = {
   subiu:  [[523, .09], [659, .09], [784, .09], [1047, .22]],
   missao: [[587, .1], [740, .1], [880, .1], [1175, .26]],
   tique:  [[440, .06]],
-  vai:    [[880, .2]],
+  vai:    [[784, .12, "triangle", .3], [1047, .16, "triangle", .3], [1319, .42, "triangle", .32]],
+  pronto: [[392, .16, "triangle", .2]],
+  conta3: [[523, .24, "triangle", .32]],
+  conta2: [[587, .24, "triangle", .32]],
+  conta1: [[659, .24, "triangle", .32]],
   ajuda:  [[740, .07], [932, .1]],
   toque:  [[520, .05]],
   moeda:  [[1568, .04], [2093, .07]]
@@ -6979,10 +7046,10 @@ function tocar(tipo){
     if(!contextoAudio()) return;
     if(tipo === "certo" || tipo === "errado") MUSICA.abafar();
     let t = _audio.currentTime + 0.01;
-    TONS[tipo].forEach(([freq, dur, forma]) => {
+    TONS[tipo].forEach(([freq, dur, forma, vol]) => {
       const o = _audio.createOscillator(), g = _audio.createGain();
       o.type = forma || "sine"; o.frequency.value = freq;
-      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.16, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol || 0.16, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
       o.connect(g); g.connect(_audio.destination); o.start(t); o.stop(t + dur + 0.02);
       t += dur * 0.85;
     });
@@ -9066,7 +9133,7 @@ function modalComoGanhar(){
   try{
     const inv = albumInventario(), pagas = (perfil.albumPag || []).length, f = pacotesFechados().length;
     itens.push(linha("album", "🎴", "Completar páginas do álbum", val("+" + ALBUM_MOEDAS_PAGINA),
-      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_PAGINAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: +${ALBUM_MOEDAS_FIM}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
+      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_PAGINAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: ${ALBUNS.map(a => "+" + a.premio).join(" e ")}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
   }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
@@ -9722,7 +9789,7 @@ function fimSuperQuiz(soVer){
 /* ============================================================
    ÁLBUM DE FIGURINHAS BÍBLICO (versão de teste)
    - 97 figurinhas: os 53 personagens e 44 objetos bíblicos, em 6 páginas por tema. Raridades: comum, rara e lendária.
-   - Cada quiz do dia feito dá 1 pacote com 3 figurinhas. O sorteio é fixo por jogador e por dia (uid + lição + dia),
+   - Cada quiz do dia feito dá 1 pacote com 2 figurinhas (eram 3; os pacotes abertos antes da mudança continuam valendo 3). O sorteio é fixo por jogador e por dia (uid + lição + dia),
      então não muda se a pessoa reabrir o jogo, e não precisa gravar nada no servidor para "ganhar" o pacote.
      O que fica no perfil: albumAbertos (pacotes já abertos), albumTrocas (o que saiu e o que entrou em cada troca),
      albumPag (páginas já premiadas) e albumFim (álbum completo premiado).
@@ -9730,7 +9797,7 @@ function fimSuperQuiz(soVer){
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
    - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
    ============================================================ */
-const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 3, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 20, ALBUM_PACOTES_DIA = 3;
+const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 2, ALBUM_POR_PACOTE_ANTES = 3, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 20, ALBUM_PACOTES_DIA = 3;
 const ALBUM_OBJ = {
   folha: ["Folha de Figueira", "Gênesis 3:7"], flor: ["Flor do Éden", "Gênesis 2:9"], nuvem: ["Nuvem de Enoque", "Gênesis 5:24"], arca: ["Arca de Noé", "Gênesis 6:14"],
   pomba_ramo: ["Pomba com o Ramo", "Gênesis 8:11"], estrelas: ["Estrelas da Promessa", "Gênesis 15:5"], tenda: ["Tenda de Abraão", "Gênesis 18:1"], trigo: ["Feixes de Trigo", "Gênesis 37:7"], cetro: ["Cetro do Faraó", "Êxodo 5:2"],
@@ -9769,9 +9836,10 @@ function albumRng(txt){
   let a = (h ^= h >>> 16) >>> 0;
   return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
-function pacoteDe(chave){
+function pacoteDe(chave, qtd){
+  qtd = qtd || ALBUM_POR_PACOTE;
   const rnd = albumRng(usuario.uid + "|album1|" + chave), saiu = [];
-  while(saiu.length < ALBUM_POR_PACOTE){
+  while(saiu.length < qtd){
     const resto = ALBUM_CARTAS.filter(c => !saiu.includes(c.id)), total = resto.reduce((s, c) => s + ALBUM_PESO[c.rar], 0); let x = rnd() * total;
     for(const c of resto){ x -= ALBUM_PESO[c.rar]; if(x <= 0){ saiu.push(c.id); break; } }
   }
@@ -9782,14 +9850,22 @@ const albumAbertos = () => (perfil && perfil.albumAbertos) || [];
 function pacotesFechados(){ const ab = new Set(albumAbertos()); return Object.keys(RES).filter(k => !ab.has(k)).sort((a, b) => (RES[a].quando || 0) - (RES[b].quando || 0)); }
 /* quantas de cada figurinha eu tenho: pacotes abertos, mais o que entrou e menos o que saiu nas trocas */
 function albumInventario(){
-  const inv = {}; albumAbertos().forEach(k => pacoteDe(k).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
+  /* o pacote passou de 3 para 2 figurinhas: quem já tinha aberto pacotes não perde nada. Na primeira vez nesta versão fica anotado
+     quantos pacotes já estavam abertos (albumCorte); esses continuam valendo 3, e os seguintes valem 2. */
+  if(perfil && perfil.albumCorte == null){ perfil.albumCorte = albumAbertos().length; if(usuario) DB.salvarUsuario(usuario.uid, { albumCorte: perfil.albumCorte }).catch(()=>{}); }
+  const corte = (perfil && perfil.albumCorte) || 0;
+  const inv = {}; albumAbertos().forEach((k, i) => pacoteDe(k, i < corte ? ALBUM_POR_PACOTE_ANTES : ALBUM_POR_PACOTE).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
   const t = (perfil && perfil.albumTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
   return inv;
 }
 const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).length;
 const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
-function albumCompleto(){ try{ return !!(perfil && perfil.albumFim); }catch(e){ return false; } }
-function moedasDeAlbum(){ return ((perfil && perfil.albumPag) || []).length * ALBUM_MOEDAS_PAGINA + (perfil && perfil.albumFim ? ALBUM_MOEDAS_FIM : 0); }
+/* álbuns já completos e premiados. Quem completou tudo quando o álbum era um só (albumFim sem albumFeitos) já recebeu o prêmio antigo. */
+const albumFeitos = () => (perfil && perfil.albumFeitos) || [];
+const albumAntigoCompleto = () => !!(perfil && perfil.albumFim && !perfil.albumFeitos);
+function albumCompleto(){ try{ return albumAntigoCompleto() || ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
+function moedasDeAlbum(){ const pag = ((perfil && perfil.albumPag) || []).length * ALBUM_MOEDAS_PAGINA;
+  return pag + (albumAntigoCompleto() ? ALBUM_MOEDAS_FIM : ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0)); }
 /* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
 function albumPublico(){ const inv = albumInventario(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); }
 /* páginas recém-completadas: paga as moedas (uma vez por página) e o prêmio do álbum inteiro */
@@ -9797,7 +9873,13 @@ function conferirPaginasDoAlbum(){
   const inv = albumInventario(), pagas = (perfil.albumPag || []).slice(); let mudou = false;
   ALBUM_PAGINAS.forEach(pg => { if(!pagas.includes(pg.id) && pg.cartas.every(c => (inv[c.id] || 0) > 0)){ pagas.push(pg.id); mudou = true; setTimeout(() => ganhouMoedas(ALBUM_MOEDAS_PAGINA, "Página completa: " + pg.nome), 600); } });
   const novo = {}; if(mudou){ perfil.albumPag = pagas; novo.albumPag = pagas; }
-  if(!perfil.albumFim && pagas.length === ALBUM_PAGINAS.length){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; setTimeout(() => { ganhouMoedas(ALBUM_MOEDAS_FIM, "Álbum completo!"); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900); }
+  if(!albumAntigoCompleto()){
+    const feitos = albumFeitos().slice(); let n = 0;
+    ALBUNS.forEach(a => { if(!feitos.includes(a.id) && a.paginas.every(i => pagas.includes(ALBUM_PAGINAS[i].id))){ feitos.push(a.id); n++;
+      setTimeout(() => { ganhouMoedas(a.premio, "Álbum completo: " + a.nome); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900 + n * 400); } });
+    if(n){ perfil.albumFeitos = feitos; novo.albumFeitos = feitos; }
+    if(!perfil.albumFim && ALBUNS.every(a => feitos.includes(a.id))){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; }
+  }
   if(Object.keys(novo).length) DB.salvarUsuario(usuario.uid, novo).catch(()=>{});
 }
 
@@ -9911,13 +9993,12 @@ function htmlFigurinha(c, n, opts){
       ${cheia ? `<span class="ct-canto a"></span><span class="ct-canto b"></span><span class="ct-lado">${esc(pg.nome)} · ${esc(pg.ref)}</span>` : ""}
       <span class="ct-topo"><span class="ct-num"><small>Nº</small><b>${String(c.n).padStart(3, "0")}</b><em>/${String(ALBUM_CARTAS.length).padStart(3, "0")}</em></span><span class="ct-rar">${"<i></i>".repeat(gemas)}<span>${ALBUM_ROT[c.rar]}</span></span></span>
       <span class="ct-pn">${painel}</span>
-      ${cheia ? `<span class="ct-grao"></span><span class="ct-vidro"></span>` : ""}
     </span></span>
-    ${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}${tem && c.rar !== "comum" ? `<span class="fig-brilho" aria-hidden="true"></span>` : ""}</${tag}>`;
+    ${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}${tem && c.rar !== "comum" && !cheia ? `<span class="fig-brilho" aria-hidden="true"></span>` : ""}</${tag}>`;
 }
 /* navegador antigo, sem as unidades de container: a medida --u é calculada aqui */
 const FIG_CQ = typeof CSS !== "undefined" && !!CSS.supports && CSS.supports("container-type", "inline-size");
-function figEscala(raiz){ if(FIG_CQ) return; (raiz || document).querySelectorAll(".fig > .ct, .fig > .vg").forEach(e => { const w = e.parentNode.clientWidth; if(w) e.style.setProperty("--u", (w / 500) + "px"); }); }
+function figEscala(raiz){ if(FIG_CQ) return; (raiz || document).querySelectorAll(".fig > .ct, .fig > .vg, .cp > .cp-in").forEach(e => { const w = e.parentNode.clientWidth; if(w) e.style.setProperty("--u", (w / (e.classList.contains("cp-in") ? 300 : 500)) + "px"); }); }
 if(!FIG_CQ) addEventListener("resize", () => figEscala(document));
 /* a imagem 3D não carregou (arquivo fora da pasta figs/): a carta volta para o desenho do jogo */
 function figSemFoto(img){
@@ -9970,7 +10051,7 @@ function modalFigurinha(id){
     const palco = m.querySelector(".fig-palco"), carta = palco.querySelector(".fig");
     if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const mexer = e => { const r = palco.getBoundingClientRect(), x = ((e.clientX - r.left) / r.width - .5), y = ((e.clientY - r.top) / r.height - .5);
-      carta.style.transform = `rotateY(${(x * 22).toFixed(1)}deg) rotateX(${(-y * 18).toFixed(1)}deg)`; carta.style.setProperty("--bx", (50 + x * 80).toFixed(0) + "%"); carta.style.setProperty("--by", (50 + y * 80).toFixed(0) + "%"); };
+      carta.style.transform = `rotateY(${(x * 22).toFixed(1)}deg) rotateX(${(-y * 18).toFixed(1)}deg)`; };
     palco.addEventListener("pointermove", mexer); palco.addEventListener("pointerleave", () => { carta.style.transform = ""; });
   });
 }
@@ -10022,7 +10103,7 @@ async function abrirPacotes(chaves){
     if(!calmo){ const ini = 950 + Math.min(vagas.length, 15) * 100 + 500, passo = vagas.length > 9 ? 170 : 520;
       vagas.forEach((v, i) => { v.onclick = () => virar(v); setTimeout(() => virar(v), ini + i * passo); }); }
     m.querySelector("#pacOk").onclick = fechar;
-    m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p) albumPagina = p.c.pg; nav("album"); };
+    m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p){ albumPagina = p.c.pg; albumAberto = albumDe(p.c.pg).id; albumManter = true; } nav("album"); };
   }, () => { conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); atualizarCasca();
     if(tabAtual === "album") telaAlbum(); else if(tabAtual === "loja") telaLoja(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e) e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } });
 }
@@ -10148,31 +10229,55 @@ async function modalTrocar(){
   });
 }
 
-/* ---------- Tela do álbum: um livro, com marcadores, folha de papel e páginas que viram ---------- */
-let albumPagina = 0, albumVirando = false;
+/* ---------- Álbuns ----------
+   Cada álbum junta algumas páginas. Para criar um álbum novo, acrescente as páginas dele em ALBUM_PAGINAS (com os personagens e objetos)
+   e uma linha aqui, com as páginas, as cores da capa, os três personagens da capa e o prêmio. */
+const ALBUNS = [
+  { id: "at", nome: "Antigo Testamento", sub: "Da criação ao retorno do exílio", pgs: ["eden", "exodo", "reis", "exilio"], cor: "#2F56B8", cor2: "#0C1648", capa: ["davi", "moises", "ester"], premio: 100 },
+  { id: "nt", nome: "Novo Testamento", sub: "De Belém à igreja que espera", pgs: ["jesus", "igreja"], cor: "#C2405A", cor2: "#460C22", capa: ["maria", "messias", "pedro"], premio: 60 }
+];
+ALBUNS.forEach(a => { a.paginas = a.pgs.map(id => ALBUM_PAGINAS.findIndex(p => p.id === id)).filter(i => i >= 0); a.cartas = [].concat(...a.paginas.map(i => ALBUM_PAGINAS[i].cartas)); });
+const albumDe = i => ALBUNS.find(a => a.paginas.includes(i)) || ALBUNS[0];
+/* albumAberto: "" = estante com as capas; senão, o álbum aberto. albumPagina é a página (posição em ALBUM_PAGINAS). */
+let albumAberto = "", albumManter = false, albumPagina = 0, albumVirando = false, albumAbrindo = false;
+/* pelo menu (e pelos avisos) o Álbum abre na estante; só o "Ver o álbum" do pacote abre direto na página da figurinha nova */
+function abrirAlbuns(){ if(!albumManter) albumAberto = ""; albumManter = false; telaAlbum(); }
+function htmlCapa(a, k, inv){
+  const tenho = a.cartas.filter(c => (inv[c.id] || 0) > 0).length, feito = albumFeitos().includes(a.id) || albumAntigoCompleto();
+  const tit = a.nome.split(" "), meio = Math.ceil(tit.length / 2);
+  return `<button type="button" class="cp" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
+    <span class="cp-in"><span class="cp-couro"></span><span class="cp-raios"></span><span class="cp-luz"></span><span class="cp-lomb"></span><span class="cp-mold"></span>
+      <span class="cp-n">Álbum ${k + 1}</span><span class="cp-tit">${esc(tit.slice(0, meio).join(" "))}<br>${esc(tit.slice(meio).join(" "))}</span><span class="cp-sub">${esc(a.sub)}</span>
+      <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
+      <span class="cp-pe"><span class="cp-barra"><i style="width:${Math.round(100 * tenho / a.cartas.length)}%"></i></span><span class="cp-conta"><span>${tenho} de ${a.cartas.length}</span><em class="${feito ? "ok" : ""}">${feito ? "✓ completo" : `+${a.premio}${MOEDA}`}</em></span></span>
+      <span class="cp-brilho"></span></span></button>`;
+}
 function htmlFolha(i, inv){
-  const pg = ALBUM_PAGINAS[i], naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = (perfil.albumPag || []).includes(pg.id);
+  const pg = ALBUM_PAGINAS[i], a = albumDe(i), pos = a.paginas.indexOf(i), naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = (perfil.albumPag || []).includes(pg.id);
   const grade = l => `<div class="alb-grade">${l.map(c => (inv[c.id] || 0) > 0 ? htmlFigurinha(c, inv[c.id]) : htmlVaga(c)).join("")}</div>`;
   const ps = pg.cartas.filter(c => c.t === "p"), os = pg.cartas.filter(c => c.t === "o");
   return `<div class="lv-folha" data-folha="${i}"><span class="lv-argolas" aria-hidden="true"></span>
     <header class="lv-cab"><span class="lv-selo" aria-hidden="true"><svg viewBox="0 0 24 24">${FIG_ICONE[pg.id]}</svg></span><div><h3>${esc(pg.nome)}</h3><small>${esc(pg.ref)} · ${naPg} de ${pg.cartas.length} figurinhas</small></div>
       <span class="lv-premio ${paga ? "pago" : ""}">${paga ? "✓ completa" : `<small>página completa</small><b>+${ALBUM_MOEDAS_PAGINA}${MOEDA}</b>`}</span></header>
-    <div class="lv-sec">Personagens</div>${grade(ps)}
-    <div class="lv-sec">Objetos</div>${grade(os)}
-    <footer class="lv-rod"><button type="button" class="lv-seta" data-vira="-1" ${i === 0 ? "disabled" : ""} aria-label="Página anterior">‹</button><span>Página ${i + 1} de ${ALBUM_PAGINAS.length}</span><button type="button" class="lv-seta" data-vira="1" ${i === ALBUM_PAGINAS.length - 1 ? "disabled" : ""} aria-label="Próxima página">›</button></footer>
-    ${i < ALBUM_PAGINAS.length - 1 ? `<button type="button" class="lv-dobra" data-vira="1" aria-label="Virar a página"></button>` : ""}</div>`;
+    ${ps.length ? `<div class="lv-sec">Personagens</div>${grade(ps)}` : ""}
+    ${os.length ? `<div class="lv-sec">Objetos</div>${grade(os)}` : ""}
+    <footer class="lv-rod"><button type="button" class="lv-seta" data-vira="-1" ${pos === 0 ? "disabled" : ""} aria-label="Página anterior">‹</button><span>Página ${pos + 1} de ${a.paginas.length}</span><button type="button" class="lv-seta" data-vira="1" ${pos === a.paginas.length - 1 ? "disabled" : ""} aria-label="Próxima página">›</button></footer>
+    ${pos < a.paginas.length - 1 ? `<button type="button" class="lv-dobra" data-vira="1" aria-label="Virar a página"></button>` : ""}</div>`;
 }
+/* página vizinha dentro do mesmo álbum (-1 = não tem) */
+function paginaVizinha(dir){ const a = albumDe(albumPagina), p = a.paginas.indexOf(albumPagina) + dir; return p >= 0 && p < a.paginas.length ? a.paginas[p] : -1; }
 function ligarFolha(el){
   el.querySelectorAll(".alb-grade [data-fig]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.fig));
-  el.querySelectorAll("[data-vira]").forEach(b => b.onclick = () => virarPagina(albumPagina + (+b.dataset.vira)));
+  el.querySelectorAll("[data-vira]").forEach(b => b.onclick = () => virarPagina(paginaVizinha(+b.dataset.vira)));
 }
 /* vira a página: para frente, a folha atual gira para a esquerda e some; para trás, a folha nova chega girando da esquerda */
 function virarPagina(nova){
   const miolo = $("albMiolo"); if(!miolo || albumVirando || nova === albumPagina || nova < 0 || nova >= ALBUM_PAGINAS.length) return;
-  const velha = miolo.querySelector(".lv-folha"), frente = nova > albumPagina, pg = ALBUM_PAGINAS[nova];
+  const a = albumDe(albumPagina); if(!a.paginas.includes(nova)) return;
+  const velha = miolo.querySelector(".lv-folha"), frente = a.paginas.indexOf(nova) > a.paginas.indexOf(albumPagina), pg = ALBUM_PAGINAS[nova];
   albumPagina = nova; tocar("toque");
   const tmp = document.createElement("div"); tmp.innerHTML = htmlFolha(nova, albumInventario()); const folha = tmp.firstElementChild;
-  const lv = $("albLivro"); lv.style.setProperty("--pg", pg.cor);
+  const lv = $("albLivro"); lv.style.setProperty("--pg", pg.cor); lv.classList.remove("abre");
   lv.querySelectorAll(".lv-abas [data-pg]").forEach(b => b.setAttribute("aria-selected", String(+b.dataset.pg === nova)));
   const pronto = () => { desenharFigurinhas(folha); ligarFolha(folha); };
   if(!velha || matchMedia("(prefers-reduced-motion: reduce)").matches){ if(velha) velha.replaceWith(folha); else miolo.appendChild(folha); pronto(); return; }
@@ -10184,31 +10289,43 @@ function virarPagina(nova){
 }
 function telaAlbum(){
   tabAtual = "album"; atualizarCasca(); pararTimer(); albumVirando = false;
-  const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados();
-  if(albumPagina < 0 || albumPagina >= ALBUM_PAGINAS.length) albumPagina = 0;
-  const pg = ALBUM_PAGINAS[albumPagina], pagas = perfil.albumPag || [];
+  const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados(), pagas = perfil.albumPag || [];
+  const aberto = ALBUNS.find(a => a.id === albumAberto);
+  /* ---------- um álbum aberto: o livro ---------- */
+  if(aberto){
+    if(!aberto.paginas.includes(albumPagina)) albumPagina = aberto.paginas[0];
+    const pg = ALBUM_PAGINAS[albumPagina], noAlbum = aberto.cartas.filter(c => (inv[c.id] || 0) > 0).length, abre = albumAbrindo; albumAbrindo = false;
+    app.innerHTML = `<div class="estudo-area alb">
+      <div class="lv-topo"><button type="button" class="pg-voltar" id="albVoltar"><span aria-hidden="true">‹</span>Álbuns</button><div><b>${esc(aberto.nome)}</b><small>${noAlbum} de ${aberto.cartas.length} figurinhas</small></div></div>
+      <div class="lv ${abre ? "abre" : ""}" id="albLivro" style="--pg:${pg.cor}">
+        <div class="lv-abas" role="tablist" aria-label="Páginas do álbum">${aberto.paginas.map((i, k) => { const p = ALBUM_PAGINAS[i], n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}" title="${esc(p.nome)}" aria-label="Página ${k + 1}: ${esc(p.nome)}, ${n} de ${p.cartas.length}"><b>${k + 1}</b><small>${pagas.includes(p.id) ? "✓" : `${n}/${p.cartas.length}`}</small></button>`; }).join("")}</div>
+        <div class="lv-capa"><div class="lv-miolo" id="albMiolo">${htmlFolha(albumPagina, inv)}</div></div></div></div>`;
+    desenharFigurinhas(app); ligarFolha(app);
+    $("albVoltar").onclick = () => { albumAberto = ""; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); };
+    app.querySelectorAll(".lv-abas [data-pg]").forEach(b => b.onclick = () => virarPagina(+b.dataset.pg));
+    /* arrastar o dedo para o lado também vira a página */
+    const miolo = $("albMiolo"); let tx = 0, ty = 0;
+    miolo.addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, { passive: true });
+    miolo.addEventListener("touchend", e => { const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty; if(Math.abs(dx) > 70 && Math.abs(dx) > 2.2 * Math.abs(dy)) virarPagina(paginaVizinha(dx < 0 ? 1 : -1)); }, { passive: true });
+    return;
+  }
+  /* ---------- a estante: pacotes, trocas e as capas dos álbuns ---------- */
   const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas();
   const trocas = `<section class="panel alb-trocas" id="albTrocas"><div class="hm-cab"><span>Trocas${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span><button type="button" class="hm-link" id="albTrocar">Trocar figurinhas <span aria-hidden="true">›</span></button></div>
       ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>`;
   app.innerHTML = `<div class="estudo-area alb">
-    ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbum de figurinhas", "Cada quiz do dia dá um pacote com 3 figurinhas. Troque as repetidas com a sua sala.")}
-    <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_PAGINAS.length} páginas completas${perfil.albumFim ? " · álbum completo ✓" : ""}</small></div>
+    ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbuns de figurinhas", `Cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas. Troque as repetidas com a sua sala.`)}
+    <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_PAGINAS.length} páginas completas${albumCompleto() ? " · álbuns completos ✓" : ""}</small></div>
     <section class="panel alb-pacotes"><span class="pct ${fechados.length ? "tem" : ""}">${FIG_PACOTE}${fechados.length ? `<b>${fechados.length}</b>` : ""}</span>
       <div class="alb-pac-tx"><b>${fechados.length ? `${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}` : "Nenhum pacote para abrir"}</b><small>${fechados.length ? `${ALBUM_POR_PACOTE} figurinhas em cada` : "Faça o quiz do dia para ganhar um, ou compre com moedas."}</small></div>
       <div class="alb-pac-bt">${fechados.length ? `<button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}` : ""}</div>
       ${htmlCompraPacote()}</section>
     ${paraMim.length ? trocas : ""}
-    <div class="lv" id="albLivro" style="--pg:${pg.cor}">
-      <div class="lv-abas" role="tablist" aria-label="Páginas do álbum">${ALBUM_PAGINAS.map((p, i) => { const n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}" title="${esc(p.nome)}" aria-label="Página ${i + 1}: ${esc(p.nome)}, ${n} de ${p.cartas.length}"><b>${i + 1}</b><small>${pagas.includes(p.id) ? "✓" : `${n}/${p.cartas.length}`}</small></button>`; }).join("")}</div>
-      <div class="lv-capa"><div class="lv-miolo" id="albMiolo">${htmlFolha(albumPagina, inv)}</div></div></div>
-    ${paraMim.length ? "" : trocas}
-    <p class="note center">Álbum completo: +${ALBUM_MOEDAS_FIM} moedas e a conquista Colecionador.</p></div>`;
-  desenharFigurinhas(app); ligarFolha(app);
-  app.querySelectorAll(".lv-abas [data-pg]").forEach(b => b.onclick = () => virarPagina(+b.dataset.pg));
-  /* arrastar o dedo para o lado também vira a página */
-  const miolo = $("albMiolo"); let tx = 0, ty = 0;
-  miolo.addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, { passive: true });
-  miolo.addEventListener("touchend", e => { const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty; if(Math.abs(dx) > 70 && Math.abs(dx) > 2.2 * Math.abs(dy)) virarPagina(albumPagina + (dx < 0 ? 1 : -1)); }, { passive: true });
+    <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv)).join("")}</div>
+    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p>
+    ${paraMim.length ? "" : trocas}</div>`;
+  figEscala(app);
+  app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { albumAberto = b.dataset.album; albumAbrindo = true; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); });
   const ab = $("albAbrir"); if(ab) ab.onclick = () => abrirPacotes(fechados.slice(0, 1));
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
   const cp = $("albComprar"); if(cp) cp.onclick = comprarPacote;
@@ -10218,7 +10335,7 @@ function telaAlbum(){
   app.querySelectorAll("[data-tr-cancelar]").forEach(b => b.onclick = () => cancelarTroca(b.dataset.trCancelar));
   /* confere as trocas (propostas novas e respostas) sem travar a tela */
   if(Date.now() - trocasEm > 60000){ const a = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length;
-    carregarTrocas(true).then(() => { const d = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length; if(tabAtual === "album" && a !== d && !document.querySelector(".modal-bg")) telaAlbum(); }); }
+    carregarTrocas(true).then(() => { const d = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length; if(tabAtual === "album" && !albumAberto && a !== d && !document.querySelector(".modal-bg")) telaAlbum(); }); }
 }
 
 /* ---------- Cartão do álbum no Início ---------- */
