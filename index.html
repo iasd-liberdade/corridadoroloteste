@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.115845">
+<meta name="versao" content="20261118.160227">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1188,11 +1188,11 @@ input[type=text],input[type=email],input[type=password],input[type=number],input
 .sino{position:relative;flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--panel-line);background:var(--panel);color:#fff;font-size:18px;display:grid;place-items:center;padding:0;animation:sinotoca 1.2s ease-in-out 2}
 .sino b{position:absolute;top:-4px;right:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:var(--a);color:#fff;font:800 11px/19px "Barlow",sans-serif;text-align:center;box-shadow:0 0 0 2px rgba(20,18,60,.55)}
 @keyframes sinotoca{0%,100%{transform:rotate(0)}15%{transform:rotate(-14deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(5deg)}75%{transform:rotate(0)}}
-.nt-lista{display:grid;gap:8px}
-.nt-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--panel-line);border-radius:14px;padding:10px 12px;color:#fff}
+.nt-lista{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-width:0}
+.nt-item{display:flex;align-items:center;gap:10px;width:100%;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden;text-align:left;background:var(--panel);border:1.5px solid var(--panel-line);border-radius:14px;padding:10px 12px;color:#fff}
 .nt-item.nova{border-color:var(--accent);background:rgba(143,230,255,.16)}
 .nt-ic{flex:none;font-size:20px;line-height:1;letter-spacing:-3px;min-width:34px;text-align:center}
-.nt-tx{flex:1;min-width:0;font-size:13.5px;line-height:1.3}
+.nt-tx{flex:1;min-width:0;font-size:13.5px;line-height:1.3;overflow-wrap:anywhere}
 .nt-tx small{display:block;font-size:12px;color:var(--soft);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nt-n{flex:none;background:var(--a);color:#fff;border-radius:99px;padding:1px 8px;font:800 12px/18px "Barlow",sans-serif}
 .nt-item .seta{flex:none;color:var(--soft)}
@@ -2217,6 +2217,7 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 /* álbum em formato de livro: marcadores no alto, capa, folha de papel com argolas e as figurinhas coladas */
 .lv{position:relative;margin:2px 0 14px}
 .lv-abas{display:flex;gap:7px;padding:0 14px 0 30px;align-items:flex-end}
+.lv.muitas .lv-abas{gap:6px;padding:0 10px 0 24px}.lv.muitas .lv-abas button b{font-size:17px}.lv.muitas .lv-abas button small{font-size:8.5px;letter-spacing:-.2px}
 .lv-abas button{flex:1 1 0;min-width:0;display:grid;justify-items:center;gap:1px;padding:6px 2px 13px;margin-bottom:-8px;border:0;border-radius:10px 10px 0 0;background:var(--pg);color:#fff;font-family:inherit;cursor:pointer;
   filter:brightness(.7) saturate(.85);transform:translateY(6px);transition:transform .2s ease,filter .2s ease;box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -8px 8px rgba(0,0,0,.18)}
 .lv-abas button b{font:400 20px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.5px}
@@ -9131,9 +9132,9 @@ function modalComoGanhar(){
   }catch(e){}
   /* álbum */
   try{
-    const inv = albumInventario(), pagas = (perfil.albumPag || []).length, f = pacotesFechados().length;
+    const inv = albumInventario(), pagas = albumPagas().length, f = pacotesFechados().length;
     itens.push(linha("album", "🎴", "Completar páginas do álbum", val("+" + ALBUM_MOEDAS_PAGINA),
-      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_PAGINAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: ${ALBUNS.map(a => "+" + a.premio).join(" e ")}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
+      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_FOLHAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: +${ALBUM_MOEDAS_ALBUM}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
   }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
@@ -9789,7 +9790,7 @@ function fimSuperQuiz(soVer){
 /* ============================================================
    ÁLBUM DE FIGURINHAS BÍBLICO (versão de teste)
    - 97 figurinhas: os 53 personagens e 44 objetos bíblicos, em 6 páginas por tema. Raridades: comum, rara e lendária.
-   - Cada quiz do dia feito dá 1 pacote com 2 figurinhas (eram 3; os pacotes abertos antes da mudança continuam valendo 3). O sorteio é fixo por jogador e por dia (uid + lição + dia),
+   - Cada quiz do dia feito dá 1 pacote com 3 figurinhas. O pacote comprado também vem com 3. O sorteio é fixo por jogador e por dia (uid + lição + dia),
      então não muda se a pessoa reabrir o jogo, e não precisa gravar nada no servidor para "ganhar" o pacote.
      O que fica no perfil: albumAbertos (pacotes já abertos), albumTrocas (o que saiu e o que entrou em cada troca),
      albumPag (páginas já premiadas) e albumFim (álbum completo premiado).
@@ -9797,7 +9798,7 @@ function fimSuperQuiz(soVer){
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
    - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
    ============================================================ */
-const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 2, ALBUM_POR_PACOTE_ANTES = 3, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 20, ALBUM_PACOTES_DIA = 3;
+const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
 const ALBUM_OBJ = {
   folha: ["Folha de Figueira", "Gênesis 3:7"], flor: ["Flor do Éden", "Gênesis 2:9"], nuvem: ["Nuvem de Enoque", "Gênesis 5:24"], arca: ["Arca de Noé", "Gênesis 6:14"],
   pomba_ramo: ["Pomba com o Ramo", "Gênesis 8:11"], estrelas: ["Estrelas da Promessa", "Gênesis 15:5"], tenda: ["Tenda de Abraão", "Gênesis 18:1"], trigo: ["Feixes de Trigo", "Gênesis 37:7"], cetro: ["Cetro do Faraó", "Êxodo 5:2"],
@@ -9829,6 +9830,17 @@ ALBUM_PAGINAS.forEach((pg, pi) => { pg.cartas = [];
     const c = { id, t, k, n: ALBUM_CARTAS.length + 1, pg: pi, nome: pr ? pr.nome : ALBUM_OBJ[k][0], ref: pr ? (pr.ref || "") : ALBUM_OBJ[k][1],
       rar: ALBUM_LENDARIAS.has(id) ? "lendaria" : (pr ? (pr.nivel || pr.preco ? "rara" : "comum") : (ALBUM_RARAS_OBJ.has(k) ? "rara" : "comum")) };
     ALBUM_CARTAS.push(c); ALBUM_IDX[id] = c; pg.cartas.push(c); }); });
+/* páginas do álbum: cada tema é dividido em páginas de até 9 figurinhas. Quando cabe, uma página fica com os personagens e a outra
+   com os objetos; quando não cabe, as figurinhas seguem na ordem, 9 por página. A página tem um id próprio (tema:parte). */
+const ALBUM_FOLHAS = [], ALBUM_FOLHA_ID = {};
+ALBUM_PAGINAS.forEach((pg, ti) => {
+  const ps = pg.cartas.filter(c => c.t === "p"), os = pg.cartas.filter(c => c.t === "o"); let grupos = [ps, os].filter(g => g.length);
+  if(ps.length > ALBUM_POR_PAGINA || os.length > ALBUM_POR_PAGINA){ grupos = []; for(let i = 0; i < pg.cartas.length; i += ALBUM_POR_PAGINA) grupos.push(pg.cartas.slice(i, i + ALBUM_POR_PAGINA)); }
+  pg.folhas = grupos.map((cartas, k) => { const fo = { id: pg.id + ":" + (k + 1), tema: ti, parte: k + 1, i: ALBUM_FOLHAS.length, cartas };
+    cartas.forEach(c => { c.folha = fo.i; }); ALBUM_FOLHAS.push(fo); ALBUM_FOLHA_ID[fo.id] = fo; return fo; });
+});
+/* páginas já premiadas (só as que existem hoje: as anotações do tempo em que a página era o tema inteiro não contam) */
+const albumPagas = () => ((perfil && perfil.albumPag) || []).filter(id => ALBUM_FOLHA_ID[id]);
 
 /* ---------- Sorteio fixo de cada pacote ---------- */
 function albumRng(txt){
@@ -9850,36 +9862,29 @@ const albumAbertos = () => (perfil && perfil.albumAbertos) || [];
 function pacotesFechados(){ const ab = new Set(albumAbertos()); return Object.keys(RES).filter(k => !ab.has(k)).sort((a, b) => (RES[a].quando || 0) - (RES[b].quando || 0)); }
 /* quantas de cada figurinha eu tenho: pacotes abertos, mais o que entrou e menos o que saiu nas trocas */
 function albumInventario(){
-  /* o pacote passou de 3 para 2 figurinhas: quem já tinha aberto pacotes não perde nada. Na primeira vez nesta versão fica anotado
-     quantos pacotes já estavam abertos (albumCorte); esses continuam valendo 3, e os seguintes valem 2. */
-  if(perfil && perfil.albumCorte == null){ perfil.albumCorte = albumAbertos().length; if(usuario) DB.salvarUsuario(usuario.uid, { albumCorte: perfil.albumCorte }).catch(()=>{}); }
-  const corte = (perfil && perfil.albumCorte) || 0;
-  const inv = {}; albumAbertos().forEach((k, i) => pacoteDe(k, i < corte ? ALBUM_POR_PACOTE_ANTES : ALBUM_POR_PACOTE).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
+  const inv = {}; albumAbertos().forEach(k => pacoteDe(k).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
   const t = (perfil && perfil.albumTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
   return inv;
 }
 const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).length;
 const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
-/* álbuns já completos e premiados. Quem completou tudo quando o álbum era um só (albumFim sem albumFeitos) já recebeu o prêmio antigo. */
-const albumFeitos = () => (perfil && perfil.albumFeitos) || [];
-const albumAntigoCompleto = () => !!(perfil && perfil.albumFim && !perfil.albumFeitos);
-function albumCompleto(){ try{ return albumAntigoCompleto() || ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
-function moedasDeAlbum(){ const pag = ((perfil && perfil.albumPag) || []).length * ALBUM_MOEDAS_PAGINA;
-  return pag + (albumAntigoCompleto() ? ALBUM_MOEDAS_FIM : ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0)); }
+/* álbuns já completos e premiados */
+const albumFeitos = () => ((perfil && perfil.albumFeitos) || []).filter(id => ALBUNS.some(a => a.id === id));
+function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
+function moedasDeAlbum(){ return albumPagas().length * ALBUM_MOEDAS_PAGINA + ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0); }
 /* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
 function albumPublico(){ const inv = albumInventario(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); }
 /* páginas recém-completadas: paga as moedas (uma vez por página) e o prêmio do álbum inteiro */
 function conferirPaginasDoAlbum(){
-  const inv = albumInventario(), pagas = (perfil.albumPag || []).slice(); let mudou = false;
-  ALBUM_PAGINAS.forEach(pg => { if(!pagas.includes(pg.id) && pg.cartas.every(c => (inv[c.id] || 0) > 0)){ pagas.push(pg.id); mudou = true; setTimeout(() => ganhouMoedas(ALBUM_MOEDAS_PAGINA, "Página completa: " + pg.nome), 600); } });
-  const novo = {}; if(mudou){ perfil.albumPag = pagas; novo.albumPag = pagas; }
-  if(!albumAntigoCompleto()){
-    const feitos = albumFeitos().slice(); let n = 0;
-    ALBUNS.forEach(a => { if(!feitos.includes(a.id) && a.paginas.every(i => pagas.includes(ALBUM_PAGINAS[i].id))){ feitos.push(a.id); n++;
-      setTimeout(() => { ganhouMoedas(a.premio, "Álbum completo: " + a.nome); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900 + n * 400); } });
-    if(n){ perfil.albumFeitos = feitos; novo.albumFeitos = feitos; }
-    if(!perfil.albumFim && ALBUNS.every(a => feitos.includes(a.id))){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; }
-  }
+  const inv = albumInventario(), pagas = albumPagas().slice(), novo = {}; let n = 0;
+  ALBUM_FOLHAS.forEach(fo => { if(!pagas.includes(fo.id) && fo.cartas.every(c => (inv[c.id] || 0) > 0)){ pagas.push(fo.id); n++;
+    const tema = ALBUM_PAGINAS[fo.tema]; setTimeout(() => ganhouMoedas(ALBUM_MOEDAS_PAGINA, "Página completa: " + tema.nome + (tema.folhas.length > 1 ? " (" + fo.parte + ")" : "")), 600 + (n - 1) * 350); } });
+  if(n){ perfil.albumPag = pagas; novo.albumPag = pagas; }
+  const feitos = albumFeitos().slice(); let m = 0;
+  ALBUNS.forEach(a => { if(!feitos.includes(a.id) && a.paginas.every(i => pagas.includes(ALBUM_FOLHAS[i].id))){ feitos.push(a.id); m++;
+    setTimeout(() => { ganhouMoedas(a.premio, "Álbum completo: " + a.nome); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900 + n * 350 + m * 400); } });
+  if(m){ perfil.albumFeitos = feitos; novo.albumFeitos = feitos; }
+  if(!perfil.albumFim && ALBUNS.every(a => feitos.includes(a.id))){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; }
   if(Object.keys(novo).length) DB.salvarUsuario(usuario.uid, novo).catch(()=>{});
 }
 
@@ -10061,9 +10066,9 @@ function modalFigurinha(id){
 const pacotesCompradosHoje = () => Object.keys((perfil && perfil.compras) || {}).filter(k => k.indexOf("pac:" + hoje() + ":") === 0).length;
 async function comprarPacote(){
   const hj = pacotesCompradosHoje(), saldo = moedas(), p = ALBUM_PRECO_PACOTE;
-  if(hj >= ALBUM_PACOTES_DIA){ aviso(`Você já comprou ${ALBUM_PACOTES_DIA} pacotes hoje. Amanhã tem mais!`); return; }
+  if(hj >= ALBUM_PACOTES_DIA){ aviso(ALBUM_PACOTES_DIA === 1 ? "Você já comprou o pacote de hoje. Amanhã tem mais!" : `Você já comprou ${ALBUM_PACOTES_DIA} pacotes hoje. Amanhã tem mais!`); return; }
   if(saldo < p){ aviso(`Faltam ${p - saldo} ${p - saldo === 1 ? "moeda" : "moedas"} para o pacote. Veja em "Ganhar moedas" como conseguir mais.`); return; }
-  if(!(await confirmar("Comprar pacote", `Comprar um pacote com ${ALBUM_POR_PACOTE} figurinhas por ${p} moedas? Você fica com ${saldo - p}. (${hj + 1} de ${ALBUM_PACOTES_DIA} de hoje)`, "Comprar"))) return;
+  if(!(await confirmar("Comprar pacote", `Comprar um pacote com ${ALBUM_POR_PACOTE} figurinhas por ${p} moedas? Você fica com ${saldo - p}.${ALBUM_PACOTES_DIA === 1 ? " Só dá para comprar 1 por dia." : ` (${hj + 1} de ${ALBUM_PACOTES_DIA} de hoje)`}`, "Comprar"))) return;
   let n = hj + 1, chave = "pac:" + hoje() + ":" + n; while(comprado(chave)) chave = "pac:" + hoje() + ":" + (++n);
   const compras = Object.assign({}, perfil.compras || {}, { [chave]: p });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
@@ -10072,12 +10077,12 @@ async function comprarPacote(){
 }
 function htmlCompraPacote(){
   const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
-  return `<div class="alb-compra"><span>${fim ? `Limite de hoje: ${ALBUM_PACOTES_DIA} de ${ALBUM_PACOTES_DIA}. Amanhã tem mais.` : `Comprados hoje: ${hj} de ${ALBUM_PACOTES_DIA}`}</span><button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="albComprar" ${fim ? "disabled" : ""}>Comprar pacote ${MOEDA}${ALBUM_PRECO_PACOTE}</button></div>`;
+  return `<div class="alb-compra"><span>${ALBUM_PACOTES_DIA === 1 ? (fim ? "Você já comprou o pacote de hoje. Amanhã tem mais." : "Dá para comprar 1 pacote por dia.") : fim ? `Limite de hoje: ${ALBUM_PACOTES_DIA} de ${ALBUM_PACOTES_DIA}. Amanhã tem mais.` : `Comprados hoje: ${hj} de ${ALBUM_PACOTES_DIA}`}</span><button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="albComprar" ${fim ? "disabled" : ""}>Comprar pacote ${MOEDA}${ALBUM_PRECO_PACOTE}</button></div>`;
 }
 /* destaque do pacote na primeira tela da loja */
 function htmlPacoteLoja(){
   const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
-  return `<section class="panel lj-pacote"><span class="pct">${FIG_PACOTE}</span><div><b>Pacote de figurinhas</b><small>${ALBUM_POR_PACOTE} figurinhas para o seu álbum · ${fim ? "volte amanhã" : `${hj} de ${ALBUM_PACOTES_DIA} hoje`}</small></div>
+  return `<section class="panel lj-pacote"><span class="pct">${FIG_PACOTE}</span><div><b>Pacote de figurinhas</b><small>${ALBUM_POR_PACOTE} figurinhas para o seu álbum · ${fim ? "volte amanhã" : ALBUM_PACOTES_DIA === 1 ? "1 por dia" : `${hj} de ${ALBUM_PACOTES_DIA} hoje`}</small></div>
     <button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="ljPacote" ${fim ? "disabled" : ""}>${MOEDA}${ALBUM_PRECO_PACOTE}</button></section>`;
 }
 async function abrirPacotes(chaves){
@@ -10103,7 +10108,7 @@ async function abrirPacotes(chaves){
     if(!calmo){ const ini = 950 + Math.min(vagas.length, 15) * 100 + 500, passo = vagas.length > 9 ? 170 : 520;
       vagas.forEach((v, i) => { v.onclick = () => virar(v); setTimeout(() => virar(v), ini + i * passo); }); }
     m.querySelector("#pacOk").onclick = fechar;
-    m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p){ albumPagina = p.c.pg; albumAberto = albumDe(p.c.pg).id; albumManter = true; } nav("album"); };
+    m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p){ albumPagina = p.c.folha; albumAberto = albumDe(p.c.folha).id; albumManter = true; } nav("album"); };
   }, () => { conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); atualizarCasca();
     if(tabAtual === "album") telaAlbum(); else if(tabAtual === "loja") telaLoja(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e) e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } });
 }
@@ -10230,20 +10235,20 @@ async function modalTrocar(){
 }
 
 /* ---------- Álbuns ----------
-   Cada álbum junta algumas páginas. Para criar um álbum novo, acrescente as páginas dele em ALBUM_PAGINAS (com os personagens e objetos)
-   e uma linha aqui, com as páginas, as cores da capa, os três personagens da capa e o prêmio. */
+   Cada álbum junta alguns temas. Para criar um álbum novo, acrescente os temas dele em ALBUM_PAGINAS (com os personagens e objetos)
+   e uma linha aqui, com os temas, as cores da capa, os três personagens da capa e o prêmio. As páginas (até 9 figurinhas) saem sozinhas. */
 const ALBUNS = [
-  { id: "at", nome: "Antigo Testamento", sub: "Da criação ao retorno do exílio", pgs: ["eden", "exodo", "reis", "exilio"], cor: "#2F56B8", cor2: "#0C1648", capa: ["davi", "moises", "ester"], premio: 100 },
-  { id: "nt", nome: "Novo Testamento", sub: "De Belém à igreja que espera", pgs: ["jesus", "igreja"], cor: "#C2405A", cor2: "#460C22", capa: ["maria", "messias", "pedro"], premio: 60 }
+  { id: "at", nome: "Antigo Testamento", sub: "Da criação ao retorno do exílio", pgs: ["eden", "exodo", "reis", "exilio"], cor: "#2F56B8", cor2: "#0C1648", capa: ["davi", "moises", "ester"], premio: ALBUM_MOEDAS_ALBUM },
+  { id: "nt", nome: "Novo Testamento", sub: "De Belém à igreja que espera", pgs: ["jesus", "igreja"], cor: "#C2405A", cor2: "#460C22", capa: ["maria", "messias", "pedro"], premio: ALBUM_MOEDAS_ALBUM }
 ];
-ALBUNS.forEach(a => { a.paginas = a.pgs.map(id => ALBUM_PAGINAS.findIndex(p => p.id === id)).filter(i => i >= 0); a.cartas = [].concat(...a.paginas.map(i => ALBUM_PAGINAS[i].cartas)); });
+ALBUNS.forEach(a => { a.paginas = [].concat(...a.pgs.map(id => ((ALBUM_PAGINAS.find(p => p.id === id) || {}).folhas || []).map(fo => fo.i))); a.cartas = [].concat(...a.paginas.map(i => ALBUM_FOLHAS[i].cartas)); });
 const albumDe = i => ALBUNS.find(a => a.paginas.includes(i)) || ALBUNS[0];
-/* albumAberto: "" = estante com as capas; senão, o álbum aberto. albumPagina é a página (posição em ALBUM_PAGINAS). */
+/* albumAberto: "" = estante com as capas; senão, o álbum aberto. albumPagina é a página (posição em ALBUM_FOLHAS). */
 let albumAberto = "", albumManter = false, albumPagina = 0, albumVirando = false, albumAbrindo = false;
 /* pelo menu (e pelos avisos) o Álbum abre na estante; só o "Ver o álbum" do pacote abre direto na página da figurinha nova */
 function abrirAlbuns(){ if(!albumManter) albumAberto = ""; albumManter = false; telaAlbum(); }
 function htmlCapa(a, k, inv){
-  const tenho = a.cartas.filter(c => (inv[c.id] || 0) > 0).length, feito = albumFeitos().includes(a.id) || albumAntigoCompleto();
+  const tenho = a.cartas.filter(c => (inv[c.id] || 0) > 0).length, feito = albumFeitos().includes(a.id);
   const tit = a.nome.split(" "), meio = Math.ceil(tit.length / 2);
   return `<button type="button" class="cp" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
     <span class="cp-in"><span class="cp-couro"></span><span class="cp-raios"></span><span class="cp-luz"></span><span class="cp-lomb"></span><span class="cp-mold"></span>
@@ -10253,11 +10258,11 @@ function htmlCapa(a, k, inv){
       <span class="cp-brilho"></span></span></button>`;
 }
 function htmlFolha(i, inv){
-  const pg = ALBUM_PAGINAS[i], a = albumDe(i), pos = a.paginas.indexOf(i), naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = (perfil.albumPag || []).includes(pg.id);
+  const fo = ALBUM_FOLHAS[i], pg = ALBUM_PAGINAS[fo.tema], a = albumDe(i), pos = a.paginas.indexOf(i), naPg = fo.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = albumPagas().includes(fo.id);
   const grade = l => `<div class="alb-grade">${l.map(c => (inv[c.id] || 0) > 0 ? htmlFigurinha(c, inv[c.id]) : htmlVaga(c)).join("")}</div>`;
-  const ps = pg.cartas.filter(c => c.t === "p"), os = pg.cartas.filter(c => c.t === "o");
+  const ps = fo.cartas.filter(c => c.t === "p"), os = fo.cartas.filter(c => c.t === "o");
   return `<div class="lv-folha" data-folha="${i}"><span class="lv-argolas" aria-hidden="true"></span>
-    <header class="lv-cab"><span class="lv-selo" aria-hidden="true"><svg viewBox="0 0 24 24">${FIG_ICONE[pg.id]}</svg></span><div><h3>${esc(pg.nome)}</h3><small>${esc(pg.ref)} · ${naPg} de ${pg.cartas.length} figurinhas</small></div>
+    <header class="lv-cab"><span class="lv-selo" aria-hidden="true"><svg viewBox="0 0 24 24">${FIG_ICONE[pg.id]}</svg></span><div><h3>${esc(pg.nome)}</h3><small>${esc(pg.ref)} · ${naPg} de ${fo.cartas.length} figurinhas</small></div>
       <span class="lv-premio ${paga ? "pago" : ""}">${paga ? "✓ completa" : `<small>página completa</small><b>+${ALBUM_MOEDAS_PAGINA}${MOEDA}</b>`}</span></header>
     ${ps.length ? `<div class="lv-sec">Personagens</div>${grade(ps)}` : ""}
     ${os.length ? `<div class="lv-sec">Objetos</div>${grade(os)}` : ""}
@@ -10272,9 +10277,9 @@ function ligarFolha(el){
 }
 /* vira a página: para frente, a folha atual gira para a esquerda e some; para trás, a folha nova chega girando da esquerda */
 function virarPagina(nova){
-  const miolo = $("albMiolo"); if(!miolo || albumVirando || nova === albumPagina || nova < 0 || nova >= ALBUM_PAGINAS.length) return;
+  const miolo = $("albMiolo"); if(!miolo || albumVirando || nova === albumPagina || nova < 0 || nova >= ALBUM_FOLHAS.length) return;
   const a = albumDe(albumPagina); if(!a.paginas.includes(nova)) return;
-  const velha = miolo.querySelector(".lv-folha"), frente = a.paginas.indexOf(nova) > a.paginas.indexOf(albumPagina), pg = ALBUM_PAGINAS[nova];
+  const velha = miolo.querySelector(".lv-folha"), frente = a.paginas.indexOf(nova) > a.paginas.indexOf(albumPagina), pg = ALBUM_PAGINAS[ALBUM_FOLHAS[nova].tema];
   albumPagina = nova; tocar("toque");
   const tmp = document.createElement("div"); tmp.innerHTML = htmlFolha(nova, albumInventario()); const folha = tmp.firstElementChild;
   const lv = $("albLivro"); lv.style.setProperty("--pg", pg.cor); lv.classList.remove("abre");
@@ -10289,16 +10294,16 @@ function virarPagina(nova){
 }
 function telaAlbum(){
   tabAtual = "album"; atualizarCasca(); pararTimer(); albumVirando = false;
-  const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados(), pagas = perfil.albumPag || [];
+  const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados(), pagas = albumPagas();
   const aberto = ALBUNS.find(a => a.id === albumAberto);
   /* ---------- um álbum aberto: o livro ---------- */
   if(aberto){
     if(!aberto.paginas.includes(albumPagina)) albumPagina = aberto.paginas[0];
-    const pg = ALBUM_PAGINAS[albumPagina], noAlbum = aberto.cartas.filter(c => (inv[c.id] || 0) > 0).length, abre = albumAbrindo; albumAbrindo = false;
+    const pg = ALBUM_PAGINAS[ALBUM_FOLHAS[albumPagina].tema], noAlbum = aberto.cartas.filter(c => (inv[c.id] || 0) > 0).length, abre = albumAbrindo; albumAbrindo = false;
     app.innerHTML = `<div class="estudo-area alb">
       <div class="lv-topo"><button type="button" class="pg-voltar" id="albVoltar"><span aria-hidden="true">‹</span>Álbuns</button><div><b>${esc(aberto.nome)}</b><small>${noAlbum} de ${aberto.cartas.length} figurinhas</small></div></div>
-      <div class="lv ${abre ? "abre" : ""}" id="albLivro" style="--pg:${pg.cor}">
-        <div class="lv-abas" role="tablist" aria-label="Páginas do álbum">${aberto.paginas.map((i, k) => { const p = ALBUM_PAGINAS[i], n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}" title="${esc(p.nome)}" aria-label="Página ${k + 1}: ${esc(p.nome)}, ${n} de ${p.cartas.length}"><b>${k + 1}</b><small>${pagas.includes(p.id) ? "✓" : `${n}/${p.cartas.length}`}</small></button>`; }).join("")}</div>
+      <div class="lv ${abre ? "abre" : ""} ${aberto.paginas.length > 6 ? "muitas" : ""}" id="albLivro" style="--pg:${pg.cor}">
+        <div class="lv-abas" role="tablist" aria-label="Páginas do álbum">${aberto.paginas.map((i, k) => { const fo = ALBUM_FOLHAS[i], p = ALBUM_PAGINAS[fo.tema], n = fo.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}" title="${esc(p.nome)}" aria-label="Página ${k + 1}: ${esc(p.nome)}, ${n} de ${fo.cartas.length}"><b>${k + 1}</b><small>${pagas.includes(fo.id) ? "✓" : `${n}/${fo.cartas.length}`}</small></button>`; }).join("")}</div>
         <div class="lv-capa"><div class="lv-miolo" id="albMiolo">${htmlFolha(albumPagina, inv)}</div></div></div></div>`;
     desenharFigurinhas(app); ligarFolha(app);
     $("albVoltar").onclick = () => { albumAberto = ""; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); };
@@ -10315,7 +10320,7 @@ function telaAlbum(){
       ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>`;
   app.innerHTML = `<div class="estudo-area alb">
     ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbuns de figurinhas", `Cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas. Troque as repetidas com a sua sala.`)}
-    <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_PAGINAS.length} páginas completas${albumCompleto() ? " · álbuns completos ✓" : ""}</small></div>
+    <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_FOLHAS.length} páginas completas${albumCompleto() ? " · álbuns completos ✓" : ""}</small></div>
     <section class="panel alb-pacotes"><span class="pct ${fechados.length ? "tem" : ""}">${FIG_PACOTE}${fechados.length ? `<b>${fechados.length}</b>` : ""}</span>
       <div class="alb-pac-tx"><b>${fechados.length ? `${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}` : "Nenhum pacote para abrir"}</b><small>${fechados.length ? `${ALBUM_POR_PACOTE} figurinhas em cada` : "Faça o quiz do dia para ganhar um, ou compre com moedas."}</small></div>
       <div class="alb-pac-bt">${fechados.length ? `<button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}` : ""}</div>
