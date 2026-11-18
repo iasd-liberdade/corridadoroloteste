@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.160227">
+<meta name="versao" content="20261118.172906">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -9910,7 +9910,8 @@ const FIG_DIR = "figs/";
 const FIG_FOTOS = new Set(("adao eva enoque noe abraao sara jose farao moises miria josue raabe debora gideao sansao rute samuel davi salomao nata jo elias eliseu isaias jeremias amos miqueias hulda habacuque "
   + "ezequiel daniel ester esdras neemias zacarias joel jonas isabel ana joao maria josenazare messias pedro madalena zaqueu filha lidia timoteo barnabe paulo joaoap ellen").split(" "));
 /* objetos que ja tem a imagem 3D (arquivos o_<objeto>.webp). Os outros usam o desenho do jogo */
-const FIG_FOTOS_OBJ = new Set("folha flor nuvem arca pomba_ramo estrelas tenda trigo cetro tabuas cajado tamborim candelabro trombeta cordao palmeira jarro".split(" "));
+const FIG_FOTOS_OBJ = new Set(("folha flor nuvem arca pomba_ramo estrelas tenda trigo cetro tabuas cajado tamborim candelabro trombeta cordao palmeira jarro coluna " +
+  "chifre harpa coroa ovelha chama brasa rolo livro torre roda leao gafanhoto peixe lamparina onda manjedoura estrela martelo pao rede pomba ovelha_chao carta asas pena coracao").split(" "));
 const figTemFoto = c => c.t === "p" ? FIG_FOTOS.has(c.k) : FIG_FOTOS_OBJ.has(c.k);
 const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp";
 /* titulo curto e objeto de cada personagem */
