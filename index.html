@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261117.200620">
+<meta name="versao" content="20261118.022029">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1995,7 +1995,7 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 .tr-par{display:flex;align-items:center;gap:8px}.tr-par > i{font-style:normal;opacity:.7}
 .tr-lado{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1px 6px;min-width:0;flex:1}.tr-lado em{grid-column:1/3;font-style:normal;font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.04em}
 .tr-lado b{font-size:12px;line-height:1.15;overflow:hidden;text-overflow:ellipsis}
-.tr-fig{width:32px;height:40px;border-radius:7px;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}.tr-fig img{max-width:92%;max-height:92%;image-rendering:pixelated}.tr-fig img.hd{image-rendering:auto}
+.tr-fig{width:32px;height:40px;border-radius:7px;background:rgba(255,255,255,.14);display:grid;place-items:center;overflow:hidden}.tr-fig img{max-width:92%;max-height:92%;image-rendering:pixelated}.tr-fig img.ft{max-width:none;max-height:none;width:150%;height:auto;margin-top:18%;image-rendering:auto}.tr-fig img.hd{image-rendering:auto}
 .tr-fig.r-rara{box-shadow:0 0 0 1.5px #F2BE2E}.tr-fig.r-lendaria{box-shadow:0 0 0 1.5px #FF8AD8}
 .tr-acoes{display:flex;flex-direction:column;gap:5px;flex:none}
 .alb-abas{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.alb-abas::-webkit-scrollbar{display:none}
@@ -2006,72 +2006,140 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 .alb-pg-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.alb-pg-cab b{display:block;font-size:17px}.alb-pg-cab small{font-size:12px;color:var(--muted)}
 .alb-premio{display:inline-flex;align-items:center;gap:4px;flex:none;padding:4px 9px;border-radius:99px;background:rgba(242,190,46,.18);color:#FFE27A;font-size:11.5px;font-weight:800}.alb-premio .moeda{width:12px;height:12px}
 .alb-premio.pago{background:rgba(43,164,134,.3);color:#9FF0D2}
-.alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:12px}
-/* figurinha moderna: fundo com luz da cor da página, desenho grande, placa de vidro com o nome, gema da raridade e brilho de foil */
-.fig{--bx:30%;--by:20%;position:relative;display:block;aspect-ratio:5/7;min-width:0;padding:0;border:0;border-radius:14px;overflow:hidden;isolation:isolate;color:#fff;font-family:inherit;text-align:left;cursor:pointer;
-  background:linear-gradient(180deg,var(--pg),#2A2560);
-  background:radial-gradient(120% 85% at 50% 8%,color-mix(in srgb,var(--pg) 78%,#fff) 0%,var(--pg) 42%,color-mix(in srgb,var(--pg) 35%,#141034) 100%);
-  box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 6px 14px rgba(10,8,40,.35);transition:transform .18s ease,box-shadow .18s ease}
+.alb-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:13px 11px}
+/* figurinha: a carta e desenhada num quadro de 500 x 700 e acompanha a largura da figurinha (--u = 1 px do desenho) */
+.fig{--bx:30%;--by:20%;position:relative;display:block;aspect-ratio:5/7;min-width:0;padding:0;border:0;background:none;color:#fff;font-family:inherit;text-align:left;cursor:pointer;border-radius:6.8%/4.86%;
+  container-type:inline-size;transition:transform .18s ease;-webkit-tap-highlight-color:transparent}
+.fig > .ct{--u:calc(100cqw / 500)}
 div.fig{cursor:default}
 button.fig.tem:hover{transform:translateY(-3px)}
 button.fig:active{transform:scale(.97)}
-.fig-fundo{position:absolute;inset:0;z-index:-1;background:repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,255,255,.1) 0 9deg,transparent 9deg 18deg);-webkit-mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%);mask-image:radial-gradient(circle at 50% 46%,#000 0,transparent 68%)}
-.fig-n{position:absolute;left:7px;top:6px;z-index:2;padding:1px 6px;border-radius:99px;background:rgba(10,8,40,.38);font-size:9.5px;font-weight:800;letter-spacing:.06em;font-variant-numeric:tabular-nums}
-.fig-gema{position:absolute;right:6px;top:5px;z-index:2;width:17px;height:17px;display:grid;place-items:center;border-radius:50%;background:rgba(10,8,40,.38)}
-.fig-gema svg{width:11px;height:11px}
-.fig-img{position:absolute;left:0;right:0;top:9%;bottom:29%;display:grid;place-items:center}
-.fig-img::after{content:"";position:absolute;left:22%;right:22%;bottom:1%;height:8%;border-radius:50%;background:rgba(10,8,40,.3);filter:blur(3px);z-index:-1}
-.fig-img img{position:absolute;left:2%;top:0;width:96%;height:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 3px rgba(10,8,40,.35))}
-.fig-img img.hd{image-rendering:auto}
-.fig-img.obj img{left:20%;top:18%;width:60%;height:64%}
-.fig.tem .fig-img.obj{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.62) 0,rgba(255,255,255,.3) 30%,transparent 58%)}
-.fig-placa{position:absolute;left:5px;right:5px;bottom:5px;display:grid;gap:0;padding:5px 7px 6px;border-radius:10px;background:rgba(12,10,44,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.28)}
-.fig-placa b{font-size:10.5px;line-height:1.12;font-weight:800;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.fig-placa small{font-size:8.5px;line-height:1.2;opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fig-x{position:absolute;right:6px;bottom:44px;z-index:3;min-width:20px;padding:1px 6px;border-radius:99px;background:#FFE27A;color:#3A2A00;font-style:normal;font-size:10.5px;font-weight:800;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.3)}
-/* rara: moldura dourada e um brilho que atravessa */
-.fig.r-rara.tem{box-shadow:0 0 0 2px #F2BE2E,0 0 0 3.5px rgba(201,138,18,.9),0 6px 16px rgba(242,190,46,.38)}
-.fig-brilho{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.5) 50%,transparent 62%);background-size:260% 100%;background-position:120% 0;animation:fig-foil 4.6s ease-in-out infinite;mix-blend-mode:soft-light}
+.fig-x{position:absolute;right:5%;bottom:19.5%;z-index:3;min-width:20px;padding:1px 6px;border-radius:99px;background:#FFE27A;color:#3A2A00;font-style:normal;font-size:10.5px;font-weight:800;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,.4)}
+/* rara e lendaria: um brilho que atravessa a carta */
+.fig-brilho{position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.45) 50%,transparent 62%);background-size:260% 100%;background-position:120% 0;background-repeat:no-repeat;animation:fig-foil 4.6s ease-in-out infinite}
 @keyframes fig-foil{0%,55%{background-position:120% 0}85%,100%{background-position:-60% 0}}
-/* lendária: moldura holográfica que gira as cores e reflexo colorido */
-.fig.r-lendaria.tem{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55);animation:fig-holo 5s linear infinite}
-@keyframes fig-holo{0%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55)}33%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FFE27A,0 0 18px 4px rgba(255,226,122,.55)}66%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #8FE6FF,0 0 18px 4px rgba(143,230,255,.55)}100%{box-shadow:0 0 0 2.5px #fff,0 0 0 5px #FF8AD8,0 0 18px 4px rgba(255,138,216,.55)}}
-.fig.r-lendaria .fig-brilho{background:linear-gradient(115deg,rgba(255,138,216,.0) 20%,rgba(255,138,216,.55) 36%,rgba(255,226,122,.55) 48%,rgba(143,230,255,.55) 60%,rgba(180,140,240,.0) 78%);background-size:260% 100%;mix-blend-mode:overlay;animation-duration:3.6s}
-/* espaço vazio: só a sombra do desenho */
-.fig.falta{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(10,8,40,.22));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2);animation:none}
-.fig.falta .fig-fundo{display:none}
-.fig.falta .fig-img img{filter:brightness(0);opacity:.24}
-.fig.falta .fig-img::after{display:none}
-.fig.falta .fig-n{background:none;font-size:11px;opacity:.7}
-.fig.falta .fig-gema{background:none;opacity:.45}
-.fig.falta .fig-placa{background:none;border-top-color:rgba(255,255,255,.12);backdrop-filter:none;-webkit-backdrop-filter:none}
-.fig.falta .fig-placa b{opacity:.6;font-weight:700}.fig.falta .fig-placa small{opacity:.4}
+.fig.r-lendaria .fig-brilho{background-image:linear-gradient(115deg,rgba(255,138,216,0) 20%,rgba(255,138,216,.5) 36%,rgba(255,226,122,.5) 48%,rgba(143,230,255,.5) 60%,rgba(180,140,240,0) 78%);animation-duration:3.4s}
+@media (prefers-reduced-motion: reduce){.fig-brilho{animation:none;display:none}}
+
+.ct{position:absolute;inset:0;display:block;border-radius:calc(34*var(--u));padding:calc(11*var(--u));background:var(--fr);box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.55),0 calc(16*var(--u)) calc(30*var(--u)) calc(-14*var(--u)) rgba(0,0,0,.7);
+  font-family:"Barlow","Segoe UI",Arial,sans-serif;font-weight:400;color:#fff;text-align:left;line-height:1.2;letter-spacing:0;-webkit-font-smoothing:antialiased}
+:where(.ct) :where(span,i,b,em,u,small){display:block;box-sizing:border-box;font-style:normal;font-weight:inherit;text-decoration:none}
+.ct::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:repeating-linear-gradient(118deg,rgba(255,255,255,.09) 0 calc(1*var(--u)),transparent calc(1*var(--u)) calc(3*var(--u)))}
+.ct::after{content:"";position:absolute;inset:calc(4.5*var(--u));border-radius:calc(30*var(--u));border:max(.6PX,calc(1*var(--u))) solid rgba(255,255,255,.38);pointer-events:none}
+.fig.r-rara .ct{background:linear-gradient(140deg,#fff6c9 0%,#f1c758 14%,#a8731b 34%,#ffe9a0 50%,#c48a22 66%,#7a4e0f 84%,#f7d977 100%)}
+.fig.r-lendaria .ct{background:conic-gradient(from 210deg at 50% 50%,#ff7ad9,#ffd36e,#8dffb1,#6fd6ff,#b093ff,#ff7ad9,#ffd36e,#8dffb1,#6fd6ff,#b093ff,#ff7ad9)}
+.ct-in{position:relative;width:100%;height:100%;border-radius:calc(23*var(--u));overflow:hidden;background:var(--c1);box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.6),0 0 0 calc(3*var(--u)) rgba(255,255,255,.14) inset}
+.ct-arte,.ct-arte>span,.ct-palco{position:absolute;inset:0}
+.ct-ceu{background:linear-gradient(180deg,var(--c1) 0%,var(--c2) 40%,var(--c3) 68%,var(--c4) 76%)}
+.ct-raios{background:repeating-conic-gradient(from 4deg at 50% 36%,rgba(255,255,255,.20) 0 5deg,transparent 5deg 15deg);mix-blend-mode:soft-light;
+  -webkit-mask:radial-gradient(circle at 50% 36%,#000 0,rgba(0,0,0,.55) 38%,transparent 72%);mask:radial-gradient(circle at 50% 36%,#000 0,rgba(0,0,0,.55) 38%,transparent 72%)}
+.ct-aneis{background:repeating-radial-gradient(circle at 50% 36%,transparent 0 calc(25*var(--u)),rgba(255,255,255,.085) calc(25*var(--u)) calc(26*var(--u)));
+  -webkit-mask:radial-gradient(circle at 50% 36%,transparent calc(110*var(--u)),#000 calc(170*var(--u)),transparent calc(330*var(--u)));mask:radial-gradient(circle at 50% 36%,transparent calc(110*var(--u)),#000 calc(170*var(--u)),transparent calc(330*var(--u)))}
+.ct-motivo{background:var(--mt);background-size:var(--mtw) auto;opacity:.13;-webkit-mask:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);mask:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 30%,transparent 62%)}
+.ct-halo{background:radial-gradient(circle at 50% 35%,rgba(var(--lz),.92) 0,rgba(var(--lz),.52) 20%,rgba(var(--ac),.26) 40%,transparent 62%)}
+.ct-foil{background:linear-gradient(112deg,transparent 18%,rgba(255,236,170,0) 30%,rgba(255,240,190,.42) 41%,rgba(255,255,255,.62) 46%,rgba(255,225,150,.34) 52%,transparent 64%,transparent 74%,rgba(255,240,190,.22) 82%,transparent 90%);mix-blend-mode:soft-light}
+.fig.r-lendaria .ct-foil{background:linear-gradient(112deg,rgba(255,122,217,.55),rgba(255,211,110,.5) 22%,rgba(141,255,177,.5) 42%,rgba(111,214,255,.55) 62%,rgba(176,147,255,.55) 82%,rgba(255,122,217,.55));opacity:.95}
+.ct-part i{position:absolute;border-radius:50%;background:var(--luz)}
+.ct-part b{position:absolute;background:#fff;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+.fig.r-rara .ct-part b{background:#fff3c4}
+.ct-cena{position:absolute;left:0;top:calc(326*var(--u));width:calc(478*var(--u));height:calc(122*var(--u));display:block}
+.ct-cena .l{fill:var(--s1);opacity:.62}.ct-cena .p{fill:var(--s2);opacity:.8}
+.ct-chao{position:absolute;left:0;right:0;top:calc(446*var(--u));bottom:calc(-60*var(--u));background:radial-gradient(ellipse 62% 44% at 50% 22%,rgba(var(--lz),.55),transparent 70%),linear-gradient(180deg,var(--f1) 0,var(--f2) 26%,var(--c1) 70%);box-shadow:0 calc(-1*var(--u)) 0 rgba(255,255,255,.28)}
+.ct-base{position:absolute;left:calc(95*var(--u));top:calc(460*var(--u));width:calc(288*var(--u));height:calc(64*var(--u))}
+.ct-base::before{content:"";position:absolute;left:0;right:0;top:calc(9*var(--u));bottom:calc(-9*var(--u));border-radius:50%;background:linear-gradient(180deg,var(--b5),#05060d);box-shadow:0 calc(16*var(--u)) calc(26*var(--u)) rgba(0,0,0,.6)}
+.ct-base i{position:absolute;inset:0;border-radius:50%;background:linear-gradient(180deg,var(--b1),var(--metal) 45%,var(--b3));box-shadow:0 0 calc(34*var(--u)) rgba(var(--ac),.6)}
+.ct-base u{position:absolute;inset:calc(4*var(--u)) calc(5*var(--u)) calc(9*var(--u));border-radius:50%;background:radial-gradient(ellipse at 50% 38%,rgba(var(--lz),.85) 0,var(--b4) 46%,#0a0e1c 100%);box-shadow:0 0 0 calc(1*var(--u)) rgba(255,255,255,.4) inset}
+.fig.r-rara .ct-base::before{background:linear-gradient(180deg,#8a5a12,#2a1a04)}
+.fig.r-rara .ct-base i{background:linear-gradient(180deg,#fff3bf,#e2b244 45%,#7a4e0f)}
+.fig.r-lendaria .ct-base i{background:conic-gradient(from 90deg,#ff7ad9,#ffd36e,#8dffb1,#6fd6ff,#b093ff,#ff7ad9)}
+.ct-bon{position:absolute;display:block}
+.ct-foto{left:calc(63.8*var(--u));top:calc(15.5*var(--u));width:calc(359.7*var(--u));height:calc(481.2*var(--u));filter:drop-shadow(0 calc(9*var(--u)) calc(7*var(--u)) rgba(0,0,0,.42)) drop-shadow(0 0 calc(20*var(--u)) rgba(var(--lz),.4))}
+.ct-spr{left:calc(74*var(--u));top:calc(148*var(--u));width:calc(330*var(--u));height:calc(352*var(--u))}
+.ct-spr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 calc(9*var(--u)) calc(7*var(--u)) rgba(0,0,0,.42))}
+.ct-spr img.hd{image-rendering:auto}
+.ct-spr.obj{left:calc(119*var(--u));top:calc(186*var(--u));width:calc(240*var(--u));height:calc(240*var(--u))}
+.ct-spr.obj::before{content:"";position:absolute;inset:calc(-46*var(--u));border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7) 0,rgba(var(--lz),.34) 38%,transparent 66%)}
+.ct-vin{background:radial-gradient(ellipse 85% 70% at 50% 40%,transparent 55%,rgba(0,0,0,.42) 100%);pointer-events:none}
+.ct-canto{position:absolute;top:calc(62*var(--u));width:calc(26*var(--u));height:calc(26*var(--u));border:calc(1.5*var(--u)) solid rgba(255,255,255,.55);opacity:.8}
+.ct-canto.a{left:calc(14*var(--u));border-right:0;border-bottom:0;border-radius:calc(7*var(--u)) 0 0 0}.ct-canto.b{right:calc(14*var(--u));border-left:0;border-bottom:0;border-radius:0 calc(7*var(--u)) 0 0}
+.ct-lado{position:absolute;left:calc(11*var(--u));top:calc(100*var(--u));writing-mode:vertical-rl;transform:rotate(180deg);font-size:calc(8.5*var(--u));font-weight:700;letter-spacing:calc(2.6*var(--u));text-transform:uppercase;color:rgba(255,255,255,.62);white-space:nowrap}
+.ct-topo{position:absolute;left:calc(14*var(--u));right:calc(14*var(--u));top:calc(14*var(--u));display:flex;justify-content:space-between;align-items:center}
+.ct-num,.ct-rar{height:calc(38*var(--u));display:flex;align-items:center;border-radius:calc(12*var(--u));background:linear-gradient(180deg,rgba(12,16,34,.78),rgba(8,10,24,.9));box-shadow:0 0 0 calc(1*var(--u)) rgba(255,255,255,.26) inset,0 calc(6*var(--u)) calc(14*var(--u)) rgba(0,0,0,.35)}
+.ct-num{padding:0 calc(12*var(--u)) 0 calc(10*var(--u));gap:calc(5*var(--u))}
+.ct-num small{font-size:calc(10*var(--u));font-weight:800;letter-spacing:calc(.6*var(--u));color:var(--acc);transform:translateY(calc(-5*var(--u)))}
+.ct-num b{font-family:"Bebas Neue","Arial Narrow",sans-serif;font-weight:400;font-size:calc(31*var(--u));line-height:1;letter-spacing:calc(1*var(--u));transform:translateY(calc(1.5*var(--u)))}
+.ct-num em{font-size:calc(10.5*var(--u));font-weight:700;color:rgba(255,255,255,.55);transform:translateY(calc(5*var(--u)))}
+.ct-rar{padding:0 calc(13*var(--u)) 0 calc(11*var(--u));gap:calc(5*var(--u))}
+.ct-rar i{width:calc(11*var(--u));height:calc(11*var(--u));transform:rotate(45deg);border-radius:calc(2*var(--u));background:linear-gradient(135deg,#fff,#c9d3e6 45%,#7f8aa3);box-shadow:0 0 0 calc(1*var(--u)) rgba(0,0,0,.35),0 0 calc(8*var(--u)) rgba(255,255,255,.5)}
+.ct-rar span{margin-left:calc(5*var(--u));font-size:calc(11.5*var(--u));font-weight:800;letter-spacing:calc(2.2*var(--u));text-transform:uppercase}
+.fig.r-rara .ct-rar i{background:linear-gradient(135deg,#fffbe0,#ffcf4a 45%,#b6740d);box-shadow:0 0 0 calc(1*var(--u)) rgba(80,40,0,.5),0 0 calc(10*var(--u)) rgba(255,207,74,.9)}
+.fig.r-rara .ct-rar span{color:#ffe08a}
+.fig.r-lendaria .ct-rar i{box-shadow:0 0 0 calc(1*var(--u)) rgba(0,0,0,.35),0 0 calc(10*var(--u)) rgba(255,255,255,.9)}
+.fig.r-lendaria .ct-rar i:nth-child(1){background:linear-gradient(135deg,#fff,#ff7ad9)}.fig.r-lendaria .ct-rar i:nth-child(2){background:linear-gradient(135deg,#fff,#ffd36e)}.fig.r-lendaria .ct-rar i:nth-child(3){background:linear-gradient(135deg,#fff,#6fd6ff)}
+.fig.r-lendaria .ct-rar span{color:#ffe7a6}
+.ct-pn{position:absolute;left:0;right:0;bottom:0;height:calc(164*var(--u));padding:calc(17*var(--u)) calc(20*var(--u)) 0;background:linear-gradient(180deg,rgba(9,12,28,.80) 0,rgba(7,9,22,.94) 46%,#060814 100%);box-shadow:0 max(1PX,calc(1.5*var(--u))) 0 var(--a2) inset,0 calc(-14*var(--u)) calc(30*var(--u)) rgba(0,0,0,.35)}
+.ct-pn::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(70*var(--u));background:radial-gradient(ellipse 60% 100% at 50% 0,rgba(var(--ac),.34),transparent 70%);pointer-events:none}
+.ct-l1{position:relative;display:flex;align-items:center;justify-content:space-between;gap:calc(10*var(--u))}
+.ct-tit{min-width:0}
+.ct-nome{font-family:"Bebas Neue","Arial Narrow",sans-serif;font-weight:400;font-size:calc(var(--fs,60)*var(--u));line-height:.9;letter-spacing:calc(1.6*var(--u));text-transform:uppercase;white-space:nowrap;padding-top:calc(14*var(--u));margin-top:calc(-14*var(--u));
+  color:#fff;background:linear-gradient(180deg,#fff 30%,var(--a3) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 calc(2*var(--u)) 0 rgba(0,0,0,.45))}
+.fig.r-rara .ct-nome{background-image:linear-gradient(180deg,#fffbe2 18%,#ffd45c 58%,#c98a1b 100%)}
+.fig.r-lendaria .ct-nome{background-image:linear-gradient(90deg,#ff9be3,#ffe08a 35%,#9dffc0 65%,#8fe0ff)}
+.ct-sub{margin-top:calc(5*var(--u));font-size:calc(15.5*var(--u));font-weight:600;letter-spacing:calc(.2*var(--u));color:var(--acc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct-med{position:relative;flex:none;width:calc(58*var(--u));height:calc(58*var(--u));border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,var(--m1),var(--metal) 55%,var(--b5));
+  box-shadow:0 0 0 calc(2*var(--u)) rgba(0,0,0,.5),0 0 0 calc(3.5*var(--u)) var(--a4),0 0 0 calc(5*var(--u)) rgba(0,0,0,.45),0 calc(6*var(--u)) calc(14*var(--u)) rgba(0,0,0,.5),0 0 calc(22*var(--u)) rgba(var(--ac),.45)}
+.ct-med svg{width:calc(32*var(--u));height:calc(32*var(--u));fill:#fff;display:block}
+.fig.r-rara .ct-med{background:radial-gradient(circle at 35% 28%,#fff6c9,#e9b93e 55%,#8a5a12);box-shadow:0 0 0 calc(2*var(--u)) rgba(0,0,0,.5),0 0 0 calc(3.5*var(--u)) #ffe08a,0 0 0 calc(5*var(--u)) rgba(0,0,0,.45),0 calc(6*var(--u)) calc(14*var(--u)) rgba(0,0,0,.5),0 0 calc(24*var(--u)) rgba(255,207,74,.55)}
+.fig.r-rara .ct-med svg{fill:#4a2c05}
+.fig.r-lendaria .ct-med{background:conic-gradient(from 40deg,#ff7ad9,#ffd36e,#8dffb1,#6fd6ff,#b093ff,#ff7ad9)}
+.ct-fio{position:relative;height:max(1PX,calc(1.5*var(--u)));margin:calc(11*var(--u)) 0 calc(10*var(--u));background:linear-gradient(90deg,rgba(var(--ac),.9),rgba(255,255,255,.14) 70%,transparent)}
+.ct-fio i{position:absolute;left:0;top:calc(-2.5*var(--u));width:calc(6*var(--u));height:calc(6*var(--u));transform:rotate(45deg);background:var(--acc)}
+.ct-chips{display:flex;gap:calc(8*var(--u));overflow:hidden}
+.ct-chips span{display:flex;align-items:center;gap:calc(6*var(--u));height:calc(25*var(--u));padding:0 calc(11*var(--u)) 0 calc(8*var(--u));border-radius:calc(8*var(--u));font-size:calc(12.5*var(--u));font-weight:700;letter-spacing:calc(.2*var(--u));white-space:nowrap;background:rgba(255,255,255,.085);box-shadow:0 0 0 calc(1*var(--u)) rgba(255,255,255,.17) inset}
+.ct-chips svg{flex:none;width:calc(13*var(--u));height:calc(13*var(--u));fill:var(--acc)}
+.ct-rod{position:absolute;left:calc(20*var(--u));right:calc(20*var(--u));bottom:calc(9*var(--u));display:flex;justify-content:space-between;font-size:calc(7.8*var(--u));font-weight:700;letter-spacing:calc(1.7*var(--u));text-transform:uppercase;color:rgba(255,255,255,.46);white-space:nowrap}
+.ct-grao{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%20.9%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");mix-blend-mode:overlay;opacity:.22;pointer-events:none}
+.ct-vidro{position:absolute;inset:0;pointer-events:none;background:linear-gradient(128deg,rgba(255,255,255,.20) 0,rgba(255,255,255,.05) 16%,transparent 30%,transparent 78%,rgba(255,255,255,.07) 100%)}
+/* carta leve (grade do album, pacotes e trocas): sem os enfeites caros, com o nome grande no centro */
+.fig.leve .ct{box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.55),0 calc(22*var(--u)) calc(30*var(--u)) calc(-18*var(--u)) rgba(0,0,0,.8)}
+.fig.leve .ct-palco{transform:translateY(calc(40*var(--u)))}
+.fig.leve .ct-halo{background:radial-gradient(circle at 50% 40%,rgba(var(--lz),.92) 0,rgba(var(--lz),.52) 20%,rgba(var(--ac),.26) 40%,transparent 62%)}
+.fig.leve .ct-foto{filter:drop-shadow(0 calc(9*var(--u)) calc(7*var(--u)) rgba(0,0,0,.42))}
+.fig.leve .ct-num{transform:scale(1.5);transform-origin:0 0;padding:0 calc(11*var(--u))}.fig.leve .ct-num b{transform:translateY(calc(1.5*var(--u)))}
+.fig.leve .ct-num small,.fig.leve .ct-num em,.fig.leve .ct-rar span{display:none}
+.fig.leve .ct-rar{transform:scale(1.5);transform-origin:100% 0;padding:0 calc(12*var(--u));gap:calc(6*var(--u))}
+.fig.leve .ct-pn{height:calc(118*var(--u));padding:0 calc(12*var(--u));display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(9,12,28,.9) 0,#060814 100%)}
+.fig.leve .ct-nome{line-height:.92;white-space:normal;padding-top:calc(16*var(--u));margin-top:calc(-12*var(--u))}
+/* figurinha que falta: carta apagada e so a sombra do desenho */
+.fig.falta .ct{filter:grayscale(1) brightness(.6)}
+.fig.falta .ct-halo,.fig.falta .ct-foil,.fig.falta .ct-part,.fig.falta .ct-spr.obj::before{display:none}
+.fig.falta .ct-foto,.fig.falta .ct-spr img{filter:brightness(0);opacity:.5}
+.ct.t-eden{--c1:#04241d;--c2:#0d6a4b;--c3:#3fbf7d;--c4:#89dc9b;--lz:228,255,192;--ac:147,243,166;--acc:#93f3a6;--luz:#e4ffc0;--metal:#2f9a58;--fr:linear-gradient(140deg,#a1d2b4 0%,#2f9a58 22%,#1a5530 45%,#6db88a 62%,#1c5c35 82%,#97ccac 100%);--s1:#2c9f6a;--s2:#0a4f3a;--f1:#2c8658;--f2:#073a29;--b1:#acd7bc;--b3:#154528;--b4:#416b56;--b5:#184d2c;--a2:#a3f5b3;--a3:#c4f8ce;--a4:#a9f5b8;--m1:#8dc7a3;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2756%27%20height%3D%2756%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%20stroke-linecap%3D%27round%27%3E%3Cpath%20d%3D%27M14%206c7%205%209%2013%200%2024c-9-11-7-19%200-24zM14%2010v18%27%2F%3E%3Cpath%20d%3D%27M42%2030c7%205%209%2013%200%2024c-9-11-7-19%200-24zM42%2034v18%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");--mtw:calc(56*var(--u))}
+.ct.t-exodo{--c1:#2b0d1e;--c2:#a53d1d;--c3:#f2953c;--c4:#f8be76;--lz:255,240,189;--ac:255,200,111;--acc:#ffc86f;--luz:#fff0bd;--metal:#c9773f;--fr:linear-gradient(140deg,#e7c2a9 0%,#c9773f 22%,#6f4123 45%,#d9a079 62%,#794726 82%,#e4bb9f 100%);--s1:#d57430;--s2:#772b1d;--f1:#a9682a;--f2:#5b2210;--b1:#e9c9b2;--b3:#5a361c;--b4:#6d5a40;--b5:#643c20;--a2:#ffd085;--a3:#ffe1b0;--a4:#ffd38c;--m1:#e1b495;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2748%27%20height%3D%2728%27%3E%3Cpath%20d%3D%27M0%2024L12%208l12%2016L36%208l12%2016%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%273%27%20r%3D%271%27%20fill%3D%27white%27%2F%3E%3Ccircle%20cx%3D%2736%27%20cy%3D%273%27%20r%3D%271%27%20fill%3D%27white%27%2F%3E%3C%2Fsvg%3E");--mtw:calc(48*var(--u))}
+.ct.t-reis{--c1:#100a36;--c2:#3b2ca3;--c3:#8c76f6;--c4:#b9a9fa;--lz:239,231,255;--ac:203,189,255;--acc:#cbbdff;--luz:#efe7ff;--metal:#6d5ee6;--fr:linear-gradient(140deg,#bdb7f4 0%,#6d5ee6 22%,#3c347f 45%,#998eee 62%,#41388a 82%,#b6aef2 100%);--s1:#6d5ad6;--s2:#2b1f7a;--f1:#6253ac;--f2:#20185a;--b1:#c5bff5;--b3:#312a68;--b4:#585579;--b5:#362f73;--a2:#d3c7ff;--a3:#e2dbff;--a4:#d5caff;--m1:#afa6f1;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2744%27%20height%3D%2744%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.1%27%3E%3Cpath%20d%3D%27M22%204l18%2018l-18%2018L4%2022z%27%2F%3E%3Cpath%20d%3D%27M22%2013l9%209l-9%209l-9-9z%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2722%27%20cy%3D%2722%27%20r%3D%271.6%27%20fill%3D%27white%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.6%27%20fill%3D%27white%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%2744%27%20r%3D%271.6%27%20fill%3D%27white%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%270%27%20r%3D%271.6%27%20fill%3D%27white%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2744%27%20r%3D%271.6%27%20fill%3D%27white%27%2F%3E%3C%2Fsvg%3E");--mtw:calc(44*var(--u))}
+.ct.t-exilio{--c1:#02172f;--c2:#0a5a92;--c3:#2caee0;--c4:#7bcfee;--lz:220,248,255;--ac:147,230,255;--acc:#93e6ff;--luz:#dcf8ff;--metal:#1c8fc4;--fr:linear-gradient(140deg,#99cde4 0%,#1c8fc4 22%,#0f4f6c 45%,#60b1d6 62%,#115676 82%,#8ec7e2 100%);--s1:#1f8ec2;--s2:#07416c;--f1:#1f7a9d;--f2:#063250;--b1:#a4d2e7;--b3:#0d4058;--b4:#416679;--b5:#0e4862;--a2:#a3eaff;--a3:#c4f1ff;--a4:#a9ebff;--m1:#82c1df;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2760%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M0%2014q7.5-9%2015%200t15%200t15%200t15%200%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%2F%3E%3Cpath%20d%3D%27M0%2034q7.5-9%2015%200t15%200t15%200t15%200%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%20opacity%3D%27.6%27%2F%3E%3Cpath%20d%3D%27M30%2020l1.2%202.8l2.8%201.2l-2.8%201.2L30%2028l-1.2-2.8L26%2024l2.8-1.2z%27%20fill%3D%27white%27%2F%3E%3C%2Fsvg%3E");--mtw:calc(60*var(--u))}
+.ct.t-jesus{--c1:#2d0a1c;--c2:#a3263f;--c3:#f0717a;--c4:#f7a7a6;--lz:255,233,220;--ac:255,185,176;--acc:#ffb9b0;--luz:#ffe9dc;--metal:#d94a5a;--fr:linear-gradient(140deg,#eeaeb5 0%,#d94a5a 22%,#772932 45%,#e4808c 62%,#822c36 82%,#eca4ac 100%);--s1:#d35464;--s2:#761b32;--f1:#a84f55;--f2:#5a1523;--b1:#f0b7bd;--b3:#622128;--b4:#6d545a;--b5:#6c252d;--a2:#ffc4bc;--a3:#ffd8d4;--a4:#ffc7c0;--m1:#ea9ba4;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2752%27%20height%3D%2740%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M6%2012q10-9%2022%200q-12%209-22%200zM28%2012l7-5v10z%27%2F%3E%3Cpath%20d%3D%27M22%2030q10-9%2022%200q-12%209-22%200zM44%2030l7-5v10z%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");--mtw:calc(52*var(--u))}
+.ct.t-igreja{--c1:#03231f;--c2:#0e6e63;--c3:#36b89f;--c4:#81d8c5;--lz:220,255,243;--ac:143,240,214;--acc:#8ff0d6;--luz:#dcfff3;--metal:#2ba486;--fr:linear-gradient(140deg,#a0d6c9 0%,#2ba486 22%,#185a4a 45%,#6bbfaa 62%,#1a6250 82%,#95d2c2 100%);--s1:#279c88;--s2:#0a5249;--f1:#26816f;--f2:#083d36;--b1:#aadbcf;--b3:#134a3c;--b4:#406a69;--b5:#165243;--a2:#a0f2dc;--a3:#c1f7e8;--a4:#a5f3de;--m1:#8acdbc;--mt:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2722%27%3E%3Cpath%20d%3D%27M0%2020a10%2010%200%200%201%2020%200a10%2010%200%200%201%2020%200%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%2F%3E%3Cpath%20d%3D%27M-10%209a10%2010%200%200%201%2020%200a10%2010%200%200%201%2020%200a10%2010%200%200%201%2020%200%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271.2%27%20opacity%3D%27.6%27%2F%3E%3C%2Fsvg%3E");--mtw:calc(40*var(--u))}
 /* figurinha grande (janela de detalhe), que inclina com o dedo */
-.fig-palco{perspective:900px;padding:8px 0 4px;display:grid;place-items:center;touch-action:none}
-.fig.grande{width:min(230px,64vw);border-radius:20px;transition:transform .12s ease-out}
-.fig.grande .fig-n{left:12px;top:11px;font-size:13px;padding:2px 9px}.fig.grande .fig-gema{right:11px;top:10px;width:28px;height:28px}.fig.grande .fig-gema svg{width:18px;height:18px}
-.fig.grande .fig-placa{left:9px;right:9px;bottom:9px;padding:9px 12px 10px;border-radius:14px}.fig.grande .fig-placa b{font-size:18px}.fig.grande .fig-placa small{font-size:12px}
-.fig.grande.tem::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at var(--bx) var(--by),rgba(255,255,255,.34),transparent 45%)}
-.fig-det{text-align:center}.fig-det-ref{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:14px 0 8px}.fig-det-fala{margin:0 0 8px;font-style:italic;font-size:14px}
-.fig-chip{padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--pg,#6B62B8) 60%,transparent);border:1px solid rgba(255,255,255,.25);font-size:11.5px;font-weight:700}
-.fig-chip.r-rara{background:rgba(242,190,46,.22);border-color:#F2BE2E;color:#FFE27A}.fig-chip.r-lendaria{background:linear-gradient(90deg,rgba(255,138,216,.35),rgba(255,226,122,.35),rgba(143,230,255,.35));border-color:#fff}
+.fig-palco{perspective:900px;padding:8px 0 6px;display:grid;place-items:center;touch-action:none}
+.fig.grande{width:min(300px,76vw);transition:transform .12s ease-out}
+.fig.grande.tem::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--bx) var(--by),rgba(255,255,255,.28),transparent 45%)}
+.fig-det{text-align:center}.fig-det-fala{margin:12px 0 8px;font-style:italic;font-size:14px}.fig-det .muted{margin-top:10px}
 /* figurinha pequena (na escolha da troca) */
-.fig.mini{border-radius:10px}.fig.mini .fig-n{left:4px;top:3px;font-size:8px;padding:0 4px}.fig.mini .fig-gema{right:3px;top:3px;width:13px;height:13px}.fig.mini .fig-gema svg{width:8px;height:8px}
-.fig.mini .fig-img{top:10%;bottom:26%}.fig.mini .fig-placa{left:3px;right:3px;bottom:3px;padding:3px 4px;border-radius:7px}.fig.mini .fig-placa b{font-size:8.5px}.fig.mini .fig-placa small{display:none}
 .fig.mini.sel{outline:3px solid #fff;outline-offset:2px}
-.fig.mini.boa::before{content:"";position:absolute;left:50%;top:3px;transform:translateX(-50%);z-index:3;width:8px;height:8px;border-radius:50%;background:#3EE0A0;box-shadow:0 0 0 1.5px #fff}
-.tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:7px;max-height:210px;overflow-y:auto;padding:3px}
+.fig.mini.boa::before{content:"";position:absolute;left:50%;top:-3px;transform:translateX(-50%);z-index:3;width:9px;height:9px;border-radius:50%;background:#3EE0A0;box-shadow:0 0 0 1.5px #fff}
+.tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:9px;max-height:250px;overflow-y:auto;padding:5px 4px 8px}
 .tr-tit{margin:12px 0 6px;font-size:13px}.tr-tit small{opacity:.7;font-size:11px}
 .tr-lista{display:grid;gap:6px}.tr-membro{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:left;cursor:pointer}
 .tr-membro b{flex:1;font-size:14px}.tr-membro i{font-style:normal;opacity:.6}.tr-av .avatar{width:28px;height:36px;display:block}
 /* pacote abrindo */
-.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:900px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:8px 6px 14px}
+.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 10px;perspective:900px;padding-bottom:8px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:8px 6px 14px}
 .pac-carta{position:relative;transform-style:preserve-3d;animation:pac-vira .7s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(.35s + var(--i) * .32s)}
 .pac-frente{backface-visibility:hidden;position:relative}
-.pac-verso{position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at 50% 40%,#7B6CF0,#2E2B6E 75%);box-shadow:inset 0 0 0 2px #FFE27A,inset 0 0 0 5px rgba(255,255,255,.12);display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
+.pac-verso{position:absolute;inset:0;border-radius:6.8%/4.86%;background:radial-gradient(circle at 50% 40%,#7B6CF0,#2E2B6E 75%);box-shadow:inset 0 0 0 2px #FFE27A,inset 0 0 0 5px rgba(255,255,255,.12);display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
 .pac-verso span{font:800 34px "Bebas Neue","Arial Narrow",sans-serif;color:#FFE27A}
 @keyframes pac-vira{from{transform:rotateY(180deg) scale(.85)}to{transform:rotateY(0) scale(1)}}
-.pac-nova,.pac-rep{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap}
+.pac-nova,.pac-rep{position:absolute;left:50%;bottom:-21px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap}
 .pac-nova{background:#3EE0A0;color:#06382A}.pac-rep{background:rgba(0,0,0,.55);color:#fff}
 .pac-resumo{text-align:center;margin:20px 0 12px;font-size:14px}
 .alb-inicio{cursor:pointer}.alb-inicio .hm-barra{display:block;margin:8px 0 6px}.alb-inicio .hm-sub{margin:0}
@@ -9618,25 +9686,120 @@ function figImagem(c){
   }catch(e){}
   return (_figImg[c.id] = u);
 }
-const FIG_GEMA = { rara: `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l5 5-5 9-5-9z" fill="#FFE27A"/><path d="M8 1l5 5H3z" fill="#FFF6C8"/><path d="M8 15l5-9H8z" fill="#E0A82A"/></svg>`,
-  lendaria: `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .8l2.1 4.6 5 .6-3.7 3.4 1 5L8 11.9 3.6 14.4l1-5L.9 6l5-.6z" fill="#fff"/></svg>` };
-/* a figurinha: n = quantas eu tenho (0 = espaço vazio do álbum, com a sombra do desenho). As imagens entram depois (data-figimg), para a tela abrir na hora */
+/* ---------- Carta nova ---------- */
+/* personagens que ja tem a imagem 3D (pasta figs/: p = pequena, g = grande). Os outros usam o desenho do jogo ate a imagem chegar */
+const FIG_DIR = "figs/";
+const FIG_FOTOS = new Set("adao eva enoque noe abraao sara jose farao moises miria josue raabe debora gideao sansao rute samuel davi salomao nata jo elias eliseu isaias jeremias amos miqueias hulda habacuque".split(" "));
+/* titulo curto e objeto de cada personagem */
+const FIG_EXTRA = {
+  adao: ["O primeiro homem", "Folha de figueira"], eva: ["Mãe de todos os viventes", "Flor do Éden"], enoque: ["Andou com Deus", "Nuvem"], noe: ["Construtor da arca", "Arca"],
+  abraao: ["Pai da fé", "Estrelas da promessa"], sara: ["Mãe de nações", "Tenda"], jose: ["O sonhador do Egito", "Feixe de trigo"], farao: ["Rei do Egito", "Cetro real"],
+  moises: ["Libertador de Israel", "Cajado"], miria: ["Profetisa do cântico", "Tamborim"], josue: ["Conquistador de Jericó", "Trombeta"], raabe: ["Corajosa em Jericó", "Cordão escarlate"],
+  debora: ["Juíza e profetisa", "Ramo de palmeira"], gideao: ["Valente dos trezentos", "Cântaro"], sansao: ["O juiz mais forte", "Coluna do templo"], rute: ["A nora fiel", "Espigas de cevada"],
+  samuel: ["Profeta que ungiu reis", "Chifre de azeite"], davi: ["Pastor, músico e rei", "Harpa"], salomao: ["O rei sábio", "Coroa"], nata: ["Profeta da corte de Davi", "Cordeirinha"],
+  jo: ["Fiel na provação", "Ovelha"], elias: ["Profeta do fogo", "Fogo do céu"], eliseu: ["Profeta dos milagres", "Vaso de azeite"], isaias: ["Profeta do Messias", "Brasa do altar"],
+  jeremias: ["Profeta das lágrimas", "Rolo"], amos: ["Pastor de Tecoa", "Cajado de pastor"], miqueias: ["Profeta de Belém", "Estrela de Belém"],
+  hulda: ["Profetisa de Jerusalém", "Livro da Lei"], habacuque: ["Sentinela da fé", "Torre de vigia"], ezequiel: ["Profeta das visões", "Rodas da visão"], daniel: ["Fiel na cova dos leões", "Leão"],
+  ester: ["Rainha corajosa", "Coroa"], esdras: ["Escriba da Lei", "Livro da Lei"], neemias: ["Reconstrutor dos muros", "Torre do muro"], zacarias: ["Profeta da restauração", "Candelabro"],
+  joel: ["Profeta do Espírito", "Gafanhoto"], jonas: ["Profeta de Nínive", "Grande peixe"],
+  isabel: ["Mãe de João Batista", "Coração"], ana: ["Profetisa no templo", "Lâmpada"], joao: ["A voz no deserto", "Águas do Jordão"], maria: ["Mãe de Jesus", "Manjedoura"],
+  josenazare: ["Carpinteiro de Nazaré", "Martelo"], messias: ["O Salvador", "Pão da vida"], pedro: ["Pescador de homens", "Rede de pesca"], madalena: ["Testemunha da ressurreição", "Flor"],
+  zaqueu: ["O publicano transformado", "Ramo de palmeira"],
+  filha: ["Profetisa em Cesareia", "Pomba"], lidia: ["Vendedora de púrpura", "Coração"], timoteo: ["Jovem pastor", "Carta"], barnabe: ["Filho da consolação", "Pomba"],
+  paulo: ["Apóstolo dos gentios", "Carta"], joaoap: ["O discípulo amado", "Candelabro"], ellen: ["Mensageira do Senhor", "Pena"]
+};
+const figExtra = c => c.t === "p" ? (FIG_EXTRA[c.k] || ["", ""]) : ["Objeto bíblico", "Objeto"];
+/* paisagem no horizonte de cada pagina: uma camada longe e uma perto */
+const FIG_PALMA = '<rect x="150" y="62" width="4" height="44"/><path d="M152 62q-22-10-30 8q18-8 30-2q-14-16-34-12q22-2 34 8q2-18-12-26q16 6 14 26q10-18 30-14q-18 0-28 14q16-8 32 2q-16-4-34 0Z"/>';
+const FIG_CENA = {
+  eden: ['<path d="M0 84Q58 44 124 68T246 58T366 66T478 48V122H0Z"/><circle cx="318" cy="40" r="15"/><circle cx="332" cy="48" r="11"/><rect x="316" y="46" width="4" height="22"/>',
+         '<path d="M0 100Q84 72 176 94T334 88T478 80V122H0Z"/><rect x="52" y="58" width="5" height="40"/><circle cx="54" cy="50" r="19"/><circle cx="40" cy="60" r="12"/><circle cx="69" cy="60" r="12"/><rect x="420" y="46" width="5" height="44"/><circle cx="422" cy="38" r="21"/><circle cx="406" cy="50" r="13"/><circle cx="439" cy="50" r="13"/>'],
+  exodo: ['<path d="M236 122L330 22l30 30l22-18l96 88Z"/><path d="M0 122L40 96l34 26Z"/>',
+          '<path d="M14 122L92 40l78 82Z"/><path d="M118 122l50-56l50 56Z"/><path d="M0 108Q104 88 226 106T478 98V122H0Z"/>'],
+  reis: ['<path d="M0 122V78h20V66h8v-8h8v8h8v12h34V56h12V44l14-12l14 12v12h12v22h30V70h8v-8h8v8h8v8h150V70h8v-8h8v8h8v8h34V52h10V40l12-10l12 10v12h10v26h22v44Z"/>',
+         '<path d="M0 122V94h12v-8h10v8h16v-8h10v8h16v-8h10v8h44V70h10V60h8v-8h10v8h8v10h10v24h170V72h10V62h8v-8h10v8h8v10h10v22h30v-8h10v8h16v-8h10v8h12v28Z"/>'],
+  exilio: ['<path d="M286 122V104h14V88h14V72h14V58h64v14h14v16h14v16h14v18Z"/><path d="M0 122V92h16v-8h8v8h30v-8h8v8h30v30Z"/>',
+           '<path d="M0 108q15-9 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0V122H0Z"/>' + FIG_PALMA],
+  jesus: ['<path d="M0 92Q70 52 150 76T300 62T478 72V122H0Z"/><rect x="186" y="46" width="26" height="24"/><rect x="214" y="38" width="20" height="32"/><path d="M236 70V50a10 10 0 0 1 20 0v20Z"/><rect x="258" y="52" width="24" height="18"/><path d="M372 6l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>',
+          '<path d="M0 104Q90 84 190 100T360 96T478 90V122H0Z"/><g transform="translate(-92 -2)">' + FIG_PALMA + '</g><g transform="translate(262 -12)">' + FIG_PALMA + '</g>'],
+  igreja: ['<path d="M0 98Q60 78 130 94T262 88V122H0Z"/><path d="M306 122V72h8V46h-6v-6h100v6h-6v26h8v50Z"/><path d="M300 40l58-22l58 22Z"/>',
+           '<path d="M0 108q15-9 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0V122H0Z"/><path d="M70 98q32 14 78 0l-9 14H82Z"/><rect x="106" y="54" width="3" height="46"/><path d="M111 56q26 14 0 40Z"/><path d="M104 60q-20 12 0 34Z"/>']
+};
+/* selo de cada pagina */
+const FIG_ICONE = {
+  eden: '<path d="M12 1.2C5 5.2 2.4 11.800 4.600 18c1.100 2.900 3.800 4.600 7.400 4.900 3.600-.3 6.300-2 7.400-4.900C21.600 11.800 19 5.200 12 1.200z"/><path d="M12 6.500v15M12 12l-3.600-2.600M12 16l3.800-2.800" fill="none" stroke="#0008" stroke-width="1.300" stroke-linecap="round"/>',
+  exodo: '<path d="M12.600 1.800c.7 3.900 5.400 6 5.400 11.300a6 6 0 0 1-12 0c0-2.400 1.100-4.200 2.400-5.400 0 2.300.9 3.600 2.200 3.700-.3-3.400-.5-6.200 2-9.600z"/>',
+  reis: '<path d="M2.800 17.500h18.400L22.800 7.600l-5.700 4.100L12 4.500 6.900 11.700 1.200 7.600z"/><rect x="2.800" y="19.200" width="18.400" height="2.300" rx=".8"/>',
+  exilio: '<path d="M6 2.500h11.500A3.500 3.500 0 0 1 21 6v1.500h-4V18a3.500 3.500 0 0 1-3.500 3.500h-8A3.500 3.500 0 0 1 2 18v-1.500h4z"/><path d="M9 8h5M9 11.500h5M9 15h3" fill="none" stroke="#0008" stroke-width="1.400" stroke-linecap="round"/>',
+  jesus: '<path d="M12 1.800l2.700 6.900 7.300.4-5.700 4.700 1.900 7.200L12 17l-6.200 4 1.900-7.200L2 9.100l7.300-.4z"/>',
+  igreja: '<path d="M21.500 4.500c-4.500.3-8 2.600-10 6.300C10.800 8 9 5.800 6.200 4.600c.6 2.400.6 4.600-.2 6.500L2 12.300l3.300 1.500c1 3.500 4 5.700 7.700 5.700 4.700 0 8-3.600 8-8.300 0-2.300.2-4.600.5-6.700z"/>'
+};
+/* brilhos e estrelinhas da carta grande, sempre nos mesmos lugares para a mesma figurinha */
+function figParticulas(c){
+  const r = albumRng("fig" + c.n), o = [], qtd = c.rar === "comum" ? 20 : c.rar === "rara" ? 30 : 42, est = c.rar === "comum" ? 3 : c.rar === "rara" ? 8 : 14;
+  const u = v => `calc(${v.toFixed(1)}*var(--u))`;
+  for(let i = 0; i < qtd; i++){ const x = r() * 100, y = r() * 74, t = 2 + r() * (i % 5 === 0 ? 12 : 5), op = .18 + r() * .5;
+    o.push(`<i style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;width:${u(t)};height:${u(t)};opacity:${op.toFixed(2)}${i % 5 === 0 ? `;filter:blur(${u(2.5)})` : ""}"></i>`); }
+  for(let i = 0; i < est; i++){ let x = r() * 100; const y = 4 + r() * 66, t = 8 + r() * (c.rar === "comum" ? 8 : 16), op = .45 + r() * .5;
+    if(x > 30 && x < 70 && y > 12 && y < 60) x = x < 50 ? x - 26 : x + 26;      // não em cima do rosto
+    o.push(`<b style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;width:${u(t)};height:${u(t)};opacity:${op.toFixed(2)}"></b>`); }
+  return o.join("");
+}
+/* tamanho da letra do nome para caber na largura (medidas no quadro de 500 x 700) */
+const figFonte = (letras, larg, max) => Math.max(24, Math.min(max, Math.floor((larg / Math.max(1, letras) - 1.6) / 0.37)));
+function figNomeLeve(nome){
+  const p = nome.split(" ");
+  if(nome.length <= 10 || p.length < 2) return [esc(nome), figFonte(nome.length, 432, 74)];
+  let m = null;
+  for(let i = 1; i < p.length; i++){ const a = p.slice(0, i).join(" "), b = p.slice(i).join(" "), t = Math.max(a.length, b.length); if(!m || t < m[0]) m = [t, a, b]; }
+  return [esc(m[1]) + "<br>" + esc(m[2]), figFonte(m[0], 432, 50)];
+}
+/* a figurinha: n = quantas eu tenho (0 = espaço vazio do álbum, carta apagada com a sombra do desenho).
+   A carta grande (cls "grande") tem todos os detalhes; as outras são a versão leve, para a grade abrir rápido. */
 function htmlFigurinha(c, n, opts){
   opts = opts || {};
-  const tem = n > 0, tag = opts.botao === false ? "div" : "button";
-  return `<${tag} ${tag === "button" ? 'type="button"' : ""} class="fig r-${c.rar} ${tem ? "tem" : "falta"} ${opts.cls || ""}" data-fig="${c.id}" ${opts.attr || ""} style="--pg:${ALBUM_PAGINAS[c.pg].cor}" aria-label="${esc(c.nome)}${tem ? "" : ", falta"}">
-    <span class="fig-fundo" aria-hidden="true"></span>
-    <span class="fig-n">${String(c.n).padStart(2, "0")}</span>${c.rar !== "comum" ? `<span class="fig-gema" title="${ALBUM_ROT[c.rar]}">${FIG_GEMA[c.rar]}</span>` : ""}
-    <span class="fig-img ${c.t === "o" ? "obj" : ""}" data-figimg="${c.id}"></span>
-    <span class="fig-placa"><b>${esc(c.nome)}</b><small>${esc(c.ref || "")}</small></span>
+  const tem = n > 0, tag = opts.botao === false ? "div" : "button", cheia = /(^| )grande( |$)/.test(opts.cls || "");
+  const pg = ALBUM_PAGINAS[c.pg], ex = figExtra(c), foto = c.t === "p" && FIG_FOTOS.has(c.k), gemas = c.rar === "comum" ? 1 : c.rar === "rara" ? 2 : 3;
+  const bon = foto ? `<img class="ct-bon ct-foto" src="${FIG_DIR}p/${c.k}.webp"${cheia && tem ? ` data-g="${FIG_DIR}g/${c.k}.webp"` : ""} data-id="${c.id}" alt="" decoding="async" onerror="figSemFoto(this)">`
+                   : `<span class="ct-bon ct-spr${c.t === "o" ? " obj" : ""}" data-figimg="${c.id}"></span>`;
+  const nm = cheia ? [esc(c.nome), figFonte(c.nome.length, 356, 60)] : figNomeLeve(c.nome), nome = `<b class="ct-nome" style="--fs:${nm[1]}">${nm[0]}</b>`;
+  const painel = !cheia ? nome : `<span class="ct-l1"><span class="ct-tit">${nome}<i class="ct-sub">${esc(ex[0])}</i></span><span class="ct-med"><svg viewBox="0 0 24 24" aria-hidden="true">${FIG_ICONE[pg.id]}</svg></span></span>
+        <span class="ct-fio"><i></i></span>
+        <span class="ct-chips"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.400 8.100 8.100 2.400-8.100 2.400L12 22.500l-2.400-8.100L1.500 12l8.100-2.400z"/></svg>${esc(ex[1])}</span>${c.ref ? `<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.500 4.800c3.300-1.200 6.400-1 9.500 1 3.100-2 6.200-2.200 9.500-1v13.700c-3.300-1.200-6.400-1-9.500 1-3.100-2-6.200-2.200-9.500-1z"/><path d="M12 6.200v13" stroke="#0009" stroke-width="1.400"/></svg>${esc(c.ref)}</span>` : ""}</span>
+        <span class="ct-rod"><span>Corrida do Rolo · Álbum Bíblico</span><span>${esc(pg.nome)} · ${String(pg.cartas.indexOf(c) + 1).padStart(2, "0")}/${pg.cartas.length}</span></span>`;
+  return `<${tag} ${tag === "button" ? 'type="button"' : ""} class="fig ${cheia ? "cheia" : "leve"} r-${c.rar} ${tem ? "tem" : "falta"} ${opts.cls || ""}" data-fig="${c.id}" ${opts.attr || ""} aria-label="${esc(c.nome)}, ${ALBUM_ROT[c.rar].toLowerCase()}${tem ? "" : ", falta"}">
+    <span class="ct t-${pg.id}"><span class="ct-in">
+      <span class="ct-arte"><span class="ct-ceu"></span>${cheia ? `<span class="ct-raios"></span><span class="ct-aneis"></span><span class="ct-motivo"></span>` : ""}<span class="ct-halo"></span>${cheia && c.rar !== "comum" ? `<span class="ct-foil"></span>` : ""}${cheia && tem ? `<span class="ct-part">${figParticulas(c)}</span>` : ""}
+        <span class="ct-palco"><svg class="ct-cena" viewBox="0 0 478 122" preserveAspectRatio="none" aria-hidden="true"><g class="l">${FIG_CENA[pg.id][0]}</g><g class="p">${FIG_CENA[pg.id][1]}</g></svg><span class="ct-chao"></span><span class="ct-base"><i></i><u></u></span>${bon}</span>
+        <span class="ct-vin"></span></span>
+      ${cheia ? `<span class="ct-canto a"></span><span class="ct-canto b"></span><span class="ct-lado">${esc(pg.nome)} · ${esc(pg.ref)}</span>` : ""}
+      <span class="ct-topo"><span class="ct-num"><small>Nº</small><b>${String(c.n).padStart(3, "0")}</b><em>/${String(ALBUM_CARTAS.length).padStart(3, "0")}</em></span><span class="ct-rar">${"<i></i>".repeat(gemas)}<span>${ALBUM_ROT[c.rar]}</span></span></span>
+      <span class="ct-pn">${painel}</span>
+      ${cheia ? `<span class="ct-grao"></span><span class="ct-vidro"></span>` : ""}
+    </span></span>
     ${tem && n > 1 && !opts.semConta ? `<em class="fig-x">×${n}</em>` : ""}${tem && c.rar !== "comum" ? `<span class="fig-brilho" aria-hidden="true"></span>` : ""}</${tag}>`;
 }
+/* navegador antigo, sem as unidades de container: a medida --u é calculada aqui */
+const FIG_CQ = typeof CSS !== "undefined" && !!CSS.supports && CSS.supports("container-type", "inline-size");
+function figEscala(raiz){ if(FIG_CQ) return; (raiz || document).querySelectorAll(".fig > .ct").forEach(e => { const w = e.parentNode.clientWidth; if(w) e.style.setProperty("--u", (w / 500) + "px"); }); }
+if(!FIG_CQ) addEventListener("resize", () => figEscala(document));
+/* a imagem 3D não carregou (arquivo fora da pasta figs/): a carta volta para o desenho do jogo */
+function figSemFoto(img){
+  img.onerror = null; const c = ALBUM_IDX[img.dataset.id]; if(!c || !img.parentNode) return;
+  const s = document.createElement("span"); s.className = "ct-bon ct-spr"; s.dataset.figimg = c.id; const pai = img.parentNode; img.replaceWith(s); desenharFigurinhas(pai);
+}
 function desenharFigurinhas(raiz){
-  const els = [...(raiz || document).querySelectorAll("[data-figimg]")]; let k = 0;
+  raiz = raiz || document; figEscala(raiz);
+  /* carta grande: troca a foto pequena pela grande quando ela termina de carregar */
+  raiz.querySelectorAll("img.ct-foto[data-g]").forEach(img => { const g = img.dataset.g; img.removeAttribute("data-g"); const big = new Image(); big.onload = () => { if(img.isConnected) img.src = g; }; big.src = g; });
+  const els = [...raiz.querySelectorAll("[data-figimg]")]; let k = 0;
   const passo = () => { const fim = Math.min(els.length, k + 6);
-    for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const c = ALBUM_IDX[e.dataset.figimg], u = figImagem(c); e.removeAttribute("data-figimg"); if(!u) continue;
-      const tem = !e.closest(".falta"), img = document.createElement("img"); img.alt = ""; img.src = u; e.appendChild(img);
-      if(c.t === "p" && tem) figEmAlta(img, c); }
+    for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const c = ALBUM_IDX[e.dataset.figimg]; e.removeAttribute("data-figimg"); if(!c) continue;
+      const mini = !e.classList.contains("ct-bon"), img = document.createElement("img"); img.alt = "";
+      if(mini && c.t === "p" && FIG_FOTOS.has(c.k)){ img.className = "ft"; img.onerror = () => { img.onerror = null; img.className = ""; img.src = figImagem(c); }; img.src = FIG_DIR + "p/" + c.k + ".webp"; e.appendChild(img); continue; }
+      const u = figImagem(c); if(!u) continue;
+      img.src = u; e.appendChild(img);
+      if(c.t === "p" && !e.closest(".falta")) figEmAlta(img, c); }
     if(k < els.length) setTimeout(passo, 20); };
   passo();
 }
@@ -9648,7 +9811,6 @@ async function figEmAlta(img, c){
 function modalFigurinha(id){
   const c = ALBUM_IDX[id], n = albumInventario()[id] || 0, pg = ALBUM_PAGINAS[c.pg], pr = c.t === "p" ? acharProfeta(c.k) : null;
   modal("Figurinha " + c.n, `<div class="fig-det"><div class="fig-palco">${htmlFigurinha(c, n, { botao: false, cls: "grande", semConta: true })}</div>
-      <p class="fig-det-ref"><span class="fig-chip r-${c.rar}">${ALBUM_ROT[c.rar]}</span><span class="fig-chip" style="--pg:${pg.cor}">${esc(pg.nome)}</span></p>
       ${pr && pr.fala && n > 0 ? `<p class="fig-det-fala">“${esc(pr.fala)}”</p>` : ""}
       <p class="muted small">${n > 1 ? `Você tem ${n}: ${n - 1} ${n - 1 === 1 ? "repetida" : "repetidas"} para trocar.` : n === 1 ? "Você tem esta figurinha." : "Você ainda não tem. Ela pode sair num pacote ou vir numa troca."}</p></div>`, m => {
     desenharFigurinhas(m);
