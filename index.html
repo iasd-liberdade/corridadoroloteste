@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.022029">
+<meta name="versao" content="20261118.030254">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1984,7 +1984,6 @@ button.cg-item:hover{background:rgba(255,255,255,.05)}
 
 /* ---------- álbum de figurinhas (teste) ---------- */
 .alb-prog{margin:-4px 0 12px}.alb-prog .hm-barra{display:block}.alb-prog small{display:block;margin-top:5px;font-size:12px;color:var(--muted)}
-.alb-pacotes{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border-color:rgba(255,226,122,.6)}
 .alb-pac-ic{font-size:30px;animation:alb-bal 1.6s ease-in-out infinite}
 @keyframes alb-bal{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) translateY(-2px)}}
 .alb-pac-tx{flex:1;min-width:0}.alb-pac-tx b{display:block;font-size:15px}.alb-pac-tx small{font-size:12px;color:var(--muted)}
@@ -2132,16 +2131,134 @@ button.fig:active{transform:scale(.97)}
 .tr-tit{margin:12px 0 6px;font-size:13px}.tr-tit small{opacity:.7;font-size:11px}
 .tr-lista{display:grid;gap:6px}.tr-membro{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:left;cursor:pointer}
 .tr-membro b{flex:1;font-size:14px}.tr-membro i{font-style:normal;opacity:.6}.tr-av .avatar{width:28px;height:36px;display:block}
-/* pacote abrindo */
-.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 10px;perspective:900px;padding-bottom:8px}.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:8px 6px 14px}
-.pac-carta{position:relative;transform-style:preserve-3d;animation:pac-vira .7s cubic-bezier(.3,1.3,.5,1) both;animation-delay:calc(.35s + var(--i) * .32s)}
-.pac-frente{backface-visibility:hidden;position:relative}
-.pac-verso{position:absolute;inset:0;border-radius:6.8%/4.86%;background:radial-gradient(circle at 50% 40%,#7B6CF0,#2E2B6E 75%);box-shadow:inset 0 0 0 2px #FFE27A,inset 0 0 0 5px rgba(255,255,255,.12);display:grid;place-items:center;backface-visibility:hidden;transform:rotateY(180deg)}
-.pac-verso span{font:800 34px "Bebas Neue","Arial Narrow",sans-serif;color:#FFE27A}
-@keyframes pac-vira{from{transform:rotateY(180deg) scale(.85)}to{transform:rotateY(0) scale(1)}}
-.pac-nova,.pac-rep{position:absolute;left:50%;bottom:-21px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap}
+/* cartas: verso e espaço vazio */
+/* verso da carta */
+.fig.verso{cursor:pointer}
+.fig.verso .ct{background:linear-gradient(140deg,#fff3bf 0%,#e2b244 16%,#8a5a12 36%,#f6dc8a 52%,#b57d1c 68%,#6b430c 86%,#f0cf6c 100%)}
+.cv{position:relative;display:block;width:100%;height:100%;border-radius:calc(23*var(--u));overflow:hidden;background:radial-gradient(circle at 50% 42%,#4a3cc0 0,#2a2088 38%,#150e4e 72%,#0b0730 100%);box-shadow:0 0 0 calc(1.5*var(--u)) rgba(0,0,0,.6),0 0 0 calc(3*var(--u)) rgba(255,255,255,.14) inset}
+.cv-trama{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2744%27%20height%3D%2744%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23ffd978%27%20stroke-width%3D%271%27%3E%3Cpath%20d%3D%27M22%202l20%2020l-20%2020L2%2022z%27%2F%3E%3Cpath%20d%3D%27M22%2012l10%2010l-10%2010l-10-10z%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2722%27%20cy%3D%2722%27%20r%3D%271.6%27%20fill%3D%27%23ffd978%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%272%27%20fill%3D%27%23ffd978%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%270%27%20r%3D%272%27%20fill%3D%27%23ffd978%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2744%27%20r%3D%272%27%20fill%3D%27%23ffd978%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%2744%27%20r%3D%272%27%20fill%3D%27%23ffd978%27%2F%3E%3C%2Fsvg%3E");background-size:calc(44*var(--u)) calc(44*var(--u));opacity:.16}
+.cv-raios{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 42%,rgba(255,217,120,.16) 0 6deg,transparent 6deg 18deg);-webkit-mask:radial-gradient(circle at 50% 42%,#000 0,rgba(0,0,0,.5) 34%,transparent 62%);mask:radial-gradient(circle at 50% 42%,#000 0,rgba(0,0,0,.5) 34%,transparent 62%)}
+.cv-borda{position:absolute;inset:calc(20*var(--u));border-radius:calc(14*var(--u));border:max(1PX,calc(2*var(--u))) solid rgba(255,217,120,.75);box-shadow:0 0 0 calc(5*var(--u)) rgba(11,7,48,.5),0 0 0 max(1PX,calc(6.5*var(--u))) rgba(255,217,120,.35)}
+.cv-canto{position:absolute;width:calc(20*var(--u));height:calc(20*var(--u));transform:rotate(45deg);background:linear-gradient(135deg,#fff3bf,#e2b244 55%,#8a5a12);box-shadow:0 0 0 calc(3*var(--u)) #150e4e,0 0 calc(10*var(--u)) rgba(255,217,120,.6)}
+.cv-canto.a{left:calc(11*var(--u));top:calc(11*var(--u))}.cv-canto.b{right:calc(11*var(--u));top:calc(11*var(--u))}.cv-canto.c{left:calc(11*var(--u));bottom:calc(11*var(--u))}.cv-canto.d{right:calc(11*var(--u));bottom:calc(11*var(--u))}
+.cv-med{position:absolute;left:calc(119*var(--u));top:calc(164*var(--u));width:calc(240*var(--u));height:calc(240*var(--u));border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,#5d4fe0,#2a2088 62%,#150e4e);
+  box-shadow:0 0 0 calc(4*var(--u)) #150e4e,0 0 0 calc(9*var(--u)) #e2b244,0 0 0 calc(11*var(--u)) #fff3bf,0 0 0 calc(15*var(--u)) #8a5a12,0 0 0 calc(18*var(--u)) #150e4e,0 0 calc(60*var(--u)) rgba(255,217,120,.55),0 calc(18*var(--u)) calc(30*var(--u)) rgba(0,0,0,.5)}
+.cv-med svg{width:calc(158*var(--u));height:auto;display:block;filter:drop-shadow(0 calc(4*var(--u)) 0 rgba(0,0,0,.35))}
+.cv-t1{position:absolute;left:0;right:0;top:calc(446*var(--u));text-align:center;font-family:"Bebas Neue","Arial Narrow",sans-serif;font-size:calc(54*var(--u));line-height:1;letter-spacing:calc(4*var(--u));color:#ffe9a8;text-shadow:0 calc(3*var(--u)) 0 rgba(0,0,0,.45)}
+.cv-t2{position:absolute;left:0;right:0;top:calc(508*var(--u));text-align:center;font-family:"Barlow","Segoe UI",Arial,sans-serif;font-size:calc(15*var(--u));font-weight:800;letter-spacing:calc(7*var(--u));text-transform:uppercase;color:rgba(255,233,168,.8)}
+.cv-est{position:absolute;left:0;right:0;top:calc(86*var(--u));display:flex;justify-content:center;gap:calc(16*var(--u))}
+.cv-est i{width:calc(18*var(--u));height:calc(18*var(--u));background:#ffe9a8;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%)}
+.cv-est i:nth-child(2){width:calc(28*var(--u));height:calc(28*var(--u));margin-top:calc(-5*var(--u))}
+.cv-fio{position:absolute;left:calc(150*var(--u));right:calc(150*var(--u));top:calc(560*var(--u));height:max(1PX,calc(2*var(--u)));background:linear-gradient(90deg,transparent,rgba(255,217,120,.8),transparent)}
+.cv-vidro{position:absolute;inset:0;background:linear-gradient(128deg,rgba(255,255,255,.22) 0,rgba(255,255,255,.05) 18%,transparent 32%,transparent 76%,rgba(255,255,255,.08) 100%)}
+/* espaço vazio do álbum (figurinha que falta): moldura tracejada no papel, número, sombra do desenho e nome */
+.vg{position:absolute;inset:0;display:block;border-radius:calc(34*var(--u));border:max(1.5PX,calc(5*var(--u))) dashed #b9a67f;background:rgba(122,96,48,.07);color:#6f5b38;font-family:"Barlow","Segoe UI",Arial,sans-serif;text-align:left}
+.vg-n{position:absolute;left:calc(28*var(--u));top:calc(22*var(--u));display:block;font-family:"Bebas Neue","Arial Narrow",sans-serif;font-weight:400;font-size:calc(74*var(--u));line-height:1;letter-spacing:calc(2*var(--u));color:#a08a5e}
+.vg-r{position:absolute;right:calc(30*var(--u));top:calc(38*var(--u));display:flex;gap:calc(11*var(--u))}
+.vg-r i{display:block;width:calc(22*var(--u));height:calc(22*var(--u));transform:rotate(45deg);border-radius:calc(4*var(--u));border:max(1PX,calc(3.5*var(--u))) solid #b9a67f}
+.fig.vaga.r-rara .vg-r i{border-color:#c79a2e;background:rgba(242,190,46,.4)}
+.fig.vaga.r-lendaria .vg-r i{border-color:#b56fd0;background:rgba(255,138,216,.35)}
+.vg-som{position:absolute;left:calc(78*var(--u));top:calc(122*var(--u));width:calc(344*var(--u));height:calc(400*var(--u));display:block;object-fit:contain;filter:brightness(0);opacity:.15}
+img.vg-som{left:calc(70*var(--u));top:calc(96*var(--u));width:calc(360*var(--u));height:calc(481*var(--u))}
+.vg-som img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.vg-som.obj{left:calc(140*var(--u));top:calc(200*var(--u));width:calc(220*var(--u));height:calc(220*var(--u))}
+.vg-nome{position:absolute;left:calc(18*var(--u));right:calc(18*var(--u));bottom:calc(28*var(--u));display:block;text-align:center;font-family:"Bebas Neue","Arial Narrow",sans-serif;font-size:calc(var(--fs,60)*var(--u));line-height:.95;letter-spacing:calc(1.6*var(--u));text-transform:uppercase;color:#8a7650}
+
+.fig > .vg{--u:calc(100cqw / 500)}
+button.fig.vaga:hover{transform:translateY(-2px)}
+/* álbum em formato de livro: marcadores no alto, capa, folha de papel com argolas e as figurinhas coladas */
+.lv{position:relative;margin:2px 0 14px}
+.lv-abas{display:flex;gap:4px;padding:0 14px 0 30px;align-items:flex-end}
+.lv-abas button{flex:1 1 0;min-width:0;display:grid;justify-items:center;gap:1px;padding:6px 2px 13px;margin-bottom:-8px;border:0;border-radius:10px 10px 0 0;background:var(--pg);color:#fff;font-family:inherit;cursor:pointer;
+  filter:brightness(.7) saturate(.85);transform:translateY(6px);transition:transform .2s ease,filter .2s ease;box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -8px 8px rgba(0,0,0,.18)}
+.lv-abas button b{font:400 20px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.5px}
+.lv-abas button small{font-size:9.5px;font-weight:700;opacity:.92;white-space:nowrap}
+.lv-abas button[aria-selected="true"]{filter:none;transform:none}
+.lv-capa{position:relative;z-index:1;padding:9px 11px 14px 9px;border-radius:18px;overflow:hidden;background:#3a2f6b;background:linear-gradient(135deg,color-mix(in srgb,var(--pg) 62%,#1a1230),color-mix(in srgb,var(--pg) 36%,#0e0a20));box-shadow:0 14px 30px rgba(8,6,30,.45),inset 0 1px 0 rgba(255,255,255,.25)}
+.lv-capa::before{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(255,255,255,.3);border-radius:14px;pointer-events:none}
+.lv-miolo{position:relative;display:grid;perspective:1900px;perspective-origin:0 30%}
+.lv-folha{grid-area:1/1;position:relative;min-width:0;padding:14px 10px 12px 31px;border-radius:5px 12px 12px 5px;color:#3d2b17;
+  background:#f5edd9 radial-gradient(120% 80% at 70% 0,rgba(255,255,255,.55),transparent 60%);box-shadow:2px 2px 0 #e9dfc6,4px 4px 0 #dccfae,6px 6px 0 #cdbf9b,0 0 0 1px rgba(90,70,30,.25);
+  transform-origin:0 50%;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.lv-folha::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(60,40,10,.24) 0,rgba(60,40,10,.07) 24px,transparent 46px),url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%200%20.5%20%200%200%200%20.9%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");background-blend-mode:normal;opacity:.5}
+.lv-folha > *{position:relative}
+.lv-argolas{position:absolute !important;left:6px;top:12px;bottom:12px;width:16px;background:radial-gradient(circle at 50% 50%,#3a2c52 0 5px,rgba(0,0,0,.22) 5px 6.5px,transparent 7px) 0 0/16px 40px repeat-y}
+.lv-argolas::after{content:"";position:absolute;left:-22px;top:0;bottom:0;width:31px;background:linear-gradient(180deg,transparent 0 15px,#7d8194 15px 16.5px,#f4f5f9 16.5px 19px,#b9bcc8 19px 22px,#666a7a 22px 24px,transparent 24px) 0 0/100% 40px repeat-y;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.lv-cab{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:4px;border-bottom:2px solid var(--pg)}
+.lv-selo{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--pg);box-shadow:0 0 0 2px #f5edd9,0 0 0 3.5px var(--pg),0 2px 4px rgba(0,0,0,.25)}
+.lv-selo svg{width:22px;height:22px;fill:#fff}
+.lv-cab > div{flex:1;min-width:0}
+.lv-cab h3{margin:0;font:400 25px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1px;color:#3d2b17}
+.lv-cab small{display:block;margin-top:3px;font-size:11.5px;font-weight:600;color:#7a6642}
+.lv-premio{flex:none;display:grid;justify-items:center;gap:1px;padding:4px 9px 5px;border-radius:12px;border:1.5px dashed #b08a2a;color:#8a6410;font-size:13px;font-weight:800;background:rgba(242,190,46,.16);white-space:nowrap;line-height:1.1}
+.lv-premio small{margin:0;font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a6410;opacity:.85}
+.lv-premio b{display:inline-flex;align-items:center;gap:3px}
+.lv-premio .moeda{width:12px;height:12px}
+.lv-premio.pago{border:2px solid #1f8a5b;color:#1f8a5b;background:none;transform:rotate(-7deg);text-transform:uppercase;letter-spacing:.08em;border-radius:6px;padding:4px 7px;font-size:11px}
+.lv-sec{display:flex;align-items:center;gap:8px;margin:12px 0 9px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8c7851}
+.lv-sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#c9b98f,transparent)}
+.lv-folha .alb-grade{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:11px 8px}
+.lv-folha .fig.leve .ct{box-shadow:0 0 0 1px rgba(0,0,0,.55),0 3px 6px rgba(60,40,10,.5)}
+.lv-rod{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:10px 26px 0 0;border-top:1px solid #d8caa6;font-size:12px;font-weight:700;color:#7a6642}
+.lv-seta{width:40px;height:40px;border-radius:50%;border:1.5px solid #c9b98f;background:#fbf6e8;color:#3d2b17;font:700 24px/1 "Barlow",sans-serif;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 0 #d8caa6;padding:0 0 3px}
+.lv-seta:disabled{opacity:.3;cursor:default}
+.lv-dobra{position:absolute !important;right:0;bottom:0;width:30px;height:30px;padding:0;border:0;cursor:pointer;background:linear-gradient(315deg,#cdbf9b 0 50%,#fffaf0 50%,#e6dbbd 100%);border-radius:10px 0 12px 0;box-shadow:-2px -2px 4px rgba(60,40,10,.2)}
+@media (min-width:900px){.lv-folha{padding:18px 18px 14px 44px}.lv-argolas{left:10px}.lv-folha .alb-grade{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:14px 12px}.lv-cab h3{font-size:30px}}
+/* página virando: a folha gira em volta da lombada */
+.lv-folha.sai,.lv-folha.entra{z-index:3;pointer-events:none}
+.lv-folha.sai{animation:lv-sai .78s cubic-bezier(.45,.08,.3,1) forwards}
+.lv-folha.entra{animation:lv-entra .78s cubic-bezier(.3,.1,.3,1) both}
+.lv-folha.sai::after,.lv-folha.entra::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(90deg,rgba(40,25,5,0) 0,rgba(40,25,5,.5) 100%);animation:lv-sombra .78s ease-in forwards}
+.lv-folha.entra::after{animation-direction:reverse;animation-timing-function:ease-out}
+@keyframes lv-sai{0%{transform:rotateY(0)}70%{opacity:1}100%{transform:rotateY(-103deg);opacity:0}}
+@keyframes lv-entra{0%{transform:rotateY(-103deg);opacity:0}30%{opacity:1}100%{transform:rotateY(0)}}
+@keyframes lv-sombra{0%{opacity:0}100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.lv-folha.sai,.lv-folha.entra{animation:none}}
+/* pacote: desenho do saquinho, compra e chegada das cartas */
+.pct{position:relative;flex:none;display:block;width:44px}
+.pct svg{display:block;width:100%;height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.4))}
+.pct.tem{animation:alb-bal 1.6s ease-in-out infinite}
+.pct > b{position:absolute;right:-7px;top:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#E8505D;color:#fff;font:800 11.5px/20px "Barlow",sans-serif;text-align:center;box-shadow:0 0 0 2px rgba(20,18,60,.6)}
+.alb-pacotes{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px 12px;padding:12px 14px;margin-bottom:12px;border-color:rgba(255,226,122,.6)}
+.alb-compra{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.16);font-size:12.5px;color:var(--muted)}
+.alb-compra .btn{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:none}.alb-compra .moeda{width:14px;height:14px}
+.lj-pacote{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border-color:rgba(255,226,122,.6)}
+.lj-pacote > div{flex:1;min-width:0}.lj-pacote b{display:block;font-size:15.5px}.lj-pacote small{display:block;font-size:12px;color:var(--muted)}
+.lj-pacote .pct{width:50px}.lj-pacote .btn{display:inline-flex;align-items:center;gap:5px;flex:none}.lj-pacote .btn .moeda{width:14px;height:14px}
+.pac{position:relative}
+.pac-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 10px;perspective:1000px;padding:4px 0 10px}
+.pac-grade.muitas{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));max-height:54vh;overflow-y:auto;padding:10px 6px 16px}
+.pac-vaga{position:relative;perspective:700px;animation:pac-chega .5s cubic-bezier(.2,1.25,.4,1) both;animation-delay:calc(var(--d0,0s) + var(--i) * .1s)}
+.pac-carta{position:relative;transform-style:preserve-3d;transform:rotateY(180deg);transition:transform .75s cubic-bezier(.3,1.3,.5,1)}
+.pac-vaga.aberta .pac-carta{transform:rotateY(0)}
+.pac-frente{position:relative;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.pac-verso{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:rotateY(180deg)}
+.pac-verso .fig{width:100%}
+.pac-vaga::after{content:"";position:absolute;inset:-14%;border-radius:50%;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(255,255,255,.95) 0,rgba(255,226,122,.7) 30%,transparent 65%)}
+.pac-vaga.aberta.r-rara::after,.pac-vaga.aberta.r-lendaria::after{animation:pac-clarao .9s ease-out .25s both}
+.pac-vaga.aberta.r-lendaria::after{background:radial-gradient(circle,#fff 0,rgba(255,138,216,.75) 26%,rgba(143,230,255,.6) 44%,transparent 68%)}
+.pac-nova,.pac-rep{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);padding:1px 8px;border-radius:99px;font-style:normal;font-size:10px;font-weight:800;white-space:nowrap;opacity:0;transition:opacity .3s ease .5s}
+.pac-vaga.aberta .pac-nova,.pac-vaga.aberta .pac-rep{opacity:1}
 .pac-nova{background:#3EE0A0;color:#06382A}.pac-rep{background:rgba(0,0,0,.55);color:#fff}
-.pac-resumo{text-align:center;margin:20px 0 12px;font-size:14px}
+.pac-saco{position:absolute;left:50%;top:0;z-index:5;width:min(40%,130px);margin-left:calc(min(40%,130px) / -2);pointer-events:none;animation:pac-saco 1.05s ease-in both}
+.pac-saco svg{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5))}
+.pac-saco em{position:absolute;right:-10px;top:-8px;min-width:30px;height:30px;padding:0 7px;border-radius:99px;background:#E8505D;color:#fff;font:800 15px/30px "Barlow",sans-serif;font-style:normal;text-align:center}
+.pac-resumo{text-align:center;margin:22px 0 12px;font-size:14px;min-height:20px}
+.pac-virar{display:block;margin:0 auto 10px;padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font:700 12.5px "Barlow",sans-serif;cursor:pointer}
+@keyframes pac-chega{from{opacity:0;transform:translateY(-34px) scale(.6) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes pac-clarao{0%{opacity:0;transform:scale(.4)}35%{opacity:.95}100%{opacity:0;transform:scale(1.5)}}
+@keyframes pac-saco{0%{opacity:0;transform:translateY(20px) scale(.7)}18%{opacity:1;transform:none}30%{transform:rotate(-7deg)}42%{transform:rotate(7deg)}54%{transform:rotate(-6deg)}66%{transform:rotate(5deg)}78%{transform:scale(1.08)}100%{opacity:0;transform:scale(1.9)}}
+@media (prefers-reduced-motion:reduce){.pac-vaga,.pac-saco{animation:none}.pac-saco{display:none}.pac-carta{transition:none}}
+/* aviso de proposta de troca e contador no menu */
+.tr-chegou{position:fixed;left:50%;top:84px;z-index:119;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;background:rgba(30,26,72,.96);border:1.5px solid rgba(143,230,255,.7);color:#fff;font-family:inherit;text-align:left;cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);transform:translateX(-50%);animation:mg-entra .35s cubic-bezier(.2,1.3,.4,1) both;width:max-content;max-width:calc(100vw - 24px)}
+.tr-chegou.sai{animation:mg-sai .3s ease-in both}
+.tr-chegou .pct{width:26px}
+.tr-chegou > span:nth-child(2){min-width:0}
+.tr-chegou b{display:block;font-size:14.5px;color:#8FE6FF}.tr-chegou small{display:block;font-size:11.5px;opacity:.88}
+.tr-chegou i{flex:none;font-style:normal;font-size:12px;font-weight:800;padding:5px 10px;border-radius:99px;background:#fff;color:#22183A}
+#nav .nav-n.alb{top:1px;right:calc(50% - 24px)}
+.nt-item.troca .nt-ic .pct{width:20px}
 .alb-inicio{cursor:pointer}.alb-inicio .hm-barra{display:block;margin:8px 0 6px}.alb-inicio .hm-sub{margin:0}
 .alb-botao{background:linear-gradient(135deg,#FFE27A,#F2BE2E)!important;color:#3A2A00!important}
 @media (prefers-reduced-motion:reduce){.pac-carta,.alb-pac-ic,.fig.r-lendaria.tem,.fig-brilho{animation:none}.pac-verso{display:none}.fig-brilho{display:none}}
@@ -2178,13 +2295,14 @@ button.fig:active{transform:scale(.97)}
   <button class="chip" id="chipConta" type="button" aria-label="Minha conta"><span class="em" id="chipEm"></span><b class="nav-n chip-n" id="navSalasN" hidden></b></button></div>
 </header>
 <div class="wrap" id="app" aria-live="polite"></div>
-<nav class="bottomnav n6" id="nav" hidden aria-label="Menu principal">
+<nav class="bottomnav n7" id="nav" hidden aria-label="Menu principal">
   <span class="nav-pilula" id="navPilula" aria-hidden="true"></span>
   <button type="button" data-tab="inicio"><span class="ic">🏠</span>Início</button>
   <button type="button" data-tab="mural"><span class="ic">📌</span>Mural</button>
   <button type="button" data-tab="estudar" aria-label="Lição: estudar e fazer o quiz"><span class="ic ic-duo" aria-hidden="true">📖<i>🎯</i></span>Lição</button>
   <button type="button" data-tab="ranking"><span class="ic">🏃‍♂️</span>Corrida</button>
   <button type="button" data-tab="missoes"><span class="ic">🗺️</span>Missões</button>
+  <button type="button" data-tab="album"><span class="ic">📔</span>Álbum<b class="nav-n alb" id="navAlbumN" hidden></b></button>
   <button type="button" data-tab="loja"><span class="ic">🛍️</span>Loja</button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
@@ -2642,6 +2760,7 @@ function dbFirebase(){
     async cancelarDesafio(id){ await col("desafios").doc(id).delete(); },
     /* trocas de figurinhas do álbum */
     async criarTroca(d){ const r = await col("trocas").add(d); return r.id; },
+    async trocasPendentes(uid){ return lista(col("trocas").where("para","==",uid).where("status","==","pendente")); },
     async minhasTrocas(uid){ const [a, b] = await Promise.all([lista(col("trocas").where("de","==",uid)), lista(col("trocas").where("para","==",uid))]); return a.concat(b); },
     async responderTroca(id, status){ await col("trocas").doc(id).update({ status, respondido: Date.now() }); },
     async cancelarTroca(id){ await col("trocas").doc(id).delete(); },
@@ -2756,6 +2875,7 @@ function dbLocal(){
     async responderDesafio(id, status){ const d = ler(); if(d.desafios && d.desafios[id]){ Object.assign(d.desafios[id], { status, respondido: Date.now() }); gravar(d); } },
     async cancelarDesafio(id){ const d = ler(); if(d.desafios){ delete d.desafios[id]; gravar(d); } },
     async criarTroca(x){ const d = ler(), id = "t" + Date.now().toString(36) + Math.floor(Math.random()*1e4); (d.trocas = d.trocas || {})[id] = x; gravar(d); return id; },
+    async trocasPendentes(uid){ const d = ler().trocas || {}; return Object.keys(d).filter(k => d[k].para === uid && d[k].status === "pendente").map(k => Object.assign({id:k}, d[k])); },
     async minhasTrocas(uid){ const d = ler().trocas || {}; return Object.keys(d).filter(k => d[k].de === uid || d[k].para === uid).map(k => Object.assign({id:k}, d[k])); },
     async responderTroca(id, status){ const d = ler(); if(d.trocas && d.trocas[id]){ Object.assign(d.trocas[id], { status, respondido: Date.now() }); gravar(d); } },
     async cancelarTroca(id){ const d = ler(); if(d.trocas){ delete d.trocas[id]; gravar(d); } },
@@ -3372,6 +3492,7 @@ function nav(tab){
   tabAtual = tab; atualizarCasca(); window.scrollTo(0,0);
   if(typeof carregarNotificacoes === "function") carregarNotificacoes();        // confere reações novas (no máximo a cada 90 s)
   if(typeof conferirDesafios === "function" && Date.now() - desafiosEm > 3 * MIN) conferirDesafios().catch(()=>{});      // e desafios (no máximo a cada 3 min)
+  if(typeof conferirTrocas === "function") conferirTrocas();                    // e propostas de troca de figurinha (no máximo a cada 3 min)
   setTimeout(() => conferirVersao(false), 400);                                 // e se subiu versão nova do jogo (no máximo a cada 2 min)
   ({ inicio: telaInicio, estudar: telaEstudar, quiz: telaQuiz, ranking: telaRanking, missoes: () => telaMissoes(), salas: telaSalas, mural: telaMuralSalas, conta: telaConta, admin: telaAdmin, loja: telaLoja, album: () => telaAlbum() }[tab] || telaInicio)();
 }
@@ -3390,7 +3511,8 @@ $("chipConta").onclick = ()=>{
   if(!AREA_DA_CONTA.includes(tabAtual)) antesDaConta = { tab: tabAtual, y: window.scrollY || 0 };
   nav("conta");
 };
-$("sino").onclick = ()=>{ if(typeof desafiosParaResponder === "function" && desafiosParaResponder().length && !(NOTIF.total > 0)) modalDesafios(); else modalNotificacoes(); };
+$("sino").onclick = ()=>{ const nd = typeof desafiosParaResponder === "function" ? desafiosParaResponder().length : 0, ntr = typeof trocasParaMim === "function" ? trocasParaMim().length : 0;
+  if(ntr && !nd && !(NOTIF.total > 0)) nav("album"); else if(nd && !ntr && !(NOTIF.total > 0)) modalDesafios(); else modalNotificacoes(); };
 $("brandIc").innerHTML = logoIcone();
 $("brand").onclick = ()=>{ if(usuario && perfil && (perfil.aprovado || perfil.admin) && perfil.profeta) nav("inicio"); };
 
@@ -7781,7 +7903,9 @@ async function carregarNotificacoes(forcar){
 }
 function atualizarSino(){
   const b = $("sino"); if(!b) return;
-  const nd = typeof desafiosParaResponder === "function" && usuario && perfil ? desafiosParaResponder().length : 0, tot = (NOTIF.total || 0) + nd;
+  const nd = typeof desafiosParaResponder === "function" && usuario && perfil ? desafiosParaResponder().length : 0;
+  const ntr = typeof trocasParaMim === "function" && usuario && perfil ? trocasParaMim().length : 0, tot = (NOTIF.total || 0) + nd + ntr;
+  const na = $("navAlbumN"); if(na){ let n = ntr; try{ if(usuario && perfil && typeof pacotesFechados === "function") n += pacotesFechados().length; }catch(e){} na.hidden = !(n > 0); na.textContent = n > 9 ? "9+" : String(n); }
   b.hidden = $("topbar").hidden || !(tot > 0);
   $("sinoN").textContent = tot > 99 ? "99+" : String(tot);
   b.setAttribute("aria-label", tot === 1 ? "1 notificação nova" : tot + " notificações novas");
@@ -7803,10 +7927,13 @@ async function modalNotificacoes(){
   const itens = NOTIF.itens.slice(0, 30).map(x => Object.assign({}, x));
   await nomesDeQuemReagiu(itens);
   const icones = x => { const ks = [...new Set(x.rs.map(r => r[0]))]; return REACOES.filter(([k]) => ks.includes(k)).slice(0, 3).map(r => r[1]).join(""); };
-  modal("Notificações", itens.length ? `<div class="nt-lista">${itens.map((x, i) => { const s = SALAS.find(y => y.id === x.p.salaId);
+  const ntr = typeof trocasParaMim === "function" ? trocasParaMim().length : 0;
+  const linhaTr = ntr ? `<div class="nt-lista" style="margin-bottom:8px"><button type="button" class="nt-item nova troca" id="ntTroca"><span class="nt-ic" aria-hidden="true"><span class="pct">${FIG_PACOTE}</span></span><span class="nt-tx"><b>${ntr} ${ntr === 1 ? "proposta de troca" : "propostas de troca"}</b> de figurinha<small>Abra o álbum para aceitar ou recusar.</small></span><span class="seta" aria-hidden="true">›</span></button></div>` : "";
+  modal("Notificações", linhaTr + (itens.length ? `<div class="nt-lista">${itens.map((x, i) => { const s = SALAS.find(y => y.id === x.p.salaId);
       return `<button type="button" class="nt-item ${x.novas > 0 ? "nova" : ""}" data-nt="${i}"><span class="nt-ic" aria-hidden="true">${icones(x)}</span><span class="nt-tx">${textoQuemReagiu(x)}<small>${esc(x.p.titulo || "")}${s ? " · " + esc(s.nome) : ""}</small></span>${x.novas > 0 ? `<span class="nt-n" aria-label="${x.novas} ${x.novas === 1 ? "nova" : "novas"}">+${x.novas}</span>` : ""}<span class="seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
       <p class="note">Toque numa notificação para abrir a publicação no mural (ou o seu perfil).</p>`
-    : `<p class="vazio">Nenhuma reação por enquanto. Publique algo no mural e veja a turma reagir!</p>`, (m, fechar) => {
+    : ntr ? "" : `<p class="vazio">Nenhuma reação por enquanto. Publique algo no mural e veja a turma reagir!</p>`), (m, fechar) => {
+    const bt = m.querySelector("#ntTroca"); if(bt) bt.onclick = () => { fechar(); nav("album"); };
     m.querySelectorAll("[data-nt]").forEach(b => b.onclick = () => { const x = itens[+b.dataset.nt]; fechar(); if(x.p.tipo === "perfil") modalPerfil(usuario.uid); else abrirPostNoMural(x.p); });
   });
   /* abriu a lista: tudo o que estava nela conta como visto, e o sino some */
@@ -8678,11 +8805,13 @@ function telaLoja(){
       m: (extraDaLoja("m", minhaMoldura()) || {}).nome, t: (extraDaLoja("t", minhaPista()) || {}).nome, v: (extraDaLoja("v", meuMovimento()) || {}).nome, c: (extraDaLoja("c", minhaFesta()) || {}).nome };
     app.innerHTML = `<div class="estudo-area">
       <div class="lj-topo">${cabPagina("Loja", "", "Loja do Rolo", "Ganhe moedas nos acertos do quiz, nas missões, na semana completa no prazo e nos desafios.")}${htmlMoedasInicio(true)}</div>
+      ${typeof htmlPacoteLoja === "function" ? htmlPacoteLoja() : ""}
       <div class="lj-cats">${LOJA_CATS.map(c => { const l = c.lista(), meus = l.filter(x => comprado(c.k + ":" + x.id)).length;
         return `<button type="button" class="lj-cat" data-cat="${c.k}">${amostra[c.k]}<b>${c.nome}</b><small>${l.length} ${l.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}</small>${emUso[c.k] ? `<em>em uso: ${esc(emUso[c.k])}</em>` : ""}<span class="lj-cat-seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
       <p class="note center">Moedas ganhas até hoje: ${moedasGanhas()} · gastas: ${moedasGastas()}</p></div>`;
     desenharAmostras();
     app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { lojaCat = b.dataset.cat; tocar("toque"); window.scrollTo(0, 0); telaLoja(); });
+    const ljp = $("ljPacote"); if(ljp) ljp.onclick = comprarPacote;
     ligarMoedasInicio(); conferirReacoesAntigas();
     return;
   }
@@ -9599,7 +9728,7 @@ function fimSuperQuiz(soVer){
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
    - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
    ============================================================ */
-const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 3, ALBUM_MAX_PROPOSTAS = 5;
+const ALBUM_MOEDAS_PAGINA = 15, ALBUM_MOEDAS_FIM = 100, ALBUM_POR_PACOTE = 3, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 20, ALBUM_PACOTES_DIA = 3;
 const ALBUM_OBJ = {
   folha: ["Folha de Figueira", "Gênesis 3:7"], flor: ["Flor do Éden", "Gênesis 2:9"], nuvem: ["Nuvem de Enoque", "Gênesis 5:24"], arca: ["Arca de Noé", "Gênesis 6:14"],
   pomba_ramo: ["Pomba com o Ramo", "Gênesis 8:11"], estrelas: ["Estrelas da Promessa", "Gênesis 15:5"], tenda: ["Tenda de Abraão", "Gênesis 18:1"], trigo: ["Feixes de Trigo", "Gênesis 37:7"], cetro: ["Cetro do Faraó", "Êxodo 5:2"],
@@ -9781,13 +9910,29 @@ function htmlFigurinha(c, n, opts){
 }
 /* navegador antigo, sem as unidades de container: a medida --u é calculada aqui */
 const FIG_CQ = typeof CSS !== "undefined" && !!CSS.supports && CSS.supports("container-type", "inline-size");
-function figEscala(raiz){ if(FIG_CQ) return; (raiz || document).querySelectorAll(".fig > .ct").forEach(e => { const w = e.parentNode.clientWidth; if(w) e.style.setProperty("--u", (w / 500) + "px"); }); }
+function figEscala(raiz){ if(FIG_CQ) return; (raiz || document).querySelectorAll(".fig > .ct, .fig > .vg").forEach(e => { const w = e.parentNode.clientWidth; if(w) e.style.setProperty("--u", (w / 500) + "px"); }); }
 if(!FIG_CQ) addEventListener("resize", () => figEscala(document));
 /* a imagem 3D não carregou (arquivo fora da pasta figs/): a carta volta para o desenho do jogo */
 function figSemFoto(img){
   img.onerror = null; const c = ALBUM_IDX[img.dataset.id]; if(!c || !img.parentNode) return;
-  const s = document.createElement("span"); s.className = "ct-bon ct-spr"; s.dataset.figimg = c.id; const pai = img.parentNode; img.replaceWith(s); desenharFigurinhas(pai);
+  const s = document.createElement("span"); s.className = img.dataset.cls || "ct-bon ct-spr"; s.dataset.figimg = c.id; s.dataset.sem = "1"; const pai = img.parentNode; img.replaceWith(s); desenharFigurinhas(pai);
 }
+/* espaço vazio do álbum: moldura tracejada no papel, com o número, a sombra do desenho e o nome */
+function htmlVaga(c){
+  const foto = c.t === "p" && FIG_FOTOS.has(c.k), nm = figNomeLeve(c.nome), gemas = c.rar === "comum" ? 1 : c.rar === "rara" ? 2 : 3;
+  return `<button type="button" class="fig vaga r-${c.rar}" data-fig="${c.id}" aria-label="${esc(c.nome)}, ${ALBUM_ROT[c.rar].toLowerCase()}, falta">
+    <span class="vg"><b class="vg-n">${String(c.n).padStart(3, "0")}</b><span class="vg-r">${"<i></i>".repeat(gemas)}</span>
+      ${foto ? `<img class="vg-som" src="${FIG_DIR}p/${c.k}.webp" data-id="${c.id}" data-cls="vg-som" alt="" loading="lazy" decoding="async" onerror="figSemFoto(this)">` : `<span class="vg-som${c.t === "o" ? " obj" : ""}" data-figimg="${c.id}"></span>`}
+      <span class="vg-nome" style="--fs:${nm[1]}">${nm[0]}</span></span></button>`;
+}
+/* verso da carta: aparece quando a figurinha chega, antes de virar */
+function htmlVerso(){
+  return `<span class="fig verso" aria-hidden="true"><span class="ct"><span class="cv"><span class="cv-trama"></span><span class="cv-raios"></span><span class="cv-borda"></span>
+    <span class="cv-canto a"></span><span class="cv-canto b"></span><span class="cv-canto c"></span><span class="cv-canto d"></span>
+    <span class="cv-est"><i></i><i></i><i></i></span><span class="cv-med"><svg viewBox="18 140 294 194">${LOGO_MARCA}</svg></span>
+    <span class="cv-t1">Corrida do Rolo</span><span class="cv-t2">Álbum Bíblico</span><span class="cv-fio"></span><span class="cv-vidro"></span></span></span></span>`;
+}
+const FIG_PACOTE = '<svg viewBox="0 0 60 88" aria-hidden="true"><defs><linearGradient id="pcA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a86ff"/><stop offset=".5" stop-color="#4a37b8"/><stop offset="1" stop-color="#231a6b"/></linearGradient></defs><path d="M4 7l4-4 4 4l4-4 4 4l4-4 4 4l4-4 4 4l4-4 4 4l4-4 4 4l4-4v78l-4 4-4-4l-4 4-4-4l-4 4-4-4l-4 4-4-4l-4 4-4-4l-4 4-4-4l-4 4z" fill="url(#pcA)" stroke="#ffe27a" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 14h50M5 74h50" stroke="#ffe27a" stroke-width="2.4" opacity=".9"/><path d="M30 25l4.6 10.400 11.300 1.100-8.500 7.500 2.500 11.100L30 49.300l-9.900 5.800 2.500-11.100-8.500-7.500 11.300-1.100z" fill="#ffe27a"/><path d="M11 18L24 70" stroke="#fff" stroke-opacity=".2" stroke-width="5" stroke-linecap="round"/></svg>';
 function desenharFigurinhas(raiz){
   raiz = raiz || document; figEscala(raiz);
   /* carta grande: troca a foto pequena pela grande quando ela termina de carregar */
@@ -9796,10 +9941,10 @@ function desenharFigurinhas(raiz){
   const passo = () => { const fim = Math.min(els.length, k + 6);
     for(; k < fim; k++){ const e = els[k]; if(!e.isConnected) continue; const c = ALBUM_IDX[e.dataset.figimg]; e.removeAttribute("data-figimg"); if(!c) continue;
       const mini = !e.classList.contains("ct-bon"), img = document.createElement("img"); img.alt = "";
-      if(mini && c.t === "p" && FIG_FOTOS.has(c.k)){ img.className = "ft"; img.onerror = () => { img.onerror = null; img.className = ""; img.src = figImagem(c); }; img.src = FIG_DIR + "p/" + c.k + ".webp"; e.appendChild(img); continue; }
+      if(mini && !e.dataset.sem && e.classList.contains("tr-fig") && c.t === "p" && FIG_FOTOS.has(c.k)){ img.className = "ft"; img.onerror = () => { img.onerror = null; img.className = ""; img.src = figImagem(c); }; img.src = FIG_DIR + "p/" + c.k + ".webp"; e.appendChild(img); continue; }
       const u = figImagem(c); if(!u) continue;
       img.src = u; e.appendChild(img);
-      if(c.t === "p" && !e.closest(".falta")) figEmAlta(img, c); }
+      if(c.t === "p" && !e.closest(".falta") && !e.closest(".vaga")) figEmAlta(img, c); }
     if(k < els.length) setTimeout(passo, 20); };
   passo();
 }
@@ -9823,23 +9968,56 @@ function modalFigurinha(id){
   });
 }
 
-/* ---------- Abrir pacotes ---------- */
+/* ---------- Comprar e abrir pacotes ---------- */
+/* pacote comprado: fica anotado em compras ("pac:dia:número" = preço), como os itens da loja; a chave também é a semente do sorteio */
+const pacotesCompradosHoje = () => Object.keys((perfil && perfil.compras) || {}).filter(k => k.indexOf("pac:" + hoje() + ":") === 0).length;
+async function comprarPacote(){
+  const hj = pacotesCompradosHoje(), saldo = moedas(), p = ALBUM_PRECO_PACOTE;
+  if(hj >= ALBUM_PACOTES_DIA){ aviso(`Você já comprou ${ALBUM_PACOTES_DIA} pacotes hoje. Amanhã tem mais!`); return; }
+  if(saldo < p){ aviso(`Faltam ${p - saldo} ${p - saldo === 1 ? "moeda" : "moedas"} para o pacote. Veja em "Ganhar moedas" como conseguir mais.`); return; }
+  if(!(await confirmar("Comprar pacote", `Comprar um pacote com ${ALBUM_POR_PACOTE} figurinhas por ${p} moedas? Você fica com ${saldo - p}. (${hj + 1} de ${ALBUM_PACOTES_DIA} de hoje)`, "Comprar"))) return;
+  let n = hj + 1, chave = "pac:" + hoje() + ":" + n; while(comprado(chave)) chave = "pac:" + hoje() + ":" + (++n);
+  const compras = Object.assign({}, perfil.compras || {}, { [chave]: p });
+  try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
+  perfil.compras = compras; tocar("missao"); atualizarCasca();
+  abrirPacotes([chave]);
+}
+function htmlCompraPacote(){
+  const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
+  return `<div class="alb-compra"><span>${fim ? `Limite de hoje: ${ALBUM_PACOTES_DIA} de ${ALBUM_PACOTES_DIA}. Amanhã tem mais.` : `Comprados hoje: ${hj} de ${ALBUM_PACOTES_DIA}`}</span><button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="albComprar" ${fim ? "disabled" : ""}>Comprar pacote ${MOEDA}${ALBUM_PRECO_PACOTE}</button></div>`;
+}
+/* destaque do pacote na primeira tela da loja */
+function htmlPacoteLoja(){
+  const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
+  return `<section class="panel lj-pacote"><span class="pct">${FIG_PACOTE}</span><div><b>Pacote de figurinhas</b><small>${ALBUM_POR_PACOTE} figurinhas para o seu álbum · ${fim ? "volte amanhã" : `${hj} de ${ALBUM_PACOTES_DIA} hoje`}</small></div>
+    <button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="ljPacote" ${fim ? "disabled" : ""}>${MOEDA}${ALBUM_PRECO_PACOTE}</button></section>`;
+}
 async function abrirPacotes(chaves){
   chaves = (chaves || []).filter(k => !albumAbertos().includes(k)); if(!chaves.length) return;
   const antes = albumInventario(), cartas = []; chaves.forEach(k => pacoteDe(k).forEach(id => cartas.push(id)));
   const lista = albumAbertos().concat(chaves); perfil.albumAbertos = lista;
   DB.salvarUsuario(usuario.uid, { albumAbertos: lista }).catch(()=>{});
   const visto = Object.assign({}, antes), itens = cartas.map(id => { const nova = !(visto[id] > 0); visto[id] = (visto[id] || 0) + 1; return { c: ALBUM_IDX[id], nova }; });
-  const novas = itens.filter(x => x.nova).length; tocar("ajuda");
-  modal(chaves.length === 1 ? "Pacote de figurinhas" : chaves.length + " pacotes de figurinhas", `<div class="pac">
-      <div class="pac-grade ${itens.length > 6 ? "muitas" : ""}">${itens.map((x, i) => `<div class="pac-carta" style="--i:${Math.min(i, 14)}"><div class="pac-verso"><span>?</span></div><div class="pac-frente">${htmlFigurinha(x.c, 1, { botao: false })}${x.nova ? `<em class="pac-nova">NOVA</em>` : `<em class="pac-rep">repetida</em>`}</div></div>`).join("")}</div>
-      <p class="pac-resumo">${novas ? `<b>${novas} ${novas === 1 ? "figurinha nova" : "figurinhas novas"}</b> no álbum` : "Só repetidas desta vez: guarde para trocar!"}${itens.length - novas && novas ? ` · ${itens.length - novas} ${itens.length - novas === 1 ? "repetida" : "repetidas"}` : ""}</p>
+  const novas = itens.filter(x => x.nova).length, calmo = matchMedia("(prefers-reduced-motion: reduce)").matches, muitas = itens.length > 6;
+  const resumo = `${novas ? `<b>${novas} ${novas === 1 ? "figurinha nova" : "figurinhas novas"}</b> no álbum` : "Só repetidas desta vez: guarde para trocar!"}${itens.length - novas && novas ? ` · ${itens.length - novas} ${itens.length - novas === 1 ? "repetida" : "repetidas"}` : ""}`;
+  const verso = htmlVerso(); tocar("ajuda");
+  modal(chaves.length === 1 ? "Pacote de figurinhas" : chaves.length + " pacotes de figurinhas", `<div class="pac" style="--d0:${calmo ? "0s" : ".95s"}">
+      ${calmo ? "" : `<div class="pac-saco">${FIG_PACOTE}${chaves.length > 1 ? `<em>×${chaves.length}</em>` : ""}</div>`}
+      <div class="pac-grade ${muitas ? "muitas" : ""}">${itens.map((x, i) => `<div class="pac-vaga r-${x.c.rar}${calmo ? " aberta" : ""}" data-i="${i}" style="--i:${Math.min(i, 14)}"><div class="pac-carta"><div class="pac-verso">${verso}</div><div class="pac-frente">${htmlFigurinha(x.c, 1, { botao: false })}</div></div>${x.nova ? `<em class="pac-nova">NOVA</em>` : `<em class="pac-rep">repetida</em>`}</div>`).join("")}</div>
+      <p class="pac-resumo" id="pacResumo">${calmo ? resumo : "Toque numa carta para virar agora."}</p>
       <div class="btn-row"><button type="button" class="btn btn-main" id="pacAlbum">Ver o álbum</button><button type="button" class="btn btn-ghost" id="pacOk">Continuar</button></div></div>`, (m, fechar) => {
     desenharFigurinhas(m);
-    if(itens.some(x => x.nova && x.c.rar !== "comum")) setTimeout(() => tocar("subiu"), 700);
+    /* as cartas chegam com o verso para cima e viram uma a uma; tocar numa carta vira na hora */
+    const vagas = [...m.querySelectorAll(".pac-vaga")]; let viradas = calmo ? vagas.length : 0;
+    const virar = v => { if(!v.isConnected || v.classList.contains("aberta")) return; v.classList.add("aberta"); const x = itens[+v.dataset.i];
+      tocar(x.nova && x.c.rar !== "comum" ? "subiu" : "toque");
+      if(++viradas === vagas.length){ const r = m.querySelector("#pacResumo"); if(r) r.innerHTML = resumo; } };
+    if(!calmo){ const ini = 950 + Math.min(vagas.length, 15) * 100 + 500, passo = vagas.length > 9 ? 170 : 520;
+      vagas.forEach((v, i) => { v.onclick = () => virar(v); setTimeout(() => virar(v), ini + i * passo); }); }
     m.querySelector("#pacOk").onclick = fechar;
     m.querySelector("#pacAlbum").onclick = () => { fechar(); const p = itens.find(x => x.nova); if(p) albumPagina = p.c.pg; nav("album"); };
-  }, () => { conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); if(tabAtual === "album") telaAlbum(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e) e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } });
+  }, () => { conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); atualizarCasca();
+    if(tabAtual === "album") telaAlbum(); else if(tabAtual === "loja") telaLoja(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e) e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } });
 }
 
 /* ---------- Trocas (só com a própria sala) ---------- */
@@ -9848,7 +10026,7 @@ const trocaNotas = () => (perfil && perfil.albumTrocas) || {};
 async function carregarTrocas(forcar){
   if(!usuario || !perfil) return TROCAS;
   if(!forcar && Date.now() - trocasEm < 60000) return TROCAS;
-  try{ TROCAS = (await DB.minhasTrocas(usuario.uid)).sort((a, b) => (b.criado || 0) - (a.criado || 0)); trocasOk = true; trocasEm = Date.now(); }
+  try{ TROCAS = (await DB.minhasTrocas(usuario.uid)).sort((a, b) => (b.criado || 0) - (a.criado || 0)); trocasOk = true; trocasEm = Date.now(); avisarTrocasNovas(); }
   catch(e){ if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; return TROCAS; }
   /* trocas que eu propus e foram aceitas: anoto o meu lado (sai a que ofereci, entra a que pedi) */
   const notas = Object.assign({}, trocaNotas()); let mudou = 0;
@@ -9857,7 +10035,38 @@ async function carregarTrocas(forcar){
   if(mudou){ perfil.albumTrocas = notas; DB.salvarUsuario(usuario.uid, { albumTrocas: notas }).catch(()=>{}); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
   return TROCAS;
 }
-const trocasParaMim = () => TROCAS.filter(t => t.para === usuario.uid && t.status === "pendente");
+const trocasParaMim = () => usuario ? TROCAS.filter(t => t.para === usuario.uid && t.status === "pendente") : [];
+/* proposta de troca que chegou e ainda não foi avisada neste aparelho: caixinha na tela, contador no sino e no menu */
+function avisarTrocasNovas(){
+  if(!usuario || !perfil) return;
+  const chave = KEY + ":trocasVistas:" + usuario.uid, vistas = lsGet(chave, []), novas = trocasParaMim().filter(t => !vistas.includes(t.id));
+  if(typeof atualizarSino === "function") atualizarSino();
+  if(!novas.length || tabAtual === "quiz") return;                    // no meio do quiz não interrompe: avisa na próxima conferida
+  lsSet(chave, vistas.concat(novas.map(t => t.id)).slice(-120));
+  if(tabAtual === "album") return;                                    // já está olhando as propostas
+  document.querySelectorAll(".tr-chegou").forEach(e => e.remove());
+  const t = novas[0], dou = ALBUM_IDX[t.dou], quero = ALBUM_IDX[t.quero], quem = String(t.deNome || "Alguém").split(" ")[0];
+  const cx = document.createElement("button"); cx.type = "button"; cx.className = "tr-chegou"; cx.setAttribute("role", "status");
+  cx.innerHTML = `<span class="pct">${FIG_PACOTE}</span><span><b>${novas.length > 1 ? `${novas.length} propostas de troca` : `${esc(quem)} quer trocar figurinha`}</b><small>${novas.length > 1 || !dou || !quero ? "Veja no álbum e responda." : `Dá ${esc(dou.nome)} e pede ${esc(quero.nome)}`}</small></span><i>Ver</i>`;
+  const sair = () => { if(!cx.isConnected) return; cx.classList.add("sai"); setTimeout(() => cx.remove(), 320); };
+  cx.onclick = () => { cx.remove(); document.querySelectorAll(".modal-bg").forEach(m => { const f = m.querySelector(".fechar"); if(f) f.click(); }); nav("album"); };
+  document.body.appendChild(cx); tocar("ajuda"); setTimeout(sair, 9000);
+}
+/* confere de tempos em tempos (no máximo a cada 3 min) se chegou proposta, mesmo com o jogo aberto em outra tela.
+   Lê só as propostas pendentes para mim, para gastar poucas leituras do Firestore. */
+let trocasConfEm = 0;
+function conferirTrocas(){
+  if(!usuario || !perfil || !perfil.profeta || !trocasOk || document.hidden) return;
+  if(Date.now() - trocasConfEm < 170000 || Date.now() - trocasEm < 60000) return;
+  trocasConfEm = Date.now(); const uid = usuario.uid, ids = () => trocasParaMim().map(t => t.id).sort().join(), a = ids();
+  DB.trocasPendentes(uid).then(l => { if(!usuario || usuario.uid !== uid) return;
+    TROCAS = TROCAS.filter(t => !(t.para === uid && t.status === "pendente")).concat(l).sort((x, y) => (y.criado || 0) - (x.criado || 0));
+    avisarTrocasNovas();
+    if(ids() !== a){ atualizarCasca(); const x = $("inAlbum"); if(x && tabAtual === "inicio"){ x.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } if(tabAtual === "album" && !document.querySelector(".modal-bg")) telaAlbum(); } })
+  .catch(e => { if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; });
+}
+setInterval(conferirTrocas, 180000);
+document.addEventListener("visibilitychange", () => { if(!document.hidden) conferirTrocas(); });
 const trocasMinhasAbertas = () => TROCAS.filter(t => t.de === usuario.uid && t.status === "pendente");
 /* repetidas livres: não conta a que já está oferecida numa proposta aberta */
 function repetidasLivres(inv){ const r = {}; ALBUM_CARTAS.forEach(c => { const n = (inv[c.id] || 0) - 1; if(n > 0) r[c.id] = n; }); trocasMinhasAbertas().forEach(t => { if(r[t.dou]) r[t.dou]--; }); return r; }
@@ -9932,29 +10141,70 @@ async function modalTrocar(){
   });
 }
 
-/* ---------- Tela do álbum ---------- */
-let albumPagina = 0;
+/* ---------- Tela do álbum: um livro, com marcadores, folha de papel e páginas que viram ---------- */
+let albumPagina = 0, albumVirando = false;
+function htmlFolha(i, inv){
+  const pg = ALBUM_PAGINAS[i], naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = (perfil.albumPag || []).includes(pg.id);
+  const grade = l => `<div class="alb-grade">${l.map(c => (inv[c.id] || 0) > 0 ? htmlFigurinha(c, inv[c.id]) : htmlVaga(c)).join("")}</div>`;
+  const ps = pg.cartas.filter(c => c.t === "p"), os = pg.cartas.filter(c => c.t === "o");
+  return `<div class="lv-folha" data-folha="${i}"><span class="lv-argolas" aria-hidden="true"></span>
+    <header class="lv-cab"><span class="lv-selo" aria-hidden="true"><svg viewBox="0 0 24 24">${FIG_ICONE[pg.id]}</svg></span><div><h3>${esc(pg.nome)}</h3><small>${esc(pg.ref)} · ${naPg} de ${pg.cartas.length} figurinhas</small></div>
+      <span class="lv-premio ${paga ? "pago" : ""}">${paga ? "✓ completa" : `<small>página completa</small><b>+${ALBUM_MOEDAS_PAGINA}${MOEDA}</b>`}</span></header>
+    <div class="lv-sec">Personagens</div>${grade(ps)}
+    <div class="lv-sec">Objetos</div>${grade(os)}
+    <footer class="lv-rod"><button type="button" class="lv-seta" data-vira="-1" ${i === 0 ? "disabled" : ""} aria-label="Página anterior">‹</button><span>Página ${i + 1} de ${ALBUM_PAGINAS.length}</span><button type="button" class="lv-seta" data-vira="1" ${i === ALBUM_PAGINAS.length - 1 ? "disabled" : ""} aria-label="Próxima página">›</button></footer>
+    ${i < ALBUM_PAGINAS.length - 1 ? `<button type="button" class="lv-dobra" data-vira="1" aria-label="Virar a página"></button>` : ""}</div>`;
+}
+function ligarFolha(el){
+  el.querySelectorAll(".alb-grade [data-fig]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.fig));
+  el.querySelectorAll("[data-vira]").forEach(b => b.onclick = () => virarPagina(albumPagina + (+b.dataset.vira)));
+}
+/* vira a página: para frente, a folha atual gira para a esquerda e some; para trás, a folha nova chega girando da esquerda */
+function virarPagina(nova){
+  const miolo = $("albMiolo"); if(!miolo || albumVirando || nova === albumPagina || nova < 0 || nova >= ALBUM_PAGINAS.length) return;
+  const velha = miolo.querySelector(".lv-folha"), frente = nova > albumPagina, pg = ALBUM_PAGINAS[nova];
+  albumPagina = nova; tocar("toque");
+  const tmp = document.createElement("div"); tmp.innerHTML = htmlFolha(nova, albumInventario()); const folha = tmp.firstElementChild;
+  const lv = $("albLivro"); lv.style.setProperty("--pg", pg.cor);
+  lv.querySelectorAll(".lv-abas [data-pg]").forEach(b => b.setAttribute("aria-selected", String(+b.dataset.pg === nova)));
+  const pronto = () => { desenharFigurinhas(folha); ligarFolha(folha); };
+  if(!velha || matchMedia("(prefers-reduced-motion: reduce)").matches){ if(velha) velha.replaceWith(folha); else miolo.appendChild(folha); pronto(); return; }
+  albumVirando = true;
+  if(frente){ miolo.insertBefore(folha, velha); velha.classList.add("sai"); } else { miolo.appendChild(folha); folha.classList.add("entra"); }
+  pronto();
+  let feito = false; const fim = () => { if(feito) return; feito = true; velha.remove(); folha.classList.remove("entra"); albumVirando = false; };
+  (frente ? velha : folha).addEventListener("animationend", e => { if(e.target === e.currentTarget) fim(); }); setTimeout(fim, 950);
+}
 function telaAlbum(){
-  tabAtual = "album"; atualizarCasca(); pararTimer();
+  tabAtual = "album"; atualizarCasca(); pararTimer(); albumVirando = false;
   const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados();
   if(albumPagina < 0 || albumPagina >= ALBUM_PAGINAS.length) albumPagina = 0;
-  const pg = ALBUM_PAGINAS[albumPagina], naPg = pg.cartas.filter(c => (inv[c.id] || 0) > 0).length, pagas = perfil.albumPag || [];
+  const pg = ALBUM_PAGINAS[albumPagina], pagas = perfil.albumPag || [];
   const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas();
+  const trocas = `<section class="panel alb-trocas" id="albTrocas"><div class="hm-cab"><span>Trocas${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span><button type="button" class="hm-link" id="albTrocar">Trocar figurinhas <span aria-hidden="true">›</span></button></div>
+      ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>`;
   app.innerHTML = `<div class="estudo-area alb">
     ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbum de figurinhas", "Cada quiz do dia dá um pacote com 3 figurinhas. Troque as repetidas com a sua sala.")}
     <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_PAGINAS.length} páginas completas${perfil.albumFim ? " · álbum completo ✓" : ""}</small></div>
-    ${fechados.length ? `<section class="panel alb-pacotes"><div class="alb-pac-ic" aria-hidden="true">🎴</div><div class="alb-pac-tx"><b>${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}</b><small>${ALBUM_POR_PACOTE} figurinhas em cada</small></div><div class="alb-pac-bt"><button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}</div></section>` : ""}
-    <section class="panel alb-trocas"><div class="hm-cab"><span>Trocas${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span><button type="button" class="hm-link" id="albTrocar">Trocar figurinhas <span aria-hidden="true">›</span></button></div>
-      ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>
-    <div class="alb-abas" role="tablist">${ALBUM_PAGINAS.map((p, i) => { const n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}"><b>${esc(p.nome)}</b><small>${n}/${p.cartas.length}${pagas.includes(p.id) ? " ✓" : ""}</small></button>`; }).join("")}</div>
-    <section class="panel pg-card alb-pagina" style="--pg:${pg.cor}"><div class="alb-pg-cab"><div><b>${esc(pg.nome)}</b><small>${esc(pg.ref)} · ${naPg} de ${pg.cartas.length}</small></div><span class="alb-premio ${pagas.includes(pg.id) ? "pago" : ""}">${pagas.includes(pg.id) ? "✓ completa" : `completa: +${ALBUM_MOEDAS_PAGINA}`}${pagas.includes(pg.id) ? "" : MOEDA}</span></div>
-      <div class="alb-grade">${pg.cartas.map(c => htmlFigurinha(c, inv[c.id] || 0)).join("")}</div></section>
+    <section class="panel alb-pacotes"><span class="pct ${fechados.length ? "tem" : ""}">${FIG_PACOTE}${fechados.length ? `<b>${fechados.length}</b>` : ""}</span>
+      <div class="alb-pac-tx"><b>${fechados.length ? `${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}` : "Nenhum pacote para abrir"}</b><small>${fechados.length ? `${ALBUM_POR_PACOTE} figurinhas em cada` : "Faça o quiz do dia para ganhar um, ou compre com moedas."}</small></div>
+      <div class="alb-pac-bt">${fechados.length ? `<button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}` : ""}</div>
+      ${htmlCompraPacote()}</section>
+    ${paraMim.length ? trocas : ""}
+    <div class="lv" id="albLivro" style="--pg:${pg.cor}">
+      <div class="lv-abas" role="tablist" aria-label="Páginas do álbum">${ALBUM_PAGINAS.map((p, i) => { const n = p.cartas.filter(c => (inv[c.id] || 0) > 0).length; return `<button type="button" role="tab" aria-selected="${i === albumPagina}" data-pg="${i}" style="--pg:${p.cor}" title="${esc(p.nome)}" aria-label="Página ${i + 1}: ${esc(p.nome)}, ${n} de ${p.cartas.length}"><b>${i + 1}</b><small>${pagas.includes(p.id) ? "✓" : `${n}/${p.cartas.length}`}</small></button>`; }).join("")}</div>
+      <div class="lv-capa"><div class="lv-miolo" id="albMiolo">${htmlFolha(albumPagina, inv)}</div></div></div>
+    ${paraMim.length ? "" : trocas}
     <p class="note center">Álbum completo: +${ALBUM_MOEDAS_FIM} moedas e a conquista Colecionador.</p></div>`;
-  desenharFigurinhas(app);
-  app.querySelectorAll("[data-pg]").forEach(b => b.onclick = () => { albumPagina = +b.dataset.pg; tocar("toque"); telaAlbum(); });
-  app.querySelectorAll(".alb-grade [data-fig]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.fig));
+  desenharFigurinhas(app); ligarFolha(app);
+  app.querySelectorAll(".lv-abas [data-pg]").forEach(b => b.onclick = () => virarPagina(+b.dataset.pg));
+  /* arrastar o dedo para o lado também vira a página */
+  const miolo = $("albMiolo"); let tx = 0, ty = 0;
+  miolo.addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; }, { passive: true });
+  miolo.addEventListener("touchend", e => { const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty; if(Math.abs(dx) > 70 && Math.abs(dx) > 2.2 * Math.abs(dy)) virarPagina(albumPagina + (dx < 0 ? 1 : -1)); }, { passive: true });
   const ab = $("albAbrir"); if(ab) ab.onclick = () => abrirPacotes(fechados.slice(0, 1));
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
+  const cp = $("albComprar"); if(cp) cp.onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
   app.querySelectorAll("[data-tr-aceitar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trAceitar, true));
   app.querySelectorAll("[data-tr-recusar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trRecusar, false));
