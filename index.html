@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261119.135829">
+<meta name="versao" content="20261119.184725">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1214,6 +1214,35 @@ input[type=text],input[type=email],input[type=password],input[type=number],input
 @keyframes avsobe{0%,30%,100%{transform:none}8%{transform:translateY(-3.4px)}14%{transform:translateY(-2.6px)}20%{transform:translateY(-3.4px)}}
 @keyframes avbrilha{0%,24%,100%{transform:scale(1)}6%{transform:scale(1.4)}12%{transform:scale(1.05)}18%{transform:scale(1.32)}}
 @media (prefers-reduced-motion:reduce){.avatar .av-corpo,.avatar .av-emb{animation:none}}
+/* personagens da loja: contorno azul-violeta, base de luz, brilho holográfico e o efeito próprio de cada um */
+.avatar.loja{filter:drop-shadow(0 0 1.5px #A6ECFF) drop-shadow(0 0 5px rgba(170,125,255,.75));overflow:visible}
+.prof.bloq .avatar.loja{filter:grayscale(1) brightness(.75)}
+.avatar .av-ped-anel{transform-box:fill-box;transform-origin:center;animation:avped 2.6s ease-out infinite;animation-delay:var(--d,0s)}
+.avatar .av-holo{animation:avholo 4.6s ease-in-out infinite;animation-delay:var(--d,0s)}
+.avatar .avl{transform-box:fill-box;transform-origin:center;animation-duration:var(--du,4s);animation-delay:calc(var(--d,0s) + var(--dl,0s));animation-iteration-count:infinite;animation-timing-function:ease-in-out;animation-fill-mode:both}
+.avatar .avl-cai{animation-name:avlcai}
+.avatar .avl-sobe{animation-name:avlsobe;animation-timing-function:ease-out}
+.avatar .avl-cintila{animation-name:avlcintila}
+.avatar .avl-pulsa{animation-name:avlpulsa}
+.avatar .avl-gira{animation-name:avlgira;animation-timing-function:linear}
+.avatar .avl-voa{animation-name:avlvoa}
+.avatar .avl-tijolo{animation-name:avltijolo;animation-timing-function:ease-out}
+.avatar .avl-onda{animation-name:avlonda}
+.avatar .avl-fita{animation-name:avlfita;animation-timing-function:linear}
+@keyframes avped{0%{transform:scale(.8);opacity:.95}100%{transform:scale(1.2);opacity:0}}
+@keyframes avholo{0%,66%{transform:translateX(0);opacity:0}69%{opacity:1}94%{opacity:1}100%{transform:translateX(46px);opacity:0}}
+@keyframes avlcai{0%{transform:translate(.6px,-7px) rotate(-25deg);opacity:0}15%{opacity:var(--o,1)}50%{transform:translate(-1.2px,0) rotate(18deg)}85%{opacity:var(--o,1)}100%{transform:translate(.8px,7px) rotate(-20deg);opacity:0}}
+@keyframes avlsobe{0%{transform:translate(0,5px) scale(.6);opacity:0}20%{opacity:1}70%{opacity:.9}100%{transform:translate(var(--x,1px),-9px) scale(1.1);opacity:0}}
+@keyframes avlcintila{0%,100%{transform:scale(.35);opacity:.25}50%{transform:scale(1);opacity:1}}
+@keyframes avlpulsa{0%,100%{transform:scale(.94)}50%{transform:scale(1.06)}}
+@keyframes avlgira{to{transform:rotate(360deg)}}
+@keyframes avlvoa{0%{transform:translate(-4px,2.2px) rotate(-10deg);opacity:0}18%{opacity:1}50%{transform:translate(0,-.6px) rotate(4deg)}82%{opacity:1}100%{transform:translate(4px,2px) rotate(12deg);opacity:0}}
+@keyframes avltijolo{0%{transform:translateY(-6px);opacity:0}6%{transform:translateY(0);opacity:1}80%{transform:translateY(0);opacity:1}90%,100%{transform:translateY(0);opacity:0}}
+@keyframes avlonda{0%,100%{transform:translateY(0)}50%{transform:translateY(-.9px)}}
+@keyframes avlfita{to{stroke-dashoffset:-18}}
+@media (prefers-reduced-motion:reduce){.avatar .avl,.avatar .av-holo,.avatar .av-ped-anel{animation:none}}
+/* vitrine da loja: o nome do efeito do personagem */
+.lj-item .lj-ef{display:grid;align-items:center;min-height:30px;margin-top:3px;padding:3px 8px;border-radius:99px;background:linear-gradient(90deg,rgba(143,243,255,.22),rgba(199,125,255,.26));border:1px solid rgba(190,170,255,.5);font:800 10px/1.2 "Barlow",sans-serif;font-style:normal;letter-spacing:.02em;color:#F1E9FF}
 /* janela da missão: cartão de jogo (paisagem da etapa, moeda da casa, progresso, recompensa) */
 .modal.mj-janela{padding-top:12px}
 .mj{text-align:center}
@@ -4006,7 +4035,7 @@ function conquistas(){
     { ic:"💎", id:"tesouro", t:"Tesouro", d:"20.000 pontos no trimestre", on: totalTrimestre() >= 20000 },
     { ic:"📖", id:"rolo", t:"Rolo inteiro", d:"Todos os dias do trimestre", on: LICOES.length > 0 && LICOES.every(L => L.dias.every(d => resDe(L,d))) },
     { ic:"💰", id:"rico", t:"Rico", d:"Ganhou 1.000 moedas no total", on: typeof moedasGanhas === "function" && moedasGanhas() >= 1000 },
-    { ic:"🎴", id:"colecionador", t:"Colecionador", d:"Completou o álbum de figurinhas", on: typeof albumCompleto === "function" && albumCompleto() }
+    { ic:"🎴", id:"colecionador", t:"Colecionador", d:"Completou um álbum de figurinhas", on: typeof temAlbumCompleto === "function" && temAlbumCompleto() }
   ];
 }
 /* ---------- Conquistas novas: aparecem uma única vez, com confetes ---------- */
@@ -6920,6 +6949,55 @@ const GESTOS = { nuvem: "sobe", pao: "sobe", coroa: "sobe", estrelas: "brilha", 
    as pernas e os objetos de verdade nas mãos. */
 const MOV_QUADROS = { marcha: ["passoA", "passoB"], salto: ["agacha", "salto"], danca: ["dancaA", "dancaB"], corrida: ["corridaA", "corridaB"], aguia: ["asasA", "asasB"],
   beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"] };
+/* ---------- Personagens da loja: o que só eles têm ----------
+   Brilho holográfico (uma faixa de luz que atravessa o boneco), base de luz no chão e um efeito próprio da história de cada um.
+   Tudo é desenhado por cima do boneco, em unidades do desenho (o boneco ocupa de 0 a 22 na largura e de 0 a 30 na altura).
+   "atras" fica atrás do boneco e "frente" passa na frente dele. Parado (sem animação), cada peça fica onde foi desenhada. */
+let _avMasc = 0;
+const EFEITOS_LOJA = (() => {
+  const n = v => +(+v).toFixed(2);
+  const st = (dl, du, x, o) => ` style="--dl:${dl}s;--du:${du}s${x != null ? ";--x:" + x + "px" : ""}${o != null ? ";--o:" + o : ""}"`;
+  const folha = (x, y, cor, dl, du) => `<path class="avl avl-cai" d="M${x} ${y}c1.1-1.1 2.5-.9 3 0-.5.9-1.9 1.1-3 0z" fill="${cor}"${st(dl, du)}/>`;
+  const brasa = (x, y, r, cor, dl, du, dx) => `<circle class="avl avl-sobe" cx="${x}" cy="${y}" r="${r}" fill="${cor}"${st(dl, du, dx)}/>`;
+  const estrela = (x, y, t, cor, dl, du) => `<path class="avl avl-cintila" d="M${x} ${n(y - t)}Q${x} ${y} ${n(x + t)} ${y}Q${x} ${y} ${x} ${n(y + t)}Q${x} ${y} ${n(x - t)} ${y}Q${x} ${y} ${x} ${n(y - t)}Z" fill="${cor}"${st(dl, du)}/>`;
+  const letra = (x, y, ch, dl) => `<text class="avl avl-sobe" x="${x}" y="${y}" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-weight="700" font-size="4.2" fill="#FFE9A8" stroke="#5A3A00" stroke-width=".34" paint-order="stroke"${st(dl, 4.2, 0)}>${ch}</text>`;
+  const carta = (x, y, dl, du) => `<g class="avl avl-voa"${st(dl, du)}><rect x="${x}" y="${y}" width="3.2" height="2.1" rx=".3" fill="#FFFFFF" stroke="#8C7B5A" stroke-width=".22"/><path d="M${x} ${y}l1.6 1.15 1.6-1.15" fill="none" stroke="#8C7B5A" stroke-width=".22"/><circle cx="${n(x + 1.6)}" cy="${n(y + 1.2)}" r=".36" fill="#E0483C"/></g>`;
+  const tijolo = (x, y, i) => `<rect class="avl avl-tijolo" x="${x}" y="${y}" width="2.6" height="1.25" rx=".15" fill="${i % 2 ? "#D2B27C" : "#E8CFA2"}" stroke="#7A5A2E" stroke-width=".18"${st(n(i * .32), 8.5)}/>`;
+  const pena = (x, y, dl, du) => `<g class="avl avl-cai"${st(dl, du, null, .95)}><path d="M${x} ${y}c.6-1.6 2.5-2 3.6-1.1-.8 1.2-2.5 1.7-3.6 1.1z" fill="#FFFFFF"/><path d="M${x} ${y}l3.2-1" fill="none" stroke="#B9C7DC" stroke-width=".18"/></g>`;
+  const fita = (d, cor, larg, luz) => `<path class="avl avl-onda" d="${d}" fill="none" stroke="${cor}" stroke-width="${larg}" stroke-linecap="round" opacity=".9"${st(0, 3.4)}/><path class="avl avl-fita" d="${d}" fill="none" stroke="${luz}" stroke-width="${n(larg / 3)}" stroke-linecap="round" stroke-dasharray="5 4" opacity=".9"${st(0, 2.2)}/>`;
+  const raios = (cx, cy, r0, r1, q) => { let d = ""; for(let i = 0; i < q; i++){ const a = Math.PI * 2 * i / q, c = Math.cos(a), sn = Math.sin(a); d += `M${n(cx + r0 * c)} ${n(cy + r0 * sn)}L${n(cx + r1 * c)} ${n(cy + r1 * sn)}`; } return d; };
+  const muro = [[-1.8, 26.7], [1, 26.7], [3.8, 26.7], [15.4, 26.7], [18.2, 26.7], [21, 26.7], [-.4, 25.35], [2.4, 25.35], [16.8, 25.35], [19.6, 25.35], [1, 24], [18.2, 24]];
+  return {
+    zaqueu:   { nome: "Folhas do sicômoro", ref: "Lucas 19:4", cor: "#9BE58A",
+      atras: folha(-1.6, 6, "#3E9B4F", 0, 4.2) + folha(19.6, 12, "#5DBB63", 1.4, 4.6),
+      frente: folha(1.2, 15, "#9BE58A", 2.3, 4) + folha(18.4, 21, "#3E9B4F", .7, 4.4) + folha(-.8, 23, "#5DBB63", 3.1, 4.8) },
+    gideao:   { nome: "Faíscas das tochas", ref: "Juízes 7:20", cor: "#FFB347",
+      atras: brasa(-.5, 16, .4, "#FF7A3D", 2.6, 2.8, .8) + brasa(22, 13, .42, "#FFB347", .7, 3, -1),
+      frente: brasa(1, 22, .55, "#FFE27A", 0, 2.6, -1.2) + brasa(3.5, 25, .45, "#FF7A3D", .9, 3, 1) + brasa(19, 23, .55, "#FFB347", .4, 2.8, 1.4) + brasa(21, 19, .45, "#FFE27A", 1.6, 2.4, -.8) + brasa(16.5, 26, .5, "#FF7A3D", 2.1, 3.2, .6) + brasa(6, 18, .4, "#FFB347", 1.2, 2.6, -.5) },
+    jo:       { nome: "Estrelas da manhã", ref: "Jó 38:7", cor: "#BFEFFF",
+      atras: estrela(11, -1.6, 1.2, "#FFFFFF", 1.9, 3),
+      frente: estrela(0, 5, 2, "#FFFFFF", 0, 2.6) + estrela(21.6, 3.5, 1.6, "#FFE27A", .9, 3) + estrela(22.2, 14, 1.3, "#DFF6FF", 1.7, 2.4) + estrela(-.6, 15.5, 1.5, "#FFE27A", .5, 3.2) + estrela(4.2, -.6, 1.2, "#DFF6FF", 2.2, 2.8) + estrela(17.6, -.9, 1.3, "#FFFFFF", 1.3, 2.6) + estrela(21, 23.5, 1.1, "#FFFFFF", 2.6, 2.6) },
+    esdras:   { nome: "Letras da Lei", ref: "Esdras 7:10", cor: "#FFE27A",
+      atras: "",
+      frente: letra(.2, 24, "ת", 0) + letra(21.8, 26, "ו", 1.05) + letra(.8, 14, "ר", 2.1) + letra(21.2, 15.5, "ה", 3.15) },      /* as letras da palavra "Torá" */
+    timoteo:  { nome: "Cartas de Paulo", ref: "1 Timóteo 1:2", cor: "#BFF3E6",
+      atras: carta(18.8, 9, 1.5, 4.6),
+      frente: carta(-1.8, 5.5, 0, 4.4) + carta(-1.2, 18, 2.9, 4.8) },
+    neemias:  { nome: "Muro em construção", ref: "Neemias 6:15", cor: "#F0D9A8",
+      atras: muro.map((m, i) => tijolo(m[0], m[1], i)).join(""), frente: "" },
+    lidia:    { nome: "Púrpura de Tiatira", ref: "Atos 16:14", cor: "#D9A6FF",
+      atras: fita("M-2 9.5C3 6 7 12.5 11 9S19.5 5.5 24 8.5", "#C77DFF", 1.1, "#F3DCFF") + fita("M-2.5 21C2 16.5 6.5 24.5 11 19.5S20 15 24.5 18.5", "#9B4FD6", 1.5, "#E9C4FF"),
+      frente: estrela(.5, 14, .9, "#F3DCFF", .4, 2.6) + estrela(21.5, 24, 1, "#E9C4FF", 1.3, 3) + estrela(20.5, 3.5, .8, "#FFFFFF", 2, 2.4) },
+    barnabe:  { nome: "Penas da pomba", ref: "Atos 11:24", cor: "#EAF4FF",
+      atras: pena(19.2, 8, 1.6, 6.2),
+      frente: pena(-1.2, 4.5, 0, 5.6) + pena(1.4, 17, 3, 6) + pena(18.8, 20.5, 4.3, 5.8) },
+    madalena: { nome: "Manhã da ressurreição", ref: "João 20:1", cor: "#FFD9A0",
+      atras: `<path class="avl avl-gira" d="${raios(11, 12, 11.3, 13.5, 12)}" fill="none" stroke="#FFEFC9" stroke-width=".55" stroke-linecap="round" opacity=".8"${st(0, 28)}/>`,
+      frente: folha(0, 19, "#F7A8C4", .6, 5.2) + folha(19.4, 24, "#FFC6DA", 2.4, 5.6) + folha(19.8, 9, "#F7A8C4", 3.9, 5) }
+  };
+})();
+/* o efeito de um personagem da loja (null para os outros) */
+const efeitoDaLoja = p => (p && p.preco && EFEITOS_LOJA[p.modelo || p.id]) || null;
 function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   /* id pode vir como "personagem~acessório" (acessório da loja em uso); um terceiro pedaço "~v" marca amostra da vitrine */
   const partes = String(id || "").split("~"), p0 = acharProfeta(partes[0]) || acharProfeta(PROFETA_PADRAO), nv = Math.floor(+nivel || 0);
@@ -6928,6 +7006,9 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   const p = acLoja ? Object.assign({}, p0, { id: p0.id + "+" + acLoja.id, modelo: p0.modelo || p0.id, emb2: acLoja.emb, emb2o: acLoja.o, emb2atras: !!acLoja.atras, semGuardar: partes[2] === "v" }) : (ac && ac.variante ? ac.variante(p0) : p0);
   const lbl = String(rotulo || p.nome).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch])) + (acLoja ? ", com " + acLoja.nome.toLowerCase() : ac ? ", " + ac.rotulo : "");
   const raro = !!p.nivel, lend = !!p.lendario;
+  const efeito = mov === "dormir" ? null : efeitoDaLoja(p0);      // personagem da loja: brilho holográfico, base de luz e o efeito próprio dele
+  const uid = efeito ? ++_avMasc : 0;                             // um número por boneco desenhado, para o recorte e os degradês não se misturarem
+  let holo = "";
   const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
   const aura = lend && !(mov === "dormir" && !montado) ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
   const brilho = raro ? `<g class="av-raro" fill="${lend ? "#FFF3B8" : "#FFE27A"}">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}${lend ? mais(10, -.2, 1) + mais(-.2, 11, 1) + mais(21.4, 23, 1) + mais(1.2, 24.5, 1) : ""}</g>` : "";
@@ -6962,15 +7043,21 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
     const gesto = d.sp.emb ? (GESTOS[p.emb] || "acena") : "";
     const ox = d.sp.emb ? (d.x0 + d.ex * d.larg).toFixed(2) : 0, oy = d.sp.emb ? ((gesto === "brilha" ? d.ey : d.eb) * 30).toFixed(2) : 0;
     temGesto = !!d.sp.emb;
+    if(efeito) holo = `<mask id="avm${uid}" maskUnits="userSpaceOnUse" x="-6" y="-4" width="34" height="38" style="mask-type:alpha">${d.img("av-masc", "u")}</mask>`
+      + `<g mask="url(#avm${uid})" shape-rendering="geometricPrecision"><path class="av-holo" d="M-14 -3h9l-8 35h-9z" fill="url(#avh${uid})" opacity="0"/></g>`;
     corpo = d.sp.emb ? d.img("av-olho", "b") + d.img("av-pisca", "bf") + d.img("av-emb av-g-" + gesto, "e", ` data-g="${gesto}" style="transform-origin:${ox}px ${oy}px"`) : d.img("av-olho", "u") + d.img("av-pisca", "f");
   }
   /* montado: o personagem fica menor e mais alto, e o jumentinho é desenhado na frente das pernas dele */
   const sombra = mov === "dormir" && quadros ? `<ellipse cx="11" cy="28.2" rx="11" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>` : `<ellipse cx="11" cy="28.2" rx="6.75" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>`;
+  const base = efeito ? `<defs><radialGradient id="avg${uid}"><stop offset="0" stop-color="${efeito.cor}" stop-opacity=".5"/><stop offset=".55" stop-color="${efeito.cor}" stop-opacity=".2"/><stop offset="1" stop-color="${efeito.cor}" stop-opacity="0"/></radialGradient>`
+    + `<linearGradient id="avh${uid}" gradientUnits="userSpaceOnUse" x1="-14" y1="-3" x2="-5.4" y2="-1.03"><stop offset="0" stop-color="#FF9BE8" stop-opacity="0"/><stop offset=".22" stop-color="#FF9BE8" stop-opacity=".55"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".8"/><stop offset=".78" stop-color="#8FF3FF" stop-opacity=".6"/><stop offset="1" stop-color="#8FF3FF" stop-opacity="0"/></linearGradient></defs>`
+    + `<ellipse class="avl avl-pulsa" cx="11" cy="13.5" rx="13" ry="14.5" fill="url(#avg${uid})" style="--dl:0s;--du:4.2s" shape-rendering="geometricPrecision"/><g class="av-ped" shape-rendering="geometricPrecision"><ellipse cx="11" cy="28.2" rx="9.6" ry="2" fill="${efeito.cor}" opacity=".3"/><ellipse class="av-ped-anel" cx="11" cy="28.2" rx="8.8" ry="1.7" fill="none" stroke="${efeito.cor}" stroke-width=".45" opacity=".85"/></g>` : "";
   const boneco = montado
     ? `<ellipse cx="11" cy="28.4" rx="9.4" ry="1.1" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/><g class="av-corpo"><g transform="translate(1.3 2.4) scale(.7)">${corpo}</g><image class="av-montaria" href="${JUMENTO_PNG}" x="-.5" y="11.5" width="23" height="17" preserveAspectRatio="none"/></g>`
-    : sombra + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo);
+    : base + sombra + (efeito ? `<g class="av-loja-atras" shape-rendering="geometricPrecision">${efeito.atras}</g>` : "") + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo)
+      + (efeito ? holo + `<g class="av-loja-frente" shape-rendering="geometricPrecision">${efeito.frente}</g>` : "");
   const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
-  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
+  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}${efeito ? " loja" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : efeito ? ", personagem da loja, com o efeito " + efeito.nome : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
 }
 let _nvMemo = { k: "", v: 0 };
 function meuNivel(){
@@ -9070,7 +9157,7 @@ const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
 let lojaCat = "";
 const LOJA_CATS = [
   { k: "a", nome: "Acessórios",        sub: "na mão, na cabeça ou nas costas",  lista: () => LOJA_ACESSORIOS },
-  { k: "p", nome: "Personagens",       sub: "só na loja",                       lista: () => PROFETAS.filter(p => p.preco) },
+  { k: "p", nome: "Personagens",       sub: "só na loja, com brilho e efeito próprio",                       lista: () => PROFETAS.filter(p => p.preco) },
   { k: "m", nome: "Molduras de perfil", sub: "em volta do seu personagem",      lista: () => LOJA_MOLDURAS },
   { k: "t", nome: "Temas da pista",    sub: "a sua raia na Corrida",            lista: () => LOJA_PISTAS },
   { k: "v", nome: "Movimentos",        sub: "o que o personagem faz na raia",   lista: () => LOJA_MOVIMENTOS },
@@ -9114,7 +9201,7 @@ function telaLoja(){
   const amostraMov = meuBoneco() || eu;
   const cartao = {
     a: a => `<div class="lj-item ${comprado("a:" + a.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(eu + "~" + a.id + "~v")}"></div><b>${esc(a.nome)}</b><small>${esc(a.ref)}</small>${botao("a:" + a.id, a.preco, perfil.acess === a.id, "Usar")}</div>`,
-    p: p => `<div class="lj-item ${comprado("p:" + p.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(p.id)}"></div><b>${esc(p.nome)}</b><small>${esc(p.ref || "")}</small>${botao("p:" + p.id, p.preco, perfil.profeta === p.id, "Usar")}</div>`,
+    p: p => `<div class="lj-item ${comprado("p:" + p.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(p.id)}"></div><b>${esc(p.nome)}</b><small>${esc(p.ref || "")}</small>${efeitoDaLoja(p) ? `<em class="lj-ef" title="Efeito que só este personagem tem (${esc(efeitoDaLoja(p).ref)})">${esc(efeitoDaLoja(p).nome)}</em>` : ""}${botao("p:" + p.id, p.preco, perfil.profeta === p.id, "Usar")}</div>`,
     m: x => `<div class="lj-item ${comprado("m:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mold${classeMoldura(x.id)}" data-prev="${esc(eu)}"></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("m:" + x.id, x.preco, minhaMoldura() === x.id, "Usar")}</div>`,
     t: x => `<div class="lj-item larga ${comprado("t:" + x.id) ? "meu" : ""}"><div class="lj-pista"><div class="track${classePista(x.id)}" style="--seg:4"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.38" data-prev="${esc(meuBoneco() || PROFETA_PADRAO)}"></div></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("t:" + x.id, x.preco, minhaPista() === x.id, "Usar")}</div>`,
     v: x => `<div class="lj-item ${comprado("v:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mov"><div class="runner mov-${x.id}" data-mov="${x.id}" data-prev="${esc(amostraMov)}"></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("v:" + x.id, x.preco, meuMovimento() === x.id, "Usar")}</div>`,
@@ -9122,6 +9209,7 @@ function telaLoja(){
   }[cat.k];
   const itens = cat.lista(), meus = itens.filter(x => comprado(cat.k + ":" + x.id)).length;
   const nota = cat.k === "v" ? `<p class="lj-nota">Vale para qualquer personagem, inclusive os comuns. Sem movimento comprado, o personagem fica parado na raia.</p>`
+    : cat.k === "p" ? `<p class="lj-nota"><b>Só os personagens da loja</b> têm brilho holográfico, base de luz e um efeito próprio, tirado da história de cada um.</p>`
     : cat.k === "a" ? `<p class="lj-nota">Um acessório por vez. A maioria fica na mão; a coroa vai na cabeça, as asas nas costas e a ovelha no chão.</p>` : "";
   app.innerHTML = `<div class="estudo-area">
     <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${htmlMoedasInicio(true)}</div>
@@ -9169,7 +9257,8 @@ const LOJA_TIPO_NOME = { a: "Acessório", p: "Personagem", m: "Moldura de perfil
 async function comprarNaLoja(id, cartao){
   const it = itemDaLoja(id); if(!it || comprado(id)) return;
   const tipo = id.split(":")[0], arteEl = cartao && cartao.querySelector(".lj-av, .lj-pista, .lj-festa");
-  if(!(await modalCompra({ nome: it.nome, tipo: LOJA_TIPO_NOME[tipo] || "Loja", preco: it.preco, arteEl, chips: ["Fica com você para sempre", tipo === "p" ? "Troque quando quiser" : "Use quando quiser"] }))) return;
+  const efLoja = tipo === "p" ? efeitoDaLoja(acharProfeta(id.split(":")[1])) : null;
+  if(!(await modalCompra({ nome: it.nome, tipo: LOJA_TIPO_NOME[tipo] || "Loja", preco: it.preco, arteEl, chips: ["Fica com você para sempre"].concat(efLoja ? ["Efeito: " + efLoja.nome] : [], [tipo === "p" ? "Troque quando quiser" : "Use quando quiser"]) }))) return;
   const compras = Object.assign({}, perfil.compras || {}, { [id]: it.preco });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
   perfil.compras = compras; tocar("missao"); atualizarCasca();
@@ -10043,7 +10132,7 @@ function fimSuperQuiz(soVer){
      albumPag (páginas já premiadas) e albumFim (álbum completo premiado).
    - Trocas: só com quem é da mesma sala. Quem propõe oferece uma repetida e pede uma figurinha; o outro aceita ou recusa.
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
-   - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
+   - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador, que sai com qualquer álbum completo).
    ============================================================ */
 const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_MAX_TROCA = 6, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
 /* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
@@ -10195,7 +10284,9 @@ const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).lengt
 const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
 /* álbuns já completos e premiados */
 const albumFeitos = () => ((perfil && perfil.figFeitos) || []).filter(id => ALBUNS.some(a => a.id === id));
-function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
+function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }          // todos os álbuns completos
+/* a conquista Colecionador: basta um álbum completo, qualquer um */
+function temAlbumCompleto(){ try{ return albumFeitos().length > 0; }catch(e){ return false; } }
 function moedasDeAlbum(){ return albumPagas().length * ALBUM_MOEDAS_PAGINA + ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0); }
 /* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
 function albumPublico(){ const inv = albumInventario(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); }
