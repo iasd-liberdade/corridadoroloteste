@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261118.190947">
+<meta name="versao" content="20261119.030336">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -2315,6 +2315,100 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .alb-botao{background:linear-gradient(135deg,#FFE27A,#F2BE2E)!important;color:#3A2A00!important}
 @media (prefers-reduced-motion:reduce){.pac-carta,.alb-pac-ic,.fig.r-lendaria.tem,.fig-brilho{animation:none}.pac-verso{display:none}.fig-brilho{display:none}}
 
+
+/* ---------- estreia do álbum: trancado até a data, com contagem regressiva ---------- */
+#nav button{position:relative}
+#nav button.trancado{color:rgba(255,255,255,.5)}
+#nav button.trancado .ic .ij{opacity:.42;filter:grayscale(.8)}
+.nav-cd{position:absolute;left:50%;top:-4px;transform:translateX(-50%);z-index:2;padding:2px 5px;border-radius:99px;background:#FFD45C;color:#3A2A00;font:800 8.5px/1 "Barlow",sans-serif;letter-spacing:-.1px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.45);pointer-events:none}
+@media (min-width:900px){.nav-cd{position:static;transform:none;margin-left:2px;font-size:10px;padding:3px 6px}}
+.acd{display:flex;justify-content:center;gap:8px}
+.acd span{flex:0 1 66px;min-width:0;padding:9px 4px 7px;border-radius:14px;background:rgba(10,8,40,.5);border:1px solid rgba(255,255,255,.18);text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.acd b{display:block;font:400 36px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1px;color:#FFE27A;font-variant-numeric:tabular-nums}
+.acd small{display:block;margin-top:3px;font:700 9.5px/1 "Barlow",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.alb-estreia{position:relative;overflow:hidden;margin-bottom:12px;padding:16px 14px 15px;text-align:center;border-color:rgba(255,226,122,.55);background:linear-gradient(160deg,rgba(122,92,255,.42),rgba(40,36,110,.5))}
+.alb-estreia::before{content:"";position:absolute;left:50%;top:-70%;width:130%;aspect-ratio:1;transform:translateX(-50%);background:radial-gradient(circle,rgba(255,212,92,.32) 0,transparent 60%);pointer-events:none}
+.alb-estreia > *{position:relative}
+.alb-estreia .ae-rot{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 0 10px;font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#FFE27A}
+.alb-estreia .ae-quando{margin:11px 0 0;font-size:13px;color:var(--soft)}.alb-estreia .ae-quando b{color:#fff}
+.alb-como{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.alb-como div{display:grid;justify-items:center;gap:4px;padding:11px 6px 10px;border-radius:16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);text-align:center;font-size:11.5px;line-height:1.25;color:var(--soft)}
+.alb-como div b{display:block;font-size:12.5px;color:#fff}.alb-como .ij{width:38px;height:38px}.alb-como .pct{width:auto;margin:0}.alb-como .pct svg{width:auto;height:38px}
+.cp.trancada{filter:saturate(.55) brightness(.82)}
+.cp-cadeado{position:absolute;right:calc(14*var(--u));top:calc(14*var(--u));z-index:3;width:calc(58*var(--u));height:calc(58*var(--u));display:grid;place-items:center;border-radius:50%;background:rgba(10,8,40,.72);box-shadow:0 0 0 calc(2*var(--u)) rgba(255,221,130,.7)}
+.cp-cadeado .ij{width:calc(44*var(--u));height:calc(44*var(--u));min-width:0;min-height:0}
+.alb-tranca{text-align:center}.alb-tranca .ij{width:74px;height:74px}.alb-tranca p{margin:8px 0 12px;font-size:14.5px;line-height:1.45}.alb-tranca .acd{margin:0 0 14px}
+.dica-cd{display:flex;align-items:baseline;gap:6px;margin:-2px 0 10px;padding:7px 10px;border-radius:10px;background:#F1EEFB;color:#2E2B6E;font:800 14px/1.2 "Barlow",sans-serif;font-variant-numeric:tabular-nums}
+.dica-cd small{font:700 10.5px/1 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6A64A8}
+.alb-inicio .ae-linha{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+/* ---------- estante: central de ações (abrir, comprar, trocar) ---------- */
+.alb-hub{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 12px}
+.hub-b{position:relative;display:grid;justify-items:center;align-content:start;gap:2px;min-width:0;padding:12px 5px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.26);color:#fff;font-family:inherit;text-align:center;cursor:pointer;overflow:hidden;
+  background:linear-gradient(165deg,rgba(255,255,255,.22),rgba(255,255,255,0) 58%),var(--hb);box-shadow:0 12px 22px -12px var(--hs),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s ease;-webkit-tap-highlight-color:transparent}
+.hub-b::before{content:"";position:absolute;left:50%;top:-34%;width:126%;aspect-ratio:1;transform:translateX(-50%);background:radial-gradient(circle,var(--hg) 0,transparent 62%);opacity:.6;pointer-events:none}
+.hub-b::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);background-size:260% 100%;background-position:130% 0;animation:hub-brilho 5.5s ease-in-out infinite;pointer-events:none}
+.hub-b.comprar::after{animation-delay:1.2s}.hub-b.trocar::after{animation-delay:2.4s}
+@keyframes hub-brilho{0%,62%{background-position:130% 0}90%,100%{background-position:-60% 0}}
+.hub-b:active{transform:scale(.96)}
+.hub-b.abrir{--hb:linear-gradient(160deg,#7558E8,#3A2C9A);--hg:rgba(255,212,92,.75);--hs:rgba(90,60,220,.9)}
+.hub-b.comprar{--hb:linear-gradient(160deg,#16B39A,#11688C);--hg:rgba(160,255,232,.6);--hs:rgba(16,150,140,.9)}
+.hub-b.trocar{--hb:linear-gradient(160deg,#E8528A,#8A3CC4);--hg:rgba(255,180,225,.62);--hs:rgba(200,60,150,.9)}
+.hub-arte{position:relative;z-index:1;height:60px;display:grid;place-items:center}
+.hub-arte .pct{width:38px}.hub-arte .ij{width:58px;height:58px}
+.hub-b.tem .hub-arte{animation:alb-bal 1.6s ease-in-out infinite}
+.hub-n{position:absolute;right:-13px;top:0;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:#FF4D6D;color:#fff;font:800 12.5px/22px "Barlow",sans-serif;text-align:center;box-shadow:0 0 0 2px rgba(20,18,60,.55)}
+.hub-b > b{position:relative;z-index:1;font:800 15.5px/1.15 "Barlow",sans-serif}
+.hub-b > small{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:3px;min-width:0;max-width:100%;font:600 11px/1.2 "Barlow",sans-serif;color:rgba(255,255,255,.86);white-space:nowrap}
+.hub-b > small .moeda{width:12px;height:12px;margin:0}
+.hub-b.vazio{filter:saturate(.45);opacity:.72}.hub-b.vazio::after{display:none}
+.hub-todos{display:block;width:100%;margin:0 0 12px;padding:9px 12px;border-radius:99px;border:1px dashed rgba(255,226,122,.6);background:rgba(255,212,92,.12);color:#FFE27A;font:800 13px/1 "Barlow",sans-serif;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.hub-b::after,.hub-b.tem .hub-arte{animation:none}}
+/* ---------- pacote ganho ou comprado: flutuando, à espera do toque ---------- */
+.pg{text-align:center}
+.pg-pacote{position:relative;display:grid;place-items:center;width:100%;height:262px;margin:0 0 4px;padding:0 0 36px;box-sizing:border-box;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;overflow:hidden;border-radius:18px}
+.pg-raios{position:absolute;left:50%;top:calc(50% - 18px);width:420px;height:420px;margin:-210px 0 0 -210px;background:repeating-conic-gradient(from 0deg,rgba(255,226,122,.3) 0 9deg,transparent 9deg 22deg);-webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 28%,transparent 56%);mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 28%,transparent 56%);animation:pg-gira 16s linear infinite}
+.pg-halo{position:absolute;left:50%;top:calc(50% - 18px);width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.75) 0,rgba(255,212,92,.25) 45%,transparent 68%);animation:pg-pulsa 2.2s ease-in-out infinite}
+.pg-flutua{position:relative;display:block;animation:pg-entra .7s cubic-bezier(.2,1.5,.4,1) both,pg-flutua 3s ease-in-out .7s infinite}
+.pg-flutua .pct{width:106px}.pg-flutua .pct svg{filter:drop-shadow(0 16px 14px rgba(8,6,30,.55))}
+.pg-flutua em{position:absolute;right:-20px;top:-8px;padding:3px 9px;border-radius:99px;background:#FF4D6D;color:#fff;font:800 15px/1.2 "Barlow",sans-serif;font-style:normal;box-shadow:0 0 0 2px rgba(20,18,60,.5)}
+.pg-fx i{position:absolute;width:10px;height:10px;background:#FFF3B8;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:pg-pisca 1.8s ease-in-out infinite}
+.pg-fx i:nth-child(1){left:20%;top:22%}.pg-fx i:nth-child(2){left:76%;top:18%;width:14px;height:14px;animation-delay:.5s}.pg-fx i:nth-child(3){left:14%;top:66%;width:13px;height:13px;animation-delay:.9s}.pg-fx i:nth-child(4){left:82%;top:62%;animation-delay:1.3s}.pg-fx i:nth-child(5){left:50%;top:8%;width:8px;height:8px;animation-delay:.25s}
+.pg-toque{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);padding:5px 12px;border-radius:99px;background:rgba(10,8,40,.6);color:#FFE27A;font:800 11.5px/1 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;animation:pg-chama 1.6s ease-in-out infinite}
+.pg-tx{margin:10px 0 14px;font-size:14.5px;line-height:1.4;color:var(--soft)}.pg-tx b{color:#fff}
+@keyframes pg-gira{to{transform:rotate(360deg)}}
+@keyframes pg-pulsa{0%,100%{transform:scale(.9);opacity:.75}50%{transform:scale(1.12);opacity:1}}
+@keyframes pg-entra{0%{transform:translateY(60px) scale(.3) rotate(-18deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes pg-flutua{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-13px) rotate(3deg)}}
+@keyframes pg-pisca{0%,100%{transform:scale(.3);opacity:0}50%{transform:scale(1);opacity:1}}
+@keyframes pg-chama{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.07)}}
+@media (prefers-reduced-motion:reduce){.pg-raios,.pg-halo,.pg-flutua,.pg-fx i,.pg-toque{animation:none}}
+/* ---------- janela de compra: o item, o recibo e o saldo depois ---------- */
+.cmp-item{position:relative;display:flex;align-items:center;gap:13px;padding:13px;border-radius:18px;overflow:hidden;background:linear-gradient(150deg,rgba(122,92,255,.5),rgba(46,211,183,.22));border:1px solid rgba(255,255,255,.24)}
+.cmp-item::before{content:"";position:absolute;left:-10%;top:-90%;width:70%;aspect-ratio:1;background:radial-gradient(circle,rgba(255,236,170,.45) 0,transparent 62%);pointer-events:none}
+.cmp-arte{position:relative;flex:none;width:86px;height:86px;display:grid;place-items:center;border-radius:16px;background:rgba(10,8,40,.38);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);overflow:hidden}
+.cmp-arte > *{max-width:100%;max-height:100%}.cmp-arte .pct{width:50px;animation:alb-bal 1.8s ease-in-out infinite}.cmp-arte .ij{width:58px;height:58px}
+.cmp-arte .lj-av{width:86px;height:86px;margin:0;border:0;background:none}.cmp-arte .lj-pista{width:86px;transform:scale(.9)}.cmp-arte .lj-festa{pointer-events:none;border:0;background:none}.cmp-arte .lj-festa span{display:none}
+.cmp-info{position:relative;min-width:0}.cmp-info small{display:block;font:800 10.5px/1.2 "Barlow",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#FFE27A}
+.cmp-info b{display:block;margin:2px 0 6px;font:800 18px/1.15 "Barlow",sans-serif}
+.cmp-chips{display:flex;flex-wrap:wrap;gap:5px}.cmp-chips span{padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.16);font:700 11px/1.3 "Barlow",sans-serif;white-space:nowrap}
+.cmp-recibo{position:relative;margin:12px 0 0;padding:6px 14px;border-radius:16px;background:rgba(10,8,40,.42);border:1px solid rgba(255,255,255,.14);
+  -webkit-mask:radial-gradient(circle 9px at 0 calc(100% - 50px),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 9px at 100% calc(100% - 50px),transparent 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 9px at 0 calc(100% - 50px),transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 9px at 100% calc(100% - 50px),transparent 98%,#000) right/51% 100% no-repeat}
+.cmp-l{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;font-size:14px}
+.cmp-l > span{display:flex;align-items:center;gap:8px;min-width:0;color:var(--soft)}.cmp-l > span .ij{width:26px;height:26px;flex:none}.cmp-l > span i{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmp-l > b{flex:none;display:inline-flex;align-items:center;gap:5px;font:800 17px/1 "Barlow",sans-serif;font-variant-numeric:tabular-nums}.cmp-l > b .moeda{width:17px;height:17px;margin:0}
+.cmp-l.menos > b{color:#FF7A8F;animation:cmp-menos .6s cubic-bezier(.3,1.5,.5,1) .25s both}
+.cmp-l.total{min-height:50px;border-top:2px dashed rgba(255,255,255,.26);color:#fff}.cmp-l.total > span{color:#fff;font-weight:800}.cmp-l.total > b{font-size:21px;color:#FFE27A}
+.cmp-l.total.falta > b{color:#FF7A8F}
+@keyframes cmp-menos{0%{transform:translateX(18px) scale(.7);opacity:0}100%{transform:none;opacity:1}}
+.cmp-falta{display:flex;align-items:center;gap:8px;margin:12px 0 0;padding:10px 12px;border-radius:14px;background:rgba(255,77,109,.18);border:1px solid rgba(255,122,143,.5);font-size:13.5px;line-height:1.35}.cmp-falta .ij{width:28px;height:28px;flex:none}
+.cmp .btn-row{margin-top:14px}
+.btn.cmp-ok{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#FFE27A,#F2B21E);color:#3A2A00;border-color:transparent;box-shadow:0 5px 0 #B67C0A,0 12px 18px -8px rgba(242,178,30,.8)}
+.btn.cmp-ok:active{transform:translateY(3px);box-shadow:0 2px 0 #B67C0A}
+.btn.cmp-ok .ij{width:26px;height:26px}.btn.cmp-ok .moeda{width:16px;height:16px;margin:0}
+.btn.cmp-ok::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.55) 50%,transparent 62%);background-size:260% 100%;background-position:130% 0;animation:hub-brilho 3.4s ease-in-out infinite;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.cmp-l.menos > b,.btn.cmp-ok::after,.cmp-arte .pct{animation:none}}
+.tr-membro small{margin-left:auto;flex:none;padding:3px 8px;border-radius:99px;background:rgba(255,212,92,.2);color:#FFE27A;font:800 11.5px/1.2 "Barlow",sans-serif;white-space:nowrap}
+.tr-membro small + i{margin-left:6px}
 /* ---------- ícones próprios (modelo Joia) ---------- */
 .ij{display:inline-block;width:1.32em;height:1.32em;vertical-align:-.32em;overflow:visible;flex:none;pointer-events:none}
 .ij .tudo,.ij .pt,.ij .chao{transform-box:fill-box;transform-origin:50% 100%}
@@ -2353,6 +2447,7 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .ij-rolo.go .pt,.ij-baixar.go .pt{animation:ijp-desce .75s ease-in-out}
 .ij-alvo.go .pt{animation:ijp-flecha .6s cubic-bezier(.3,1.5,.5,1)}
 .ij-arco.go .pt{animation:ijp-tiro .7s ease-in-out}
+.ij-troca.go .pt{transform-origin:50% 50%;animation:ijp-pulsa .8s ease-in-out}
 .ij-calendario.go .pt{transform-origin:50% 50%;animation:ijp-pulsa .8s ease-in-out .1s}
 .ij-notas.go .pt{animation:ijp-escreve .8s ease-in-out}
 @keyframes ijp-cai{0%{transform:translateY(-14px);opacity:0}60%{transform:translateY(1.5px);opacity:1}100%{transform:none}}
@@ -2415,7 +2510,7 @@ button.fig.vaga:hover{transform:translateY(-2px)}
   <button type="button" data-tab="estudar" aria-label="Lição: estudar e fazer o quiz"><span class="ic" data-ic="licao" aria-hidden="true"></span>Lição</button>
   <button type="button" data-tab="ranking"><span class="ic">🏃‍♂️</span>Corrida</button>
   <button type="button" data-tab="missoes"><span class="ic">🗺️</span>Missões</button>
-  <button type="button" data-tab="album"><span class="ic">📔</span>Álbum<b class="nav-n alb" id="navAlbumN" hidden></b></button>
+  <button type="button" data-tab="album"><span class="ic">📔</span>Álbum<b class="nav-n alb" id="navAlbumN" hidden></b><b class="nav-cd" id="navAlbumCd" hidden></b></button>
   <button type="button" data-tab="loja"><span class="ic">🛍️</span>Loja</button>
 </nav>
 <div class="toast" id="toast" role="status"></div>
@@ -3528,6 +3623,7 @@ function atualizarCasca(){
   if(logado && typeof minhaMoldura === "function"){ const cc = $("chipConta"), mm = minhaMoldura(); Array.from(cc.classList).filter(c => c.indexOf("mold") === 0).forEach(c => cc.classList.remove(c)); if(mm) cc.classList.add("mold", "mold-" + mm); }
   const tm = $("topoMoedas"); if(tm){ tm.hidden = !comMenu; if(comMenu) pintarMoedasTopo(); }
   if(typeof atualizarSino === "function") atualizarSino();
+  if(typeof albumTique === "function") albumTique();          // álbum trancado ou não, e a contagem no menu
   const abaMenu = tabAtual === "quiz" ? "estudar" : tabAtual;          // estudar e quiz moram no mesmo botão (Lição)
   document.querySelectorAll("#nav button").forEach(b => { if(b.dataset.tab === abaMenu) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
   moverPilula();
@@ -4007,6 +4103,7 @@ function telaInicio(){
   app.querySelectorAll("[data-cq]").forEach(b => b.onclick = ()=> modalConquista(+b.dataset.cq));
   const est = $("inEstudar"); if(est) est.onclick = ()=>{ estudoLicao = L; estudoDia = hojeIdx >= 0 ? hojeIdx : -1; estudoVista = "dias"; nav("estudar"); };
   if(typeof dicaDaLoja === "function") dicaDaLoja();          // aponta a Loja no menu, uma vez por pessoa
+  if(typeof dicaDoAlbum === "function") dicaDoAlbum();        // e o Álbum (com a contagem até a estreia)
   if(typeof ligarSuperQuizInicio === "function") ligarSuperQuizInicio();
   if(typeof ligarMoedasInicio === "function"){ ligarMoedasInicio(); conferirReacoesAntigas(); }
   if(typeof ligarAlbumInicio === "function") ligarAlbumInicio();
@@ -4467,14 +4564,14 @@ function telaResultado(i, novo, extra){
   $("wa").onclick = async ()=>{ ocupado($("wa"), true); try{ await compartilharCartao(i); }catch(e){ aviso("Não deu para gerar a imagem."); } ocupado($("wa"), false); };
   $("voltar").onclick = ()=>{ quizAbrindo = false; quizVista = "semana"; nav("quiz"); };
   $("selfie").onclick = ()=> telaSelfie(i);
-  const rp = $("rPacote"); if(rp) rp.onclick = ()=>{ rp.remove(); abrirPacotes([LICAO.id + "|" + dia.data]); };
+  const rp = $("rPacote"); if(rp) rp.onclick = ()=> abrirPacotes([LICAO.id + "|" + dia.data]);
   $("verPontos2").onclick = modalPontuacao;
   $("rMural").onclick = ()=> publicarNoMural(postDoResultado(LICAO, dia, r), $("rMural"));
   window.scrollTo(0,0);
   /* quiz feito agora: assim que as moedas chegam no total, o pacote de figurinhas abre sozinho (espera se houver outra janela aberta).
      O botão continua na tela para quem fechar antes. */
   const abrirPacoteSozinho = () => { let t = 0; const tenta = () => { const b = $("rPacote"); if(!b || !b.isConnected || t++ > 150) return;
-    if(document.querySelector(".modal-bg") || moedasAnim) return void setTimeout(tenta, 400); b.click(); }; setTimeout(tenta, 450); };
+    if(document.querySelector(".modal-bg") || moedasAnim) return void setTimeout(tenta, 400); pacoteGanho([LICAO.id + "|" + dia.data]); }; setTimeout(tenta, 450); };
   if(animar) animarResultado(r.pts, ganhas, tinha, novo && rp ? abrirPacoteSozinho : null); else { pintarMoedasTopo(); if(novo && rp) setTimeout(abrirPacoteSozinho, 900); }
   if(novo && minhaFesta()) setTimeout(() => { if($("resPts")) festejar(minhaFesta()); }, 900);           // a comemoração comprada na loja
   if(novo){
@@ -8912,7 +9009,8 @@ async function conferirReacoesAntigas(){
 }
 const moedasDeReflexoes = () => 2 * ((perfil && perfil.reflexoesDias) || []).length;      // +2 pela 1ª reflexão de cada dia de lição
 function moedasGanhas(){ return moedasDeAcertos() + semanasCompletas() * MOEDAS_SEMANA + moedasDeMissoes() + moedasDeDesafios() + moedasDeReacoes() + moedasDeReflexoes() + (typeof moedasDeAlbum === "function" ? moedasDeAlbum() : 0); }
-function moedasGastas(){ const c = (perfil && perfil.compras) || {}; return Object.keys(c).reduce((s, k) => s + (+c[k] || 0), 0); }
+/* pacotes comprados nos testes, antes da estreia do álbum, não contam como gasto: as figurinhas deles também não contam */
+function moedasGastas(){ const c = (perfil && perfil.compras) || {}; return Object.keys(c).reduce((s, k) => s + (k.indexOf("pac:") === 0 && typeof pacDaEra === "function" && !pacDaEra(k) ? 0 : (+c[k] || 0)), 0); }
 function moedas(){ return Math.max(0, moedasGanhas() - moedasGastas() - (typeof moedasEmJogo === "function" ? moedasEmJogo() : 0)); }
 const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
 
@@ -8981,7 +9079,7 @@ function telaLoja(){
   desenharAmostras();
   $("ljVoltar").onclick = () => { lojaCat = ""; window.scrollTo(0, 0); telaLoja(); };
   ligarMoedasInicio();
-  app.querySelectorAll("[data-comprar]").forEach(b => b.onclick = () => comprarNaLoja(b.dataset.comprar));
+  app.querySelectorAll("[data-comprar]").forEach(b => b.onclick = () => comprarNaLoja(b.dataset.comprar, b.closest(".lj-item")));
   app.querySelectorAll("[data-usar]").forEach(b => b.onclick = () => usarDaLoja(b.dataset.usar));
   app.querySelectorAll("[data-festa]").forEach(b => b.onclick = () => { tocar("toque"); festejar(b.dataset.festa, 2600); });
 }
@@ -8991,11 +9089,36 @@ function itemDaLoja(id){
   if(LOJA_EXTRAS[tipo]){ const x = extraDaLoja(tipo, k); return x ? { nome: x.nome, preco: x.preco } : null; }
   const p = acharProfeta(k); return p && p.preco ? { nome: p.nome, preco: p.preco } : null;
 }
-async function comprarNaLoja(id){
+/* Janela de compra: mostra o item, o recibo (saldo, o que sai em vermelho e quanto sobra) e pede a confirmação.
+   Se faltar moeda, a mesma janela mostra quanto falta e leva para "Ganhar moedas". Devolve true só quando a pessoa confirma. */
+function modalCompra(o){
+  return new Promise(res => {
+    const saldo = moedas(), p = o.preco, falta = Math.max(0, p - saldo); let ok = false;
+    modal(falta ? "Moedas insuficientes" : "Confirmar compra", `<div class="cmp">
+        <div class="cmp-item"><div class="cmp-arte" id="cmpArte">${o.arte || iconeSVG("loja")}</div><div class="cmp-info"><small>${esc(o.tipo || "Loja")}</small><b>${esc(o.nome)}</b>${o.chips && o.chips.length ? `<div class="cmp-chips">${o.chips.map(c => `<span>${esc(c)}</span>`).join("")}</div>` : ""}</div></div>
+        <div class="cmp-recibo">
+          <div class="cmp-l"><span>${iconeSVG("saco")}<i>Seu saldo</i></span><b>${MOEDA}${fmt(saldo)}</b></div>
+          <div class="cmp-l menos"><span>${iconeSVG("carrinho")}<i>${esc(o.nome)}</i></span><b>−${MOEDA}${fmt(p)}</b></div>
+          <div class="cmp-l total ${falta ? "falta" : ""}"><span>${falta ? "Faltam" : "Depois da compra"}</span><b>${MOEDA}<span id="cmpFica">${fmt(falta ? falta : saldo)}</span></b></div>
+        </div>
+        ${falta ? `<p class="cmp-falta">${iconeSVG("aviso")}<span>Faltam <b>${falta} ${falta === 1 ? "moeda" : "moedas"}</b> para esta compra. Cada resposta certa no quiz vale 1 moeda.</span></p>` : ""}
+        <div class="btn-row">${falta ? `<button type="button" class="btn cmp-ok" id="cmpGanhar">${iconeSVG("moeda")}Ganhar moedas</button>` : `<button type="button" class="btn cmp-ok" id="cmpOk">${iconeSVG("carrinho")}Comprar por ${MOEDA}${fmt(p)}</button>`}<button type="button" class="btn btn-ghost" id="cmpNao">Agora não</button></div></div>`, (m, fechar) => {
+      if(o.arteEl){ const a = m.querySelector("#cmpArte"), c = o.arteEl.cloneNode(true); c.removeAttribute("id"); a.innerHTML = ""; a.appendChild(c); }
+      m.querySelector("#cmpNao").onclick = fechar;
+      const g = m.querySelector("#cmpGanhar"); if(g) g.onclick = () => { fechar(); if(typeof modalComoGanhar === "function") modalComoGanhar(); };
+      const b = m.querySelector("#cmpOk"); if(b) b.onclick = () => { ok = true; fechar(); };
+      /* o saldo desce até o que vai sobrar, para a pessoa ver a conta acontecer */
+      const el = m.querySelector("#cmpFica");
+      if(el && !falta){ if(matchMedia("(prefers-reduced-motion: reduce)").matches) el.textContent = fmt(saldo - p);
+        else { const ini = performance.now() + 450, dur = 650; const passo = t => { if(!el.isConnected) return; const f = Math.max(0, Math.min(1, (t - ini) / dur)), e = 1 - Math.pow(1 - f, 3); el.textContent = fmt(Math.round(saldo - p * e)); if(f < 1) requestAnimationFrame(passo); }; requestAnimationFrame(passo); setTimeout(() => { if(el.isConnected) el.textContent = fmt(saldo - p); }, 1400); } }
+    }, () => res(ok));
+  });
+}
+const LOJA_TIPO_NOME = { a: "Acessório", p: "Personagem", m: "Moldura de perfil", t: "Tema da pista", v: "Movimento", c: "Comemoração" };
+async function comprarNaLoja(id, cartao){
   const it = itemDaLoja(id); if(!it || comprado(id)) return;
-  const saldo = moedas();
-  if(saldo < it.preco){ aviso(`Faltam ${it.preco - saldo} ${it.preco - saldo === 1 ? "moeda" : "moedas"} para ${it.nome}. Veja em \"Ganhar moedas\" como conseguir mais.`); return; }
-  if(!(await confirmar("Comprar na loja", `Comprar ${it.nome} por ${it.preco} moedas? Você fica com ${saldo - it.preco}.`, "Comprar"))) return;
+  const tipo = id.split(":")[0], arteEl = cartao && cartao.querySelector(".lj-av, .lj-pista, .lj-festa");
+  if(!(await modalCompra({ nome: it.nome, tipo: LOJA_TIPO_NOME[tipo] || "Loja", preco: it.preco, arteEl, chips: ["Fica com você para sempre", tipo === "p" ? "Troque quando quiser" : "Use quando quiser"] }))) return;
   const compras = Object.assign({}, perfil.compras || {}, { [id]: it.preco });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
   perfil.compras = compras; tocar("missao"); atualizarCasca();
@@ -9021,7 +9144,7 @@ function meuResumoPublico(){
   const rs = Object.values(RES);
   return { uid: usuario.uid, tipo: "perfil", salaId: "", salaMes: "perfil|" + usuario.uid, titulo: "Seu perfil", nome: perfil.nome || "", profeta: meuBoneco(), nivel: meuNivel(), moldura: minhaMoldura(), pista: minhaPista(),
     pts: rs.reduce((s, r) => s + (r.pts || 0), 0), quizzes: rs.length, acertos: rs.reduce((s, r) => s + (r.acertos || 0), 0), casas: missoesFeitas(), seq: sequencia(),
-    conquistas: conquistas().filter(c => c.on).map(c => c.id), album: typeof albumPublico === "function" ? albumPublico() : "" };
+    conquistas: conquistas().filter(c => c.on).map(c => c.id), album: typeof albumPublico === "function" ? albumPublico() : "", albumEra: typeof ALBUM_ERA !== "undefined" ? ALBUM_ERA : "" };
 }
 /* grava o resumo só quando algo mudou (uma escrita por quiz, mais ou menos) */
 function sincronizarPerfilPublico(){
@@ -9872,6 +9995,15 @@ function fimSuperQuiz(soVer){
    - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
    ============================================================ */
 const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
+/* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
+   Só os quizzes FEITOS a partir dela dão pacote (os antigos não contam). É a hora do aparelho de cada jogador.
+   O que foi ganho nos testes ficou em campos antigos do perfil (albumAbertos, albumTrocas…) e não é lido: todo mundo começa do zero. */
+let ALBUM_INICIO = new Date(2026, 10, 20, 5, 0, 0).getTime();           // sexta-feira, 20/11/2026, 5h da manhã
+const ALBUM_ERA = "2026-11-20", ALBUM_QUANDO = "sexta-feira, 20/11, às 5h da manhã", ALBUM_QUANDO_CURTO = "sexta-feira, às 5h";
+const ALBUM_AVISO = "2026-11-20T05";          // marca do balão de novidade. Versões anteriores anunciaram 0h (marca "2026-11-20") e 10h ("2026-11-20T10"): quem viu aquelas vê o balão de novo, com o horário certo
+const albumAvisoVisto = v => v === ALBUM_AVISO;
+const albumLiberado = () => Date.now() >= ALBUM_INICIO;
+const pacDaEra = k => k.indexOf("pac:") === 0 && new Date(k.slice(4, 14) + "T23:59:59").getTime() >= ALBUM_INICIO;          // pacote comprado depois da estreia (a chave leva o dia da compra)
 const ALBUM_OBJ = {
   folha: ["Folha de Figueira", "Gênesis 3:7"], flor: ["Flor do Éden", "Gênesis 2:9"], nuvem: ["Nuvem de Enoque", "Gênesis 5:24"], arca: ["Arca de Noé", "Gênesis 6:14"],
   pomba_ramo: ["Pomba com o Ramo", "Gênesis 8:11"], estrelas: ["Estrelas da Promessa", "Gênesis 15:5"], tenda: ["Tenda de Abraão", "Gênesis 18:1"], trigo: ["Feixes de Trigo", "Gênesis 37:7"], cetro: ["Cetro do Faraó", "Êxodo 5:2"],
@@ -9917,7 +10049,7 @@ ALBUM_PAGINAS.forEach((pg, ti) => {
     cartas.forEach(c => { c.folha = fo.i; }); ALBUM_FOLHAS.push(fo); ALBUM_FOLHA_ID[fo.id] = fo; return fo; });
 });
 /* páginas já premiadas (só as que existem hoje: as anotações do tempo em que a página era o tema inteiro não contam) */
-const albumPagas = () => ((perfil && perfil.albumPag) || []).filter(id => ALBUM_FOLHA_ID[id]);
+const albumPagas = () => ((perfil && perfil.figPag) || []).filter(id => ALBUM_FOLHA_ID[id]);
 
 /* ---------- Sorteio fixo de cada pacote ---------- */
 function albumRng(txt){
@@ -9934,19 +10066,78 @@ function pacoteDe(chave, qtd){
   }
   return saiu;
 }
-const albumAbertos = () => (perfil && perfil.albumAbertos) || [];
+const albumAbertos = () => (perfil && perfil.figAbertos) || [];
 /* pacotes ganhos e ainda fechados: um por quiz do dia feito (do mais antigo ao mais novo) */
-function pacotesFechados(){ const ab = new Set(albumAbertos()); return Object.keys(RES).filter(k => !ab.has(k)).sort((a, b) => (RES[a].quando || 0) - (RES[b].quando || 0)); }
+function pacotesFechados(){
+  if(!albumLiberado()) return [];
+  const ab = new Set(albumAbertos());
+  const doQuiz = Object.keys(RES).filter(k => (RES[k].quando || 0) >= ALBUM_INICIO && !ab.has(k)).map(k => [k, RES[k].quando]);
+  const comprados = Object.keys((perfil && perfil.compras) || {}).filter(k => pacDaEra(k) && !ab.has(k)).map(k => [k, new Date(k.slice(4, 14) + "T12:00:00").getTime() + (+k.slice(15) || 0)]);       // comprado e guardado para abrir depois
+  return doQuiz.concat(comprados).sort((a, b) => a[1] - b[1]).map(x => x[0]);
+}
+/* ---------- contagem regressiva até a estreia ---------- */
+const z2 = n => String(n).padStart(2, "0");
+function albumFalta(){ const s = Math.max(0, Math.ceil((ALBUM_INICIO - Date.now()) / 1000)); return { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 }; }
+function albumFaltaCurto(){ const f = albumFalta(); return f.d ? `${f.d}d ${f.h}h` : f.h ? `${f.h}h ${z2(f.m)}m` : `${z2(f.m)}:${z2(f.s)}`; }
+function albumFaltaTexto(){ const f = albumFalta(); return (f.d ? `${f.d} ${f.d === 1 ? "dia" : "dias"} ` : "") + `${z2(f.h)}h ${z2(f.m)}min ${z2(f.s)}s`; }
+function htmlContagemAlbum(){ const f = albumFalta(); return `<div class="acd" data-acd="caixas" role="timer" aria-label="Tempo que falta para a estreia do álbum"><span><b data-u="d">${z2(f.d)}</b><small>${f.d === 1 ? "dia" : "dias"}</small></span><span><b data-u="h">${z2(f.h)}</b><small>horas</small></span><span><b data-u="m">${z2(f.m)}</b><small>min</small></span><span><b data-u="s">${z2(f.s)}</b><small>seg</small></span></div>`; }
+/* a cada segundo: acerta as contagens que estiverem na tela e o botão do menu; na hora da estreia, destranca tudo */
+let _albumAberto = albumLiberado(), _albumTimer = 0;
+function albumTique(){
+  const lib = albumLiberado(), b = typeof document !== "undefined" && document.querySelector('#nav [data-tab="album"]'), cd = typeof document !== "undefined" && document.getElementById("navAlbumCd");
+  const por = (e, t) => { if(e.textContent !== t) e.textContent = t; };
+  if(b) b.classList.toggle("trancado", !lib);
+  if(cd){ cd.hidden = lib; if(!lib) por(cd, albumFaltaCurto()); }
+  if(!lib){ const f = albumFalta();
+    document.querySelectorAll('[data-acd="texto"]').forEach(e => por(e, albumFaltaTexto()));
+    document.querySelectorAll('[data-acd="curto"]').forEach(e => por(e, albumFaltaCurto()));
+    document.querySelectorAll('[data-acd="caixas"]').forEach(e => e.querySelectorAll("[data-u]").forEach(x => por(x, z2(f[x.dataset.u])))); }
+  if(lib && !_albumAberto){ _albumAberto = true; if(_albumTimer){ clearInterval(_albumTimer); _albumTimer = 0; }
+    if(usuario && perfil && perfil.profeta){ document.querySelectorAll(".alb-tranca").forEach(e => { const f = e.closest(".modal-bg"); if(f) f.remove(); }); document.querySelectorAll(".dica-nav").forEach(e => e.remove());
+      tocar("subiu"); aviso("O álbum de figurinhas foi liberado!"); atualizarCasca();
+      if(tabAtual === "album" && !document.querySelector(".modal-bg")) telaAlbum(); else if(tabAtual === "inicio"){ const e = $("inAlbum"); if(e){ e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } } else if(tabAtual === "loja" && !lojaCat && !document.querySelector(".modal-bg")) telaLoja(); } }
+}
+if(typeof document !== "undefined" && !_albumAberto) _albumTimer = setInterval(albumTique, 1000);
+function modalAlbumTrancado(){
+  if(albumLiberado()) return;
+  modal("Álbum em breve", `<div class="alb-tranca">${iconeSVG("cadeado")}<p>Os álbuns serão liberados na <b>${ALBUM_QUANDO}</b>.<br>A partir daí, cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas.</p>${htmlContagemAlbum()}<div class="btn-row uma"><button type="button" class="btn btn-main" id="atOk">Combinado</button></div></div>`, (m, fechar) => { m.querySelector("#atOk").onclick = fechar; animarIcone(m); });
+}
+/* balão no menu, uma vez por pessoa: apresenta o álbum e, antes da estreia, mostra quanto falta */
+let _dicaAlbum = false;
+function dicaDoAlbum(){
+  if(_dicaAlbum || !usuario || !perfil || albumAvisoVisto(perfil.viuAlbum) || albumAvisoVisto(lsGet(KEY + ":viuAlbum:" + usuario.uid, ""))) return;
+  _dicaAlbum = true;
+  const tentar = n => {
+    const alvo = document.querySelector('#nav [data-tab="album"]');
+    if(!alvo || $("nav").hidden || tabAtual !== "inicio" || document.querySelector(".modal-bg, .tutorial, .cd, #cargaBarra, .dica-nav, .mg-caixa")){ if(n < 120) setTimeout(() => tentar(n + 1), 1000); else _dicaAlbum = false; return; }
+    const r = alvo.getBoundingClientRect(), emCima = r.top > window.innerHeight / 2, el = document.createElement("div"), lib = albumLiberado();
+    el.className = "dica-nav " + (emCima ? "acima" : "abaixo"); el.setAttribute("role", "dialog"); el.setAttribute("aria-label", "Novidade: álbum de figurinhas");
+    el.innerHTML = lib ? `<b>Novidade: o Álbum de figurinhas chegou!</b><p>Cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas. Complete as páginas e troque as repetidas com a sua sala.</p><div><button type="button" class="btn btn-main btn-sm" id="daVer">Ver os álbuns</button><button type="button" class="btn btn-ghost btn-sm" id="daDepois">Depois</button></div><i aria-hidden="true"></i>`
+      : `<b>Novidade: Álbum de figurinhas!</b><p>Estreia na <strong>${ALBUM_QUANDO_CURTO}</strong>. Cada quiz do dia vai dar um pacote com ${ALBUM_POR_PACOTE} figurinhas para colecionar e trocar com a sua sala.</p><div class="dica-cd"><small>Faltam</small><span data-acd="texto">${albumFaltaTexto()}</span></div><div><button type="button" class="btn btn-main btn-sm" id="daVer">Ver os álbuns</button><button type="button" class="btn btn-ghost btn-sm" id="daDepois">Depois</button></div><i aria-hidden="true"></i>`;
+    document.body.appendChild(el);
+    const larg = el.offsetWidth, cx = r.left + r.width / 2, x = Math.max(8, Math.min(window.innerWidth - larg - 8, cx - larg / 2));
+    el.style.left = x + "px"; el.querySelector("i").style.left = Math.max(14, Math.min(larg - 14, cx - x)) + "px";
+    if(emCima) el.style.bottom = (window.innerHeight - r.top + (lib ? 12 : 22)) + "px"; else el.style.top = (r.bottom + 12) + "px";          // trancado: sobe um pouco para não cobrir a contagem do menu
+    alvo.classList.add("novidade");
+    const fechar = () => { el.remove(); alvo.classList.remove("novidade"); document.removeEventListener("click", fora, true); };
+    const fora = e => { if(!el.contains(e.target)) fechar(); };
+    setTimeout(() => document.addEventListener("click", fora, true), 300);
+    lsSet(KEY + ":viuAlbum:" + usuario.uid, ALBUM_AVISO); perfil.viuAlbum = ALBUM_AVISO; DB.salvarUsuario(usuario.uid, { viuAlbum: ALBUM_AVISO }).catch(()=>{});
+    el.querySelector("#daVer").onclick = () => { fechar(); nav("album"); };
+    el.querySelector("#daDepois").onclick = fechar;
+  };
+  setTimeout(() => tentar(0), 1700);
+}
 /* quantas de cada figurinha eu tenho: pacotes abertos, mais o que entrou e menos o que saiu nas trocas */
 function albumInventario(){
   const inv = {}; albumAbertos().forEach(k => pacoteDe(k).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
-  const t = (perfil && perfil.albumTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
+  const t = (perfil && perfil.figTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
   return inv;
 }
 const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).length;
 const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
 /* álbuns já completos e premiados */
-const albumFeitos = () => ((perfil && perfil.albumFeitos) || []).filter(id => ALBUNS.some(a => a.id === id));
+const albumFeitos = () => ((perfil && perfil.figFeitos) || []).filter(id => ALBUNS.some(a => a.id === id));
 function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
 function moedasDeAlbum(){ return albumPagas().length * ALBUM_MOEDAS_PAGINA + ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0); }
 /* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
@@ -9956,12 +10147,12 @@ function conferirPaginasDoAlbum(){
   const inv = albumInventario(), pagas = albumPagas().slice(), novo = {}; let n = 0;
   ALBUM_FOLHAS.forEach(fo => { if(!pagas.includes(fo.id) && fo.cartas.every(c => (inv[c.id] || 0) > 0)){ pagas.push(fo.id); n++;
     const tema = ALBUM_PAGINAS[fo.tema]; setTimeout(() => ganhouMoedas(ALBUM_MOEDAS_PAGINA, "Página completa: " + tema.nome + (tema.folhas.length > 1 ? " (" + fo.parte + ")" : "")), 600 + (n - 1) * 350); } });
-  if(n){ perfil.albumPag = pagas; novo.albumPag = pagas; }
+  if(n){ perfil.figPag = pagas; novo.figPag = pagas; }
   const feitos = albumFeitos().slice(); let m = 0;
   ALBUNS.forEach(a => { if(!feitos.includes(a.id) && a.paginas.every(i => pagas.includes(ALBUM_FOLHAS[i].id))){ feitos.push(a.id); m++;
     setTimeout(() => { ganhouMoedas(a.premio, "Álbum completo: " + a.nome); if(typeof confetes === "function") confetes(); tocar("subiu"); }, 900 + n * 350 + m * 400); } });
-  if(m){ perfil.albumFeitos = feitos; novo.albumFeitos = feitos; }
-  if(!perfil.albumFim && ALBUNS.every(a => feitos.includes(a.id))){ perfil.albumFim = Date.now(); novo.albumFim = perfil.albumFim; }
+  if(m){ perfil.figFeitos = feitos; novo.figFeitos = feitos; }
+  if(!perfil.figFim && ALBUNS.every(a => feitos.includes(a.id))){ perfil.figFim = Date.now(); novo.figFim = perfil.figFim; }
   if(Object.keys(novo).length) DB.salvarUsuario(usuario.uid, novo).catch(()=>{});
 }
 
@@ -9992,7 +10183,7 @@ const FIG_FOTOS_OBJ = new Set(("folha flor nuvem arca pomba_ramo estrelas tenda 
   "tunica arca_alianca fornalha tumulo barco escudo espada sandalias ancora calice coroa_vida").split(" "));
 const figTemFoto = c => c.t === "p" ? FIG_FOTOS.has(c.k) : FIG_FOTOS_OBJ.has(c.k);
 /* imagens refeitas depois de publicadas: o endereço muda (?v=) para o navegador buscar de novo em vez de usar a guardada */
-const FIG_VERSAO = { "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 2, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2 };
+const FIG_VERSAO = { "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 3, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2, "o:nuvem": 2, "o:tenda": 2 };
 const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp" + (FIG_VERSAO[c.id] ? "?v=" + FIG_VERSAO[c.id] : "");
 /* titulo curto e objeto de cada personagem */
 const FIG_EXTRA = {
@@ -10150,31 +10341,46 @@ function modalFigurinha(id){
 /* pacote comprado: fica anotado em compras ("pac:dia:número" = preço), como os itens da loja; a chave também é a semente do sorteio */
 const pacotesCompradosHoje = () => Object.keys((perfil && perfil.compras) || {}).filter(k => k.indexOf("pac:" + hoje() + ":") === 0).length;
 async function comprarPacote(){
-  const hj = pacotesCompradosHoje(), saldo = moedas(), p = ALBUM_PRECO_PACOTE;
+  if(!albumLiberado()){ modalAlbumTrancado(); return; }
+  const hj = pacotesCompradosHoje(), p = ALBUM_PRECO_PACOTE;
   if(hj >= ALBUM_PACOTES_DIA){ aviso(ALBUM_PACOTES_DIA === 1 ? "Você já comprou o pacote de hoje. Amanhã tem mais!" : `Você já comprou ${ALBUM_PACOTES_DIA} pacotes hoje. Amanhã tem mais!`); return; }
-  if(saldo < p){ aviso(`Faltam ${p - saldo} ${p - saldo === 1 ? "moeda" : "moedas"} para o pacote. Veja em "Ganhar moedas" como conseguir mais.`); return; }
-  if(!(await confirmar("Comprar pacote", `Comprar um pacote com ${ALBUM_POR_PACOTE} figurinhas por ${p} moedas? Você fica com ${saldo - p}.${ALBUM_PACOTES_DIA === 1 ? " Só dá para comprar 1 por dia." : ` (${hj + 1} de ${ALBUM_PACOTES_DIA} de hoje)`}`, "Comprar"))) return;
+  if(!(await modalCompra({ nome: "Pacote de figurinhas", tipo: "Álbum", arte: `<span class="pct">${FIG_PACOTE}</span>`, preco: p, chips: [`${ALBUM_POR_PACOTE} figurinhas`, ALBUM_PACOTES_DIA === 1 ? "1 por dia" : `${hj + 1} de ${ALBUM_PACOTES_DIA} hoje`, "Abra agora ou depois"] }))) return;
   let n = hj + 1, chave = "pac:" + hoje() + ":" + n; while(comprado(chave)) chave = "pac:" + hoje() + ":" + (++n);
   const compras = Object.assign({}, perfil.compras || {}, { [chave]: p });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
   perfil.compras = compras; tocar("missao"); atualizarCasca();
-  abrirPacotes([chave]);
+  pacoteGanho([chave], "compra");
 }
-function htmlCompraPacote(){
-  const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
-  return `<div class="alb-compra"><span>${ALBUM_PACOTES_DIA === 1 ? (fim ? "Você já comprou o pacote de hoje. Amanhã tem mais." : "Dá para comprar 1 pacote por dia.") : fim ? `Limite de hoje: ${ALBUM_PACOTES_DIA} de ${ALBUM_PACOTES_DIA}. Amanhã tem mais.` : `Comprados hoje: ${hj} de ${ALBUM_PACOTES_DIA}`}</span><button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="albComprar" ${fim ? "disabled" : ""}>Comprar pacote ${MOEDA}${ALBUM_PRECO_PACOTE}</button></div>`;
+/* o pacote que acabou de chegar (do quiz ou da compra): fica flutuando na tela até a pessoa tocar para abrir, ou deixar para depois */
+function pacoteGanho(chaves, tipo){
+  chaves = (chaves || []).filter(k => !albumAbertos().includes(k)); if(!chaves.length) return;
+  const n = chaves.length, compra = tipo === "compra"; let abrir = false;
+  /* só redesenha a tela que estiver mesmo à vista (a do resultado do quiz fica como está, com o botão do pacote) */
+  const atualizar = () => { atualizarCasca(); const e = $("inAlbum"); if(tabAtual === "album" && document.querySelector(".alb-hub")) telaAlbum(); else if(tabAtual === "loja" && $("ljPacote")) telaLoja(); else if(e){ e.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } };
+  tocar("subiu");
+  modal(compra ? "Pacote comprado!" : n > 1 ? `Você ganhou ${n} pacotes!` : "Você ganhou um pacote!", `<div class="pg">
+      <button type="button" class="pg-pacote" id="pgPacote" aria-label="Abrir o pacote agora"><span class="pg-raios" aria-hidden="true"></span><span class="pg-halo" aria-hidden="true"></span><span class="pg-fx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="pg-flutua"><span class="pct">${FIG_PACOTE}</span>${n > 1 ? `<em>×${n}</em>` : ""}</span><span class="pg-toque">Toque para abrir</span></button>
+      <p class="pg-tx"><b>${n * ALBUM_POR_PACOTE} figurinhas</b> esperando por você${compra ? "" : ", pelo quiz de hoje"}.</p>
+      <div class="btn-row"><button type="button" class="btn btn-main" id="pgAbrir">Abrir agora</button><button type="button" class="btn btn-ghost" id="pgDepois">Abrir depois</button></div></div>`, (m, fechar) => {
+    const vai = () => { abrir = true; fechar(); };
+    m.querySelector("#pgPacote").onclick = vai; m.querySelector("#pgAbrir").onclick = vai;
+    m.querySelector("#pgDepois").onclick = () => { fechar(); aviso(n > 1 ? "Os pacotes ficam guardados no Álbum." : "O pacote fica guardado no Álbum."); };
+  }, () => { if(abrir) abrirPacotes(chaves); else atualizar(); });
 }
 /* destaque do pacote na primeira tela da loja */
 function htmlPacoteLoja(){
-  const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA;
-  return `<section class="panel lj-pacote"><span class="pct">${FIG_PACOTE}</span><div><b>Pacote de figurinhas</b><small>${ALBUM_POR_PACOTE} figurinhas para o seu álbum · ${fim ? "volte amanhã" : ALBUM_PACOTES_DIA === 1 ? "1 por dia" : `${hj} de ${ALBUM_PACOTES_DIA} hoje`}</small></div>
-    <button type="button" class="btn btn-sm ${fim ? "btn-ghost" : "btn-main"} ${!fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="ljPacote" ${fim ? "disabled" : ""}>${MOEDA}${ALBUM_PRECO_PACOTE}</button></section>`;
+  const hj = pacotesCompradosHoje(), fim = hj >= ALBUM_PACOTES_DIA, lib = albumLiberado();
+  return `<section class="panel lj-pacote"><span class="pct">${FIG_PACOTE}</span><div><b>Pacote de figurinhas</b><small>${!lib ? `Estreia na ${ALBUM_QUANDO_CURTO} · faltam <span data-acd="curto">${albumFaltaCurto()}</span>` : `${ALBUM_POR_PACOTE} figurinhas para o seu álbum · ${fim ? "volte amanhã" : ALBUM_PACOTES_DIA === 1 ? "1 por dia" : `${hj} de ${ALBUM_PACOTES_DIA} hoje`}`}</small></div>
+    <button type="button" class="btn btn-sm ${fim || !lib ? "btn-ghost" : "btn-main"} ${lib && !fim && moedas() < ALBUM_PRECO_PACOTE ? "caro" : ""}" id="ljPacote" ${fim && lib ? "disabled" : ""}>${lib ? MOEDA + ALBUM_PRECO_PACOTE : "🔒 Em breve"}</button></section>`;
 }
 async function abrirPacotes(chaves){
+  if(!albumLiberado()){ modalAlbumTrancado(); return; }
   chaves = (chaves || []).filter(k => !albumAbertos().includes(k)); if(!chaves.length) return;
+  const rp = $("rPacote"); if(rp) rp.remove();          // o botão da tela do resultado some: o pacote já foi aberto
   const antes = albumInventario(), cartas = []; chaves.forEach(k => pacoteDe(k).forEach(id => cartas.push(id)));
-  const lista = albumAbertos().concat(chaves); perfil.albumAbertos = lista;
-  DB.salvarUsuario(usuario.uid, { albumAbertos: lista }).catch(()=>{});
+  const lista = albumAbertos().concat(chaves); perfil.figAbertos = lista;
+  DB.salvarUsuario(usuario.uid, { figAbertos: lista }).catch(()=>{});
   const visto = Object.assign({}, antes), itens = cartas.map(id => { const nova = !(visto[id] > 0); visto[id] = (visto[id] || 0) + 1; return { c: ALBUM_IDX[id], nova }; });
   const novas = itens.filter(x => x.nova).length, calmo = matchMedia("(prefers-reduced-motion: reduce)").matches, muitas = itens.length > 6;
   const resumo = `${novas ? `<b>${novas} ${novas === 1 ? "figurinha nova" : "figurinhas novas"}</b> no álbum` : "Só repetidas desta vez: guarde para trocar!"}${itens.length - novas && novas ? ` · ${itens.length - novas} ${itens.length - novas === 1 ? "repetida" : "repetidas"}` : ""}`;
@@ -10200,17 +10406,18 @@ async function abrirPacotes(chaves){
 
 /* ---------- Trocas (só com a própria sala) ---------- */
 let TROCAS = [], trocasEm = 0, trocasOk = true;
-const trocaNotas = () => (perfil && perfil.albumTrocas) || {};
+const trocaNotas = () => (perfil && perfil.figTrocas) || {};
 async function carregarTrocas(forcar){
   if(!usuario || !perfil) return TROCAS;
+  if(!albumLiberado()){ TROCAS = []; return TROCAS; }
   if(!forcar && Date.now() - trocasEm < 60000) return TROCAS;
-  try{ TROCAS = (await DB.minhasTrocas(usuario.uid)).sort((a, b) => (b.criado || 0) - (a.criado || 0)); trocasOk = true; trocasEm = Date.now(); avisarTrocasNovas(); }
+  try{ TROCAS = (await DB.minhasTrocas(usuario.uid)).filter(t => (t.criado || 0) >= ALBUM_INICIO).sort((a, b) => (b.criado || 0) - (a.criado || 0)); trocasOk = true; trocasEm = Date.now(); avisarTrocasNovas(); }
   catch(e){ if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; return TROCAS; }
   /* trocas que eu propus e foram aceitas: anoto o meu lado (sai a que ofereci, entra a que pedi) */
   const notas = Object.assign({}, trocaNotas()); let mudou = 0;
   TROCAS.forEach(t => { if(t.status === "aceito" && t.de === usuario.uid && !notas[t.id]){ notas[t.id] = [t.dou, t.quero]; mudou++;
     const c = ALBUM_IDX[t.quero]; aviso(`${t.paraNome || "Seu amigo"} aceitou a troca: você recebeu ${c ? c.nome : "a figurinha"}!`); } });
-  if(mudou){ perfil.albumTrocas = notas; DB.salvarUsuario(usuario.uid, { albumTrocas: notas }).catch(()=>{}); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
+  if(mudou){ perfil.figTrocas = notas; DB.salvarUsuario(usuario.uid, { figTrocas: notas }).catch(()=>{}); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
   return TROCAS;
 }
 const trocasParaMim = () => usuario ? TROCAS.filter(t => t.para === usuario.uid && t.status === "pendente") : [];
@@ -10234,11 +10441,11 @@ function avisarTrocasNovas(){
    Lê só as propostas pendentes para mim, para gastar poucas leituras do Firestore. */
 let trocasConfEm = 0;
 function conferirTrocas(){
-  if(!usuario || !perfil || !perfil.profeta || !trocasOk || document.hidden) return;
+  if(!usuario || !perfil || !perfil.profeta || !trocasOk || document.hidden || !albumLiberado()) return;
   if(Date.now() - trocasConfEm < 170000 || Date.now() - trocasEm < 60000) return;
   trocasConfEm = Date.now(); const uid = usuario.uid, ids = () => trocasParaMim().map(t => t.id).sort().join(), a = ids();
   DB.trocasPendentes(uid).then(l => { if(!usuario || usuario.uid !== uid) return;
-    TROCAS = TROCAS.filter(t => !(t.para === uid && t.status === "pendente")).concat(l).sort((x, y) => (y.criado || 0) - (x.criado || 0));
+    TROCAS = TROCAS.filter(t => !(t.para === uid && t.status === "pendente")).concat(l.filter(t => (t.criado || 0) >= ALBUM_INICIO)).sort((x, y) => (y.criado || 0) - (x.criado || 0));
     avisarTrocasNovas();
     if(ids() !== a){ atualizarCasca(); const x = $("inAlbum"); if(x && tabAtual === "inicio"){ x.outerHTML = htmlAlbumInicio(); ligarAlbumInicio(); } if(tabAtual === "album" && !document.querySelector(".modal-bg")) telaAlbum(); } })
   .catch(e => { if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; });
@@ -10255,7 +10462,7 @@ async function responderTroca(id, aceitar){
   if(aceitar && (inv[t.quero] || 0) === 1 && !(await confirmar("Aceitar a troca", `Você só tem uma ${ALBUM_IDX[t.quero].nome}. Se trocar, ela sai do seu álbum. Trocar mesmo assim?`, "Trocar"))) return;
   try{ await DB.responderTroca(id, aceitar ? "aceito" : "recusado"); }catch(e){ aviso(erroMsg(e)); return; }
   t.status = aceitar ? "aceito" : "recusado";
-  if(aceitar){ const notas = Object.assign({}, trocaNotas(), { [id]: [t.quero, t.dou] }); perfil.albumTrocas = notas; DB.salvarUsuario(usuario.uid, { albumTrocas: notas }).catch(()=>{});
+  if(aceitar){ const notas = Object.assign({}, trocaNotas(), { [id]: [t.quero, t.dou] }); perfil.figTrocas = notas; DB.salvarUsuario(usuario.uid, { figTrocas: notas }).catch(()=>{});
     tocar("ajuda"); aviso(`Troca feita: você recebeu ${ALBUM_IDX[t.dou].nome}!`); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
   else aviso("Troca recusada.");
   if(tabAtual === "album") telaAlbum();
@@ -10270,25 +10477,31 @@ function linhaTroca(t){
 }
 /* propor uma troca: 1) escolhe o amigo da sala; 2) escolhe a figurinha dele e a repetida que oferece */
 async function modalTrocar(){
+  if(!albumLiberado()){ modalAlbumTrancado(); return; }
   if(semSala()){ modal("Trocar figurinhas", `<p>Para trocar figurinhas você precisa estar numa sala. Entre na sala da sua turma em Minha conta → Salas.</p>`); return; }
   if(!trocasOk){ modal("Trocar figurinhas", `<p>As trocas ainda não foram liberadas: o administrador precisa publicar as regras novas do Firestore.</p>`); return; }
   if(trocasMinhasAbertas().length >= ALBUM_MAX_PROPOSTAS){ aviso(`Você já tem ${ALBUM_MAX_PROPOSTAS} propostas esperando resposta. Cancele uma ou espere.`); return; }
+  if(!Object.keys(repetidasLivres(albumInventario())).length){ modal("Trocar figurinhas", `<div class="alb-tranca">${iconeSVG("troca")}<p>Você ainda não tem figurinha repetida para oferecer.<br>Quando sair uma repetida num pacote, ela aparece aqui para trocar.</p></div>`, m => animarIcone(m)); return; }
   const sala = salaAtual();
-  modal("Trocar figurinhas", `<div class="tr-modal" id="trModal"><p class="vazio">Carregando a sala…</p></div>`, async (m, fechar) => {
+  modal("Trocar figurinhas", `<div class="tr-modal" id="trModal"><p class="vazio">Procurando quem tem figurinhas repetidas…</p></div>`, async (m, fechar) => {
     const el = m.querySelector("#trModal");
     let membros = [];
     try{ await membrosAtivos(sala); membros = ((membrosCache[sala.id] || {}).lista || []).filter(x => x.uid !== usuario.uid); }catch(e){}
     if(!el.isConnected) return;
     if(!membros.length){ el.innerHTML = `<p class="vazio">Ainda não há outras pessoas na sala ${esc(sala.nome)} para trocar.</p>`; return; }
+    /* só entra na lista quem tem figurinha repetida (pelo álbum que cada um deixa à vista da sala) */
+    const albuns = {};
+    await Promise.all(membros.map(async x => { let pub = null; try{ pub = await perfilPublico(x.uid); }catch(e){} albuns[x.uid] = pub && pub.albumEra === ALBUM_ERA && typeof pub.album === "string" ? pub.album : ""; }));
+    if(!el.isConnected) return;
+    const repDe = uid => { let r = 0; for(const ch of albuns[uid] || "") if(+ch > 1) r += +ch - 1; return r; };
+    const comRep = membros.filter(x => repDe(x.uid) > 0).sort((a, b) => repDe(b.uid) - repDe(a.uid));
+    if(!comRep.length){ el.innerHTML = `<div class="alb-tranca">${iconeSVG("troca")}<p>Ninguém da sala <b>${esc(sala.nome)}</b> tem figurinha repetida agora.<br>Quem tiver repetida aparece aqui.</p></div>`; return; }
     const passo1 = () => {
-      el.innerHTML = `<p class="muted small" style="margin-top:0">Com quem da sala <b>${esc(sala.nome)}</b> você quer trocar?</p><div class="tr-lista">${membros.map(x => `<button type="button" class="tr-membro" data-uid="${esc(x.uid)}"><span class="tr-av">${avatarSVG(personagemDe(x.profeta, x.nivel), x.nome, 0)}</span><b>${esc(x.nome || "?")}</b><i aria-hidden="true">›</i></button>`).join("")}</div>`;
-      el.querySelectorAll("[data-uid]").forEach(b => b.onclick = () => passo2(membros.find(x => x.uid === b.dataset.uid)));
+      el.innerHTML = `<p class="muted small" style="margin-top:0">Quem da sala <b>${esc(sala.nome)}</b> tem repetidas para trocar:</p><div class="tr-lista">${comRep.map(x => { const r = repDe(x.uid); return `<button type="button" class="tr-membro" data-uid="${esc(x.uid)}"><span class="tr-av">${avatarSVG(personagemDe(x.profeta, x.nivel), x.nome, 0)}</span><b>${esc(x.nome || "?")}</b><small>${r} ${r === 1 ? "repetida" : "repetidas"}</small><i aria-hidden="true">›</i></button>`; }).join("")}</div>`;
+      el.querySelectorAll("[data-uid]").forEach(b => b.onclick = () => passo2(comRep.find(x => x.uid === b.dataset.uid)));
     };
     const passo2 = async outro => {
-      el.innerHTML = `<p class="vazio">Olhando o álbum de ${esc(outro.nome || "?")}…</p>`;
-      let pub = null; try{ pub = await perfilPublico(outro.uid); }catch(e){}
-      if(!el.isConnected) return;
-      const txt = pub && typeof pub.album === "string" ? pub.album : "", dele = {}; ALBUM_CARTAS.forEach((c, i) => { dele[c.id] = +txt[i] || 0; });
+      const txt = albuns[outro.uid] || "", dele = {}; ALBUM_CARTAS.forEach((c, i) => { dele[c.id] = +txt[i] || 0; });
       const inv = albumInventario(), livres = repetidasLivres(inv);
       const pedir = ALBUM_CARTAS.filter(c => dele[c.id] > 1).sort((a, b) => ((inv[a.id] || 0) > 0) - ((inv[b.id] || 0) > 0) || a.n - b.n);
       const dar = ALBUM_CARTAS.filter(c => livres[c.id] > 0).sort((a, b) => (dele[a.id] > 0) - (dele[b.id] > 0) || a.n - b.n);
@@ -10332,15 +10545,15 @@ const albumDe = i => ALBUNS.find(a => a.paginas.includes(i)) || ALBUNS[0];
 let albumAberto = "", albumManter = false, albumPagina = 0, albumVirando = false, albumAbrindo = false;
 /* pelo menu (e pelos avisos) o Álbum abre na estante; só o "Ver o álbum" do pacote abre direto na página da figurinha nova */
 function abrirAlbuns(){ if(!albumManter) albumAberto = ""; albumManter = false; telaAlbum(); }
-function htmlCapa(a, k, inv){
+function htmlCapa(a, k, inv, trancada){
   const tenho = a.cartas.filter(c => (inv[c.id] || 0) > 0).length, feito = albumFeitos().includes(a.id);
   const tit = a.nome.split(" "), meio = Math.ceil(tit.length / 2);
-  return `<button type="button" class="cp" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
+  return `<button type="button" class="cp${trancada ? " trancada" : ""}" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
     <span class="cp-in"><span class="cp-couro"></span><span class="cp-raios"></span><span class="cp-luz"></span><span class="cp-lomb"></span><span class="cp-mold"></span>
       <span class="cp-n">Álbum ${k + 1}</span><span class="cp-tit">${esc(tit.slice(0, meio).join(" "))}<br>${esc(tit.slice(meio).join(" "))}</span><span class="cp-sub">${esc(a.sub)}</span>
       <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
       <span class="cp-pe"><span class="cp-barra"><i style="width:${Math.round(100 * tenho / a.cartas.length)}%"></i></span><span class="cp-conta"><span>${tenho} de ${a.cartas.length}</span><em class="${feito ? "ok" : ""}">${feito ? "✓ completo" : `+${a.premio}${MOEDA}`}</em></span></span>
-      <span class="cp-brilho"></span></span></button>`;
+      <span class="cp-brilho"></span>${trancada ? `<span class="cp-cadeado">${iconeSVG("cadeado")}</span>` : ""}</span></button>`;
 }
 function htmlFolha(i, inv){
   const fo = ALBUM_FOLHAS[i], pg = ALBUM_PAGINAS[fo.tema], a = albumDe(i), pos = a.paginas.indexOf(i), naPg = fo.cartas.filter(c => (inv[c.id] || 0) > 0).length, paga = albumPagas().includes(fo.id);
@@ -10378,6 +10591,7 @@ function virarPagina(nova){
 function telaAlbum(){
   tabAtual = "album"; atualizarCasca(); pararTimer(); albumVirando = false;
   const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados(), pagas = albumPagas();
+  if(!albumLiberado()) albumAberto = "";          // antes da estreia dá para ver as capas, mas não abrir
   const aberto = ALBUNS.find(a => a.id === albumAberto);
   /* ---------- um álbum aberto: o livro ---------- */
   if(aberto){
@@ -10397,26 +10611,38 @@ function telaAlbum(){
     miolo.addEventListener("touchend", e => { const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty; if(Math.abs(dx) > 70 && Math.abs(dx) > 2.2 * Math.abs(dy)) virarPagina(paginaVizinha(dx < 0 ? 1 : -1)); }, { passive: true });
     return;
   }
-  /* ---------- a estante: pacotes, trocas e as capas dos álbuns ---------- */
-  const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas();
-  const trocas = `<section class="panel alb-trocas" id="albTrocas"><div class="hm-cab"><span>Trocas${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span><button type="button" class="hm-link" id="albTrocar">Trocar figurinhas <span aria-hidden="true">›</span></button></div>
-      ${!trocasOk ? `<p class="hm-sub">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p>` : paraMim.length || minhas.length ? `<ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul>` : `<p class="hm-sub">Nenhuma proposta aberta. Ofereça uma repetida a alguém da sua sala.</p>`}</section>`;
+  /* ---------- antes da estreia: contagem regressiva e as capas trancadas ---------- */
+  if(!albumLiberado()){
+    app.innerHTML = `<div class="estudo-area alb">
+      ${cabPagina("Álbum", "Em breve", "Álbuns de figurinhas", `Estreia na ${ALBUM_QUANDO_CURTO}. A partir daí, cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas.`)}
+      <section class="panel alb-estreia"><p class="ae-rot">${iconeSVG("ampulheta")}Os quizzes liberam figurinhas em</p>${htmlContagemAlbum()}<p class="ae-quando">Estreia: <b>${ALBUM_QUANDO}</b></p></section>
+      <div class="alb-como"><div><span class="pct">${FIG_PACOTE}</span><b>Quiz do dia</b>1 pacote com ${ALBUM_POR_PACOTE} figurinhas</div><div>${iconeSVG("carrinho")}<b>Comprar</b>${ALBUM_PACOTES_DIA} pacote por dia, ${ALBUM_PRECO_PACOTE} moedas</div><div>${iconeSVG("troca")}<b>Trocar</b>as repetidas com a sua sala</div></div>
+      <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv, true)).join("")}</div>
+      <p class="est-nota">Os álbuns abrem na ${ALBUM_QUANDO_CURTO}.</p></div>`;
+    figEscala(app); albumTique();
+    app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { tocar("toque"); modalAlbumTrancado(); });
+    return;
+  }
+  /* ---------- a estante: a central de ações (abrir, comprar, trocar), as propostas e as capas dos álbuns ---------- */
+  const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas(), nf = fechados.length, hj = pacotesCompradosHoje(), fimCompra = hj >= ALBUM_PACOTES_DIA, caro = !fimCompra && moedas() < ALBUM_PRECO_PACOTE;
+  const propostas = paraMim.length || minhas.length ? `<section class="panel alb-trocas" id="albTrocas"><div class="hm-cab"><span>Propostas de troca${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span></div><ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul></section>` : "";
   app.innerHTML = `<div class="estudo-area alb">
     ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbuns de figurinhas", `Cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas. Troque as repetidas com a sua sala.`)}
     <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_FOLHAS.length} páginas completas${albumCompleto() ? " · álbuns completos ✓" : ""}</small></div>
-    <section class="panel alb-pacotes"><span class="pct ${fechados.length ? "tem" : ""}">${FIG_PACOTE}${fechados.length ? `<b>${fechados.length}</b>` : ""}</span>
-      <div class="alb-pac-tx"><b>${fechados.length ? `${fechados.length} ${fechados.length === 1 ? "pacote para abrir" : "pacotes para abrir"}` : "Nenhum pacote para abrir"}</b><small>${fechados.length ? `${ALBUM_POR_PACOTE} figurinhas em cada` : "Faça o quiz do dia para ganhar um, ou compre com moedas."}</small></div>
-      <div class="alb-pac-bt">${fechados.length ? `<button type="button" class="btn btn-main btn-sm" id="albAbrir">Abrir</button>${fechados.length > 1 ? `<button type="button" class="btn btn-ghost btn-sm" id="albTodos">Abrir todos</button>` : ""}` : ""}</div>
-      ${htmlCompraPacote()}</section>
-    ${paraMim.length ? trocas : ""}
+    <div class="alb-hub">
+      <button type="button" class="hub-b abrir ${nf ? "tem" : "vazio"}" id="albAbrir" aria-label="${nf ? `Abrir pacote: ${nf} para abrir` : "Nenhum pacote para abrir"}"><span class="hub-arte"><span class="pct">${FIG_PACOTE}</span>${nf ? `<b class="hub-n">${nf}</b>` : ""}</span><b>Abrir</b><small>${nf ? `${nf} ${nf === 1 ? "pacote" : "pacotes"}` : "faça o quiz do dia"}</small></button>
+      <button type="button" class="hub-b comprar ${fimCompra ? "vazio" : ""}" id="albComprar" aria-label="Comprar pacote por ${ALBUM_PRECO_PACOTE} moedas"><span class="hub-arte">${iconeSVG("carrinho")}</span><b>Comprar</b><small>${fimCompra ? "amanhã tem mais" : `${MOEDA}${ALBUM_PRECO_PACOTE} · ${ALBUM_PACOTES_DIA} por dia`}</small></button>
+      <button type="button" class="hub-b trocar" id="albTrocar" aria-label="Trocar figurinhas com a sala"><span class="hub-arte">${iconeSVG("troca")}${paraMim.length ? `<b class="hub-n">${paraMim.length}</b>` : ""}</span><b>Trocar</b><small>${paraMim.length ? `${paraMim.length} para responder` : rep ? `${rep} ${rep === 1 ? "repetida" : "repetidas"}` : "com a sua sala"}</small></button>
+    </div>
+    ${nf > 1 ? `<button type="button" class="hub-todos" id="albTodos">Abrir ${nf > 10 ? "10 pacotes de uma vez" : `os ${nf} pacotes de uma vez`}</button>` : ""}
+    ${!trocasOk ? `<section class="panel alb-trocas"><p class="hm-sub" style="margin:0">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p></section>` : propostas}
     <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv)).join("")}</div>
-    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p>
-    ${paraMim.length ? "" : trocas}</div>`;
-  figEscala(app);
+    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p></div>`;
+  figEscala(app); desenharFigurinhas(app);
   app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { albumAberto = b.dataset.album; albumAbrindo = true; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); });
-  const ab = $("albAbrir"); if(ab) ab.onclick = () => abrirPacotes(fechados.slice(0, 1));
+  $("albAbrir").onclick = () => { if(nf) abrirPacotes(fechados.slice(0, 1)); else aviso("Nenhum pacote para abrir. Faça o quiz do dia para ganhar um, ou compre com moedas."); };
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
-  const cp = $("albComprar"); if(cp) cp.onclick = comprarPacote;
+  $("albComprar").onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
   app.querySelectorAll("[data-tr-aceitar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trAceitar, true));
   app.querySelectorAll("[data-tr-recusar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trRecusar, false));
@@ -10428,6 +10654,8 @@ function telaAlbum(){
 
 /* ---------- Cartão do álbum no Início ---------- */
 function htmlAlbumInicio(){
+  if(!albumLiberado()) return `<section class="panel hm-card alb-inicio" id="inAlbum" role="button" tabindex="0"><div class="hm-cab"><span>Álbum de figurinhas <em>em breve</em></span><span class="hm-link">Ver <span aria-hidden="true">›</span></span></div>
+    <p class="hm-sub ae-linha" style="margin-top:6px">🔒 Estreia na ${ALBUM_QUANDO_CURTO} · faltam <b data-acd="texto">${albumFaltaTexto()}</b></p></section>`;
   const inv = albumInventario(), tenho = albumColadas(inv), f = pacotesFechados().length, tr = trocasParaMim().length;
   return `<section class="panel hm-card alb-inicio" id="inAlbum" role="button" tabindex="0"><div class="hm-cab"><span>Álbum de figurinhas <em>${tenho}/${ALBUM_CARTAS.length}</em></span><span class="hm-link">Abrir <span aria-hidden="true">›</span></span></div>
     <span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span>
@@ -10561,6 +10789,11 @@ const ICJ = (() => {
     uau: ["pulo", [...rosto, [TINTA, C(23.5, 26, 3.4), { semContorno: 1 }], [TINTA, C(40.5, 26, 3.4), { semContorno: 1 }], [TINTA, "M32 35.5Q38.5 35.5 38.5 43Q38.5 50.5 32 50.5Q25.5 50.5 25.5 43Q25.5 35.5 32 35.5Z", { semContorno: 1 }]]],
     riso: ["treme", [...rosto, [TINTA, "M18 27.5Q23 21 28 27.5", { s: 3.2, det: 1 }], [TINTA, "M36 27.5Q41 21 46 27.5", { s: 3.2, det: 1 }], [TINTA, "M17 33.5H47Q46 50.5 32 50.5Q18 50.5 17 33.5Z", { semContorno: 1 }], [BRANCO, "M20.5 33.5H43.5V38H21.5Z", { semContorno: 1 }],
       ["#5CD6FF", "M12 29Q6.5 37.5 10.5 41Q15.5 41.5 15.5 35.5Z"], ["#5CD6FF", "M52 29Q57.5 37.5 53.5 41Q48.5 41.5 48.5 35.5Z"]]],
+    troca: ["bate", [[AZUL, R(7, 15, 23, 31, 4.5), { tr: "rotate(-12 18.5 30.5)" }], ["#FFF6D6", S(18.5, 30.5, 6.2, 2.8), { tr: "rotate(-12 18.5 30.5)", semContorno: 1 }],
+      ["#FF5D8F", R(34, 19, 23, 31, 4.5), { tr: "rotate(12 45.5 34.5)" }], ["#FFF6D6", S(45.5, 34.5, 6.2, 2.8), { tr: "rotate(12 45.5 34.5)", semContorno: 1 }],
+      [OURO, "M25 11Q34 4 43 10", { s: 4.2, p: 1 }], [OURO, "M40 3.5L48.5 11.5L38 14.5Z", { round: 2, p: 1 }], [OURO, "M39 54Q30 61 21 55", { s: 4.2, p: 1 }], [OURO, "M24 61.5L15.5 53.5L26 50.5Z", { round: 2, p: 1 }]]],
+    carrinho: ["vai", [[CINZA, "M5 12H12.5L19.5 41H49", { s: 4.6 }], [OURO, "M15 18H56L51.5 36Q51 38.5 48.5 38.5H20Z", { round: 2 }], ["#000", "M24.5 18L27 38.5M34.5 18V38.5M44.5 18L42.5 38.5", { sh: 1 }],
+      ["#C77B00", "M25 19L27 37", { s: 2, det: 1 }], ["#C77B00", "M34.5 19V37", { s: 2, det: 1 }], ["#C77B00", "M44.5 19L42.5 37", { s: 2, det: 1 }], [AZUL, C(24, 51, 5)], [AZUL, C(45, 51, 5)], ["#fff", "M19 22H30", { s: 2.2, hl: 1 }]]],
     rosto: ["pulo", [...rosto, [TINTA, C(23.5, 27, 3.2), { semContorno: 1 }], [TINTA, C(40.5, 27, 3.2), { semContorno: 1 }], [TINTA, "M21.5 38Q32 48 42.5 38", { s: 3.6, det: 1 }]]]
   };
   /* qual emoji vira qual ícone (sem o seletor de variação) */
@@ -10569,7 +10802,7 @@ const ICJ = (() => {
     "🔊": "som", "📳": "vibrar", "⚔": "espadas", "💬": "balao", "💭": "pensamento", "🎭": "personagem", "👥": "pessoas", "➕": "mais", "✅": "certo", "❌": "erro", "⚠": "aviso", "❓": "pergunta", "🖍": "marcador", "✏": "lapis", "🧽": "borracha", "✋": "mao",
     "🧘": "calma", "🕊": "pomba", "🏹": "arco", "☀": "sol", "🌙": "lua", "🌗": "tema", "🌅": "nascer", "💎": "diamante", "👣": "pegadas", "📥": "baixar", "⬇": "baixar", "📊": "grafico", "📈": "subida", "🏫": "salas", "🎉": "festa", "💰": "saco", "📸": "camera",
     "🛠": "ferramentas", "💡": "lampada", "🔄": "atualizar", "🔁": "repetir", "⏭": "pular", "🚪": "porta", "📝": "notas", "📚": "livros", "🖼": "imagem", "💾": "salvar", "🗑": "lixeira", "✂": "tesoura", "🙏": "amem", "👏": "palmas", "💪": "forca", "🙌": "gloria",
-    "😮": "uau", "😂": "riso", "🙂": "rosto" };
+    "😮": "uau", "😂": "riso", "🙂": "rosto", "🛒": "carrinho", "🔀": "troca" };
   return { F, E };
 })();
 
