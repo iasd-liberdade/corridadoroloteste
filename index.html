@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261119.030336">
+<meta name="versao" content="20261119.135829">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -2130,7 +2130,7 @@ button.fig:active{transform:scale(.97)}
 /* figurinha pequena (na escolha da troca) */
 .fig.mini.sel{outline:3px solid #fff;outline-offset:2px}
 .fig.mini.boa::before{content:"";position:absolute;left:50%;top:-3px;transform:translateX(-50%);z-index:3;width:9px;height:9px;border-radius:50%;background:#3EE0A0;box-shadow:0 0 0 1.5px #fff}
-.tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:9px;max-height:250px;overflow-y:auto;padding:5px 4px 8px}
+.tr-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;max-height:268px;overflow-y:auto;padding:7px 5px 8px}
 .tr-tit{margin:12px 0 6px;font-size:13px}.tr-tit small{opacity:.7;font-size:11px}
 .tr-lista{display:grid;gap:6px}.tr-membro{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--panel-line);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;text-align:left;cursor:pointer}
 .tr-membro b{flex:1;font-size:14px}.tr-membro i{font-style:normal;opacity:.6}.tr-av .avatar{width:28px;height:36px;display:block}
@@ -2363,6 +2363,50 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .hub-b.vazio{filter:saturate(.45);opacity:.72}.hub-b.vazio::after{display:none}
 .hub-todos{display:block;width:100%;margin:0 0 12px;padding:9px 12px;border-radius:99px;border:1px dashed rgba(255,226,122,.6);background:rgba(255,212,92,.12);color:#FFE27A;font:800 13px/1 "Barlow",sans-serif;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.hub-b::after,.hub-b.tem .hub-arte{animation:none}}
+
+/* ---------- trocas: aviso na estante, tela das propostas e a escolha de várias figurinhas ---------- */
+.alb-aviso{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 12px;padding:12px 14px;color:#fff;font-family:inherit;text-align:left;cursor:pointer}
+.alb-aviso.novo{border-color:rgba(143,230,255,.75);background:linear-gradient(150deg,rgba(232,82,138,.34),rgba(122,92,255,.3))}
+.alb-aviso-ic{position:relative;flex:none;display:grid;place-items:center;width:48px;height:48px}.alb-aviso-ic .ij{width:46px;height:46px}
+.alb-aviso.novo .alb-aviso-ic{animation:alb-bal 1.6s ease-in-out infinite}
+.alb-aviso-ic > b{position:absolute;right:-6px;top:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#FF4D6D;color:#fff;font:800 12px/20px "Barlow",sans-serif;text-align:center;box-shadow:0 0 0 2px rgba(20,18,60,.55)}
+.alb-aviso-tx{flex:1;min-width:0}.alb-aviso-tx b{display:block;font:800 15px/1.2 "Barlow",sans-serif}.alb-aviso-tx small{display:block;margin-top:2px;font-size:12.5px;color:var(--soft)}
+.alb-aviso > i{flex:none;padding:7px 14px;border-radius:99px;background:#fff;color:#22183A;font:800 13px/1 "Barlow",sans-serif;font-style:normal}
+@media (prefers-reduced-motion:reduce){.alb-aviso.novo .alb-aviso-ic{animation:none}}
+.trp-dica{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:13px;line-height:1.35;color:var(--soft)}.trp-dica .ij{flex:none;width:30px;height:30px}
+.trp-tit{margin:4px 0 10px;font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#FFE27A}
+.trp{margin:0 0 14px;padding:14px}.trp.chegou{border-color:rgba(143,230,255,.6)}
+.trp-cab{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 10px;font-size:15px}.trp-cab b{font-weight:800}.trp-cab small{flex:none;font-size:11.5px;color:var(--muted)}
+.trp-lados{display:grid;gap:8px}
+.trp-lado{min-width:0;padding:10px;border-radius:16px;background:rgba(10,8,40,.3);border:1px solid rgba(255,255,255,.12)}
+.trp-lado.recebe{background:rgba(46,211,183,.14);border-color:rgba(46,211,183,.4)}
+.trp-rot{display:flex;align-items:center;justify-content:space-between;margin:0 0 9px;font:800 11.5px/1 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.trp-rot em{font-style:normal;min-width:22px;padding:4px 7px;border-radius:99px;background:rgba(255,255,255,.18);text-align:center;letter-spacing:0}
+.trp-cartas{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px;padding-top:3px}
+.trp-seta{display:grid;place-items:center;height:30px}.trp-seta .ij{width:34px;height:34px}
+.trp-nota{margin:10px 0 0;padding:8px 10px;border-radius:12px;background:rgba(255,212,92,.16);border:1px solid rgba(255,212,92,.45);font-size:12.5px;line-height:1.35}
+.trp-nota.ruim{background:rgba(255,77,109,.16);border-color:rgba(255,122,143,.5)}
+.trp .btn-row{margin-top:12px}
+.trp-vazio{display:grid;justify-items:center;gap:6px;margin:0 0 14px;padding:22px 14px;text-align:center}.trp-vazio .ij{width:64px;height:64px}.trp-vazio p{margin:0;color:var(--soft)}
+.trp-nova{margin-top:4px}
+@media (min-width:760px){.trp-lados{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start}.trp-seta{height:auto;padding-top:46px}}
+.fig-det-rar{display:inline-block;margin:10px 0 0;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.14);font:800 11.5px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.fig-det-rar.r-rara{background:rgba(242,190,46,.22);color:#FFE27A}.fig-det-rar.r-lendaria{background:linear-gradient(90deg,rgba(255,138,216,.3),rgba(143,230,255,.3));color:#fff}
+.tr-bloco{margin:10px 0 0;padding:10px 10px 6px;border-radius:16px;background:rgba(10,8,40,.28);border:1px solid rgba(255,255,255,.12)}
+.tr-bloco .tr-tit{display:flex;align-items:center;gap:8px;margin:0 0 3px;font-size:14px}.tr-bloco .tr-tit > span:nth-child(2){flex:1;min-width:0}
+.tr-n{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#FFD45C;color:#3A2A00;font:800 12.5px/1 "Barlow",sans-serif}
+.tr-bloco .tr-tit em{flex:none;font-style:normal;min-width:24px;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.18);font:800 12.5px/1.2 "Barlow",sans-serif;text-align:center}
+.tr-dica{margin:0 0 4px;font-size:11.5px;line-height:1.3;color:var(--muted)}
+.tr-meio{display:grid;place-items:center;height:28px;margin-top:6px}.tr-meio .ij{width:32px;height:32px}
+.tr-cel{position:relative;min-width:0}.tr-cel > .fig{width:100%}
+.tr-cel .fig.mini.sel{outline:3px solid #FFD45C;outline-offset:2px}
+.tr-cel.sel::after{content:"✓";position:absolute;left:-4px;top:-4px;z-index:4;width:20px;height:20px;border-radius:50%;background:#FFD45C;color:#3A2A00;font:900 12px/20px system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px rgba(20,18,60,.7)}
+.tr-ver{position:absolute;right:2px;bottom:2px;z-index:4;display:grid;place-items:center;width:25px;height:25px;padding:0;border:0;border-radius:50%;background:rgba(10,8,40,.85);box-shadow:0 0 0 1.5px rgba(255,255,255,.55);cursor:pointer}
+.tr-ver::before{content:"";position:absolute;inset:-7px}
+.tr-ver .ij{width:17px;height:17px}
+.tr-rodape{position:sticky;bottom:-18px;z-index:5;display:flex;align-items:center;gap:10px;margin:12px -4px 0;padding:10px 12px;border-radius:16px;background:#2A2670;box-shadow:0 -6px 18px rgba(10,8,40,.45),inset 0 0 0 1px rgba(255,255,255,.18)}
+.tr-rodape p{flex:1;min-width:0;margin:0;font-size:13.5px;line-height:1.25}.tr-rodape p b{color:#FFE27A}
+.tr-rodape .btn{flex:none;width:auto;min-height:42px;padding:8px 16px}
 /* ---------- pacote ganho ou comprado: flutuando, à espera do toque ---------- */
 .pg{text-align:center}
 .pg-pacote{position:relative;display:grid;place-items:center;width:100%;height:262px;margin:0 0 4px;padding:0 0 36px;box-sizing:border-box;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;overflow:hidden;border-radius:18px}
@@ -6887,7 +6931,7 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
   const aura = lend && !(mov === "dormir" && !montado) ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
   const brilho = raro ? `<g class="av-raro" fill="${lend ? "#FFF3B8" : "#FFE27A"}">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}${lend ? mais(10, -.2, 1) + mais(-.2, 11, 1) + mais(21.4, 23, 1) + mais(1.2, 24.5, 1) : ""}</g>` : "";
-  /* o boneco vem dos modelos em pixel art (52×60 nos comuns; os conquistados e comprados aparecem em 122×130 e trocam sozinhos
+  /* o boneco vem dos modelos em pixel art (desenho imediato: 52×60 nos comuns, 122×130 nos conquistados e comprados; todos trocam sozinhos
      para 992×1000 quando o desenho grande fica pronto), encaixado no mesmo espaço de antes; a segunda imagem é a piscada */
   const atraso = (p0.id.split("").reduce((t, ch) => t + ch.charCodeAt(0), 0) % 37) / 10;
   /* imagem de um desenho: usa o de 992×1000 se já estiver pronto; senão o pequeno, marcado para a troca */
@@ -6895,7 +6939,7 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
     const W = hd ? hd.W : sp.W, H = hd ? hd.H : sp.H, larg = 30 * W / H, x0 = 11 - larg / 2;
     const href = { u: hd ? hd.u : sp.url, f: hd ? hd.f : sp.fechado, b: hd ? hd.b : sp.base, bf: hd ? hd.bf : sp.baseFechado, e: hd ? hd.e : sp.emb };
     return { sp, hd, larg, x0, ex: hd && hd.ex != null ? hd.ex : sp.ex, ey: hd && hd.ey != null ? hd.ey : sp.ey, eb: hd && hd.eb != null ? hd.eb : sp.eb,
-      img: (cls, k, extra) => `<image class="${cls}" href="${href[k]}" x="${x0.toFixed(2)}" y="0" width="${larg.toFixed(2)}" height="30" preserveAspectRatio="none"${!hd && especialHD(q) ? ` data-hd="${esc(q.id)}" data-hk="${k}"` : ""}${extra || ""}/>` }; };
+      img: (cls, k, extra) => `<image class="${cls}" href="${href[k]}" x="${x0.toFixed(2)}" y="0" width="${larg.toFixed(2)}" height="30" preserveAspectRatio="none"${!hd && temHD(q) ? ` data-hd="${esc(q.id)}" data-hk="${k}"` : ""}${extra || ""}/>` }; };
   const quadros = mov && !montado && MOV_QUADROS[mov] ? MOV_QUADROS[mov] : null;     // qualquer personagem com movimento comprado (os quadros saem em 992×1000)
   let corpo, temGesto = false;
   if(quadros){
@@ -8259,8 +8303,8 @@ document.addEventListener("visibilitychange", () => { if(!document.hidden && typ
 /* ============================================================
    BONECOS: MODELOS EM PIXEL ART
    Motor de desenho dos arquivos de modelo "profetas-resolucoes" e "profetas-hd".
-   - Personagens comuns: modelo de 52×60 pixels.
-   - Personagens raros e os da loja: modelo de 122×130 pixels.
+   - Todos os personagens aparecem na qualidade 992×1000 (desenhada em segundo plano e guardada no aparelho).
+   - Enquanto ela não fica pronta, aparece o desenho imediato: 52×60 nos comuns, 122×130 nos raros e nos da loja.
    O motor fica isolado dentro de uma função para não misturar nomes com o resto do jogo.
    ============================================================ */
 function _fabricaSprites(){      /* a fábrica inteira também vai para o ajudante em segundo plano (Worker) que desenha na qualidade 992×1000 */
@@ -8757,12 +8801,14 @@ const _hdCache = {};
 const SPRITE_VERSAO = "m7";            // mude quando o desenho dos personagens mudar, para descartar as imagens guardadas no aparelho
 /* desenhos da versão anterior guardados no aparelho: saem, para não ocupar espaço à toa */
 try{ for(let i = localStorage.length - 1; i >= 0; i--){ const k = localStorage.key(i); if(k && k.indexOf(KEY + ":boneco:") === 0 && k.indexOf(KEY + ":boneco:" + SPRITE_VERSAO + ":") !== 0) localStorage.removeItem(k); } }catch(e){}
-/* Tudo o que foi conquistado ou comprado (personagem raro, personagem da loja, acessório, quadros dos movimentos) ganha a qualidade 992×1000 */
+/* O desenho imediato: tudo o que foi conquistado ou comprado (personagem raro, personagem da loja, acessório, quadros dos movimentos) sai em 122×130; os comuns, em 52×60 */
 const especialHD = p => !!(p && (p.nivel || p.preco || p.emb2 || p.pose || /[+#@]/.test(p.id)));
+/* A qualidade 992×1000 vale para todos os personagens, os comuns também */
+const temHD = p => !!(p && p.id);
 const olhosDaPose = pose => { const P = gerarSpriteModelo.POSES[pose]; return P && P.olhos === "f" ? "F" : "O"; };
 function spriteHD(p){
   if(_hdCache[p.id]) return _hdCache[p.id];
-  const raro = !!p.nivel, alta = especialHD(p), W = alta ? 122 : 52, H = alta ? 130 : 60, k = alta ? 3 : 4;   // especiais: 122×130 na hora (e 992×1000 em segundo plano); comuns: 52×60   // k: ampliação inteira, para o desenho continuar nítido em qualquer tamanho
+  const raro = !!p.nivel, alta = especialHD(p), W = alta ? 122 : 52, H = alta ? 130 : 60, k = alta ? 3 : 4;   // desenho imediato: 122×130 nos especiais, 52×60 nos comuns (o de 992×1000 vem em segundo plano para todos)   // k: ampliação inteira, para o desenho continuar nítido em qualquer tamanho
   const chave = KEY + ":boneco:" + SPRITE_VERSAO + ":" + p.id;
   try{ const g = JSON.parse(localStorage.getItem(chave) || "null"); if(g && g.u && (g.f || p.pose)) return (_hdCache[p.id] = Object.assign({ url: g.u, fechado: g.f, W, H }, g.e ? { base: g.b, baseFechado: g.bf, emb: g.e, ex: g.ex, ey: g.ey, eb: g.eb } : {})); }catch(e){}
   const res = gerarSpriteModelo(p, W, H), G = res.G;
@@ -8799,11 +8845,12 @@ function spriteHD(p){
 /* ---------- Qualidade 992×1000 ----------
    Desenhar um boneco em 992×1000 leva quase 1 segundo. Para o jogo não travar:
    - o desenho é feito por um ajudante em segundo plano (Web Worker), um de cada vez;
-   - enquanto ele não fica pronto, aparece o desenho de 122×130, que é trocado sozinho quando o grande chega;
+   - enquanto ele não fica pronto, aparece o desenho imediato (122×130, ou 52×60 nos comuns), que é trocado sozinho quando o grande chega;
    - o desenho pronto fica guardado no aparelho (IndexedDB), então cada boneco só é desenhado uma vez.
-   Aparelho sem esse recurso (navegador antigo): continua com o desenho de 122×130. */
+   Aparelho sem esse recurso (navegador antigo): continua com o desenho imediato. */
 const HD = (() => {
   const VER = "sp992:" + SPRITE_VERSAO + ":", HW = 992, HH = 1000, prontos = {}, pedidos = {}, esperas = {};
+  let lote = 0, loteAberto = false, ordem = 0;      // lote: os pedidos feitos de uma vez só (a mesma tela)
   let semApoio = typeof Worker === "undefined" || typeof OffscreenCanvas === "undefined" || !OffscreenCanvas.prototype.convertToBlob, fila = [], sq = 0, url = null;
   const NW = Math.max(1, Math.min(2, ((typeof navigator !== "undefined" && navigator.hardwareConcurrency) || 2) - 1)), ajudantes = [];   // até 2 ajudantes ao mesmo tempo
   /* versão nova dos desenhos: os guardados da versão anterior saem */
@@ -8831,7 +8878,9 @@ onmessage=async e=>{ const {n,p,W,H}=e.data; try{
   const proximo = () => {
     while(fila.length && !semApoio){
       const a = ajudantes.find(x => !x.ocupado) || (ajudantes.length < NW ? novoAjudante() : null); if(!a) return;
-      a.ocupado = fila.pop();   // o pedido mais recente primeiro: é o que está na tela agora
+      /* a tela mais recente primeiro (é a que está aberta agora) e, dentro dela, na ordem em que os bonecos aparecem */
+      let i = 0; for(let j = 1; j < fila.length; j++){ const x = fila[j], y = fila[i]; if(x.lote > y.lote || (x.lote === y.lote && x.n < y.n)) i = j; }
+      a.ocupado = fila.splice(i, 1)[0];
       a.w.postMessage({ n: ++sq, p: a.ocupado.p, W: HW, H: HH });
     }
   };
@@ -8854,22 +8903,24 @@ onmessage=async e=>{ const {n,p,W,H}=e.data; try{
   function pedir(p){
     const chave = p.id; if(prontos[chave] || pedidos[chave] || semApoio) return;
     pedidos[chave] = 1;
+    if(!loteAberto){ loteAberto = true; lote++; setTimeout(() => { loteAberto = false; }, 0); }
+    const meuLote = lote, n = ++ordem;
     const dados = JSON.parse(JSON.stringify(p)); delete dados.semGuardar;
     limpo.then(() => typeof GUARDA === "undefined" ? null : GUARDA.get(VER + chave)).catch(() => null).then(g => {
       if(g && g.u){ chegou(chave, g, false); return; }
       if(semApoio){ delete pedidos[chave]; avisar(chave, null); return; }
-      fila.push({ chave, p: dados }); proximo();
+      fila.push({ chave, p: dados, lote: meuLote, n }); proximo();
     });
   }
   return {
-    pronto(p){ if(!especialHD(p)) return null; const r = prontos[p.id]; if(!r) pedir(p); return r || null; },
+    pronto(p){ if(!temHD(p)) return null; const r = prontos[p.id]; if(!r) pedir(p); return r || null; },
     /* para as imagens de compartilhar: espera o desenho grande (até 20 s) */
-    esperar(p){ if(!especialHD(p) || semApoio) return Promise.resolve(null); if(prontos[p.id]) return Promise.resolve(prontos[p.id]);
+    esperar(p){ if(!temHD(p) || semApoio) return Promise.resolve(null); if(prontos[p.id]) return Promise.resolve(prontos[p.id]);
       return new Promise(ok => { (esperas[p.id] = esperas[p.id] || []).push(ok); setTimeout(() => ok(null), 20000); pedir(p); }); },
     get ativo(){ return !semApoio; }
   };
 })();
-/* o melhor desenho disponível de um personagem (para as imagens de compartilhar): o de 992×1000 se der, senão o de 122×130 */
+/* o melhor desenho disponível de um personagem (para as imagens de compartilhar): o de 992×1000 se der, senão o desenho imediato */
 async function spriteMelhor(p){ const r = await HD.esperar(p); return r ? { url: r.u, fechado: r.f, W: r.W, H: r.H } : spriteHD(p); }
 
 /* ============================================================
@@ -9330,7 +9381,7 @@ function modalComoGanhar(){
   try{
     const inv = albumInventario(), pagas = albumPagas().length, f = pacotesFechados().length;
     itens.push(linha("album", "🎴", "Completar páginas do álbum", val("+" + ALBUM_MOEDAS_PAGINA),
-      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_FOLHAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: +${ALBUM_MOEDAS_ALBUM}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
+      `${albumColadas(inv)} de ${ALBUM_CARTAS.length} figurinhas · ${pagas} de ${ALBUM_FOLHAS.length} páginas${f ? ` · ${f} ${f === 1 ? "pacote para abrir" : "pacotes para abrir"}` : ""} · álbum completo: ${ALBUNS.map(a => "+" + a.premio).join(" e ")}`, barra(100 * albumColadas(inv) / ALBUM_CARTAS.length)));
   }catch(e){}
   modal("Ganhar moedas", `<div class="cg">
       <p class="cg-saldo">${MOEDA}<b>${moedas()}</b> para gastar · ${moedasGanhas()} ganhas até hoje</p>
@@ -9994,7 +10045,7 @@ function fimSuperQuiz(soVer){
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
    - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
    ============================================================ */
-const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
+const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_MAX_TROCA = 6, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
 /* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
    Só os quizzes FEITOS a partir dela dão pacote (os antigos não contam). É a hora do aparelho de cada jogador.
    O que foi ganho nos testes ficou em campos antigos do perfil (albumAbertos, albumTrocas…) e não é lido: todo mundo começa do zero. */
@@ -10028,8 +10079,9 @@ const ALBUM_PAGINAS = [
   { id: "jesus", nome: "Jesus e os Evangelhos", ref: "Mateus a João", cor: "#E8505D", p: ["isabel", "ana", "joao", "maria", "josenazare", "messias", "pedro", "madalena", "zaqueu"], o: ["onda", "manjedoura", "estrela", "martelo", "pao", "rede", "pomba", "ovelha_chao", "tumulo"] },
   { id: "igreja", nome: "Igreja e Missão", ref: "Atos ao Apocalipse", cor: "#2BA486", p: ["filha", "lidia", "timoteo", "barnabe", "paulo", "joaoap", "ellen"], o: ["carta", "asas", "pena", "coracao", "barco", "escudo", "espada", "sandalias", "ancora", "calice", "coroa_vida"] }
 ];
-const ALBUM_LENDARIAS = new Set(["p:messias", "o:arca", "o:tabuas"]);
-const ALBUM_RARAS_OBJ = new Set(["candelabro", "coroa", "harpa", "estrela", "manjedoura", "asas", "pao", "trombeta", "estrelas", "leao", "arca_alianca", "coroa_vida"]);
+/* RARIDADES: 8 lendárias, 15 raras e o resto comuns (85). No máximo uma lendária por página, para nenhuma página ficar muito mais difícil que as outras. */
+const ALBUM_LENDARIAS = new Set(["p:messias", "o:tumulo", "p:abraao", "o:arca", "p:moises", "p:davi", "p:daniel", "p:paulo"]);
+const ALBUM_RARAS = new Set(["p:adao", "p:jose", "p:josue", "o:tabuas", "o:arca_alianca", "p:salomao", "p:elias", "o:harpa", "p:ester", "p:jonas", "p:maria", "p:pedro", "o:manjedoura", "p:joaoap", "o:coroa_vida"]);
 const ALBUM_PESO = { comum: 10, rara: 5, lendaria: 2.5 }, ALBUM_ROT = { comum: "Comum", rara: "Rara", lendaria: "Lendária" };
 /* lista numerada de todas as figurinhas */
 const ALBUM_CARTAS = []; const ALBUM_IDX = {};
@@ -10037,7 +10089,7 @@ ALBUM_PAGINAS.forEach((pg, pi) => { pg.cartas = [];
   pg.p.map(x => "p:" + x).concat(pg.o.map(x => "o:" + x)).forEach(id => {
     const [t, k] = id.split(":"), pr = t === "p" ? acharProfeta(k) : null; if(t === "p" && !pr) return; if(t === "o" && !ALBUM_OBJ[k]) return;
     const c = { id, t, k, n: ALBUM_CARTAS.length + 1, pg: pi, nome: pr ? pr.nome : ALBUM_OBJ[k][0], ref: pr ? (pr.ref || "") : ALBUM_OBJ[k][1],
-      rar: ALBUM_LENDARIAS.has(id) ? "lendaria" : (pr ? (pr.nivel || pr.preco ? "rara" : "comum") : (ALBUM_RARAS_OBJ.has(k) ? "rara" : "comum")) };
+      rar: ALBUM_LENDARIAS.has(id) ? "lendaria" : ALBUM_RARAS.has(id) ? "rara" : "comum" };
     ALBUM_CARTAS.push(c); ALBUM_IDX[id] = c; pg.cartas.push(c); }); });
 /* páginas do álbum: cada página é uma grade 3×3. As figurinhas do tema seguem na ordem (personagens e depois objetos), 9 por página.
    Se o tema não fecha a última página, os espaços que sobram ficam como "Em breve" (breve), à espera de figurinhas novas.
@@ -10129,9 +10181,14 @@ function dicaDoAlbum(){
   setTimeout(() => tentar(0), 1700);
 }
 /* quantas de cada figurinha eu tenho: pacotes abertos, mais o que entrou e menos o que saiu nas trocas */
+/* as figurinhas de um lado da troca: lista de ids (as primeiras propostas guardavam um id só) */
+const trLista = v => (Array.isArray(v) ? v : v ? [v] : []).filter(id => ALBUM_IDX[id]);
+/* a anotação de uma troca feita, no perfil: { m: [saíram], r: [entraram] } (o formato antigo era [saiu, entrou]) */
+const notaLados = n => Array.isArray(n) ? [trLista(n[0]), trLista(n[1])] : [trLista(n && n.m), trLista(n && n.r)];
+const trNomes = l => l.length === 1 ? ALBUM_IDX[l[0]].nome : l.length + " figurinhas";
 function albumInventario(){
   const inv = {}; albumAbertos().forEach(k => pacoteDe(k).forEach(c => { inv[c] = (inv[c] || 0) + 1; }));
-  const t = (perfil && perfil.figTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = t[id]; inv[menos] = (inv[menos] || 0) - 1; inv[mais] = (inv[mais] || 0) + 1; });
+  const t = (perfil && perfil.figTrocas) || {}; Object.keys(t).forEach(id => { const [menos, mais] = notaLados(t[id]); menos.forEach(c => { inv[c] = (inv[c] || 0) - 1; }); mais.forEach(c => { inv[c] = (inv[c] || 0) + 1; }); });
   return inv;
 }
 const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).length;
@@ -10322,10 +10379,11 @@ async function figEmAlta(img, c){
   const q = figPersonagem(c);
   for(let i = 0; i < 10 && img.isConnected; i++){ const r = await HD.esperar(q); if(r && r.u){ if(img.isConnected){ img.src = r.u; img.classList.add("hd"); } return; } if(!HD.ativo) return; }
 }
-function modalFigurinha(id){
-  const c = ALBUM_IDX[id], n = albumInventario()[id] || 0, pg = ALBUM_PAGINAS[c.pg], pr = c.t === "p" ? acharProfeta(c.k) : null;
-  modal("Figurinha " + c.n, `<div class="fig-det"><div class="fig-palco">${htmlFigurinha(c, n, { botao: false, cls: "grande", semConta: true })}</div>
-      ${pr && pr.fala && n > 0 ? `<p class="fig-det-fala">“${esc(pr.fala)}”</p>` : ""}
+function modalFigurinha(id, opts){
+  const c = ALBUM_IDX[id], n = albumInventario()[id] || 0, pg = ALBUM_PAGINAS[c.pg], pr = c.t === "p" ? acharProfeta(c.k) : null, ver = !!(opts && opts.ver);      // ver: numa troca, mostra a carta inteira mesmo para quem não tem
+  modal("Figurinha " + c.n, `<div class="fig-det"><div class="fig-palco">${htmlFigurinha(c, ver ? Math.max(n, 1) : n, { botao: false, cls: "grande", semConta: true })}</div>
+      ${pr && pr.fala && (n > 0 || ver) ? `<p class="fig-det-fala">“${esc(pr.fala)}”</p>` : ""}
+      <p class="fig-det-rar r-${c.rar}">${ALBUM_ROT[c.rar]}</p>
       <p class="muted small">${n > 1 ? `Você tem ${n}: ${n - 1} ${n - 1 === 1 ? "repetida" : "repetidas"} para trocar.` : n === 1 ? "Você tem esta figurinha." : "Você ainda não tem. Ela pode sair num pacote ou vir numa troca."}</p></div>`, m => {
     desenharFigurinhas(m);
     /* a figurinha grande inclina com o dedo (ou o mouse), como uma carta de verdade */
@@ -10415,8 +10473,8 @@ async function carregarTrocas(forcar){
   catch(e){ if(/permission|insufficient/i.test(String(e && (e.code || e.message)))) trocasOk = false; return TROCAS; }
   /* trocas que eu propus e foram aceitas: anoto o meu lado (sai a que ofereci, entra a que pedi) */
   const notas = Object.assign({}, trocaNotas()); let mudou = 0;
-  TROCAS.forEach(t => { if(t.status === "aceito" && t.de === usuario.uid && !notas[t.id]){ notas[t.id] = [t.dou, t.quero]; mudou++;
-    const c = ALBUM_IDX[t.quero]; aviso(`${t.paraNome || "Seu amigo"} aceitou a troca: você recebeu ${c ? c.nome : "a figurinha"}!`); } });
+  TROCAS.forEach(t => { if(t.status === "aceito" && t.de === usuario.uid && !notas[t.id]){ const dei = trLista(t.dou), veio = trLista(t.quero); notas[t.id] = { m: dei, r: veio }; mudou++;
+    aviso(`${t.paraNome || "Seu amigo"} aceitou a troca: você recebeu ${veio.length ? trNomes(veio) : "as figurinhas"}!`); } });
   if(mudou){ perfil.figTrocas = notas; DB.salvarUsuario(usuario.uid, { figTrocas: notas }).catch(()=>{}); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
   return TROCAS;
 }
@@ -10430,11 +10488,11 @@ function avisarTrocasNovas(){
   lsSet(chave, vistas.concat(novas.map(t => t.id)).slice(-120));
   if(tabAtual === "album") return;                                    // já está olhando as propostas
   document.querySelectorAll(".tr-chegou").forEach(e => e.remove());
-  const t = novas[0], dou = ALBUM_IDX[t.dou], quero = ALBUM_IDX[t.quero], quem = String(t.deNome || "Alguém").split(" ")[0];
+  const t = novas[0], dou = trLista(t.dou), quero = trLista(t.quero), quem = String(t.deNome || "Alguém").split(" ")[0];
   const cx = document.createElement("button"); cx.type = "button"; cx.className = "tr-chegou"; cx.setAttribute("role", "status");
-  cx.innerHTML = `<span class="pct">${FIG_PACOTE}</span><span><b>${novas.length > 1 ? `${novas.length} propostas de troca` : `${esc(quem)} quer trocar figurinha`}</b><small>${novas.length > 1 || !dou || !quero ? "Veja no álbum e responda." : `Dá ${esc(dou.nome)} e pede ${esc(quero.nome)}`}</small></span><i>Ver</i>`;
+  cx.innerHTML = `<span class="pct">${FIG_PACOTE}</span><span><b>${novas.length > 1 ? `${novas.length} propostas de troca` : `${esc(quem)} quer trocar figurinha`}</b><small>${novas.length > 1 || !dou.length || !quero.length ? "Veja no álbum e responda." : `Dá ${esc(trNomes(dou))} e pede ${esc(trNomes(quero))}`}</small></span><i>Ver</i>`;
   const sair = () => { if(!cx.isConnected) return; cx.classList.add("sai"); setTimeout(() => cx.remove(), 320); };
-  cx.onclick = () => { cx.remove(); document.querySelectorAll(".modal-bg").forEach(m => { const f = m.querySelector(".fechar"); if(f) f.click(); }); nav("album"); };
+  cx.onclick = () => { cx.remove(); document.querySelectorAll(".modal-bg").forEach(m => { const f = m.querySelector(".fechar"); if(f) f.click(); }); nav("album"); if(albumLiberado()){ window.scrollTo(0, 0); telaTrocas(); } };
   document.body.appendChild(cx); tocar("ajuda"); setTimeout(sair, 9000);
 }
 /* confere de tempos em tempos (no máximo a cada 3 min) se chegou proposta, mesmo com o jogo aberto em outra tela.
@@ -10454,28 +10512,66 @@ setInterval(conferirTrocas, 180000);
 document.addEventListener("visibilitychange", () => { if(!document.hidden) conferirTrocas(); });
 const trocasMinhasAbertas = () => TROCAS.filter(t => t.de === usuario.uid && t.status === "pendente");
 /* repetidas livres: não conta a que já está oferecida numa proposta aberta */
-function repetidasLivres(inv){ const r = {}; ALBUM_CARTAS.forEach(c => { const n = (inv[c.id] || 0) - 1; if(n > 0) r[c.id] = n; }); trocasMinhasAbertas().forEach(t => { if(r[t.dou]) r[t.dou]--; }); return r; }
+function repetidasLivres(inv){ const r = {}; ALBUM_CARTAS.forEach(c => { const n = (inv[c.id] || 0) - 1; if(n > 0) r[c.id] = n; }); trocasMinhasAbertas().forEach(t => trLista(t.dou).forEach(id => { if(r[id]) r[id]--; })); return r; }
+/* quantas de cada figurinha eu ainda posso dar: o que tenho menos o que já ofereci nas minhas propostas abertas */
+function trDisponivel(inv){ const r = {}; Object.keys(inv).forEach(id => { r[id] = inv[id] || 0; }); trocasMinhasAbertas().forEach(t => trLista(t.dou).forEach(id => { r[id] = (r[id] || 0) - 1; })); return r; }
 async function responderTroca(id, aceitar){
   const t = TROCAS.find(x => x.id === id); if(!t || t.status !== "pendente") return;
-  const inv = albumInventario();
-  if(aceitar && !((inv[t.quero] || 0) > 0)){ aviso("Você não tem mais a figurinha pedida nesta troca."); return; }
-  if(aceitar && (inv[t.quero] || 0) === 1 && !(await confirmar("Aceitar a troca", `Você só tem uma ${ALBUM_IDX[t.quero].nome}. Se trocar, ela sai do seu álbum. Trocar mesmo assim?`, "Trocar"))) return;
+  const inv = albumInventario(), dou = trLista(t.dou), quero = trLista(t.quero), nomes = l => l.map(i => ALBUM_IDX[i].nome).join(", ");
+  if(aceitar){
+    const livre = trDisponivel(inv), falta = quero.filter(i => !((inv[i] || 0) > 0)), presas = quero.filter(i => (inv[i] || 0) > 0 && livre[i] <= 0);
+    if(falta.length){ aviso(`Você não tem mais ${nomes(falta)}. Não dá para aceitar esta troca.`); return; }
+    if(presas.length){ aviso(`Você já ofereceu ${nomes(presas)} em outra proposta sua. Cancele aquela antes de aceitar esta.`); return; }
+    const unicas = quero.filter(i => livre[i] === 1);
+    if(unicas.length && !(await confirmar("Aceitar a troca", `Você só tem uma de: ${nomes(unicas)}. Se trocar, ${unicas.length === 1 ? "ela sai" : "elas saem"} do seu álbum. Trocar mesmo assim?`, "Trocar"))) return;
+  }
   try{ await DB.responderTroca(id, aceitar ? "aceito" : "recusado"); }catch(e){ aviso(erroMsg(e)); return; }
   t.status = aceitar ? "aceito" : "recusado";
-  if(aceitar){ const notas = Object.assign({}, trocaNotas(), { [id]: [t.quero, t.dou] }); perfil.figTrocas = notas; DB.salvarUsuario(usuario.uid, { figTrocas: notas }).catch(()=>{});
-    tocar("ajuda"); aviso(`Troca feita: você recebeu ${ALBUM_IDX[t.dou].nome}!`); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
+  if(aceitar){ const notas = Object.assign({}, trocaNotas(), { [id]: { m: quero, r: dou } }); perfil.figTrocas = notas; DB.salvarUsuario(usuario.uid, { figTrocas: notas }).catch(()=>{});
+    tocar("ajuda"); aviso(`Troca feita: você recebeu ${trNomes(dou)}!`); conferirPaginasDoAlbum(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); }
   else aviso("Troca recusada.");
   if(tabAtual === "album") telaAlbum();
 }
 async function cancelarTroca(id){ try{ await DB.cancelarTroca(id); TROCAS = TROCAS.filter(t => t.id !== id); aviso("Proposta cancelada."); }catch(e){ aviso(erroMsg(e)); } if(tabAtual === "album") telaAlbum(); }
-function linhaTroca(t){
-  const minha = t.de === usuario.uid, dou = ALBUM_IDX[t.dou], quero = ALBUM_IDX[t.quero]; if(!dou || !quero) return "";
-  const mini = c => `<span class="tr-fig r-${c.rar}" data-figimg="${c.id}"></span><b>${esc(c.nome)}</b>`;
-  return `<li class="tr-item"><div class="tr-tx"><small>${minha ? `Você propôs para ${esc(t.paraNome || "?")}` : `${esc(t.deNome || "?")} propõe`}</small>
-      <div class="tr-par"><span class="tr-lado"><em>${minha ? "você dá" : "você recebe"}</em>${mini(dou)}</span><i aria-hidden="true">⇄</i><span class="tr-lado"><em>${minha ? "você recebe" : "você dá"}</em>${mini(quero)}</span></div></div>
-    <div class="tr-acoes">${minha ? `<button type="button" class="btn btn-sm btn-ghost" data-tr-cancelar="${esc(t.id)}">Cancelar</button>` : `<button type="button" class="btn btn-sm btn-main" data-tr-aceitar="${esc(t.id)}">Aceitar</button><button type="button" class="btn btn-sm btn-ghost" data-tr-recusar="${esc(t.id)}">Recusar</button>`}</div></li>`;
+/* ---------- a tela das propostas: cada proposta num cartão, com as figurinhas maiores; tocar numa abre a carta inteira ---------- */
+let albumTrocasAberta = false;
+function htmlProposta(t){
+  const minha = t.de === usuario.uid, dou = trLista(t.dou).map(id => ALBUM_IDX[id]), quero = trLista(t.quero).map(id => ALBUM_IDX[id]); if(!dou.length || !quero.length) return "";
+  const inv = albumInventario(), recebo = minha ? quero : dou, dando = minha ? dou : quero;
+  const cartas = (l, boa) => `<div class="trp-cartas">${l.map(c => htmlFigurinha(c, 1, { cls: "mini" + (boa(c) ? " boa" : ""), attr: `data-ver="${c.id}"`, semConta: true })).join("")}</div>`;
+  const livre = trDisponivel(inv), sem = minha ? [] : dando.filter(c => !(livre[c.id] > 0)), unicas = minha ? [] : dando.filter(c => livre[c.id] === 1), lista = l => l.map(c => esc(c.nome)).join(", ");
+  return `<section class="panel trp ${minha ? "minha" : "chegou"}">
+      <header class="trp-cab"><span>${minha ? `Você propôs para <b>${esc(t.paraNome || "?")}</b>` : `<b>${esc(t.deNome || "?")}</b> propõe`}</span><small>${t.criado && typeof haQuanto === "function" ? haQuanto(t.criado) : ""}</small></header>
+      <div class="trp-lados">
+        <div class="trp-lado recebe"><p class="trp-rot"><span>Você recebe</span><em>${recebo.length}</em></p>${cartas(recebo, c => !((inv[c.id] || 0) > 0))}</div>
+        <span class="trp-seta" aria-hidden="true">${iconeSVG("troca")}</span>
+        <div class="trp-lado da"><p class="trp-rot"><span>Você dá</span><em>${dando.length}</em></p>${cartas(dando, () => false)}</div>
+      </div>
+      ${sem.length ? `<p class="trp-nota ruim">Você não tem livre: ${lista(sem)}. Não dá para aceitar agora.</p>` : unicas.length ? `<p class="trp-nota">Atenção: você só tem uma de ${lista(unicas)}. Se aceitar, ${unicas.length === 1 ? "ela sai" : "elas saem"} do seu álbum.</p>` : ""}
+      <div class="btn-row ${minha ? "uma" : ""}">${minha ? `<button type="button" class="btn btn-ghost" data-tr-cancelar="${esc(t.id)}">Cancelar a proposta</button>`
+        : `<button type="button" class="btn btn-main" data-tr-aceitar="${esc(t.id)}" ${sem.length ? "disabled" : ""}>Aceitar</button><button type="button" class="btn btn-ghost" data-tr-recusar="${esc(t.id)}">Recusar</button>`}</div></section>`;
 }
-/* propor uma troca: 1) escolhe o amigo da sala; 2) escolhe a figurinha dele e a repetida que oferece */
+function telaTrocas(){
+  tabAtual = "album"; albumTrocasAberta = true; albumAberto = ""; atualizarCasca(); pararTimer();
+  const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas();
+  app.innerHTML = `<div class="estudo-area alb trp-tela">
+      <div class="lv-topo"><button type="button" class="pg-voltar" id="trpVoltar"><span aria-hidden="true">‹</span>Álbuns</button><div><b>Propostas de troca</b><small>${paraMim.length} para responder · ${minhas.length} ${minhas.length === 1 ? "enviada" : "enviadas"}</small></div></div>
+      ${paraMim.length || minhas.length ? `<p class="trp-dica">${iconeSVG("lupa")}<span>Toque numa figurinha para ver a carta inteira antes de decidir. O ponto verde marca as que faltam no seu álbum.</span></p>` : ""}
+      ${paraMim.length ? `<h2 class="trp-tit">Para você responder</h2>${paraMim.map(htmlProposta).join("")}` : ""}
+      ${minhas.length ? `<h2 class="trp-tit">Enviadas por você</h2>${minhas.map(htmlProposta).join("")}` : ""}
+      ${!paraMim.length && !minhas.length ? `<section class="panel trp-vazio">${iconeSVG("troca")}<p>Nenhuma proposta aberta agora.</p></section>` : ""}
+      <div class="btn-row uma trp-nova"><button type="button" class="btn btn-main" id="trpNova">Propor uma troca</button></div></div>`;
+  figEscala(app); desenharFigurinhas(app);
+  $("trpVoltar").onclick = () => { albumTrocasAberta = false; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); };
+  $("trpNova").onclick = modalTrocar;
+  app.querySelectorAll("[data-ver]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.ver, { ver: true }));
+  app.querySelectorAll("[data-tr-aceitar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trAceitar, true));
+  app.querySelectorAll("[data-tr-recusar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trRecusar, false));
+  app.querySelectorAll("[data-tr-cancelar]").forEach(b => b.onclick = () => cancelarTroca(b.dataset.trCancelar));
+  if(Date.now() - trocasEm > 60000){ const a = trocasParaMim().length + "|" + trocasMinhasAbertas().length;
+    carregarTrocas(true).then(() => { if(tabAtual === "album" && albumTrocasAberta && a !== trocasParaMim().length + "|" + trocasMinhasAbertas().length && !document.querySelector(".modal-bg")) telaTrocas(); }); }
+}
+/* propor uma troca: 1) escolhe o amigo da sala; 2) escolhe uma ou mais figurinhas dele e uma ou mais repetidas suas */
 async function modalTrocar(){
   if(!albumLiberado()){ modalAlbumTrancado(); return; }
   if(semSala()){ modal("Trocar figurinhas", `<p>Para trocar figurinhas você precisa estar numa sala. Entre na sala da sua turma em Minha conta → Salas.</p>`); return; }
@@ -10508,25 +10604,37 @@ async function modalTrocar(){
       const voltar = `<button type="button" class="pg-voltar" id="trVoltar"><span aria-hidden="true">‹</span>Escolher outra pessoa</button>`;
       if(!txt){ el.innerHTML = voltar + `<p class="vazio">${esc(outro.nome || "Essa pessoa")} ainda não abriu o álbum nesta versão do jogo.</p>`; el.querySelector("#trVoltar").onclick = passo1; return; }
       if(!pedir.length || !dar.length){ el.innerHTML = voltar + `<p class="vazio">${!pedir.length ? `${esc(outro.nome || "Essa pessoa")} não tem figurinhas repetidas agora.` : "Você não tem figurinhas repetidas livres para oferecer."}</p>`; el.querySelector("#trVoltar").onclick = passo1; return; }
-      let quero = "", dou = "";
-      const grade = (lista, sel, attr, marca) => `<div class="tr-grade">${lista.map(c => htmlFigurinha(c, 1, { cls: "mini" + (c.id === sel ? " sel" : "") + (marca(c) ? " boa" : ""), attr: `${attr}="${c.id}"`, semConta: true })).join("")}</div>`;
-      const pintar = () => {
-        el.innerHTML = voltar + `<p class="tr-tit">1. Escolha uma repetida de <b>${esc(outro.nome || "?")}</b> <small>(com ponto verde: falta no seu álbum)</small></p>${grade(pedir, quero, "data-quero", c => !((inv[c.id] || 0) > 0))}
-          <p class="tr-tit">2. Escolha uma repetida sua para dar <small>(com ponto verde: falta no álbum dele)</small></p>${grade(dar, dou, "data-dou", c => !(dele[c.id] > 0))}
-          <p class="erro" id="trErro"></p><div class="btn-row uma"><button type="button" class="btn btn-main" id="trPropor" ${quero && dou ? "" : "disabled"}>Propor a troca</button></div>`;
-        desenharFigurinhas(el);
-        el.querySelector("#trVoltar").onclick = passo1;
-        el.querySelectorAll("[data-quero]").forEach(b => b.onclick = () => { quero = b.dataset.quero; pintar(); });
-        el.querySelectorAll("[data-dou]").forEach(b => b.onclick = () => { dou = b.dataset.dou; pintar(); });
-        el.querySelector("#trPropor").onclick = async () => {
-          if(quero === dou){ el.querySelector("#trErro").textContent = "Escolha figurinhas diferentes."; return; }
-          const b = el.querySelector("#trPropor"); ocupado(b, true);
-          try{ const d = { de: usuario.uid, deNome: perfil.nome || "", para: outro.uid, paraNome: outro.nome || "", dou, quero, status: "pendente", salaId: sala.id, criado: Date.now() };
-            d.id = await DB.criarTroca(d); TROCAS.unshift(d); tocar("ajuda"); fechar(); aviso(`Proposta enviada para ${outro.nome || "seu amigo"}.`); if(tabAtual === "album") telaAlbum(); }
-          catch(e){ ocupado(b, false); if(/permission|insufficient/i.test(String(e && (e.code || e.message)))){ trocasOk = false; el.querySelector("#trErro").textContent = "As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore."; } else el.querySelector("#trErro").textContent = erroMsg(e); }
-        };
+      const quero = [], dou = [], primeiro = esc(String(outro.nome || "essa pessoa").split(" ")[0]);
+      const grade = (lista, attr, marca) => `<div class="tr-grade">${lista.map(c => `<div class="tr-cel">${htmlFigurinha(c, 1, { cls: "mini" + (marca(c) ? " boa" : ""), attr: `${attr}="${c.id}" aria-pressed="false"`, semConta: true })}<button type="button" class="tr-ver" data-ver="${c.id}" aria-label="Ver a carta: ${esc(c.nome)}">${iconeSVG("lupa")}</button></div>`).join("")}</div>`;
+      el.innerHTML = voltar + `
+        <section class="tr-bloco"><p class="tr-tit"><span class="tr-n">1</span><span>Você recebe de <b>${esc(outro.nome || "?")}</b></span><em id="trQn">0</em></p>
+          <p class="tr-dica">Toque para escolher uma ou mais. Ponto verde: falta no seu álbum.</p>${grade(pedir, "data-quero", c => !((inv[c.id] || 0) > 0))}</section>
+        <div class="tr-meio" aria-hidden="true">${iconeSVG("troca")}</div>
+        <section class="tr-bloco"><p class="tr-tit"><span class="tr-n">2</span><span>Você dá em troca</span><em id="trDn">0</em></p>
+          <p class="tr-dica">São as suas repetidas livres. Ponto verde: falta no álbum de ${primeiro}.</p>${grade(dar, "data-dou", c => !(dele[c.id] > 0))}</section>
+        <p class="erro" id="trErro"></p>
+        <div class="tr-rodape"><p id="trResumo">Escolha as figurinhas dos dois lados.</p><button type="button" class="btn btn-main" id="trPropor" disabled>Propor a troca</button></div>`;
+      desenharFigurinhas(el);
+      el.querySelector("#trVoltar").onclick = passo1;
+      const erro = el.querySelector("#trErro"), bt = el.querySelector("#trPropor");
+      const resumo = () => { el.querySelector("#trQn").textContent = quero.length; el.querySelector("#trDn").textContent = dou.length; bt.disabled = !(quero.length && dou.length);
+        el.querySelector("#trResumo").innerHTML = quero.length || dou.length ? `Você dá <b>${dou.length}</b> e recebe <b>${quero.length}</b>` : "Escolha as figurinhas dos dois lados."; };
+      const marcar = (lista, outra, b, id) => { erro.textContent = "";
+        const i = lista.indexOf(id);
+        if(i >= 0) lista.splice(i, 1);
+        else { if(outra.includes(id)){ erro.textContent = "Essa figurinha já está do outro lado da troca."; return; }
+          if(lista.length >= ALBUM_MAX_TROCA){ erro.textContent = `No máximo ${ALBUM_MAX_TROCA} figurinhas de cada lado.`; return; } lista.push(id); }
+        const on = lista.includes(id); b.classList.toggle("sel", on); b.setAttribute("aria-pressed", on ? "true" : "false"); b.parentNode.classList.toggle("sel", on); tocar("toque"); resumo(); };
+      el.querySelectorAll("[data-quero]").forEach(b => b.onclick = () => marcar(quero, dou, b, b.dataset.quero));
+      el.querySelectorAll("[data-dou]").forEach(b => b.onclick = () => marcar(dou, quero, b, b.dataset.dou));
+      el.querySelectorAll("[data-ver]").forEach(b => b.onclick = () => modalFigurinha(b.dataset.ver, { ver: true }));
+      bt.onclick = async () => {
+        if(!quero.length || !dou.length) return;
+        ocupado(bt, true);
+        try{ const d = { de: usuario.uid, deNome: perfil.nome || "", para: outro.uid, paraNome: outro.nome || "", dou: dou.slice(), quero: quero.slice(), status: "pendente", salaId: sala.id, criado: Date.now() };
+          d.id = await DB.criarTroca(d); TROCAS.unshift(d); tocar("ajuda"); fechar(); aviso(`Proposta enviada para ${outro.nome || "seu amigo"}.`); if(tabAtual === "album") telaAlbum(); }
+        catch(e){ ocupado(bt, false); if(/permission|insufficient/i.test(String(e && (e.code || e.message)))){ trocasOk = false; erro.textContent = "As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore."; } else erro.textContent = erroMsg(e); }
       };
-      pintar();
     };
     passo1();
   });
@@ -10536,7 +10644,7 @@ async function modalTrocar(){
    Cada álbum junta alguns temas. Para criar um álbum novo, acrescente os temas dele em ALBUM_PAGINAS (com os personagens e objetos)
    e uma linha aqui, com os temas, as cores da capa, os três personagens da capa e o prêmio. As páginas (até 9 figurinhas) saem sozinhas. */
 const ALBUNS = [
-  { id: "at", nome: "Antigo Testamento", sub: "Da criação ao retorno do exílio", pgs: ["eden", "exodo", "reis", "exilio"], cor: "#2F56B8", cor2: "#0C1648", capa: ["davi", "moises", "ester"], premio: ALBUM_MOEDAS_ALBUM },
+  { id: "at", nome: "Antigo Testamento", sub: "Da criação ao retorno do exílio", pgs: ["eden", "exodo", "reis", "exilio"], cor: "#2F56B8", cor2: "#0C1648", capa: ["davi", "moises", "ester"], premio: 80 },
   { id: "nt", nome: "Novo Testamento", sub: "De Belém à igreja que espera", pgs: ["jesus", "igreja"], cor: "#C2405A", cor2: "#460C22", capa: ["maria", "messias", "pedro"], premio: ALBUM_MOEDAS_ALBUM }
 ];
 ALBUNS.forEach(a => { a.paginas = [].concat(...a.pgs.map(id => ((ALBUM_PAGINAS.find(p => p.id === id) || {}).folhas || []).map(fo => fo.i))); a.cartas = [].concat(...a.paginas.map(i => ALBUM_FOLHAS[i].cartas)); });
@@ -10544,7 +10652,7 @@ const albumDe = i => ALBUNS.find(a => a.paginas.includes(i)) || ALBUNS[0];
 /* albumAberto: "" = estante com as capas; senão, o álbum aberto. albumPagina é a página (posição em ALBUM_FOLHAS). */
 let albumAberto = "", albumManter = false, albumPagina = 0, albumVirando = false, albumAbrindo = false;
 /* pelo menu (e pelos avisos) o Álbum abre na estante; só o "Ver o álbum" do pacote abre direto na página da figurinha nova */
-function abrirAlbuns(){ if(!albumManter) albumAberto = ""; albumManter = false; telaAlbum(); }
+function abrirAlbuns(){ if(!albumManter) albumAberto = ""; albumManter = false; albumTrocasAberta = false; telaAlbum(); }
 function htmlCapa(a, k, inv, trancada){
   const tenho = a.cartas.filter(c => (inv[c.id] || 0) > 0).length, feito = albumFeitos().includes(a.id);
   const tit = a.nome.split(" "), meio = Math.ceil(tit.length / 2);
@@ -10589,6 +10697,7 @@ function virarPagina(nova){
   (frente ? velha : folha).addEventListener("animationend", e => { if(e.target === e.currentTarget) fim(); }); setTimeout(fim, 950);
 }
 function telaAlbum(){
+  if(albumTrocasAberta && albumLiberado()) return telaTrocas();
   tabAtual = "album"; atualizarCasca(); pararTimer(); albumVirando = false;
   const inv = albumInventario(), tenho = albumColadas(inv), rep = albumRepetidas(inv), fechados = pacotesFechados(), pagas = albumPagas();
   if(!albumLiberado()) albumAberto = "";          // antes da estreia dá para ver as capas, mas não abrir
@@ -10625,7 +10734,10 @@ function telaAlbum(){
   }
   /* ---------- a estante: a central de ações (abrir, comprar, trocar), as propostas e as capas dos álbuns ---------- */
   const paraMim = trocasParaMim(), minhas = trocasMinhasAbertas(), nf = fechados.length, hj = pacotesCompradosHoje(), fimCompra = hj >= ALBUM_PACOTES_DIA, caro = !fimCompra && moedas() < ALBUM_PRECO_PACOTE;
-  const propostas = paraMim.length || minhas.length ? `<section class="panel alb-trocas" id="albTrocas"><div class="hm-cab"><span>Propostas de troca${paraMim.length ? ` <em>${paraMim.length} para responder</em>` : ""}</span></div><ul class="lista tr-ul">${paraMim.map(linhaTroca).join("")}${minhas.map(linhaTroca).join("")}</ul></section>` : "";
+  const quem = [...new Set(paraMim.map(t => String(t.deNome || "Alguém").split(" ")[0]))];
+  const propostas = paraMim.length || minhas.length ? `<button type="button" class="panel alb-aviso ${paraMim.length ? "novo" : ""}" id="albTrocas"><span class="alb-aviso-ic">${iconeSVG("troca")}${paraMim.length ? `<b>${paraMim.length}</b>` : ""}</span>
+      <span class="alb-aviso-tx"><b>${paraMim.length ? (paraMim.length === 1 ? `${esc(quem[0])} propôs uma troca` : `Você recebeu ${paraMim.length} propostas de troca`) : (minhas.length === 1 ? "1 proposta sua espera resposta" : `${minhas.length} propostas suas esperam resposta`)}</b>
+      <small>${paraMim.length ? (minhas.length ? `E ${minhas.length} ${minhas.length === 1 ? "sua espera" : "suas esperam"} resposta` : "Veja as figurinhas e responda") : "Você pode ver ou cancelar"}</small></span><i>Ver</i></button>` : "";
   app.innerHTML = `<div class="estudo-area alb">
     ${cabPagina("Álbum", `${tenho} de ${ALBUM_CARTAS.length}`, "Álbuns de figurinhas", `Cada quiz do dia dá um pacote com ${ALBUM_POR_PACOTE} figurinhas. Troque as repetidas com a sua sala.`)}
     <div class="alb-prog"><span class="hm-barra"><i style="width:${Math.round(100 * tenho / ALBUM_CARTAS.length)}%"></i></span><small>${rep} ${rep === 1 ? "repetida" : "repetidas"} · ${pagas.length} de ${ALBUM_FOLHAS.length} páginas completas${albumCompleto() ? " · álbuns completos ✓" : ""}</small></div>
@@ -10644,9 +10756,7 @@ function telaAlbum(){
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
   $("albComprar").onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
-  app.querySelectorAll("[data-tr-aceitar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trAceitar, true));
-  app.querySelectorAll("[data-tr-recusar]").forEach(b => b.onclick = () => responderTroca(b.dataset.trRecusar, false));
-  app.querySelectorAll("[data-tr-cancelar]").forEach(b => b.onclick = () => cancelarTroca(b.dataset.trCancelar));
+  const pr = $("albTrocas"); if(pr && pr.tagName === "BUTTON") pr.onclick = () => { tocar("toque"); window.scrollTo(0, 0); telaTrocas(); };
   /* confere as trocas (propostas novas e respostas) sem travar a tela */
   if(Date.now() - trocasEm > 60000){ const a = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length;
     carregarTrocas(true).then(() => { const d = trocasParaMim().length + "|" + trocasMinhasAbertas().length + "|" + Object.keys(trocaNotas()).length; if(tabAtual === "album" && !albumAberto && a !== d && !document.querySelector(".modal-bg")) telaAlbum(); }); }
@@ -10794,6 +10904,7 @@ const ICJ = (() => {
       [OURO, "M25 11Q34 4 43 10", { s: 4.2, p: 1 }], [OURO, "M40 3.5L48.5 11.5L38 14.5Z", { round: 2, p: 1 }], [OURO, "M39 54Q30 61 21 55", { s: 4.2, p: 1 }], [OURO, "M24 61.5L15.5 53.5L26 50.5Z", { round: 2, p: 1 }]]],
     carrinho: ["vai", [[CINZA, "M5 12H12.5L19.5 41H49", { s: 4.6 }], [OURO, "M15 18H56L51.5 36Q51 38.5 48.5 38.5H20Z", { round: 2 }], ["#000", "M24.5 18L27 38.5M34.5 18V38.5M44.5 18L42.5 38.5", { sh: 1 }],
       ["#C77B00", "M25 19L27 37", { s: 2, det: 1 }], ["#C77B00", "M34.5 19V37", { s: 2, det: 1 }], ["#C77B00", "M44.5 19L42.5 37", { s: 2, det: 1 }], [AZUL, C(24, 51, 5)], [AZUL, C(45, 51, 5)], ["#fff", "M19 22H30", { s: 2.2, hl: 1 }]]],
+    lupa: ["pulo", [[OURO, "M39 39L55 55", { s: 8.5 }], [AZUL, C(26, 26, 18)], ["#DDF4FF", C(26, 26, 11.5), { semContorno: 1 }], ["#fff", "M19 21Q22 16 28 16", { s: 3, hl: 1 }]]],
     rosto: ["pulo", [...rosto, [TINTA, C(23.5, 27, 3.2), { semContorno: 1 }], [TINTA, C(40.5, 27, 3.2), { semContorno: 1 }], [TINTA, "M21.5 38Q32 48 42.5 38", { s: 3.6, det: 1 }]]]
   };
   /* qual emoji vira qual ícone (sem o seletor de variação) */
@@ -10802,7 +10913,7 @@ const ICJ = (() => {
     "🔊": "som", "📳": "vibrar", "⚔": "espadas", "💬": "balao", "💭": "pensamento", "🎭": "personagem", "👥": "pessoas", "➕": "mais", "✅": "certo", "❌": "erro", "⚠": "aviso", "❓": "pergunta", "🖍": "marcador", "✏": "lapis", "🧽": "borracha", "✋": "mao",
     "🧘": "calma", "🕊": "pomba", "🏹": "arco", "☀": "sol", "🌙": "lua", "🌗": "tema", "🌅": "nascer", "💎": "diamante", "👣": "pegadas", "📥": "baixar", "⬇": "baixar", "📊": "grafico", "📈": "subida", "🏫": "salas", "🎉": "festa", "💰": "saco", "📸": "camera",
     "🛠": "ferramentas", "💡": "lampada", "🔄": "atualizar", "🔁": "repetir", "⏭": "pular", "🚪": "porta", "📝": "notas", "📚": "livros", "🖼": "imagem", "💾": "salvar", "🗑": "lixeira", "✂": "tesoura", "🙏": "amem", "👏": "palmas", "💪": "forca", "🙌": "gloria",
-    "😮": "uau", "😂": "riso", "🙂": "rosto", "🛒": "carrinho", "🔀": "troca" };
+    "😮": "uau", "😂": "riso", "🙂": "rosto", "🛒": "carrinho", "🔀": "troca", "🔍": "lupa" };
   return { F, E };
 })();
 
