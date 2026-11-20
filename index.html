@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261119.135829">
+<meta name="versao" content="20261120.023052">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Corrida do Rolo · Quiz da Lição</title>
+<title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1214,6 +1214,40 @@ input[type=text],input[type=email],input[type=password],input[type=number],input
 @keyframes avsobe{0%,30%,100%{transform:none}8%{transform:translateY(-3.4px)}14%{transform:translateY(-2.6px)}20%{transform:translateY(-3.4px)}}
 @keyframes avbrilha{0%,24%,100%{transform:scale(1)}6%{transform:scale(1.4)}12%{transform:scale(1.05)}18%{transform:scale(1.32)}}
 @media (prefers-reduced-motion:reduce){.avatar .av-corpo,.avatar .av-emb{animation:none}}
+/* personagens da loja: contorno azul-violeta, base de luz, brilho holográfico e o efeito próprio de cada um */
+.avatar.loja{filter:drop-shadow(0 0 1.5px #A6ECFF) drop-shadow(0 0 5px rgba(170,125,255,.75));overflow:visible}
+.prof.bloq .avatar.loja{filter:grayscale(1) brightness(.75)}
+.avatar .av-ped-anel{transform-box:fill-box;transform-origin:center;animation:avped 2.6s ease-out infinite;animation-delay:var(--d,0s)}
+.avatar .av-holo{animation:avholo 4.6s ease-in-out infinite;animation-delay:var(--d,0s)}
+.avatar .avl{transform-box:fill-box;transform-origin:center;animation-duration:var(--du,4s);animation-delay:calc(var(--d,0s) + var(--dl,0s));animation-iteration-count:infinite;animation-timing-function:ease-in-out;animation-fill-mode:both}
+.avatar .avl-cai{animation-name:avlcai}
+.avatar .avl-sobe{animation-name:avlsobe;animation-timing-function:ease-out}
+.avatar .avl-cintila{animation-name:avlcintila}
+.avatar .avl-pulsa{animation-name:avlpulsa}
+.avatar .avl-gira{animation-name:avlgira;animation-timing-function:linear}
+.avatar .avl-voa{animation-name:avlvoa}
+.avatar .avl-tijolo{animation-name:avltijolo;animation-timing-function:ease-out}
+.avatar .avl-onda{animation-name:avlonda}
+.avatar .avl-fita{animation-name:avlfita;animation-timing-function:linear}
+@keyframes avped{0%{transform:scale(.8);opacity:.95}100%{transform:scale(1.2);opacity:0}}
+@keyframes avholo{0%,66%{transform:translateX(0);opacity:0}69%{opacity:1}94%{opacity:1}100%{transform:translateX(46px);opacity:0}}
+@keyframes avlcai{0%{transform:translate(.6px,-7px) rotate(-25deg);opacity:0}15%{opacity:var(--o,1)}50%{transform:translate(-1.2px,0) rotate(18deg)}85%{opacity:var(--o,1)}100%{transform:translate(.8px,7px) rotate(-20deg);opacity:0}}
+@keyframes avlsobe{0%{transform:translate(0,5px) scale(.6);opacity:0}20%{opacity:1}70%{opacity:.9}100%{transform:translate(var(--x,1px),-9px) scale(1.1);opacity:0}}
+@keyframes avlcintila{0%,100%{transform:scale(.35);opacity:.25}50%{transform:scale(1);opacity:1}}
+@keyframes avlpulsa{0%,100%{transform:scale(.94)}50%{transform:scale(1.06)}}
+@keyframes avlgira{to{transform:rotate(360deg)}}
+@keyframes avlvoa{0%{transform:translate(-4px,2.2px) rotate(-10deg);opacity:0}18%{opacity:1}50%{transform:translate(0,-.6px) rotate(4deg)}82%{opacity:1}100%{transform:translate(4px,2px) rotate(12deg);opacity:0}}
+@keyframes avltijolo{0%{transform:translateY(-6px);opacity:0}6%{transform:translateY(0);opacity:1}80%{transform:translateY(0);opacity:1}90%,100%{transform:translateY(0);opacity:0}}
+@keyframes avlonda{0%,100%{transform:translateY(0)}50%{transform:translateY(-.9px)}}
+@keyframes avlfita{to{stroke-dashoffset:-18}}
+@media (prefers-reduced-motion:reduce){.avatar .avl,.avatar .av-holo,.avatar .av-ped-anel{animation:none}}
+/* VERSÃO DE TESTE: a faixa no alto e o aviso na tela do Álbum */
+.faixa-teste{position:fixed;left:50%;top:0;transform:translateX(-50%);z-index:99999;padding:2px 12px 3px;border-radius:0 0 9px 9px;background:#E0483C;color:#fff;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.alb-teste{margin-top:16px;display:grid;justify-items:center;gap:8px;text-align:center;border:1.5px dashed rgba(255,150,140,.75)}
+.alb-teste b{font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#FFB4AB}
+.alb-teste p{margin:0;font-size:13px;line-height:1.4;color:var(--soft)}
+/* vitrine da loja: o nome do efeito do personagem */
+.lj-item .lj-ef{display:grid;align-items:center;min-height:30px;margin-top:3px;padding:3px 8px;border-radius:99px;background:linear-gradient(90deg,rgba(143,243,255,.22),rgba(199,125,255,.26));border:1px solid rgba(190,170,255,.5);font:800 10px/1.2 "Barlow",sans-serif;font-style:normal;letter-spacing:.02em;color:#F1E9FF}
 /* janela da missão: cartão de jogo (paisagem da etapa, moeda da casa, progresso, recompensa) */
 .modal.mj-janela{padding-top:12px}
 .mj{text-align:center}
@@ -2529,6 +2563,114 @@ button.fig.vaga:hover{transform:translateY(-2px)}
   .ar-stats{grid-template-columns:repeat(6,1fr)}
   .menu-conta{grid-template-columns:1fr}
 }
+/* ===================== LOJA NOVA ===================== */
+.ljn .pg-cab{padding-bottom:12px}
+.ljn-sec{margin:20px 2px 10px;font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+/* a carteira: o saldo grande, o atalho de ganhar moedas e a próxima meta */
+.ljn-cart{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 12px;padding:16px;border-radius:24px;overflow:hidden;background:linear-gradient(140deg,#1B1750 0%,#34298A 52%,#5B4FC9 100%);border:1px solid rgba(255,226,122,.55);box-shadow:0 16px 32px rgba(20,10,70,.38),inset 0 1px 0 rgba(255,255,255,.22)}
+.ljn-cart-luz{position:absolute;right:-70px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,215,90,.38),transparent);pointer-events:none}
+.ljn-cart-l{position:relative;min-width:0}
+.ljn-cart-l small{display:block;font:800 11px/1.2 "Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#CFC8FF}
+.ljn-cart-n{display:flex;align-items:baseline;gap:8px;margin-top:4px;color:#FFE27A}
+.ljn-cart-n .moeda{width:30px;height:30px;align-self:center;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.ljn-cart-n b{font:400 56px/.9 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.ljn-cart-n span{font:800 12px/1 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#CFC8FF}
+.ljn-cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 10px;border-radius:99px;border:1px solid rgba(255,226,122,.7);background:rgba(255,226,122,.14);color:#FFE9A8;font:800 13px/1 "Barlow",sans-serif;cursor:pointer}
+.ljn-cart-btn .cg-ic-mais{width:24px;height:24px}
+.ljn-cart-btn:hover{background:rgba(255,226,122,.24)}
+.ljn-cart-meta{position:relative;grid-column:1/-1;display:grid;gap:8px}
+.ljn-cart-meta:empty{display:none}
+.ljn-alc{justify-self:start;padding:5px 11px;border-radius:99px;background:rgba(125,240,184,.18);border:1px solid rgba(125,240,184,.55);color:#B9F7D8;font:800 12px/1.2 "Barlow",sans-serif}
+.ljn-meta{display:grid;gap:6px;font-size:13px;line-height:1.3;color:#E3DEFF}
+.ljn-meta b{color:#FFE27A}
+.ljn-barra,.ljn-prog{display:block;height:7px;border-radius:99px;background:rgba(10,8,50,.38);overflow:hidden}
+.ljn-barra i,.ljn-prog i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#F2A53A,#FFE27A)}
+/* o destaque de hoje: um palco com raios de luz, o item grande e o botão */
+.ljn-hero{position:relative;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:end;gap:8px;min-height:250px;margin-top:12px;padding:18px 8px 16px 18px;border-radius:26px;overflow:hidden;background:radial-gradient(90% 80% at 76% 64%,color-mix(in srgb,var(--c) 62%,transparent),transparent 72%),linear-gradient(160deg,#17134A 0%,#2C2380 55%,#4B3FB0 100%);border:1px solid rgba(255,255,255,.22);box-shadow:0 18px 36px rgba(20,10,70,.42),inset 0 1px 0 rgba(255,255,255,.2)}
+.ljn-raios{position:absolute;left:76%;top:58%;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.11) 0 9deg,transparent 9deg 22deg);-webkit-mask:radial-gradient(closest-side,#000 18%,transparent 78%);mask:radial-gradient(closest-side,#000 18%,transparent 78%);animation:ljngira 48s linear infinite;pointer-events:none}
+.ljn-pontos{position:absolute;inset:0;pointer-events:none}
+.ljn-pontos i{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 2px rgba(255,255,255,.7);animation:ljnpisca 2.6s ease-in-out infinite}
+.ljn-pontos i:nth-child(1){left:52%;top:16%}.ljn-pontos i:nth-child(2){left:90%;top:22%;animation-delay:.7s;width:4px;height:4px}.ljn-pontos i:nth-child(3){left:60%;top:74%;animation-delay:1.3s;width:4px;height:4px}.ljn-pontos i:nth-child(4){left:94%;top:62%;animation-delay:.4s}.ljn-pontos i:nth-child(5){left:70%;top:8%;animation-delay:1.8s;width:4px;height:4px}.ljn-pontos i:nth-child(6){left:46%;top:46%;animation-delay:1.1s;width:3px;height:3px}
+.ljn-hero-tx{position:relative;display:grid;justify-items:start;gap:6px;min-width:0;z-index:1}
+.ljn-tag{padding:5px 11px;border-radius:99px;background:linear-gradient(90deg,#FFE27A,#F2A53A);color:#3A2A00;font:800 10.5px/1.2 "Barlow",sans-serif;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 10px rgba(242,165,58,.4)}
+.ljn-hero h2{margin:4px 0 0;font:400 46px/.92 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.6px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.ljn-ef{padding:4px 10px;border-radius:99px;background:linear-gradient(90deg,rgba(143,243,255,.26),rgba(199,125,255,.32));border:1px solid rgba(200,185,255,.6);font:800 11px/1.2 "Barlow",sans-serif;font-style:normal;color:#F1E9FF}
+.ljn-hero small{font-size:12px;color:#CFC8FF}
+.ljn-hero .ljn-btn{width:auto;min-width:138px;margin-top:8px;padding:8px 16px}
+.ljn-hero-arte{position:relative;display:grid;place-items:end center;align-self:stretch;min-height:200px}
+.ljn-hero-arte .lj-av{position:relative;width:150px;height:194px}
+.ljn-hero-arte .lj-av .avatar{width:150px;height:194px}
+.ljn-chao{position:absolute;left:50%;bottom:-2px;width:190px;height:44px;margin-left:-95px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 70%,#fff),color-mix(in srgb,var(--c) 40%,transparent) 55%,transparent);opacity:.75;animation:ljnpulsa 3.2s ease-in-out infinite}
+/* o pacote de figurinhas vira uma faixa viva */
+.ljn .lj-pacote{position:relative;margin:12px 0 0;padding:14px 16px;border-radius:22px;overflow:hidden;background:linear-gradient(115deg,#2B1E7A 0%,#6A3FC8 55%,#C94FA8 100%);border:1px solid rgba(255,255,255,.3);box-shadow:0 12px 24px rgba(20,10,70,.3),inset 0 1px 0 rgba(255,255,255,.25)}
+.ljn .lj-pacote .pct{width:58px;transform:rotate(-8deg);filter:drop-shadow(0 8px 12px rgba(0,0,0,.4))}
+.ljn .lj-pacote b{font-size:17px;color:#fff}.ljn .lj-pacote small{color:#E7DCFF}
+.ljn .lj-pacote .btn.btn-main{background:linear-gradient(180deg,#FFE27A,#F2A53A);color:#3A2A00;border:0;box-shadow:0 4px 0 #A8650E;font-weight:800}
+/* as categorias: cartões coloridos, com a amostra no canto e o progresso da coleção */
+.ljn-cats{gap:10px}
+.ljn-tile{position:relative;overflow:hidden;justify-items:start;align-content:end;text-align:left;gap:3px;min-height:196px;padding:12px 14px 13px;border-radius:24px;border:1px solid rgba(255,255,255,.3);background:linear-gradient(150deg,color-mix(in srgb,var(--g1) 74%,#241C6B),color-mix(in srgb,var(--g2) 70%,#241C6B));box-shadow:0 14px 26px rgba(20,10,70,.32),inset 0 1px 0 rgba(255,255,255,.3)}
+.ljn-tile::before{content:"";position:absolute;right:-46px;top:-56px;width:190px;height:190px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.34),transparent);pointer-events:none}
+.ljn-tile:hover{background:linear-gradient(150deg,color-mix(in srgb,var(--g1) 82%,#241C6B),color-mix(in srgb,var(--g2) 78%,#241C6B))}
+.ljn-tile-arte{position:relative;justify-self:end;display:grid;place-items:end center;height:106px;margin-bottom:4px}
+.ljn-tile .lj-av{width:84px;height:104px}.ljn-tile .lj-av .avatar{width:80px;height:104px}
+.ljn-tile .lj-av.lj-mold{width:74px;height:92px}.ljn-tile .lj-av.lj-mold .avatar{width:62px;height:80px}
+.ljn-tile .lj-av.lj-mov{width:78px;height:86px}.ljn-tile .lj-av.lj-mov .avatar{width:44px;height:56px}
+.ljn-t-t .ljn-tile-arte{justify-self:stretch;place-items:end stretch}.ljn-t-t .lj-pista{width:100%;height:auto;padding:0}
+.ljn-tile .lj-festa.parada{width:72px;height:84px;background:rgba(20,18,60,.3);border-color:rgba(255,255,255,.4)}
+.ljn-tile b{position:relative;font:800 17px/1.15 "Barlow",sans-serif;margin:0;text-shadow:0 2px 0 rgba(0,0,0,.28)}
+.ljn-tile small{position:relative;font-size:12px;color:#fff;opacity:.92}
+.ljn-tile .ljn-prog{position:relative;width:100%;margin-top:5px}
+.ljn-tile .ljn-prog i{background:#fff}
+.ljn-tile em{position:relative;margin-top:3px;color:#fff}
+.ljn-tile .lj-cat-seta{right:auto;left:14px;top:12px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(20,18,60,.35);font-size:17px;line-height:1;color:#fff}
+/* dentro da categoria: os filtros e os itens, cada um no seu palco */
+.ljn-filtros{display:flex;gap:8px;margin:0 0 12px;overflow-x:auto;scrollbar-width:none}
+.ljn-filtros::-webkit-scrollbar{display:none}
+.ljn-filtros button{flex:none;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:99px;border:1px solid rgba(255,255,255,.28);background:rgba(20,18,60,.28);color:#E7E3FF;font:800 13px/1 "Barlow",sans-serif;cursor:pointer}
+.ljn-filtros button i{font-style:normal;min-width:20px;padding:3px 6px;border-radius:99px;background:rgba(255,255,255,.16);font-size:11px;text-align:center}
+.ljn-filtros button.on{background:#fff;border-color:#fff;color:#2E2B6E}
+.ljn-filtros button.on i{background:linear-gradient(90deg,var(--g1),var(--g2));color:#1B1750}
+.ljn-dentro .lj-nota{margin:0 2px 12px}
+.ljn-grade{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ljn-grade.pistas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ljn-vazio{grid-column:1/-1;margin:0;padding:22px 16px;border-radius:20px;border:1px dashed rgba(255,255,255,.35);text-align:center;color:var(--soft);font-size:14px}
+.ljn-card{position:relative;align-content:start;gap:3px;padding:8px 8px 11px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07));border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 22px rgba(20,10,70,.24),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .14s ease}
+.ljn-card:active{transform:scale(.985)}
+.ljn-card.meu{border-color:rgba(143,230,255,.7)}
+.ljn-card.uso{border-color:#7DF0B8;box-shadow:0 0 0 3px rgba(125,240,184,.28),0 12px 22px rgba(20,10,70,.24)}
+.ljn-palco{position:relative;width:100%;height:132px;border-radius:16px;overflow:hidden;display:grid;place-items:end center;padding-bottom:9px;background:radial-gradient(95% 70% at 50% 100%,color-mix(in srgb,var(--c) 62%,transparent),transparent 74%),linear-gradient(180deg,#1B1750,#352B8C)}
+.ljn-palco::after{content:"";position:absolute;left:50%;bottom:5px;width:104px;height:20px;margin-left:-52px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.38),transparent);pointer-events:none}
+.ljn-luz{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 82%);clip-path:polygon(40% 0,60% 0,96% 100%,4% 100%);pointer-events:none}
+.ljn-palco > .lj-av,.ljn-palco > .lj-pista,.ljn-palco > .lj-festa{position:relative;z-index:1}
+.ljn-palco .lj-av{width:92px;height:116px}.ljn-palco .lj-av .avatar{width:88px;height:114px}
+.ljn-palco .lj-av.lj-mold{width:84px;height:104px;margin:0 0 4px;background:rgba(255,255,255,.12)}.ljn-palco .lj-av.lj-mold .avatar{width:70px;height:90px}
+.ljn-palco .lj-av.lj-mov{width:96px;height:104px;margin:0 0 2px;background:rgba(255,255,255,.1)}
+.ljn-palco .lj-mov .runner{left:22px;bottom:12px;width:52px;height:66px}.ljn-palco .lj-mov .runner .avatar{width:52px;height:66px}
+.ljn-palco .lj-pista{align-self:center;padding:0 8px}
+.ljn-palco .lj-festa{align-self:center;width:88px;height:98px;margin-bottom:6px;background:rgba(20,18,60,.4)}
+.ljn-selo{position:absolute;left:8px;top:8px;z-index:2;padding:4px 9px;border-radius:99px;background:rgba(143,230,255,.92);color:#12305A;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.ljn-card.uso .ljn-selo{background:#7DF0B8;color:#0E3B2A}
+.ljn-card b{font:800 14px/1.2 "Barlow",sans-serif;min-height:34px;margin-top:5px}
+.ljn-card small{font-size:11px}
+.ljn-card .lj-ef{margin-top:4px}
+/* o botão: dourado quando dá para comprar */
+.ljn-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:40px;margin-top:8px;padding:7px 12px;border-radius:99px;border:0;font:800 14px/1 "Barlow",sans-serif;cursor:pointer;transition:transform .12s ease}
+.ljn-btn:active{transform:translateY(2px)}
+.ljn-btn .moeda{width:17px;height:17px;flex:none}
+.ljn-btn b{min-height:0;margin:0;font:800 15px/1 "Barlow",sans-serif}
+.ljn-btn span{font-weight:800}
+.ljn-btn.pode{background:linear-gradient(180deg,#FFE27A,#F2A53A);color:#3A2A00;box-shadow:0 4px 0 #A8650E,0 10px 18px rgba(242,165,58,.3)}
+.ljn-btn.pode::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-18deg);animation:ljnbrilho 3.8s ease-in-out infinite}
+.ljn-btn.caro{background:rgba(20,18,60,.42);color:#E7E3FF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.26)}
+.ljn-btn.caro span{font-weight:700;color:#CFC8FF}
+.ljn-btn.usar{background:#fff;color:#2E2B6E;box-shadow:0 4px 0 rgba(20,18,60,.35)}
+.ljn-btn.uso{background:linear-gradient(180deg,#3FD3A0,#1E9E78);color:#fff;box-shadow:0 4px 0 #14694F}
+@keyframes ljngira{to{transform:rotate(360deg)}}
+@keyframes ljnpisca{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes ljnpulsa{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:.9;transform:scale(1.04)}}
+@keyframes ljnbrilho{0%,62%{left:-60%}100%{left:130%}}
+@media (prefers-reduced-motion:reduce){.ljn-raios,.ljn-pontos i,.ljn-chao,.ljn-btn.pode::after{animation:none}}
+@media (min-width:700px){.ljn-cats{grid-template-columns:repeat(3,minmax(0,1fr))}.ljn-grade,.ljn-grade.pistas{grid-template-columns:repeat(auto-fill,minmax(176px,1fr))}.ljn-hero{min-height:290px;padding:26px 20px 22px 30px}.ljn-hero h2{font-size:64px}.ljn-hero-arte .lj-av,.ljn-hero-arte .lj-av .avatar{width:180px;height:232px}}
 </style>
 </head>
 <body class="sem-menu">
@@ -4006,7 +4148,7 @@ function conquistas(){
     { ic:"💎", id:"tesouro", t:"Tesouro", d:"20.000 pontos no trimestre", on: totalTrimestre() >= 20000 },
     { ic:"📖", id:"rolo", t:"Rolo inteiro", d:"Todos os dias do trimestre", on: LICOES.length > 0 && LICOES.every(L => L.dias.every(d => resDe(L,d))) },
     { ic:"💰", id:"rico", t:"Rico", d:"Ganhou 1.000 moedas no total", on: typeof moedasGanhas === "function" && moedasGanhas() >= 1000 },
-    { ic:"🎴", id:"colecionador", t:"Colecionador", d:"Completou o álbum de figurinhas", on: typeof albumCompleto === "function" && albumCompleto() }
+    { ic:"🎴", id:"colecionador", t:"Colecionador", d:"Completou um álbum de figurinhas", on: typeof temAlbumCompleto === "function" && temAlbumCompleto() }
   ];
 }
 /* ---------- Conquistas novas: aparecem uma única vez, com confetes ---------- */
@@ -6920,6 +7062,55 @@ const GESTOS = { nuvem: "sobe", pao: "sobe", coroa: "sobe", estrelas: "brilha", 
    as pernas e os objetos de verdade nas mãos. */
 const MOV_QUADROS = { marcha: ["passoA", "passoB"], salto: ["agacha", "salto"], danca: ["dancaA", "dancaB"], corrida: ["corridaA", "corridaB"], aguia: ["asasA", "asasB"],
   beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"] };
+/* ---------- Personagens da loja: o que só eles têm ----------
+   Brilho holográfico (uma faixa de luz que atravessa o boneco), base de luz no chão e um efeito próprio da história de cada um.
+   Tudo é desenhado por cima do boneco, em unidades do desenho (o boneco ocupa de 0 a 22 na largura e de 0 a 30 na altura).
+   "atras" fica atrás do boneco e "frente" passa na frente dele. Parado (sem animação), cada peça fica onde foi desenhada. */
+let _avMasc = 0;
+const EFEITOS_LOJA = (() => {
+  const n = v => +(+v).toFixed(2);
+  const st = (dl, du, x, o) => ` style="--dl:${dl}s;--du:${du}s${x != null ? ";--x:" + x + "px" : ""}${o != null ? ";--o:" + o : ""}"`;
+  const folha = (x, y, cor, dl, du) => `<path class="avl avl-cai" d="M${x} ${y}c1.1-1.1 2.5-.9 3 0-.5.9-1.9 1.1-3 0z" fill="${cor}"${st(dl, du)}/>`;
+  const brasa = (x, y, r, cor, dl, du, dx) => `<circle class="avl avl-sobe" cx="${x}" cy="${y}" r="${r}" fill="${cor}"${st(dl, du, dx)}/>`;
+  const estrela = (x, y, t, cor, dl, du) => `<path class="avl avl-cintila" d="M${x} ${n(y - t)}Q${x} ${y} ${n(x + t)} ${y}Q${x} ${y} ${x} ${n(y + t)}Q${x} ${y} ${n(x - t)} ${y}Q${x} ${y} ${x} ${n(y - t)}Z" fill="${cor}"${st(dl, du)}/>`;
+  const letra = (x, y, ch, dl) => `<text class="avl avl-sobe" x="${x}" y="${y}" text-anchor="middle" font-family="'Times New Roman',Times,serif" font-weight="700" font-size="4.2" fill="#FFE9A8" stroke="#5A3A00" stroke-width=".34" paint-order="stroke"${st(dl, 4.2, 0)}>${ch}</text>`;
+  const carta = (x, y, dl, du) => `<g class="avl avl-voa"${st(dl, du)}><rect x="${x}" y="${y}" width="3.2" height="2.1" rx=".3" fill="#FFFFFF" stroke="#8C7B5A" stroke-width=".22"/><path d="M${x} ${y}l1.6 1.15 1.6-1.15" fill="none" stroke="#8C7B5A" stroke-width=".22"/><circle cx="${n(x + 1.6)}" cy="${n(y + 1.2)}" r=".36" fill="#E0483C"/></g>`;
+  const tijolo = (x, y, i) => `<rect class="avl avl-tijolo" x="${x}" y="${y}" width="2.6" height="1.25" rx=".15" fill="${i % 2 ? "#D2B27C" : "#E8CFA2"}" stroke="#7A5A2E" stroke-width=".18"${st(n(i * .32), 8.5)}/>`;
+  const pena = (x, y, dl, du) => `<g class="avl avl-cai"${st(dl, du, null, .95)}><path d="M${x} ${y}c.6-1.6 2.5-2 3.6-1.1-.8 1.2-2.5 1.7-3.6 1.1z" fill="#FFFFFF"/><path d="M${x} ${y}l3.2-1" fill="none" stroke="#B9C7DC" stroke-width=".18"/></g>`;
+  const fita = (d, cor, larg, luz) => `<path class="avl avl-onda" d="${d}" fill="none" stroke="${cor}" stroke-width="${larg}" stroke-linecap="round" opacity=".9"${st(0, 3.4)}/><path class="avl avl-fita" d="${d}" fill="none" stroke="${luz}" stroke-width="${n(larg / 3)}" stroke-linecap="round" stroke-dasharray="5 4" opacity=".9"${st(0, 2.2)}/>`;
+  const raios = (cx, cy, r0, r1, q) => { let d = ""; for(let i = 0; i < q; i++){ const a = Math.PI * 2 * i / q, c = Math.cos(a), sn = Math.sin(a); d += `M${n(cx + r0 * c)} ${n(cy + r0 * sn)}L${n(cx + r1 * c)} ${n(cy + r1 * sn)}`; } return d; };
+  const muro = [[-1.8, 26.7], [1, 26.7], [3.8, 26.7], [15.4, 26.7], [18.2, 26.7], [21, 26.7], [-.4, 25.35], [2.4, 25.35], [16.8, 25.35], [19.6, 25.35], [1, 24], [18.2, 24]];
+  return {
+    zaqueu:   { nome: "Folhas do sicômoro", ref: "Lucas 19:4", cor: "#9BE58A",
+      atras: folha(-1.6, 6, "#3E9B4F", 0, 4.2) + folha(19.6, 12, "#5DBB63", 1.4, 4.6),
+      frente: folha(1.2, 15, "#9BE58A", 2.3, 4) + folha(18.4, 21, "#3E9B4F", .7, 4.4) + folha(-.8, 23, "#5DBB63", 3.1, 4.8) },
+    gideao:   { nome: "Faíscas das tochas", ref: "Juízes 7:20", cor: "#FFB347",
+      atras: brasa(-.5, 16, .4, "#FF7A3D", 2.6, 2.8, .8) + brasa(22, 13, .42, "#FFB347", .7, 3, -1),
+      frente: brasa(1, 22, .55, "#FFE27A", 0, 2.6, -1.2) + brasa(3.5, 25, .45, "#FF7A3D", .9, 3, 1) + brasa(19, 23, .55, "#FFB347", .4, 2.8, 1.4) + brasa(21, 19, .45, "#FFE27A", 1.6, 2.4, -.8) + brasa(16.5, 26, .5, "#FF7A3D", 2.1, 3.2, .6) + brasa(6, 18, .4, "#FFB347", 1.2, 2.6, -.5) },
+    jo:       { nome: "Estrelas da manhã", ref: "Jó 38:7", cor: "#BFEFFF",
+      atras: estrela(11, -1.6, 1.2, "#FFFFFF", 1.9, 3),
+      frente: estrela(0, 5, 2, "#FFFFFF", 0, 2.6) + estrela(21.6, 3.5, 1.6, "#FFE27A", .9, 3) + estrela(22.2, 14, 1.3, "#DFF6FF", 1.7, 2.4) + estrela(-.6, 15.5, 1.5, "#FFE27A", .5, 3.2) + estrela(4.2, -.6, 1.2, "#DFF6FF", 2.2, 2.8) + estrela(17.6, -.9, 1.3, "#FFFFFF", 1.3, 2.6) + estrela(21, 23.5, 1.1, "#FFFFFF", 2.6, 2.6) },
+    esdras:   { nome: "Letras da Lei", ref: "Esdras 7:10", cor: "#FFE27A",
+      atras: "",
+      frente: letra(.2, 24, "ת", 0) + letra(21.8, 26, "ו", 1.05) + letra(.8, 14, "ר", 2.1) + letra(21.2, 15.5, "ה", 3.15) },      /* as letras da palavra "Torá" */
+    timoteo:  { nome: "Cartas de Paulo", ref: "1 Timóteo 1:2", cor: "#BFF3E6",
+      atras: carta(18.8, 9, 1.5, 4.6),
+      frente: carta(-1.8, 5.5, 0, 4.4) + carta(-1.2, 18, 2.9, 4.8) },
+    neemias:  { nome: "Muro em construção", ref: "Neemias 6:15", cor: "#F0D9A8",
+      atras: muro.map((m, i) => tijolo(m[0], m[1], i)).join(""), frente: "" },
+    lidia:    { nome: "Púrpura de Tiatira", ref: "Atos 16:14", cor: "#D9A6FF",
+      atras: fita("M-2 9.5C3 6 7 12.5 11 9S19.5 5.5 24 8.5", "#C77DFF", 1.1, "#F3DCFF") + fita("M-2.5 21C2 16.5 6.5 24.5 11 19.5S20 15 24.5 18.5", "#9B4FD6", 1.5, "#E9C4FF"),
+      frente: estrela(.5, 14, .9, "#F3DCFF", .4, 2.6) + estrela(21.5, 24, 1, "#E9C4FF", 1.3, 3) + estrela(20.5, 3.5, .8, "#FFFFFF", 2, 2.4) },
+    barnabe:  { nome: "Penas da pomba", ref: "Atos 11:24", cor: "#EAF4FF",
+      atras: pena(19.2, 8, 1.6, 6.2),
+      frente: pena(-1.2, 4.5, 0, 5.6) + pena(1.4, 17, 3, 6) + pena(18.8, 20.5, 4.3, 5.8) },
+    madalena: { nome: "Manhã da ressurreição", ref: "João 20:1", cor: "#FFD9A0",
+      atras: `<path class="avl avl-gira" d="${raios(11, 12, 11.3, 13.5, 12)}" fill="none" stroke="#FFEFC9" stroke-width=".55" stroke-linecap="round" opacity=".8"${st(0, 28)}/>`,
+      frente: folha(0, 19, "#F7A8C4", .6, 5.2) + folha(19.4, 24, "#FFC6DA", 2.4, 5.6) + folha(19.8, 9, "#F7A8C4", 3.9, 5) }
+  };
+})();
+/* o efeito de um personagem da loja (null para os outros) */
+const efeitoDaLoja = p => (p && p.preco && EFEITOS_LOJA[p.modelo || p.id]) || null;
 function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   /* id pode vir como "personagem~acessório" (acessório da loja em uso); um terceiro pedaço "~v" marca amostra da vitrine */
   const partes = String(id || "").split("~"), p0 = acharProfeta(partes[0]) || acharProfeta(PROFETA_PADRAO), nv = Math.floor(+nivel || 0);
@@ -6928,6 +7119,9 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
   const p = acLoja ? Object.assign({}, p0, { id: p0.id + "+" + acLoja.id, modelo: p0.modelo || p0.id, emb2: acLoja.emb, emb2o: acLoja.o, emb2atras: !!acLoja.atras, semGuardar: partes[2] === "v" }) : (ac && ac.variante ? ac.variante(p0) : p0);
   const lbl = String(rotulo || p.nome).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch])) + (acLoja ? ", com " + acLoja.nome.toLowerCase() : ac ? ", " + ac.rotulo : "");
   const raro = !!p.nivel, lend = !!p.lendario;
+  const efeito = mov === "dormir" ? null : efeitoDaLoja(p0);      // personagem da loja: brilho holográfico, base de luz e o efeito próprio dele
+  const uid = efeito ? ++_avMasc : 0;                             // um número por boneco desenhado, para o recorte e os degradês não se misturarem
+  let holo = "";
   const mais = (cx, cy, t) => `<rect x="${cx - .5}" y="${cy - t}" width="1" height="${2 * t}"/><rect x="${cx - t}" y="${cy - .5}" width="${2 * t}" height="1"/>`;
   const aura = lend && !(mov === "dormir" && !montado) ? `<g class="av-aura" shape-rendering="geometricPrecision"><ellipse cx="10" cy="14.5" rx="11.6" ry="15.2" fill="#FFE27A" opacity=".2"/><ellipse cx="10" cy="8.5" rx="8.4" ry="8.4" fill="#FFF3B8" opacity=".34"/></g>` : "";
   const brilho = raro ? `<g class="av-raro" fill="${lend ? "#FFF3B8" : "#FFE27A"}">${mais(.6, 4, 1.5)}${mais(21.2, 2.6, 1.5)}${mais(.2, 17.5, 1)}${mais(21.6, 9.5, 1)}${lend ? mais(10, -.2, 1) + mais(-.2, 11, 1) + mais(21.4, 23, 1) + mais(1.2, 24.5, 1) : ""}</g>` : "";
@@ -6962,15 +7156,21 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
     const gesto = d.sp.emb ? (GESTOS[p.emb] || "acena") : "";
     const ox = d.sp.emb ? (d.x0 + d.ex * d.larg).toFixed(2) : 0, oy = d.sp.emb ? ((gesto === "brilha" ? d.ey : d.eb) * 30).toFixed(2) : 0;
     temGesto = !!d.sp.emb;
+    if(efeito) holo = `<mask id="avm${uid}" maskUnits="userSpaceOnUse" x="-6" y="-4" width="34" height="38" style="mask-type:alpha">${d.img("av-masc", "u")}</mask>`
+      + `<g mask="url(#avm${uid})" shape-rendering="geometricPrecision"><path class="av-holo" d="M-14 -3h9l-8 35h-9z" fill="url(#avh${uid})" opacity="0"/></g>`;
     corpo = d.sp.emb ? d.img("av-olho", "b") + d.img("av-pisca", "bf") + d.img("av-emb av-g-" + gesto, "e", ` data-g="${gesto}" style="transform-origin:${ox}px ${oy}px"`) : d.img("av-olho", "u") + d.img("av-pisca", "f");
   }
   /* montado: o personagem fica menor e mais alto, e o jumentinho é desenhado na frente das pernas dele */
   const sombra = mov === "dormir" && quadros ? `<ellipse cx="11" cy="28.2" rx="11" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>` : `<ellipse cx="11" cy="28.2" rx="6.75" ry="1.05" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/>`;
+  const base = efeito ? `<defs><radialGradient id="avg${uid}"><stop offset="0" stop-color="${efeito.cor}" stop-opacity=".5"/><stop offset=".55" stop-color="${efeito.cor}" stop-opacity=".2"/><stop offset="1" stop-color="${efeito.cor}" stop-opacity="0"/></radialGradient>`
+    + `<linearGradient id="avh${uid}" gradientUnits="userSpaceOnUse" x1="-14" y1="-3" x2="-5.4" y2="-1.03"><stop offset="0" stop-color="#FF9BE8" stop-opacity="0"/><stop offset=".22" stop-color="#FF9BE8" stop-opacity=".55"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".8"/><stop offset=".78" stop-color="#8FF3FF" stop-opacity=".6"/><stop offset="1" stop-color="#8FF3FF" stop-opacity="0"/></linearGradient></defs>`
+    + `<ellipse class="avl avl-pulsa" cx="11" cy="13.5" rx="13" ry="14.5" fill="url(#avg${uid})" style="--dl:0s;--du:4.2s" shape-rendering="geometricPrecision"/><g class="av-ped" shape-rendering="geometricPrecision"><ellipse cx="11" cy="28.2" rx="9.6" ry="2" fill="${efeito.cor}" opacity=".3"/><ellipse class="av-ped-anel" cx="11" cy="28.2" rx="8.8" ry="1.7" fill="none" stroke="${efeito.cor}" stroke-width=".45" opacity=".85"/></g>` : "";
   const boneco = montado
     ? `<ellipse cx="11" cy="28.4" rx="9.4" ry="1.1" fill="rgba(20,18,60,.32)" shape-rendering="geometricPrecision"/><g class="av-corpo"><g transform="translate(1.3 2.4) scale(.7)">${corpo}</g><image class="av-montaria" href="${JUMENTO_PNG}" x="-.5" y="11.5" width="23" height="17" preserveAspectRatio="none"/></g>`
-    : sombra + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo);
+    : base + sombra + (efeito ? `<g class="av-loja-atras" shape-rendering="geometricPrecision">${efeito.atras}</g>` : "") + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo)
+      + (efeito ? holo + `<g class="av-loja-frente" shape-rendering="geometricPrecision">${efeito.frente}</g>` : "");
   const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
-  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
+  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}${efeito ? " loja" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : efeito ? ", personagem da loja, com o efeito " + efeito.nome : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
 }
 let _nvMemo = { k: "", v: 0 };
 function meuNivel(){
@@ -9070,23 +9270,33 @@ const MOEDA = `<i class="moeda" aria-hidden="true"></i>`;
 let lojaCat = "";
 const LOJA_CATS = [
   { k: "a", nome: "Acessórios",        sub: "na mão, na cabeça ou nas costas",  lista: () => LOJA_ACESSORIOS },
-  { k: "p", nome: "Personagens",       sub: "só na loja",                       lista: () => PROFETAS.filter(p => p.preco) },
+  { k: "p", nome: "Personagens",       sub: "só na loja, com brilho e efeito próprio",                       lista: () => PROFETAS.filter(p => p.preco) },
   { k: "m", nome: "Molduras de perfil", sub: "em volta do seu personagem",      lista: () => LOJA_MOLDURAS },
   { k: "t", nome: "Temas da pista",    sub: "a sua raia na Corrida",            lista: () => LOJA_PISTAS },
   { k: "v", nome: "Movimentos",        sub: "o que o personagem faz na raia",   lista: () => LOJA_MOVIMENTOS },
   { k: "c", nome: "Comemorações",      sub: "ao terminar o quiz",               lista: () => LOJA_FESTAS }
 ];
+/* cores de cada categoria (o degradê do cartão e a luz do palco) e o filtro da tela da categoria */
+const LOJA_CORES = { a: ["#FFB347", "#F0668A"], p: ["#8FE6FF", "#B48CF0"], m: ["#FFE27A", "#F2A53A"], t: ["#7DF0B8", "#2BA4C9"], v: ["#FF8AD8", "#8F6BF0"], c: ["#8FB8FF", "#6F62E0"] };
+let lojaFiltro = "";
 function telaLoja(){
   tabAtual = "loja"; atualizarCasca(); pararTimer(); if(typeof MUSICA !== "undefined") MUSICA.parar();
   const saldo = moedas(), eu = perfil.profeta || PROFETA_PADRAO;
   const cat = LOJA_CATS.find(c => c.k === lojaCat);
-  const saldoHtml = `<div class="lj-saldo" aria-label="${saldo} moedas">${MOEDA}<b>${saldo}</b><small>${saldo === 1 ? "moeda" : "moedas"}</small></div>`;
   const desenharAmostras = () => {      /* os bonecos de amostra são desenhados aos poucos, para a tela abrir na hora */
     const prevs = [...app.querySelectorAll("[data-prev]")]; let k = 0;
     const desenhar = () => { const fim = Math.min(prevs.length, k + 3); for(; k < fim; k++){ if(!prevs[k].isConnected) return; prevs[k].innerHTML = avatarSVG(prevs[k].dataset.prev, null, 0, 0, prevs[k].dataset.mov || ""); } if(k < prevs.length) setTimeout(desenhar, 30); };
     desenhar();
   };
-  /* ---------- 1ª tela: as categorias ---------- */
+  /* o botão de cada item: dourado quando dá para comprar, "faltam N" quando não dá, e Usar / Em uso no que já é meu */
+  const botao = (id, preco, emUso, rotUsar) => comprado(id)
+    ? `<button type="button" class="ljn-btn ${emUso ? "uso" : "usar"}" data-usar="${id}">${emUso ? "✓ Em uso" : rotUsar}</button>`
+    : `<button type="button" class="ljn-btn ${saldo < preco ? "caro" : "pode"}" data-comprar="${id}">${MOEDA}<b>${preco}</b><span>${saldo < preco ? `faltam ${preco - saldo}` : "Comprar"}</span></button>`;
+  const ligarCompras = () => {
+    app.querySelectorAll("[data-comprar]").forEach(b => b.onclick = async () => { await comprarNaLoja(b.dataset.comprar, b.closest(".lj-item, .ljn-hero")); if(tabAtual === "loja" && !document.querySelector(".lj-grade") && app.querySelector(".ljn")) telaLoja(); });
+    app.querySelectorAll("[data-usar]").forEach(b => b.onclick = () => usarDaLoja(b.dataset.usar));
+  };
+  /* ---------- 1ª tela: a carteira, o destaque de hoje, o pacote de figurinhas e as categorias ---------- */
   if(!cat){
     const amostra = { a: `<div class="lj-av" data-prev="${esc(eu + "~harpa~v")}"></div>`, p: `<div class="lj-av" data-prev="zaqueu"></div>`,
       m: `<div class="lj-av lj-mold mold mold-ouro" data-prev="${esc(eu)}"></div>`,
@@ -9095,43 +9305,64 @@ function telaLoja(){
       c: `<div class="lj-festa parada">${FESTA_ICONE.estrelas}</div>` };
     const emUso = { a: perfil.acess && comprado("a:" + perfil.acess) && LOJA_AC[perfil.acess] ? LOJA_AC[perfil.acess].nome : "", p: (acharProfeta(perfil.profeta) || {}).preco ? acharProfeta(perfil.profeta).nome : "",
       m: (extraDaLoja("m", minhaMoldura()) || {}).nome, t: (extraDaLoja("t", minhaPista()) || {}).nome, v: (extraDaLoja("v", meuMovimento()) || {}).nome, c: (extraDaLoja("c", minhaFesta()) || {}).nome };
-    app.innerHTML = `<div class="estudo-area">
-      <div class="lj-topo">${cabPagina("Loja", "", "Loja do Rolo", "Ganhe moedas nos acertos do quiz, nas missões, na semana completa no prazo e nos desafios.")}${htmlMoedasInicio(true)}</div>
+    /* o que ainda não é meu, do mais barato ao mais caro: dá a meta da carteira ("faltam N para ...") */
+    const faltam = LOJA_CATS.flatMap(c => c.lista().map(x => ({ id: c.k + ":" + x.id, nome: x.nome, preco: x.preco }))).filter(x => !comprado(x.id)).sort((a, b) => a.preco - b.preco);
+    const posso = faltam.filter(x => x.preco <= saldo).length, prox = faltam.find(x => x.preco > saldo);
+    const carteira = `<section class="ljn-cart"><span class="ljn-cart-luz" aria-hidden="true"></span>
+        <div class="ljn-cart-l"><small>Seu saldo</small><div class="ljn-cart-n">${MOEDA}<b>${fmt(saldo)}</b><span>${saldo === 1 ? "moeda" : "moedas"}</span></div></div>
+        <button type="button" class="ljn-cart-btn" id="inMoedas">${MOEDA_MAIS}<span>Ganhar moedas</span></button>
+        <div class="ljn-cart-meta">${!faltam.length ? `<span class="ljn-alc">Você já tem tudo o que a loja vende!</span>`
+          : `${posso ? `<span class="ljn-alc">${posso} ${posso === 1 ? "item" : "itens"} ao seu alcance</span>` : ""}${prox ? `<span class="ljn-meta"><span>Faltam <b>${prox.preco - saldo}</b> para <b>${esc(prox.nome)}</b></span><span class="ljn-barra"><i style="width:${Math.max(4, Math.round(100 * saldo / prox.preco))}%"></i></span></span>` : ""}`}</div></section>`;
+    /* o destaque muda todo dia: um personagem da loja que ainda não é meu (ou, sem eles, um acessório) */
+    const dia = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+    const pers = PROFETAS.filter(p => p.preco && !comprado("p:" + p.id)), acs = LOJA_ACESSORIOS.filter(a => !comprado("a:" + a.id));
+    const dp = pers.length ? pers[dia % pers.length] : null, da = !dp && acs.length ? acs[dia % acs.length] : null, ef = dp ? efeitoDaLoja(dp) : null;
+    const destaque = dp || da ? `<section class="ljn-hero" style="--c:${dp ? dp.bg : LOJA_CORES.a[0]}"><span class="ljn-raios" aria-hidden="true"></span><span class="ljn-pontos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <div class="ljn-hero-tx"><span class="ljn-tag">Destaque de hoje</span><h2>${esc((dp || da).nome)}</h2>${ef ? `<em class="ljn-ef">${esc(ef.nome)}</em>` : ""}<small>${esc((dp || da).ref || "")}</small>
+          ${botao((dp ? "p:" : "a:") + (dp || da).id, (dp || da).preco, false, "Usar")}</div>
+        <div class="ljn-hero-arte"><span class="ljn-chao" aria-hidden="true"></span><div class="lj-av" data-prev="${esc(dp ? dp.id : eu + "~" + da.id + "~v")}"></div></div></section>` : "";
+    app.innerHTML = `<div class="estudo-area ljn">
+      ${cabPagina("Loja", "", "Loja do Rolo", "Gaste as suas moedas e deixe o seu personagem com a sua cara.")}
+      ${carteira}
+      ${destaque}
       ${typeof htmlPacoteLoja === "function" ? htmlPacoteLoja() : ""}
-      <div class="lj-cats">${LOJA_CATS.map(c => { const l = c.lista(), meus = l.filter(x => comprado(c.k + ":" + x.id)).length;
-        return `<button type="button" class="lj-cat" data-cat="${c.k}">${amostra[c.k]}<b>${c.nome}</b><small>${l.length} ${l.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}</small>${emUso[c.k] ? `<em>em uso: ${esc(emUso[c.k])}</em>` : ""}<span class="lj-cat-seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
+      <h2 class="ljn-sec">Categorias</h2>
+      <div class="lj-cats ljn-cats">${LOJA_CATS.map(c => { const l = c.lista(), meus = l.filter(x => comprado(c.k + ":" + x.id)).length, cor = LOJA_CORES[c.k];
+        return `<button type="button" class="lj-cat ljn-tile ljn-t-${c.k}" data-cat="${c.k}" style="--g1:${cor[0]};--g2:${cor[1]}"><span class="ljn-tile-arte">${amostra[c.k]}</span><b>${c.nome}</b><small>${l.length} ${l.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}</small><span class="ljn-prog" aria-hidden="true"><i style="width:${Math.round(100 * meus / l.length)}%"></i></span>${emUso[c.k] ? `<em>em uso: ${esc(emUso[c.k])}</em>` : ""}<span class="lj-cat-seta" aria-hidden="true">›</span></button>`; }).join("")}</div>
       <p class="note center">Moedas ganhas até hoje: ${moedasGanhas()} · gastas: ${moedasGastas()}</p></div>`;
     desenharAmostras();
-    app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { lojaCat = b.dataset.cat; tocar("toque"); window.scrollTo(0, 0); telaLoja(); });
+    app.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => { lojaCat = b.dataset.cat; lojaFiltro = ""; tocar("toque"); window.scrollTo(0, 0); telaLoja(); });
     const ljp = $("ljPacote"); if(ljp) ljp.onclick = comprarPacote;
-    ligarMoedasInicio(); conferirReacoesAntigas();
+    ligarCompras(); ligarMoedasInicio(); conferirReacoesAntigas();
     return;
   }
-  /* ---------- 2ª tela: os itens de uma categoria ---------- */
-  const botao = (id, preco, emUso, rotUsar) => comprado(id)
-    ? `<button type="button" class="btn btn-sm ${emUso ? "btn-ok" : "btn-ghost"}" data-usar="${id}">${emUso ? "✓ Em uso" : rotUsar}</button>`
-    : `<button type="button" class="btn btn-sm btn-main ${saldo < preco ? "caro" : ""}" data-comprar="${id}">${MOEDA}${preco}</button>`;
-  const amostraMov = meuBoneco() || eu;
+  /* ---------- 2ª tela: os itens de uma categoria, cada um no seu palco ---------- */
+  const amostraMov = meuBoneco() || eu, cor = LOJA_CORES[cat.k];
+  const carta = (id, c, arte, nome, ref, extra, emUso, rotulo, preco, larga) => `<div class="lj-item ljn-card ${larga ? "larga" : ""} ${comprado(id) ? "meu" : ""} ${emUso ? "uso" : ""}" style="--c:${c}"><div class="ljn-palco"><span class="ljn-luz" aria-hidden="true"></span>${arte}${comprado(id) ? `<span class="ljn-selo">${emUso ? "Em uso" : "Seu"}</span>` : ""}</div><b>${esc(nome)}</b><small>${esc(ref || "")}</small>${extra || ""}${botao(id, preco, emUso, rotulo)}</div>`;
   const cartao = {
-    a: a => `<div class="lj-item ${comprado("a:" + a.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(eu + "~" + a.id + "~v")}"></div><b>${esc(a.nome)}</b><small>${esc(a.ref)}</small>${botao("a:" + a.id, a.preco, perfil.acess === a.id, "Usar")}</div>`,
-    p: p => `<div class="lj-item ${comprado("p:" + p.id) ? "meu" : ""}"><div class="lj-av" data-prev="${esc(p.id)}"></div><b>${esc(p.nome)}</b><small>${esc(p.ref || "")}</small>${botao("p:" + p.id, p.preco, perfil.profeta === p.id, "Usar")}</div>`,
-    m: x => `<div class="lj-item ${comprado("m:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mold${classeMoldura(x.id)}" data-prev="${esc(eu)}"></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("m:" + x.id, x.preco, minhaMoldura() === x.id, "Usar")}</div>`,
-    t: x => `<div class="lj-item larga ${comprado("t:" + x.id) ? "meu" : ""}"><div class="lj-pista"><div class="track${classePista(x.id)}" style="--seg:4"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.38" data-prev="${esc(meuBoneco() || PROFETA_PADRAO)}"></div></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("t:" + x.id, x.preco, minhaPista() === x.id, "Usar")}</div>`,
-    v: x => `<div class="lj-item ${comprado("v:" + x.id) ? "meu" : ""}"><div class="lj-av lj-mov"><div class="runner mov-${x.id}" data-mov="${x.id}" data-prev="${esc(amostraMov)}"></div></div><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("v:" + x.id, x.preco, meuMovimento() === x.id, "Usar")}</div>`,
-    c: x => `<div class="lj-item ${comprado("c:" + x.id) ? "meu" : ""}"><button type="button" class="lj-festa" data-festa="${x.id}" title="Ver a comemoração" aria-label="Ver a comemoração ${esc(x.nome)}">${FESTA_ICONE[x.id] || ""}<span>▶ ver</span></button><b>${esc(x.nome)}</b><small>${esc(x.ref)}</small>${botao("c:" + x.id, x.preco, minhaFesta() === x.id, "Usar")}</div>`
+    a: a => carta("a:" + a.id, cor[0], `<div class="lj-av" data-prev="${esc(eu + "~" + a.id + "~v")}"></div>`, a.nome, a.ref, "", perfil.acess === a.id, "Usar", a.preco),
+    p: p => carta("p:" + p.id, p.bg || cor[0], `<div class="lj-av" data-prev="${esc(p.id)}"></div>`, p.nome, p.ref, efeitoDaLoja(p) ? `<em class="lj-ef" title="Efeito que só este personagem tem (${esc(efeitoDaLoja(p).ref)})">${esc(efeitoDaLoja(p).nome)}</em>` : "", perfil.profeta === p.id, "Usar", p.preco),
+    m: x => carta("m:" + x.id, cor[0], `<div class="lj-av lj-mold${classeMoldura(x.id)}" data-prev="${esc(eu)}"></div>`, x.nome, x.ref, "", minhaMoldura() === x.id, "Usar", x.preco),
+    t: x => carta("t:" + x.id, cor[0], `<div class="lj-pista"><div class="track${classePista(x.id)}" style="--seg:4"><span class="flag" aria-hidden="true">🏁</span><div class="runner" style="--p:.38" data-prev="${esc(meuBoneco() || PROFETA_PADRAO)}"></div></div></div>`, x.nome, x.ref, "", minhaPista() === x.id, "Usar", x.preco, true),
+    v: x => carta("v:" + x.id, cor[0], `<div class="lj-av lj-mov"><div class="runner mov-${x.id}" data-mov="${x.id}" data-prev="${esc(amostraMov)}"></div></div>`, x.nome, x.ref, "", meuMovimento() === x.id, "Usar", x.preco),
+    c: x => carta("c:" + x.id, cor[0], `<button type="button" class="lj-festa" data-festa="${x.id}" title="Ver a comemoração" aria-label="Ver a comemoração ${esc(x.nome)}">${FESTA_ICONE[x.id] || ""}<span>▶ ver</span></button>`, x.nome, x.ref, "", minhaFesta() === x.id, "Usar", x.preco)
   }[cat.k];
-  const itens = cat.lista(), meus = itens.filter(x => comprado(cat.k + ":" + x.id)).length;
+  const todos = cat.lista(), meu = x => comprado(cat.k + ":" + x.id), nMeus = todos.filter(meu).length, nPode = todos.filter(x => !meu(x) && x.preco <= saldo).length;
+  const itens = todos.filter(lojaFiltro === "meus" ? meu : lojaFiltro === "pode" ? (x => !meu(x) && x.preco <= saldo) : (() => true));
   const nota = cat.k === "v" ? `<p class="lj-nota">Vale para qualquer personagem, inclusive os comuns. Sem movimento comprado, o personagem fica parado na raia.</p>`
+    : cat.k === "p" ? `<p class="lj-nota"><b>Só os personagens da loja</b> têm brilho holográfico, base de luz e um efeito próprio, tirado da história de cada um.</p>`
     : cat.k === "a" ? `<p class="lj-nota">Um acessório por vez. A maioria fica na mão; a coroa vai na cabeça, as asas nas costas e a ovelha no chão.</p>` : "";
-  app.innerHTML = `<div class="estudo-area">
+  const fbt = (k, rot, n) => `<button type="button" class="${lojaFiltro === k ? "on" : ""}" data-f="${k}" aria-pressed="${lojaFiltro === k}">${rot}<i>${n}</i></button>`;
+  app.innerHTML = `<div class="estudo-area ljn ljn-dentro" style="--g1:${cor[0]};--g2:${cor[1]}">
     <div class="lj-topo cat">${botaoVoltar("ljVoltar", "a loja")}${htmlMoedasInicio(true)}</div>
-    ${cabPagina("Loja", `${itens.length} ${itens.length === 1 ? "item" : "itens"}${meus ? ` · ${meus} ${meus === 1 ? "seu" : "seus"}` : ""}`, cat.nome, cat.sub.charAt(0).toUpperCase() + cat.sub.slice(1) + ".")}
-    <section class="panel pg-card">${nota}<div class="lj-grade ${cat.k === "t" ? "pistas" : ""}">${itens.map(cartao).join("")}</div></section></div>`;
+    ${cabPagina("Loja", `${todos.length} ${todos.length === 1 ? "item" : "itens"}${nMeus ? ` · ${nMeus} ${nMeus === 1 ? "seu" : "seus"}` : ""}`, cat.nome, cat.sub.charAt(0).toUpperCase() + cat.sub.slice(1) + ".")}
+    <div class="ljn-filtros" role="group" aria-label="Mostrar">${fbt("", "Todos", todos.length)}${fbt("meus", "Meus", nMeus)}${fbt("pode", "Dá para comprar", nPode)}</div>
+    ${nota}
+    <div class="lj-grade ljn-grade ${cat.k === "t" ? "pistas" : ""}">${itens.map(cartao).join("") || `<p class="ljn-vazio">${lojaFiltro === "meus" ? "Você ainda não tem nada desta categoria." : "Com o saldo de agora, nada desta categoria. Ganhe mais moedas no quiz!"}</p>`}</div></div>`;
   desenharAmostras();
-  $("ljVoltar").onclick = () => { lojaCat = ""; window.scrollTo(0, 0); telaLoja(); };
-  ligarMoedasInicio();
-  app.querySelectorAll("[data-comprar]").forEach(b => b.onclick = () => comprarNaLoja(b.dataset.comprar, b.closest(".lj-item")));
-  app.querySelectorAll("[data-usar]").forEach(b => b.onclick = () => usarDaLoja(b.dataset.usar));
+  $("ljVoltar").onclick = () => { lojaCat = ""; lojaFiltro = ""; window.scrollTo(0, 0); telaLoja(); };
+  ligarMoedasInicio(); ligarCompras();
+  app.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { lojaFiltro = b.dataset.f; tocar("toque"); telaLoja(); });
   app.querySelectorAll("[data-festa]").forEach(b => b.onclick = () => { tocar("toque"); festejar(b.dataset.festa, 2600); });
 }
 function itemDaLoja(id){
@@ -9169,7 +9400,8 @@ const LOJA_TIPO_NOME = { a: "Acessório", p: "Personagem", m: "Moldura de perfil
 async function comprarNaLoja(id, cartao){
   const it = itemDaLoja(id); if(!it || comprado(id)) return;
   const tipo = id.split(":")[0], arteEl = cartao && cartao.querySelector(".lj-av, .lj-pista, .lj-festa");
-  if(!(await modalCompra({ nome: it.nome, tipo: LOJA_TIPO_NOME[tipo] || "Loja", preco: it.preco, arteEl, chips: ["Fica com você para sempre", tipo === "p" ? "Troque quando quiser" : "Use quando quiser"] }))) return;
+  const efLoja = tipo === "p" ? efeitoDaLoja(acharProfeta(id.split(":")[1])) : null;
+  if(!(await modalCompra({ nome: it.nome, tipo: LOJA_TIPO_NOME[tipo] || "Loja", preco: it.preco, arteEl, chips: ["Fica com você para sempre"].concat(efLoja ? ["Efeito: " + efLoja.nome] : [], [tipo === "p" ? "Troque quando quiser" : "Use quando quiser"]) }))) return;
   const compras = Object.assign({}, perfil.compras || {}, { [id]: it.preco });
   try{ await DB.salvarUsuario(usuario.uid, { compras }); }catch(e){ aviso("Não deu para comprar: " + erroMsg(e)); return; }
   perfil.compras = compras; tocar("missao"); atualizarCasca();
@@ -10043,13 +10275,25 @@ function fimSuperQuiz(soVer){
      albumPag (páginas já premiadas) e albumFim (álbum completo premiado).
    - Trocas: só com quem é da mesma sala. Quem propõe oferece uma repetida e pede uma figurinha; o outro aceita ou recusa.
      Coleção "trocas" (regras novas no firestore.rules). Cada jogador anota o seu lado da troca no próprio perfil.
-   - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador).
+   - Prêmios: moedas por página completa e um prêmio maior pelo álbum inteiro (mais a conquista Colecionador, que sai com qualquer álbum completo).
    ============================================================ */
 const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, ALBUM_POR_PAGINA = 9, ALBUM_MAX_PROPOSTAS = 5, ALBUM_MAX_TROCA = 6, ALBUM_PRECO_PACOTE = 10, ALBUM_PACOTES_DIA = 1;
 /* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
    Só os quizzes FEITOS a partir dela dão pacote (os antigos não contam). É a hora do aparelho de cada jogador.
    O que foi ganho nos testes ficou em campos antigos do perfil (albumAbertos, albumTrocas…) e não é lido: todo mundo começa do zero. */
-let ALBUM_INICIO = new Date(2026, 10, 20, 5, 0, 0).getTime();           // sexta-feira, 20/11/2026, 5h da manhã
+let ALBUM_INICIO = 0;           // VERSÃO DE TESTE: álbum liberado desde sempre. No oficial: new Date(2026, 10, 20, 5, 0, 0).getTime(), sexta-feira, 20/11/2026, 5h da manhã
+const ALBUM_TESTE = true;
+/* a faixa vermelha no alto da tela, para ninguém confundir esta versão com a oficial */
+(() => { try{ const fx = document.createElement("div"); fx.className = "faixa-teste"; fx.textContent = "Versão de teste · álbum liberado"; document.body.appendChild(fx); }catch(e){} })();
+/* apaga as figurinhas desta conta (pacotes abertos, trocas anotadas, prêmios de página e de álbum), para ela chegar limpa à estreia */
+async function zerarAlbumDeTeste(){
+  if(!(await confirmar("Zerar o meu álbum", "Apaga todas as figurinhas desta conta e os prêmios de página e de álbum (as moedas desses prêmios também saem). Não dá para desfazer.", "Zerar"))) return;
+  const vazio = { figAbertos: [], figPag: [], figFeitos: [], figFim: 0, viuAlbum: "" };
+  const semTrocas = FB_OK && typeof firebase !== "undefined" ? firebase.firestore.FieldValue.delete() : {};
+  try{ await DB.salvarUsuario(usuario.uid, Object.assign({ figTrocas: semTrocas }, vazio)); }catch(e){ aviso("Não deu para zerar: " + erroMsg(e)); return; }
+  Object.assign(perfil, vazio, { figTrocas: {} });
+  albumAberto = ""; atualizarCasca(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); telaAlbum(); aviso("Álbum zerado.");
+}
 const ALBUM_ERA = "2026-11-20", ALBUM_QUANDO = "sexta-feira, 20/11, às 5h da manhã", ALBUM_QUANDO_CURTO = "sexta-feira, às 5h";
 const ALBUM_AVISO = "2026-11-20T05";          // marca do balão de novidade. Versões anteriores anunciaram 0h (marca "2026-11-20") e 10h ("2026-11-20T10"): quem viu aquelas vê o balão de novo, com o horário certo
 const albumAvisoVisto = v => v === ALBUM_AVISO;
@@ -10195,7 +10439,9 @@ const albumColadas = inv => ALBUM_CARTAS.filter(c => (inv[c.id] || 0) > 0).lengt
 const albumRepetidas = inv => ALBUM_CARTAS.reduce((s, c) => s + Math.max(0, (inv[c.id] || 0) - 1), 0);
 /* álbuns já completos e premiados */
 const albumFeitos = () => ((perfil && perfil.figFeitos) || []).filter(id => ALBUNS.some(a => a.id === id));
-function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }
+function albumCompleto(){ try{ return ALBUNS.every(a => albumFeitos().includes(a.id)); }catch(e){ return false; } }          // todos os álbuns completos
+/* a conquista Colecionador: basta um álbum completo, qualquer um */
+function temAlbumCompleto(){ try{ return albumFeitos().length > 0; }catch(e){ return false; } }
 function moedasDeAlbum(){ return albumPagas().length * ALBUM_MOEDAS_PAGINA + ALBUNS.reduce((t, a) => t + (albumFeitos().includes(a.id) ? a.premio : 0), 0); }
 /* o que os outros veem para propor trocas: uma letra por figurinha (quantas eu tenho, até 9) */
 function albumPublico(){ const inv = albumInventario(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); }
@@ -10749,11 +10995,13 @@ function telaAlbum(){
     ${nf > 1 ? `<button type="button" class="hub-todos" id="albTodos">Abrir ${nf > 10 ? "10 pacotes de uma vez" : `os ${nf} pacotes de uma vez`}</button>` : ""}
     ${!trocasOk ? `<section class="panel alb-trocas"><p class="hm-sub" style="margin:0">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p></section>` : propostas}
     <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv)).join("")}</div>
-    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p></div>`;
+    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p>
+    <section class="panel alb-teste"><b>Versão de teste</b><p>Aqui o álbum já está liberado. O que for feito com uma conta de verdade fica salvo nela e aparece também no jogo oficial.</p><button type="button" class="btn btn-ghost btn-sm" id="albZerar">Zerar o meu álbum</button></section></div>`;
   figEscala(app); desenharFigurinhas(app);
   app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { albumAberto = b.dataset.album; albumAbrindo = true; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); });
   $("albAbrir").onclick = () => { if(nf) abrirPacotes(fechados.slice(0, 1)); else aviso("Nenhum pacote para abrir. Faça o quiz do dia para ganhar um, ou compre com moedas."); };
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
+  const zr = $("albZerar"); if(zr) zr.onclick = zerarAlbumDeTeste;
   $("albComprar").onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
   const pr = $("albTrocas"); if(pr && pr.tagName === "BUTTON") pr.onclick = () => { tocar("toque"); window.scrollTo(0, 0); telaTrocas(); };
