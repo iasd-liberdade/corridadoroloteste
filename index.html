@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261120.023052">
+<meta name="versao" content="20261120.033352">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -10487,7 +10487,8 @@ const FIG_FOTOS_OBJ = new Set(("folha flor nuvem arca pomba_ramo estrelas tenda 
 const figTemFoto = c => c.t === "p" ? FIG_FOTOS.has(c.k) : FIG_FOTOS_OBJ.has(c.k);
 /* imagens refeitas depois de publicadas: o endereço muda (?v=) para o navegador buscar de novo em vez de usar a guardada */
 const FIG_VERSAO = { "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 3, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2, "o:nuvem": 2, "o:tenda": 2 };
-const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp" + (FIG_VERSAO[c.id] ? "?v=" + FIG_VERSAO[c.id] : "");
+const FIG_VERSAO_P = 2;          /* personagens: 2 = pés e barra da túnica refeitos, olhos sem a marca branca (20/11/2026) */
+const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp" + (FIG_VERSAO[c.id] ? "?v=" + FIG_VERSAO[c.id] : c.t === "p" ? "?v=" + FIG_VERSAO_P : "");
 /* titulo curto e objeto de cada personagem */
 const FIG_EXTRA = {
   adao: ["O primeiro homem", "Folha de figueira"], eva: ["Mãe de todos os viventes", "Flor do Éden"], enoque: ["Andou com Deus", "Nuvem"], noe: ["Construtor da arca", "Arca"],
@@ -10905,7 +10906,7 @@ function htmlCapa(a, k, inv, trancada){
   return `<button type="button" class="cp${trancada ? " trancada" : ""}" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
     <span class="cp-in"><span class="cp-couro"></span><span class="cp-raios"></span><span class="cp-luz"></span><span class="cp-lomb"></span><span class="cp-mold"></span>
       <span class="cp-n">Álbum ${k + 1}</span><span class="cp-tit">${esc(tit.slice(0, meio).join(" "))}<br>${esc(tit.slice(meio).join(" "))}</span><span class="cp-sub">${esc(a.sub)}</span>
-      <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
+      <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp?v=${FIG_VERSAO_P}" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
       <span class="cp-pe"><span class="cp-barra"><i style="width:${Math.round(100 * tenho / a.cartas.length)}%"></i></span><span class="cp-conta"><span>${tenho} de ${a.cartas.length}</span><em class="${feito ? "ok" : ""}">${feito ? "✓ completo" : `+${a.premio}${MOEDA}`}</em></span></span>
       <span class="cp-brilho"></span>${trancada ? `<span class="cp-cadeado">${iconeSVG("cadeado")}</span>` : ""}</span></button>`;
 }
