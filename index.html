@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261120.033352">
+<meta name="versao" content="20261120.105843">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
+<title>Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1241,11 +1241,6 @@ input[type=text],input[type=email],input[type=password],input[type=number],input
 @keyframes avlonda{0%,100%{transform:translateY(0)}50%{transform:translateY(-.9px)}}
 @keyframes avlfita{to{stroke-dashoffset:-18}}
 @media (prefers-reduced-motion:reduce){.avatar .avl,.avatar .av-holo,.avatar .av-ped-anel{animation:none}}
-/* VERSÃO DE TESTE: a faixa no alto e o aviso na tela do Álbum */
-.faixa-teste{position:fixed;left:50%;top:0;transform:translateX(-50%);z-index:99999;padding:2px 12px 3px;border-radius:0 0 9px 9px;background:#E0483C;color:#fff;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
-.alb-teste{margin-top:16px;display:grid;justify-items:center;gap:8px;text-align:center;border:1.5px dashed rgba(255,150,140,.75)}
-.alb-teste b{font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#FFB4AB}
-.alb-teste p{margin:0;font-size:13px;line-height:1.4;color:var(--soft)}
 /* vitrine da loja: o nome do efeito do personagem */
 .lj-item .lj-ef{display:grid;align-items:center;min-height:30px;margin-top:3px;padding:3px 8px;border-radius:99px;background:linear-gradient(90deg,rgba(143,243,255,.22),rgba(199,125,255,.26));border:1px solid rgba(190,170,255,.5);font:800 10px/1.2 "Barlow",sans-serif;font-style:normal;letter-spacing:.02em;color:#F1E9FF}
 /* janela da missão: cartão de jogo (paisagem da etapa, moeda da casa, progresso, recompensa) */
@@ -2994,12 +2989,15 @@ function dataCurta(iso){ const [y,m,d]=iso.split("-"); return d+"/"+m; }
 function sortear(lista){ return lista[Math.floor(Math.random()*lista.length)]; }
 function semente(str){ let h = 2166136261; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return ()=>{ h += 0x6D2B79F5; let t = Math.imul(h ^ (h >>> 15), 1 | h); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 function embaralhar(arr, rnd){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(rnd()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
-/* Perguntas que o jogador vê num dia: sorteia "qtd" objetivas (sempre as mesmas para a mesma pessoa no mesmo dia) + a reflexão no fim */
+/* Perguntas que o jogador vê num dia: sorteia "qtd" objetivas (sempre as mesmas para a mesma pessoa no mesmo dia; pelo menos uma de V ou F, se o dia tiver) + a reflexão no fim */
 function perguntasDoDia(L, k){
   const d = L.dias[k], todas = d.perguntas, n = L.qtd && L.qtd[k];
   if(!n || n >= todas.filter(q=>!q.reflexao).length) return todas;
   const obj = todas.filter(q=>!q.reflexao), ref = todas.filter(q=>q.reflexao);
-  return embaralhar(obj, semente((usuario ? usuario.uid : "") + "|" + L.id + "|" + d.data)).slice(0, n).concat(ref.slice(0,1));
+  const ordem = embaralhar(obj, semente((usuario ? usuario.uid : "") + "|" + L.id + "|" + d.data)), sorte = ordem.slice(0, n);
+  /* dia com verdadeiro ou falso: ninguém fica sem; se nenhuma saiu no sorteio, a última sorteada dá lugar à primeira V ou F da fila */
+  if(n > 1 && !sorte.some(q => q.vf)){ const v = ordem.slice(n).find(q => q.vf); if(v) sorte[n - 1] = v; }
+  return sorte.concat(ref.slice(0,1));
 }
 function $(id){ return document.getElementById(id); }
 let tt;
@@ -10281,19 +10279,7 @@ const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, A
 /* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
    Só os quizzes FEITOS a partir dela dão pacote (os antigos não contam). É a hora do aparelho de cada jogador.
    O que foi ganho nos testes ficou em campos antigos do perfil (albumAbertos, albumTrocas…) e não é lido: todo mundo começa do zero. */
-let ALBUM_INICIO = 0;           // VERSÃO DE TESTE: álbum liberado desde sempre. No oficial: new Date(2026, 10, 20, 5, 0, 0).getTime(), sexta-feira, 20/11/2026, 5h da manhã
-const ALBUM_TESTE = true;
-/* a faixa vermelha no alto da tela, para ninguém confundir esta versão com a oficial */
-(() => { try{ const fx = document.createElement("div"); fx.className = "faixa-teste"; fx.textContent = "Versão de teste · álbum liberado"; document.body.appendChild(fx); }catch(e){} })();
-/* apaga as figurinhas desta conta (pacotes abertos, trocas anotadas, prêmios de página e de álbum), para ela chegar limpa à estreia */
-async function zerarAlbumDeTeste(){
-  if(!(await confirmar("Zerar o meu álbum", "Apaga todas as figurinhas desta conta e os prêmios de página e de álbum (as moedas desses prêmios também saem). Não dá para desfazer.", "Zerar"))) return;
-  const vazio = { figAbertos: [], figPag: [], figFeitos: [], figFim: 0, viuAlbum: "" };
-  const semTrocas = FB_OK && typeof firebase !== "undefined" ? firebase.firestore.FieldValue.delete() : {};
-  try{ await DB.salvarUsuario(usuario.uid, Object.assign({ figTrocas: semTrocas }, vazio)); }catch(e){ aviso("Não deu para zerar: " + erroMsg(e)); return; }
-  Object.assign(perfil, vazio, { figTrocas: {} });
-  albumAberto = ""; atualizarCasca(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); telaAlbum(); aviso("Álbum zerado.");
-}
+let ALBUM_INICIO = new Date(2026, 10, 20, 5, 0, 0).getTime();           // sexta-feira, 20/11/2026, 5h da manhã
 const ALBUM_ERA = "2026-11-20", ALBUM_QUANDO = "sexta-feira, 20/11, às 5h da manhã", ALBUM_QUANDO_CURTO = "sexta-feira, às 5h";
 const ALBUM_AVISO = "2026-11-20T05";          // marca do balão de novidade. Versões anteriores anunciaram 0h (marca "2026-11-20") e 10h ("2026-11-20T10"): quem viu aquelas vê o balão de novo, com o horário certo
 const albumAvisoVisto = v => v === ALBUM_AVISO;
@@ -10996,13 +10982,11 @@ function telaAlbum(){
     ${nf > 1 ? `<button type="button" class="hub-todos" id="albTodos">Abrir ${nf > 10 ? "10 pacotes de uma vez" : `os ${nf} pacotes de uma vez`}</button>` : ""}
     ${!trocasOk ? `<section class="panel alb-trocas"><p class="hm-sub" style="margin:0">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p></section>` : propostas}
     <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv)).join("")}</div>
-    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p>
-    <section class="panel alb-teste"><b>Versão de teste</b><p>Aqui o álbum já está liberado. O que for feito com uma conta de verdade fica salvo nela e aparece também no jogo oficial.</p><button type="button" class="btn btn-ghost btn-sm" id="albZerar">Zerar o meu álbum</button></section></div>`;
+    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p></div>`;
   figEscala(app); desenharFigurinhas(app);
   app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { albumAberto = b.dataset.album; albumAbrindo = true; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); });
   $("albAbrir").onclick = () => { if(nf) abrirPacotes(fechados.slice(0, 1)); else aviso("Nenhum pacote para abrir. Faça o quiz do dia para ganhar um, ou compre com moedas."); };
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
-  const zr = $("albZerar"); if(zr) zr.onclick = zerarAlbumDeTeste;
   $("albComprar").onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
   const pr = $("albTrocas"); if(pr && pr.tagName === "BUTTON") pr.onclick = () => { tocar("toque"); window.scrollTo(0, 0); telaTrocas(); };
