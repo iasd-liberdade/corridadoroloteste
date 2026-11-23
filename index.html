@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261123.194210">
+<meta name="versao" content="20261123.201734">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -12346,6 +12346,24 @@ function ligarAlbumInicio(){
   e.onclick = () => { tocar("toque"); nav("album"); }; e.onkeydown = ev => { if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); e.click(); } };
   if(Date.now() - trocasEm > 3 * 60000) carregarTrocas().then(() => { const x = $("inAlbum"); if(x && tabAtual === "inicio"){ x.outerHTML = htmlAlbumInicio(); const y = $("inAlbum"); if(y){ y.onclick = () => { tocar("toque"); nav("album"); }; } } });
 }
+
+/* ============================================================
+   VERSÃO DE TESTE: o master tem tudo (moedas sem fim, a loja inteira, todos os personagens e todas as figurinhas).
+   Só muda o jeito de esta versão ler o perfil; nada é gravado na conta.
+   ============================================================ */
+(() => {
+  const tudo = () => { try{ return typeof ehMaster === "function" && ehMaster(); }catch(e){ return false; } };
+  const _comprado = comprado, _moedas = moedas, _liberado = profetaLiberado, _inv = albumInventario, _paginas = conferirPaginasDoAlbum, _pacote = comprarPacote;
+  comprado = id => tudo() || _comprado(id);
+  moedas = () => tudo() ? 99999 : _moedas();
+  profetaLiberado = p => tudo() || _liberado(p);
+  /* o álbum mostra todas as figurinhas; as trocas e o perfil público continuam com as de verdade */
+  albumInventario = () => { const inv = _inv(); if(tudo()) ALBUM_CARTAS.forEach(c => { if(!((inv[c.id] || 0) > 0)) inv[c.id] = 1; }); return inv; };
+  albumPublico = () => { const inv = _inv(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); };
+  repetidasLivres = (fn => inv => fn(tudo() ? _inv() : inv))(repetidasLivres);
+  conferirPaginasDoAlbum = () => { if(!tudo()) _paginas(); };
+  comprarPacote = (...a) => { if(tudo()){ aviso("Na versão de teste, o master já tem todas as figurinhas."); return; } return _pacote(...a); };
+})();
 
 /* ============================================================
    ÍCONES PRÓPRIOS (modelo Joia)
