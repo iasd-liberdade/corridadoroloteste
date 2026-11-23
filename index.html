@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261123.181056">
+<meta name="versao" content="20261123.194210">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1940,7 +1940,13 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 @keyframes fx-coluna{0%,100%{opacity:.7}50%{opacity:1}}
 .fx-pomba-voo{transform-box:fill-box;transform-origin:50% 50%;animation:fx-pomba 4.2s linear infinite}
 @keyframes fx-pomba{0%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}12.5%{transform:translate(18px,.5px) scale(-.8,.8);opacity:.7}25%{transform:translate(11px,-1px) scale(-.7,.7);opacity:.55}37.5%{transform:translate(4px,.5px) scale(-.8,.8);opacity:.7}49.9%{transform:translate(-.5px,6px) scale(-.95,.95);opacity:.95}50%{transform:translate(-.5px,6px) scale(.95,.95)}62.5%{transform:translate(3.5px,12.5px) scale(1.1,1.1);opacity:1}75%{transform:translate(11px,15px) scale(1.25,1.25);opacity:1}87.5%{transform:translate(18.5px,12.5px) scale(1.1,1.1);opacity:1}99.9%{transform:translate(22.5px,6px) scale(.95,.95)}100%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}}
-.fx-asa{transform-origin:50% 100%;animation:fx-asa .32s ease-in-out infinite alternate}.fx-asa2{animation-delay:-.16s}
+.fx-asa{transform-origin:50% 100%;animation:fx-asa .32s ease-in-out infinite alternate}
+.fx-pa-asa{animation:fx-pa-bate .62s cubic-bezier(.45,0,.35,1) infinite}
+.fx-pa-asa2{animation:fx-pa-bate2 .62s cubic-bezier(.45,0,.35,1) infinite}
+@keyframes fx-pa-bate{0%,100%{transform:rotate(-4deg) scaleY(1)}42%{transform:rotate(16deg) scaleY(-.7)}}
+@keyframes fx-pa-bate2{0%,100%{transform:rotate(-12deg) scaleY(.92)}42%{transform:rotate(10deg) scaleY(-.55)}}
+.fx-pa-corpo{animation:fx-pa-sobe .62s cubic-bezier(.45,0,.35,1) infinite}
+@keyframes fx-pa-sobe{0%,100%{transform:translateY(2px)}42%{transform:translateY(-2.5px)}}.fx-asa2{animation-delay:-.16s}
 @keyframes fx-asa{to{transform:scaleY(-.35)}}
 /* Rosto Resplandecente */
 .runner.mov-brilho .avatar{animation:mov-brilho 2.6s ease-in-out infinite}
@@ -1967,7 +1973,7 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 .fx-faisca{opacity:0;animation:fx-faisca 1.8s ease-out infinite}
 .fx-faisca.f1{--dx:4px}.fx-faisca.f2{--dx:-5px;animation-delay:.45s}.fx-faisca.f3{--dx:6px;animation-delay:.9s}.fx-faisca.f4{--dx:-3px;animation-delay:1.35s}
 @keyframes fx-faisca{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-16px) scale(.5)}}
-@media (prefers-reduced-motion:reduce){.fx-pisca,.fx-palmas > g,.fx-nota,.fx-esc-ceu,.fx-anjo,.fx-sai,.fx-onda,.fx-marola,.fx-funda-gira,.fx-funda-rastro,.fx-pedra,.fx-coluna,.fx-pomba-voo,.fx-asa,.fx-raios,.fx-halo,.fx-parede,.fx-gota,.fx-v,.fx-faisca{animation:none}}
+@media (prefers-reduced-motion:reduce){.fx-pisca,.fx-palmas > g,.fx-nota,.fx-esc-ceu,.fx-anjo,.fx-sai,.fx-onda,.fx-marola,.fx-funda-gira,.fx-funda-rastro,.fx-pedra,.fx-coluna,.fx-pomba-voo,.fx-asa,.fx-pa-asa,.fx-pa-asa2,.fx-pa-corpo,.fx-raios,.fx-halo,.fx-parede,.fx-gota,.fx-v,.fx-faisca{animation:none}}
 .ar-bi{transform-box:fill-box;transform-origin:50% 50%}
 @media (prefers-reduced-motion:reduce){.runner[class*="mov-"] .avatar{animation:none}}
 /* ---------- temas da pista com cenário em pixel art: uma cena presa em cima (--t), o chão embaixo (--c), um piso opcional (--x) e o fundo (--b) ---------- */
@@ -7797,9 +7803,35 @@ const MOV_FX = (() => {
       ? `<ellipse cx="0" cy="0" rx=".95" ry=".7" transform="rotate(-22)"/><ellipse cx="2.6" cy="-.7" rx=".95" ry=".7" transform="rotate(-22 2.6 -.7)"/><path d="M.8-.2v-3.6l2.6-.8v3.6M.8-3.1l2.6-.8" fill="none" stroke="${cor}" stroke-width=".42"/>`
       : `<ellipse cx="0" cy="0" rx="1" ry=".74" transform="rotate(-22)"/><path d="M.85-.25v-3.9c.9.4 1.8 1 1.9 2" fill="none" stroke="${cor}" stroke-width=".42"/>`}</g></g>`;
   /* a pomba (de perfil, olhando para a direita) com as asas batendo */
-  const pomba = `<g class="fx-pomba-voo"><circle r="5" fill="none"/><g class="fx-pomba-c" transform="scale(1.75)" fill="#FFFFFF" stroke="#9C95C9" stroke-width=".14">
-      <path d="M-2.6 .1l-1.3-.7.2 1.2z"/><ellipse cx="-.4" cy=".1" rx="1.9" ry=".85"/><circle cx="1.5" cy="-.45" r=".62"/><path d="M2.05-.5l.6.12-.6.2z" fill="#F2A53A" stroke="none"/>
-      <path class="fx-asa" d="M-.9-.2c-.6-1.2-1.8-2.2-3-2.4 .5 1 1.3 2 2.2 2.6z"/><path class="fx-asa fx-asa2" d="M-.2-.3c.1-1.3-.4-2.6-1.3-3.4-.1 1.2.2 2.5.8 3.5z"/></g></g>`;
+  /* a pomba: de perfil, voando para a direita, desenhada pena por pena (corpo, cauda em leque, asa de trás e asa da frente
+     com coberteiras, secundárias e primárias), olho, bico e pés recolhidos; as asas batem de verdade (giram e passam por
+     baixo do corpo) e ela tem um brilho suave em volta. Desenho em 100×70, reduzido para o tamanho do boneco. */
+  const pena = (bx, by, tx, ty, w, cor, borda) => { const cx = (bx + tx) / 2, cy = (by + ty) / 2, L = Math.hypot(tx - bx, ty - by) / 2, a = Math.atan2(ty - by, tx - bx) * 180 / Math.PI;
+    return `<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="${L.toFixed(1)}" ry="${w}" transform="rotate(${a.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="${cor}" stroke="${borda}" stroke-width=".9"/>`; };
+  /* a asa, com a raiz em (0,0) e erguida para cima e para trás */
+  const asa = (c1, c2, borda) => {
+    const prim = [[-14, -24, -36, -50], [-16, -22, -41, -43], [-17, -19, -44, -34], [-17, -15, -43, -25], [-16, -11, -39, -16], [-14, -8, -33, -9]];
+    const sec = [[-10, -6, -27, -4], [-7, -4, -21, 0], [-4, -2, -14, 3]];
+    return prim.map(([a, b, c, d]) => pena(a, b, c, d, 3.4, c1, borda)).join("") + sec.map(([a, b, c, d]) => pena(a, b, c, d, 3.6, c1, borda)).join("")
+      + `<path d="M3 3C8-4 9-16 4-26C1-31-5-36-12-38C-10-30-12-22-16-15C-18-9-16-3-9 1C-5 3-1 4 3 3Z" fill="${c1}" stroke="${borda}" stroke-width=".9"/>`
+      + `<path d="M-11-31C-9-24-12-17-15-12M-3-27C-2-20-5-13-9-8M3-17C1-11-2-6-6-2" fill="none" stroke="${c2}" stroke-width="1.1" stroke-linecap="round"/>`
+      + `<path d="M4-25C2-30-4-35-11-37" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>`;
+  };
+  const pomba = `<g class="fx-pomba-voo"><circle r="6.6" fill="none"/><g transform="scale(.1) translate(-52 -30)">
+      <g class="fx-halo" fill="#FFF6D8"><circle cx="52" cy="32" r="46" opacity=".08"/><circle cx="52" cy="32" r="38" opacity=".1"/><circle cx="52" cy="32" r="30" opacity=".12"/><circle cx="52" cy="32" r="22" opacity=".14"/></g>
+      <g class="fx-pa-corpo">
+        <g transform="translate(61 27)"><g class="fx-pa-asa2">${asa("#E4E1F3", "#C9C4E4", "#A9A3CF")}</g></g>
+        ${[[24, 40, 3, 33], [24, 41, 0, 38.5], [24, 42, 1, 44], [24, 43, 4, 49], [25, 44, 9, 53]].map(([a, b, c, d]) => pena(a, b, c, d, 3.2, "#F4F3FB", "#A9A3CF")).join("")}
+        <path d="M90 31C90 25 85.5 21 80 21C75 21 71.5 23.5 69.5 26.5C63 24.5 52 25 43 29C34 33 25 38 15 40.5C22 45 32 49 44 50.5C56 52 67 50 74 45C79 41.5 83 38.5 86.5 36C89 34.5 90 33 90 31Z" fill="#FFFFFF" stroke="#9E98C6" stroke-width="1.1"/>
+        <path d="M24 44C35 49 51 51.5 63 49C70 47.4 76 43.5 80.5 38C76 46 64 53 48 52.6C37 52.3 29 48.6 24 44Z" fill="#E3E0F2"/><path d="M66 33C71 36 73 41 71 46" fill="none" stroke="#EEEBF7" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M68 28.2C72 31 74 35 73 39M62 29C65 32 66 36 64.5 40" fill="none" stroke="#E6E3F4" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M74 24.6C77 22.8 81 22.6 84 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M54 51l-1.4 3.2M57 50.8l-.6 3.4M53 54.2l2.8.2M56.2 54.2l2.6.2" stroke="#E07F86" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M89 30.4L97 32.2L89 34.1Q87.8 32.2 89 30.4Z" fill="#EDA27E" stroke="#B9735A" stroke-width=".7"/><path d="M89.2 32.2H95.6" stroke="#B9735A" stroke-width=".55"/>
+        <ellipse cx="88.4" cy="30.4" rx="1.6" ry="1.1" fill="#F6F0F3" stroke="#D6CFE0" stroke-width=".4"/>
+        <circle cx="82.6" cy="28.6" r="2.7" fill="#E6E2F2"/><circle cx="82.8" cy="28.6" r="2" fill="#2A1C38"/><circle cx="83.5" cy="27.9" r=".7" fill="#FFFFFF"/>
+        <g transform="translate(56 29)"><g class="fx-pa-asa">${asa("#FFFFFF", "#D9D5EC", "#9E98C6")}</g></g>
+      </g></g></g>`;
   const raios = Array.from({ length: 12 }, (_, i) => `<path d="M11 9L${(11 + 16 * Math.cos((i * 30 - 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 - 4) * Math.PI / 180)).toFixed(2)}L${(11 + 16 * Math.cos((i * 30 + 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 + 4) * Math.PI / 180)).toFixed(2)}z"/>`).join("");
   /* parede de água (a da esquerda; a da direita é a mesma espelhada) */
   const parede = `<g class="fx-parede"><path d="M-12 29.6V14C-12 8-7 4-2 4.5 1 4.8 2.2 7.2.6 8.6-.6 9.6-2.4 9-2.4 7.6-3.4 9.4-1.6 12 .4 13V29.6z" fill="#1F6FC2"/>
