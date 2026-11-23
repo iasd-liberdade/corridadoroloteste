@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261123.122607">
+<meta name="versao" content="20261123.181056">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -1887,6 +1887,88 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 .lj-nota{margin:0 0 10px;font-size:12.5px;line-height:1.4;color:var(--soft)}
 .lj-nota.alerta{padding:8px 10px;border-radius:10px;background:rgba(242,190,46,.14);border:1px solid rgba(242,190,46,.4);color:#FFE9A8}
 .lj-nota b{color:#fff}
+/* p66: movimentos novos */
+.fx-pisca,.fx-sai,.fx-onda,.fx-halo,.fx-raios,.fx-parede,.fx-asa,.fx-faisca,.fx-nota{transform-box:fill-box;transform-origin:50% 50%}
+.fx-pisca{animation:fx-pisca 1.6s ease-in-out infinite}.fx-pisca.p2{animation-delay:-.8s}.fx-pisca.p3{animation-delay:-.4s}
+@keyframes fx-pisca{0%,100%{opacity:.15;transform:scale(.35)}50%{opacity:1;transform:scale(1)}}
+/* Palmas de Louvor */
+.av-mv-palmas .av-q{animation-duration:.56s}
+.runner.mov-palmas .avatar{animation:mov-palmas .56s ease-in-out infinite}
+@keyframes mov-palmas{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px) scale(1.02,.98)}}
+.fx-palmas > g{transform-box:fill-box;transform-origin:50% 100%;animation:fx-palmas .56s ease-out infinite}
+@keyframes fx-palmas{0%,49%{opacity:0;transform:scale(.5)}53%{opacity:1;transform:scale(.9)}90%,100%{opacity:0;transform:scale(1.3)}}
+/* Cântico Novo */
+.av-mv-canto .av-q{animation-duration:1.6s}
+.runner.mov-canto .avatar{animation:mov-canto 1.6s ease-in-out infinite}
+@keyframes mov-canto{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-1px)}}
+.fx-nota{opacity:0;animation:fx-nota1 2.4s ease-out infinite}
+.fx-nota.n2{animation-name:fx-nota2;animation-delay:.8s}.fx-nota.n3{animation-name:fx-nota3;animation-delay:1.6s}
+@keyframes fx-nota1{0%{opacity:0;transform:translate(0,0) scale(.4) rotate(-10deg)}15%{opacity:1}100%{opacity:0;transform:translate(7px,-12px) scale(1.15) rotate(14deg)}}
+@keyframes fx-nota2{0%{opacity:0;transform:translate(0,0) scale(.4) rotate(10deg)}15%{opacity:1}100%{opacity:0;transform:translate(-9px,-11px) scale(1.1) rotate(-16deg)}}
+@keyframes fx-nota3{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(2px,-15px) scale(1.2) rotate(8deg)}}
+/* Escada de Jacó */
+.runner.mov-escada .avatar{animation:mov-escada 3s ease-in-out infinite}
+@keyframes mov-escada{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+.fx-esc-ceu{transform-box:fill-box;transform-origin:50% 50%;animation:fx-halo 3s ease-in-out infinite}
+.fx-escada > g:first-of-type{animation:fx-coluna 2.6s ease-in-out infinite}
+.fx-anjo{transform-box:fill-box;transform-origin:50% 50%;opacity:0;animation:fx-anjo-sobe 3.6s ease-in-out infinite}
+.fx-anjo.a2{animation-name:fx-anjo-desce;animation-delay:-1.2s}.fx-anjo.a3{animation-delay:-2.4s}
+@keyframes fx-anjo-sobe{0%{opacity:0;transform:translate(0,0) scale(.9)}15%{opacity:1}75%{opacity:.8}100%{opacity:0;transform:translate(0,-36px) scale(.4)}}
+@keyframes fx-anjo-desce{0%{opacity:0;transform:translate(0,-36px) scale(.4)}25%{opacity:.8}85%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.9)}}
+/* Andar sobre as Águas */
+.runner.mov-aguas .avatar{animation:mov-aguas 1.4s ease-in-out infinite}
+@keyframes mov-aguas{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-1px) rotate(1.5deg)}}
+.fx-onda{opacity:0;animation:fx-onda 2.1s ease-out infinite}.fx-onda.o2{animation-delay:.7s}.fx-onda.o3{animation-delay:1.4s}
+@keyframes fx-onda{0%{opacity:.95;transform:scale(.35)}100%{opacity:0;transform:scale(2.1)}}
+.fx-marola{animation:fx-marola 1.2s linear infinite}
+@keyframes fx-marola{to{transform:translateX(-3px)}}
+/* Funda de Davi */
+.av-mv-funda .av-q{animation-duration:.36s}
+.runner.mov-funda .avatar{animation:mov-funda .72s ease-in-out infinite}
+@keyframes mov-funda{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.fx-funda-gira{transform-box:fill-box;transform-origin:50% 50%;animation:fx-funda .42s linear infinite}
+@keyframes fx-funda{to{transform:rotate(-360deg)}}
+.fx-funda-rastro{animation:fx-funda-r .42s linear infinite}
+@keyframes fx-funda-r{to{stroke-dashoffset:4.2}}
+.fx-pedra{opacity:0;animation:fx-pedra 2.4s ease-in infinite}
+@keyframes fx-pedra{0%,72%{opacity:0;transform:translate(0,0)}75%{opacity:1;transform:translate(1px,0)}100%{opacity:0;transform:translate(17px,-5px)}}
+/* Pomba do Espírito */
+.av-mv-pomba .av-q{animation-duration:2s}
+.runner.mov-pomba .avatar{animation:mov-pomba 2s ease-in-out infinite}
+@keyframes mov-pomba{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+.fx-coluna{animation:fx-coluna 2.6s ease-in-out infinite}
+@keyframes fx-coluna{0%,100%{opacity:.7}50%{opacity:1}}
+.fx-pomba-voo{transform-box:fill-box;transform-origin:50% 50%;animation:fx-pomba 4.2s linear infinite}
+@keyframes fx-pomba{0%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}12.5%{transform:translate(18px,.5px) scale(-.8,.8);opacity:.7}25%{transform:translate(11px,-1px) scale(-.7,.7);opacity:.55}37.5%{transform:translate(4px,.5px) scale(-.8,.8);opacity:.7}49.9%{transform:translate(-.5px,6px) scale(-.95,.95);opacity:.95}50%{transform:translate(-.5px,6px) scale(.95,.95)}62.5%{transform:translate(3.5px,12.5px) scale(1.1,1.1);opacity:1}75%{transform:translate(11px,15px) scale(1.25,1.25);opacity:1}87.5%{transform:translate(18.5px,12.5px) scale(1.1,1.1);opacity:1}99.9%{transform:translate(22.5px,6px) scale(.95,.95)}100%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}}
+.fx-asa{transform-origin:50% 100%;animation:fx-asa .32s ease-in-out infinite alternate}.fx-asa2{animation-delay:-.16s}
+@keyframes fx-asa{to{transform:scaleY(-.35)}}
+/* Rosto Resplandecente */
+.runner.mov-brilho .avatar{animation:mov-brilho 2.6s ease-in-out infinite}
+@keyframes mov-brilho{0%,100%{filter:drop-shadow(0 0 1.5px rgba(255,233,160,.7))}50%{filter:drop-shadow(0 0 5px rgba(255,243,184,1))}}
+.fx-raios{animation:fx-raios 14s linear infinite}
+@keyframes fx-raios{to{transform:rotate(360deg)}}
+.fx-halo{animation:fx-halo 2.6s ease-in-out infinite}.fx-halo.h2{animation-delay:-1.3s}
+@keyframes fx-halo{0%,100%{opacity:.5;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+/* Mar se Abrindo */
+.runner.mov-mar .avatar{animation:mov-mar 2.2s ease-in-out infinite}
+@keyframes mov-mar{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+.fx-parede{transform-origin:50% 100%;animation:fx-parede 2.2s ease-in-out infinite alternate}
+.fx-mar > g .fx-parede{animation-delay:-1.1s}
+@keyframes fx-parede{0%{transform:scale(1,.93)}100%{transform:scale(1.03,1.03)}}
+.fx-gota{animation:fx-gota 1.4s ease-out infinite}
+.fx-peixe{animation:fx-peixe 3.2s ease-in-out infinite}
+@keyframes fx-peixe{0%{transform:translate(-1px,3px)}50%{transform:translate(4px,-6px)}100%{transform:translate(-1px,3px)}}.fx-gota.g2{animation-delay:.45s}.fx-gota.g3{animation-delay:.9s}
+@keyframes fx-gota{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(1.6px,-2.4px)}}
+/* Redemoinho de Elias */
+.runner.mov-redemoinho .avatar{animation:mov-redemoinho 2.6s ease-in-out infinite}
+@keyframes mov-redemoinho{0%,100%{transform:translateY(-2px) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+.fx-v{animation:fx-vento .7s linear infinite}.fx-v.v2{animation-duration:.85s}.fx-v.v3{animation-duration:1s}.fx-v.v4{animation-duration:1.15s}.fx-v.v5{animation-duration:1.3s}
+@keyframes fx-vento{to{stroke-dashoffset:-10.8}}
+.fx-faisca{opacity:0;animation:fx-faisca 1.8s ease-out infinite}
+.fx-faisca.f1{--dx:4px}.fx-faisca.f2{--dx:-5px;animation-delay:.45s}.fx-faisca.f3{--dx:6px;animation-delay:.9s}.fx-faisca.f4{--dx:-3px;animation-delay:1.35s}
+@keyframes fx-faisca{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-16px) scale(.5)}}
+@media (prefers-reduced-motion:reduce){.fx-pisca,.fx-palmas > g,.fx-nota,.fx-esc-ceu,.fx-anjo,.fx-sai,.fx-onda,.fx-marola,.fx-funda-gira,.fx-funda-rastro,.fx-pedra,.fx-coluna,.fx-pomba-voo,.fx-asa,.fx-raios,.fx-halo,.fx-parede,.fx-gota,.fx-v,.fx-faisca{animation:none}}
+.ar-bi{transform-box:fill-box;transform-origin:50% 50%}
 @media (prefers-reduced-motion:reduce){.runner[class*="mov-"] .avatar{animation:none}}
 /* ---------- temas da pista com cenário em pixel art: uma cena presa em cima (--t), o chão embaixo (--c), um piso opcional (--x) e o fundo (--b) ---------- */
 /* ---------- Temas da pista: cada pista é uma cena em camadas, que conta a história da esquerda para a direita.
@@ -7656,7 +7738,9 @@ const GESTOS = { nuvem: "sobe", pao: "sobe", coroa: "sobe", estrelas: "brilha", 
 /* Movimentos da loja: os quadros (poses) que o personagem alterna na raia. Cada quadro é um desenho próprio, com os braços,
    as pernas e os objetos de verdade nas mãos. */
 const MOV_QUADROS = { marcha: ["passoA", "passoB"], salto: ["agacha", "salto"], danca: ["dancaA", "dancaB"], corrida: ["corridaA", "corridaB"], aguia: ["asasA", "asasB"],
-  beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"] };
+  beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"],
+  palmas: ["palmasA", "palmasB"], canto: ["cantoA", "cantoB"], escada: ["escada"], aguas: ["passoA", "passoB"], funda: ["fundaA", "fundaB"],
+  pomba: ["louvorA", "louvorB"], brilho: ["louvorB"], mar: ["salto"], redemoinho: ["asasA"] };
 /* ---------- Personagens da loja: o que só eles têm ----------
    Brilho holográfico (uma faixa de luz que atravessa o boneco), base de luz no chão e um efeito próprio da história de cada um.
    Tudo é desenhado por cima do boneco, em unidades do desenho (o boneco ocupa de 0 a 22 na largura e de 0 a 30 na altura).
@@ -7704,6 +7788,61 @@ const EFEITOS_LOJA = (() => {
       frente: folha(0, 19, "#F7A8C4", .6, 5.2) + folha(19.4, 24, "#FFC6DA", 2.4, 5.6) + folha(19.8, 9, "#F7A8C4", 3.9, 5) }
   };
 })();
+/* ---------- Movimentos novos (p66): o que aparece por trás (atras) e pela frente (frente) do personagem ----------
+   Unidades do desenho do boneco (viewBox -1 -1 24 31): a cabeça fica em volta de (11, 9), as mãos perto de y 17-22 e os pés em y 28,5. */
+const MOV_FX = (() => {
+  const G = (cls, d) => `<g class="${cls}" shape-rendering="geometricPrecision">${d}</g>`;
+  const estrela = (x, y, r, cor, cls) => `<path class="${cls || ""}" d="M${x} ${y - r}l${r * .28} ${r * .72} ${r * .72} ${r * .28}-${r * .72} ${r * .28}-${r * .28} ${r * .72}-${r * .28}-${r * .72}-${r * .72}-${r * .28} ${r * .72}-${r * .28}z" fill="${cor}"/>`;
+  const nota = (cls, cor, dupla) => `<g class="${cls}"><g fill="${cor}" stroke="#2E2B6E" stroke-width=".22" paint-order="stroke">${dupla
+      ? `<ellipse cx="0" cy="0" rx=".95" ry=".7" transform="rotate(-22)"/><ellipse cx="2.6" cy="-.7" rx=".95" ry=".7" transform="rotate(-22 2.6 -.7)"/><path d="M.8-.2v-3.6l2.6-.8v3.6M.8-3.1l2.6-.8" fill="none" stroke="${cor}" stroke-width=".42"/>`
+      : `<ellipse cx="0" cy="0" rx="1" ry=".74" transform="rotate(-22)"/><path d="M.85-.25v-3.9c.9.4 1.8 1 1.9 2" fill="none" stroke="${cor}" stroke-width=".42"/>`}</g></g>`;
+  /* a pomba (de perfil, olhando para a direita) com as asas batendo */
+  const pomba = `<g class="fx-pomba-voo"><circle r="5" fill="none"/><g class="fx-pomba-c" transform="scale(1.75)" fill="#FFFFFF" stroke="#9C95C9" stroke-width=".14">
+      <path d="M-2.6 .1l-1.3-.7.2 1.2z"/><ellipse cx="-.4" cy=".1" rx="1.9" ry=".85"/><circle cx="1.5" cy="-.45" r=".62"/><path d="M2.05-.5l.6.12-.6.2z" fill="#F2A53A" stroke="none"/>
+      <path class="fx-asa" d="M-.9-.2c-.6-1.2-1.8-2.2-3-2.4 .5 1 1.3 2 2.2 2.6z"/><path class="fx-asa fx-asa2" d="M-.2-.3c.1-1.3-.4-2.6-1.3-3.4-.1 1.2.2 2.5.8 3.5z"/></g></g>`;
+  const raios = Array.from({ length: 12 }, (_, i) => `<path d="M11 9L${(11 + 16 * Math.cos((i * 30 - 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 - 4) * Math.PI / 180)).toFixed(2)}L${(11 + 16 * Math.cos((i * 30 + 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 + 4) * Math.PI / 180)).toFixed(2)}z"/>`).join("");
+  /* parede de água (a da esquerda; a da direita é a mesma espelhada) */
+  const parede = `<g class="fx-parede"><path d="M-12 29.6V14C-12 8-7 4-2 4.5 1 4.8 2.2 7.2.6 8.6-.6 9.6-2.4 9-2.4 7.6-3.4 9.4-1.6 12 .4 13V29.6z" fill="#1F6FC2"/>
+      <path d="M-10.4 29.6V15.2C-10.4 10.6-7 7.2-3.4 6.8-5.6 8.4-6.6 11-6.4 14 -4.6 16-2 16.6.4 16.4V29.6z" fill="#3C93E0" opacity=".9"/><path d="M-8.4 29.6V18.6c.4-2.6 1.6-4.4 3.4-5.6-.6 1.8-.6 3.6.2 5.2 1.2 1.2 3 1.8 5.2 1.8V29.6z" fill="#7CC4FF" opacity=".55"/>
+      <g fill="none" stroke="#CFEFFF" stroke-width=".35" stroke-linecap="round" opacity=".7"><path d="M-10.8 20.4q1.2-.7 2.4 0t2.4 0 2.4 0"/><path d="M-9.6 24.6q1.2-.7 2.4 0t2.4 0 2.4 0 2.4 0"/><path d="M-11.4 27.6q1.2-.7 2.4 0t2.4 0"/></g>
+      <g class="fx-peixe"><path d="M-7 22.8c.9-.8 2.1-.8 3 0-.9.8-2.1.8-3 0zM-7 22.8l-.9-.6v1.2z" fill="#FFB347" opacity=".85"/></g>
+      <path d="M-12 14C-12 8-7 4-2 4.5 1 4.8 2.2 7.2.6 8.6-.6 9.6-2.4 9-2.4 7.6" fill="none" stroke="#F2FBFF" stroke-width=".8" stroke-linecap="round"/>
+      <g fill="#F2FBFF"><circle class="fx-gota g1" cx="0" cy="4.2" r=".45"/><circle class="fx-gota g2" cx="-2.6" cy="3.6" r=".35"/><circle class="fx-gota g3" cx="1.6" cy="6" r=".35"/><circle class="fx-gota g1" cx="-6" cy="4.8" r=".3"/></g></g>`;
+  /* a escada de luz: dois trilhos que sobem e se afinam (perspectiva) e degraus cada vez mais juntos e mais apagados */
+  const xE = y => 3 + (29 - y) / 47 * 5, xD = y => 19 - (29 - y) / 47 * 5, ys = [26, 22, 18.4, 15, 11.9, 9, 6.3, 3.8, 1.5, -.7, -2.7, -4.6, -6.4, -8.1, -9.7, -11.2, -12.6, -13.9, -15.1];
+  const degrau = (y, k, w, cor, op) => `<path d="M${xE(y).toFixed(2)} ${y}H${xD(y).toFixed(2)}" stroke="${cor}" stroke-width="${(w - k * .03).toFixed(2)}" opacity="${op}"/>`;
+  const degraus = `<path d="M3 29L8-18M19 29L14-18" stroke="#FFF6D8" stroke-width="2.2" opacity=".18"/>` + ys.map((y, k) => degrau(y, k, 2, "#FFF6D8", ".14")).join("")
+    + `<path d="M3 29L8-18M19 29L14-18" stroke-width=".85"/>` + ys.map((y, k) => degrau(y, k, .8, "#FFE27A", Math.max(.35, .95 - k * .03).toFixed(2))).join("");
+  /* um anjinho de luz: cabeça, túnica e duas asas */
+  const anjo = `<g transform="translate(11 20) scale(1.6) translate(-11 -20)"><circle cx="11" cy="20" r="3.2" fill="#FFF3B8" opacity=".45"/><path d="M9.2 20.6c-1.4-1.4-2.6-1.2-3 .2 1 .1 1.8.6 2.4 1.3zM12.8 20.6c1.4-1.4 2.6-1.2 3 .2-1 .1-1.8.6-2.4 1.3z" fill="#FFFFFF" opacity=".9"/><path d="M11 19.6l1.6 3.4h-3.2z" fill="#FFFFFF"/><circle cx="11" cy="18.8" r=".9" fill="#FFF6D8"/></g>`;
+  const vento = (cy, rx, ry, cls) => `<ellipse class="${cls}" cx="11" cy="${cy}" rx="${rx}" ry="${ry}"/>`;
+  const frenteVento = (cy, rx, ry, cls) => `<path class="${cls}" d="M${11 - rx} ${cy}a${rx} ${ry} 0 0 0 ${2 * rx} 0"/>`;
+  return {
+    palmas: { frente: G("fx-palmas", `<g stroke="#FFE27A" stroke-width=".75" stroke-linecap="round" fill="none"><path d="M11 13.2v-2.4M7.6 14.4l-1.8-1.5M14.4 14.4l1.8-1.5M6.8 17.2H4.4M15.2 17.2h2.4"/></g>${estrela(5.4, 13.6, .9, "#FFFFFF", "fx-pisca")}${estrela(16.8, 13.2, .75, "#FFE27A", "fx-pisca p2")}`) },
+    canto: { frente: G("fx-canto", `<g transform="translate(13.6 14.6) scale(1.45)">${nota("fx-nota n1", "#FFE27A", false)}</g><g transform="translate(11.6 14.2) scale(1.45)">${nota("fx-nota n2", "#8FE6FF", true)}</g><g transform="translate(12.6 14.8) scale(1.45)">${nota("fx-nota n3", "#FF9BE8", false)}</g>`) },
+    escada: { atras: G("fx-escada", `<path d="M2.4 29L7.4-18H14.6L19.6 29z" fill="#FFF3B8" opacity=".13"/>
+        <g stroke="#FFE27A" stroke-linecap="round" fill="none">${degraus}</g>
+        <g class="fx-anjo a1">${anjo}</g><g class="fx-anjo a2">${anjo}</g><g class="fx-anjo a3">${anjo}</g>
+        <g class="fx-esc-ceu"><ellipse cx="11" cy="-18" rx="7" ry="3.6" fill="#FFF3B8" opacity=".35"/><ellipse cx="11" cy="-18.2" rx="3.8" ry="2" fill="#FFFBE6" opacity=".75"/>
+          <g fill="#FFFFFF" opacity=".9"><circle cx="5.8" cy="-16.6" r="1.6"/><circle cx="8.2" cy="-18" r="2.1"/><circle cx="11" cy="-18.8" r="2.3"/><circle cx="13.8" cy="-18" r="2.1"/><circle cx="16.2" cy="-16.6" r="1.6"/><rect x="5.8" y="-17.2" width="10.4" height="2.2" rx="1.1"/></g></g>`),
+      frente: G("fx-escada-f", `${estrela(3, 6, .8, "#FFF3B8", "fx-pisca")}${estrela(19.4, 3.4, .7, "#FFFFFF", "fx-pisca p2")}${estrela(18.6, 16, .55, "#FFE27A", "fx-pisca p3")}`) },
+    aguas: { atras: G("fx-aguas", `<ellipse cx="11" cy="28.7" rx="13" ry="2.5" fill="#2B7FD0" opacity=".55"/><ellipse cx="11" cy="28.6" rx="10" ry="1.8" fill="#6FC3FF" opacity=".45"/>
+        <g fill="none" stroke="#EAF8FF" stroke-width=".38"><ellipse class="fx-onda o1" cx="11" cy="28.7" rx="5" ry=".95"/><ellipse class="fx-onda o2" cx="11" cy="28.7" rx="5" ry=".95"/><ellipse class="fx-onda o3" cx="11" cy="28.7" rx="5" ry=".95"/></g>`),
+      frente: G("fx-aguas-f", `<path class="fx-marola" d="M-4 29.3q.75-.45 1.5 0t1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0" fill="none" stroke="#EAF8FF" stroke-width=".32" opacity=".85"/>${estrela(3, 27.6, .55, "#FFFFFF", "fx-pisca")}${estrela(19.5, 28.2, .5, "#FFFFFF", "fx-pisca p2")}`) },
+    funda: { frente: G("fx-funda", `<circle cx="19.2" cy="11.2" r="5.2" fill="none" stroke="#FFFFFF" stroke-width=".32" stroke-dasharray="1.8 2.4" opacity=".5" class="fx-funda-rastro"/>
+        <g class="fx-funda-gira"><circle cx="19.2" cy="11.2" r="6.4" fill="none"/><path d="M24.4 11.2A5.2 5.2 0 0 1 21.8 15.7" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+          <path d="M19.2 11.2H23.6" stroke="#8A5A2B" stroke-width=".48" stroke-linecap="round"/><path d="M23.4 10.5h1.8v1.4h-1.8z" fill="#8A5A2B"/><circle cx="24.4" cy="11.2" r="1" fill="#B4B4C4" stroke="#4A4A58" stroke-width=".3"/></g>
+        <g class="fx-pedra"><path d="M19 9.6h-5" stroke="#FFFFFF" stroke-width=".5" stroke-linecap="round" opacity=".7"/><circle cx="19.6" cy="9.6" r=".85" fill="#A9A9B8" stroke="#4A4A58" stroke-width=".28"/></g>`) },
+    pomba: { atras: G("fx-coluna", `<path d="M6.2-8h9.6l3.4 37.4H2.8z" fill="#FFF3B8" opacity=".2"/><path d="M8.6-8h4.8l1.6 37.4H7z" fill="#FFFBE6" opacity=".22"/>`),
+      frente: G("fx-pomba", pomba + estrela(4, 3, .6, "#FFF3B8", "fx-pisca") + estrela(18.4, 2, .7, "#FFFFFF", "fx-pisca p2")) },
+    brilho: { atras: G("fx-brilho", `<circle cx="11" cy="9" r="11" fill="#FFE9A0" opacity=".22" class="fx-halo"/><g class="fx-raios" fill="#FFE27A" opacity=".42">${raios}</g><circle cx="11" cy="9" r="7.4" fill="#FFF6D8" opacity=".38" class="fx-halo h2"/>`),
+      frente: G("fx-brilho-f", `${estrela(2.4, 4, .9, "#FFFFFF", "fx-pisca")}${estrela(20, 5.5, .75, "#FFF3B8", "fx-pisca p2")}${estrela(19, 15, .6, "#FFFFFF", "fx-pisca p3")}`) },
+    mar: { atras: G("fx-mar", `<ellipse cx="11" cy="29" rx="10" ry="1.4" fill="#C9A66B" opacity=".55"/>${parede}<g transform="matrix(-1 0 0 1 22 0)">${parede}</g>`) },
+    redemoinho: { atras: G("fx-vento", `<path d="M8.4 29.8L1.6 16.6Q11 13.6 20.4 16.6L13.6 29.8Z" fill="#D6D2FF" opacity=".2"/><g fill="none" stroke="#E6E3FF" stroke-width=".7" stroke-dasharray="3.2 2.2" stroke-linecap="round">${vento(29, 2.4, .6, "fx-v v1")}${vento(26.6, 4, .9, "fx-v v2")}${vento(24, 5.6, 1.2, "fx-v v3")}${vento(21.2, 7.2, 1.5, "fx-v v4")}${vento(18.2, 8.8, 1.8, "fx-v v5")}</g>
+        <g fill="#FF9A3C"><circle class="fx-faisca f1" cx="5" cy="26" r=".45"/><circle class="fx-faisca f2" cx="17" cy="24" r=".4"/><circle class="fx-faisca f3" cx="9" cy="28" r=".35"/><circle class="fx-faisca f4" cx="14" cy="27" r=".45" fill="#FFE27A"/></g>`),
+      frente: G("fx-vento-f", `<g fill="none" stroke="#FFFFFF" stroke-width=".5" stroke-dasharray="2.6 2.6" stroke-linecap="round" opacity=".85">${frenteVento(29, 2.4, .6, "fx-v v1")}${frenteVento(26.6, 4, .9, "fx-v v2")}${frenteVento(24, 5.6, 1.2, "fx-v v3")}${frenteVento(21.2, 7.2, 1.5, "fx-v v4")}</g>`) }
+  };
+})();
 /* o efeito de um personagem da loja (null para os outros) */
 const efeitoDaLoja = p => (p && p.preco && EFEITOS_LOJA[p.modelo || p.id]) || null;
 function avatarSVG(id, rotulo, nivel, nvAcess, mov){
@@ -7736,7 +7875,13 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
       img: (cls, k, extra) => `<image class="${cls}" href="${href[k]}" x="${x0.toFixed(2)}" y="0" width="${larg.toFixed(2)}" height="30" preserveAspectRatio="none"${!hd && temHD(q) ? ` data-hd="${esc(q.id)}" data-hk="${k}"` : ""}${extra || ""}/>` }; };
   const quadros = mov && !montado && MOV_QUADROS[mov] ? MOV_QUADROS[mov] : null;     // qualquer personagem com movimento comprado (os quadros saem em 992×1000)
   let corpo, temGesto = false;
-  if(quadros){
+  const artic = mov && !montado && typeof MOV_ART !== "undefined" && MOV_ART[mov];
+  if(artic){
+    /* movimento articulado: o corpo sem braços e sem pés, e as partes que se mexem de verdade por cima */
+    const pc = artic.corpo || "corpo", d = desenho(Object.assign({}, p, { id: p.id + "@" + pc, pose: pc, semGuardar: false }));
+    corpo = `<g class="av-art av-art-${mov}">${d.img("av-q", "u")}${ART.pes(p)}${ART.bracos(p, artic)}</g>` + (mov === "beijo" ? AV_CORACOES : "");
+    const fx = typeof MOV_FX !== "undefined" && MOV_FX[mov]; if(fx) corpo = (fx.atras || "") + corpo + (fx.frente || "");
+  } else if(quadros){
     /* movimento da loja: os quadros se alternam (só a pose muda; o resto da animação vem do movimento da raia) */
     const fr = quadros.map(pose => desenho(Object.assign({}, p, { id: p.id + "@" + pose, pose, semGuardar: false })));
     if(mov === "dormir"){
@@ -7749,6 +7894,7 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
         : "";
       const luz = mov === "orar" ? `<g class="av-luz" shape-rendering="geometricPrecision"><ellipse cx="11" cy="9" rx="10" ry="10" fill="#FFF3B8" opacity=".35"/><ellipse cx="11" cy="9" rx="6.5" ry="6.5" fill="#FFFBE6" opacity=".45"/><g stroke="#FFE27A" stroke-width=".6" stroke-linecap="round" opacity=".8"><path d="M11 -2.6v2.4M3 1l1.6 1.6M19 1l-1.6 1.6M-.8 8.6h2.2M20.6 8.6h2.2"/></g></g>` : "";
       corpo = luz + `<g class="av-mv av-mv-${mov}">${fr.map((d, i) => d.img(fr.length > 1 ? "av-q av-q" + (i + 1) : "av-q", "u")).join("")}</g>` + extra;
+      const fx = MOV_FX[mov]; if(fx) corpo = (fx.atras || "") + corpo + (fx.frente || "");
     }
   } else {
     const d = desenho(p);
@@ -7770,7 +7916,7 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
     : base + sombra + (efeito ? `<g class="av-loja-atras" shape-rendering="geometricPrecision">${efeito.atras}</g>` : "") + (temGesto ? `<g class="av-corpo">${corpo}</g>` : corpo)
       + (efeito ? holo + `<g class="av-loja-frente" shape-rendering="geometricPrecision">${efeito.frente}</g>` : "");
   const selo = nv > 0 ? `<g class="av-nivel" shape-rendering="geometricPrecision"><circle cx="19.3" cy="26" r="3.7" fill="#F2BE2E" stroke="#3A2A00" stroke-width=".7"/><text x="19.3" y="27.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="5.2" fill="#3A2A00">${nv}</text></g>` : "";
-  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${lend ? " lendario" : ""}${efeito ? " loja" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : efeito ? ", personagem da loja, com o efeito " + efeito.nome : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
+  return `<svg viewBox="-1 -1 24 31" class="avatar${raro ? " raro" : ""}${artic ? " art" : ""}${lend ? " lendario" : ""}${efeito ? " loja" : ""}" role="img" aria-label="${lbl}${nv > 0 ? ", nível " + nv : ""}${lend ? ", personagem lendário" : raro ? ", personagem raro" : efeito ? ", personagem da loja, com o efeito " + efeito.nome : ""}" style="overflow:visible;--d:-${atraso}s">${aura}${brilho}${boneco}${selo}</svg>`;
 }
 let _nvMemo = { k: "", v: 0 };
 function meuNivel(){
@@ -9217,7 +9363,20 @@ const POSES = {
   bicepsA: { e:{c:[5.1,22.3],m:[5.3,17.7],s:false}, d:{c:[26.9,22.3],m:[26.7,17.7],s:false}, bi:1 },
   bicepsB: { e:{c:[4.9,22],m:[5.7,16.9],s:false},   d:{c:[27.1,22],m:[26.3,16.9],s:false},   bi:1.7 },
   orar:    { e:{c:[11,27.4],m:[15.4,23.4],t:"j",s:false}, d:{c:[21,27.4],m:[16.6,23.4],t:"j",s:false}, olhos:"f", ajoelha:2.6 },
-  dormir:  { e:{c:[8.8,26.4],m:[9.6,29.9]}, d:{c:[23.2,26.4],m:[22.4,29.9]}, olhos:"f", semObj:1 }
+  dormir:  { e:{c:[8.8,26.4],m:[9.6,29.9]}, d:{c:[23.2,26.4],m:[22.4,29.9]}, olhos:"f", semObj:1 },
+  corpo:   { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1 },
+  corpoBeijo:   { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, boca:"bico" },
+  corpoCanto:   { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, boca:"canto" },
+  corpoFechado: { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, olhos:"f" },
+  palmasA: { e:{c:[8.9,25.6],m:[11.2,22.6],t:"a",s:false}, d:{c:[23.1,25.6],m:[20.8,22.6],t:"a",s:false}, semObj:1 },
+  palmasB: { e:{c:[10.2,25.8],m:[15.3,22.4],t:"j",s:false}, d:{c:[21.8,25.8],m:[16.7,22.4],t:"j",s:false}, olhos:"f", semObj:1 },
+  cantoA:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[25.9,21.6],m:[27.4,17.2]}, boca:"canto" },
+  cantoB:  { e:{c:[6.1,21.6],m:[4.6,17.2]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, boca:"canto", olhos:"f" },
+  fundaA:  { e:{c:[8.6,26.4],m:[8.9,30.1],t:"a",s:false}, d:{c:[25.4,19.6],m:[26.8,15.2],s:false}, semObj:1 },
+  fundaB:  { e:{c:[8.3,26.2],m:[7.6,29.8],t:"a",s:false}, d:{c:[25.8,19.2],m:[25.8,14.8],s:false}, semObj:1 },
+  louvorA: { e:{c:[5.4,20.6],m:[3.4,16.2]}, d:{c:[26.6,20.6],m:[28.6,16.2]}, olhos:"f" },
+  louvorB: { e:{c:[5.6,20.2],m:[4,15.6]},   d:{c:[26.4,20.2],m:[28,15.6]},   olhos:"f" },
+  escada:  { e:{c:[10.2,25.8],m:[15.3,22.2],t:"j",s:false}, d:{c:[21.8,25.8],m:[16.7,22.2],t:"j",s:false}, semObj:1 }
 };
 /* onde a mão segura cada objeto: [linha, coluna] dentro do desenho do objeto (1 quadradinho = 1 unidade) */
 const PEGA = { tabuas:[7.2,4.5], tamborim:[7.4,4], palmeira:[8.2,4.8], chifre:[6.8,2], chama:[8.3,4], jarro:[5.6,1.4], livro:[6.2,1.2], brasa:[1.2,1.4],
@@ -9270,7 +9429,7 @@ function gerarSprite(p, W, H){
   const pe = PO && PO.pe || [0,0];
   const pernaE=d=>{ camada(Rt(11,34.5+d,15,36+d),pele,"pele",{plano:1}); camada(RR(10,35.6+d,15.2,37+d,.8,.8),"#6B4A33","sand"); };
   const pernaD=d=>{ camada(Rt(17,34.5+d,21,36+d),{b:pele.s},"pele",{plano:1}); camada(RR(16.8,35.6+d,22,37+d,.8,.8),"#4E3424","sand"); };
-  if(!dyK){ if(pe[0]>=0) pernaE(0); if(pe[1]>=0) pernaD(0); }
+  if(!dyK && !(PO && PO.semPes)){ if(pe[0]>=0) pernaE(0); if(pe[1]>=0) pernaD(0); }
   /* túnica (ajoelhado: a barra encosta no chão) */
   const tunica0=P([[11.2,20],[20.8,20],[22.2,21.2],[22.2,28],[24.4,35],[7.6,35],[9.8,28],[9.8,21.2]]);
   const tunica = dyK ? I(tunica0,Rt(0,0,40,37-dyK)) : tunica0;
@@ -9452,6 +9611,7 @@ function gerarSprite(p, W, H){
   /* ---- pose: braços, objetos na mão e mãos ---- */
   if(PO){
     const linha=mistura(V(24).d,"#1A1030",.62), linhaPele=mistura(pele.d,"#1A1030",.45);
+    if(PO.boca==="canto"){ camada(E(16,17.3,1.3,.62),pele.b,"",{plano:1}); camada(E(16,17.55,.82,.78),"#6A2232","",{plano:1}); camada(E(16,17.95,.5,.3),"#E0607A","",{plano:1}); }
     if(PO.boca==="bico"){ camada(E(16,17.3,1.3,.62),pele.b,"",{plano:1}); camada(E(16,17.4,.78,.68),"#7A2E3A","",{plano:1}); camada(E(16,17.4,.5,.42),"#C9506A","",{plano:1}); camada(E(15.85,17.25,.16,.12),"#F2A0B0","",{plano:1}); }
     const SH={e:[9.4,22.6],d:[22.6,22.6]};
     const tom={e:V, d:y=>({b:V(y).s,s:V(y).d,d:mistura(V(y).d,"#1A1030",.35),l:V(y).b})};
@@ -9466,7 +9626,7 @@ function gerarSprite(p, W, H){
     colocar(p.emb2,"e",p.emb2atras); colocar(p.emb,"d");
     objs.filter(o=>o.atras).forEach(o=>emblema(o.icx,o.o,true));
     objs.filter(o=>o.chao).forEach(o=>emblema(o.icx,o.o));
-    ["e","d"].forEach(l=>{ const A=PO[l], S=SH[l], c=A.c, m=A.m, r=1.6, meio=[(S[0]+c[0])/2,(S[1]+c[1])/2];
+    ["e","d"].forEach(l=>{ if(PO.semBracos) return; const A=PO[l], S=SH[l], c=A.c, m=A.m, r=1.6, meio=[(S[0]+c[0])/2,(S[1]+c[1])/2];
       const forma=U(F.C(S[0],S[1],c[0],c[1],r),F.C(c[0],c[1],m[0],m[1],r*.93));
       camada(U(F.C(meio[0],meio[1],c[0],c[1],r+.32),F.C(c[0],c[1],m[0],m[1],r*.93+.32)),linha,"",{plano:1});
       camada(forma,tom[l],"veste",{dx:1.2,dy:.5});
@@ -9475,7 +9635,7 @@ function gerarSprite(p, W, H){
       camada(I(forma,F.C(pq[0],pq[1],m[0],m[1],r*1.05)),y=>({b:tom[l](y).s,s:tom[l](y).d,d:tom[l](y).d,l:tom[l](y).b}),"punho",{dx:1,dy:.4});
     });
     objs.filter(o=>!o.atras&&!o.chao).forEach(o=>emblema(o.icx,o.o));
-    ["e","d"].forEach(l=>{ const A=PO[l], [hx,hy]=A.m, t=A.t||"p", lado=l==="e"?-1:1, cor=l==="e"?pele:{b:pele.b,s:pele.s,d:pele.d,l:pele.b};
+    ["e","d"].forEach(l=>{ if(PO.semBracos) return; const A=PO[l], [hx,hy]=A.m, t=A.t||"p", lado=l==="e"?-1:1, cor=l==="e"?pele:{b:pele.b,s:pele.s,d:pele.d,l:pele.b};
       if(t==="a"){            // mão aberta (tchau / mandando o beijo): palma, quatro dedos separados e o polegar
         const dedos=[-.95,-.32,.32,.95].map((d,i)=>F.C(hx+d*1.05,hy-.4,hx+d*1.35,hy-2.25+Math.abs(i-1.5)*.35,.36));
         const pol=F.C(hx-lado*1.1,hy+.5,hx-lado*2.1,hy-.5,.38), palma=E(hx,hy+.25,1.3,1.1);
@@ -9591,7 +9751,7 @@ Object.assign(CINTOS, { sansao:"#5A3A22", davi:"#8A5A2B" });
 Object.assign(CINTOS, { adao:"#5A3A22", farao:"#F2BE2E", josenazare:"#5A3A22", raabe:"#E8483C", pedro:"#8A5A2B" });
 Object.assign(MANTOS, { josue:"#8E3222", pedro:"#E8D9B5" });
 
-gerarSprite.POSES = POSES; gerarSprite.ICONES = ICONES; gerarSprite.scale2x = scale2x;
+gerarSprite.POSES = POSES; gerarSprite.ICONES = ICONES; gerarSprite.scale2x = scale2x; gerarSprite.mistura = mistura; gerarSprite.rampa = rampa; gerarSprite.PEGA = PEGA;
 return gerarSprite;
 }
 const gerarSpriteModelo = _fabricaSprites();
@@ -9722,6 +9882,151 @@ onmessage=async e=>{ const {n,p,W,H}=e.data; try{
 })();
 /* o melhor desenho disponível de um personagem (para as imagens de compartilhar): o de 992×1000 se der, senão o desenho imediato */
 async function spriteMelhor(p){ const r = await HD.esperar(p); return r ? { url: r.u, fechado: r.f, W: r.W, H: r.H } : spriteHD(p); }
+/* ---------- Movimento articulado (p68) ----------
+   Em vez de trocar entre dois desenhos, o personagem é montado em partes: o corpo (desenhado sem os braços e sem os pés)
+   e, por cima, os braços (ombro, cotovelo, mão e o objeto que ela segura) e os pés, que giram e sobem de verdade,
+   em movimento contínuo. As partes usam as mesmas cores e o mesmo contorno do desenho. Unidades do boneco (viewBox -1 -1 24 31).
+   Ângulos em graus: u = braço (do ombro ao cotovelo), f = antebraço (do cotovelo à mão, relativo ao braço); e/d = lado da tela.
+   Positivo gira no sentido do relógio: no lado "e" abre o braço para fora; no lado "d", para dentro. p = pé (sobe com negativo). */
+const MOV_ART = {
+  marcha:  { dur: 1, kf: {
+    0:   { ue: 4,  fe: -78, ud: -30, fd: 4,  pe: -1.6, pd: 0,    c: "translateY(-1.3px) rotate(-2.5deg)" },
+    25:  { ue: 17, fe: -36, ud: -17, fd: 36, pe: 0,    pd: 0,    c: "translateY(0) rotate(0deg)" },
+    50:  { ue: 30, fe: -4,  ud: -4,  fd: 78, pe: 0,    pd: -1.6, c: "translateY(-1.3px) rotate(2.5deg)" },
+    75:  { ue: 17, fe: -36, ud: -17, fd: 36, pe: 0,    pd: 0,    c: "translateY(0) rotate(0deg)" } } },
+  salto:   { dur: 1.25, kf: {
+    0:   { ue: 26, fe: 0,  ud: -26, fd: 0 },
+    10:  { ue: 30, fe: 4,  ud: -30, fd: -4 },
+    24:  { ue: 146, fe: 13, ud: -146, fd: -13 },
+    44:  { ue: 140, fe: 10, ud: -140, fd: -10 },
+    58:  { ue: 26, fe: 0,  ud: -26, fd: 0 } } },
+  danca:   { dur: 1.3, kf: {
+    0:   { ue: 137, fe: 54, ud: -72,  fd: -63, pe: 0,  pd: -1.2, c: "rotate(-8deg) translateX(-1.5px)" },
+    25:  { ue: 104, fe: 62, ud: -104, fd: -62, pe: 0,  pd: 0,    c: "rotate(0deg) translateY(-2.6px)" },
+    50:  { ue: 72,  fe: 63, ud: -137, fd: -54, pe: -1.2, pd: 0,  c: "rotate(8deg) translateX(1.5px)" },
+    75:  { ue: 104, fe: 62, ud: -104, fd: -62, pe: 0,  pd: 0,    c: "rotate(0deg) translateY(-2.6px)" } } },
+  corrida: { dur: .5, kf: {
+    0:   { ue: 40, fe: -118, ud: -4,  fd: 58,  pe: -1.9, pd: 0,    c: "rotate(7deg) translate(0,0)" },
+    50:  { ue: 4,  fe: -58,  ud: -40, fd: 118, pe: 0,    pd: -1.9, c: "rotate(7deg) translate(1.5px,-2.6px)" } } },
+  aguia:   { dur: .65, kf: {
+    0:   { ue: 122, fe: 6,  ud: -122, fd: -6 },
+    50:  { ue: 70,  fe: -12, ud: -70, fd: 12 } } },
+  tchau:   { dur: 1.1, aberta: "d", kf: {
+    0:   { ue: 12, fe: -16, ud: -134, fd: -52, c: "rotate(-1.5deg)" },
+    50:  { ue: 15, fe: -20, ud: -142, fd: -4,  c: "rotate(1.5deg)" } } },
+  beijo:   { dur: 2.4, aberta: "d", corpo: "corpoBeijo", kf: {
+    0:   { ue: 12, fe: -16, ud: 96,   fd: 75 },
+    40:  { ue: 12, fe: -16, ud: 96,   fd: 75 },
+    55:  { ue: 14, fe: -20, ud: -114, fd: -16 },
+    92:  { ue: 14, fe: -20, ud: -112, fd: -20 } } },
+  biceps:  { dur: 1.4, semObj: 1, kf: {
+    0:   { ue: 94, fe: 88, ud: -94, fd: -88, b: 1,   c: "translateY(0) scale(1)" },
+    50:  { ue: 99, fe: 94, ud: -99, fd: -94, b: 1.7, c: "translateY(-1px) scale(1.04)" } } },
+  palmas:  { dur: .56, aberta: "ed", kf: {
+    0:   { ue: -77, fe: -150, ud: 77, fd: 150 },
+    50:  { ue: -70, fe: -80,  ud: 70, fd: 80 } } },
+  canto:   { dur: 1.6, corpo: "corpoCanto", kf: {
+    0:   { ue: 12,  fe: -16, ud: -107, fd: -54 },
+    50:  { ue: 107, fe: 54,  ud: -12,  fd: 16 } } },
+  aguas:   { dur: 1.4, kf: {
+    0:   { ue: 8,  fe: -50, ud: -24, fd: 8,  pe: -1.2, pd: 0 },
+    25:  { ue: 15, fe: -26, ud: -15, fd: 26, pe: 0,    pd: 0 },
+    50:  { ue: 24, fe: -8,  ud: -8,  fd: 50, pe: 0,    pd: -1.2 },
+    75:  { ue: 15, fe: -26, ud: -15, fd: 26, pe: 0,    pd: 0 } } },
+  funda:   { dur: .72, aberta: "e", semObj: 1, kf: {
+    0:   { ue: 12, fe: -16, ud: -151, fd: 0 },
+    50:  { ue: 18, fe: -8,  ud: -147, fd: -10 } } },
+  pomba:   { dur: 2, corpo: "corpoFechado", kf: {
+    0:   { ue: 117, fe: 39, ud: -117, fd: -39 },
+    50:  { ue: 124, fe: 44, ud: -124, fd: -44 } } },
+  brilho:  { dur: 2.6, corpo: "corpoFechado", kf: {
+    0:   { ue: 122, fe: 39, ud: -122, fd: -39 },
+    50:  { ue: 116, fe: 33, ud: -116, fd: -33 } } },
+  mar:     { dur: 2.2, kf: {
+    0:   { ue: 146, fe: 13, ud: -146, fd: -13 },
+    50:  { ue: 151, fe: 6,  ud: -151, fd: -6 } } },
+  redemoinho: { dur: 2.6, kf: {
+    0:   { ue: 118, fe: 4,  ud: -100, fd: -16 },
+    50:  { ue: 100, fe: 16, ud: -118, fd: -4 } } }
+};
+/* os corações do Beijo da Saudação (os mesmos do desenho de antes) */
+const AV_CORACOES = `<g class="av-coracoes" fill="#FF5C7A" stroke="#FFFFFF" stroke-width=".3"><path class="av-c1" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/><path class="av-c2" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/><path class="av-c3" d="M21 13.6c-.9-1.4-2.6-.6-2 .8.4.9 2 1.9 2 1.9s1.6-1 2-1.9c.6-1.4-1.1-2.2-2-.8z"/></g>`;
+const ART = (() => {
+  const SPR = gerarSpriteModelo, mix = SPR.mistura, rampa = SPR.rampa, FIX = ["coroa_cab", "ovelha_chao", "asas"];
+  const OMBRO = { e: [6.05, 16.95], d: [15.95, 16.95] }, LU = 2.9, LF = 2.75, R = 1.2, HY = LF + .15;
+  const capsula = (r, a, b) => `M${(-r).toFixed(2)} ${a}V${b}A${r.toFixed(2)} ${r.toFixed(2)} 0 0 0 ${r.toFixed(2)} ${b}V${a}A${r.toFixed(2)} ${r.toFixed(2)} 0 0 0 ${(-r).toFixed(2)} ${a}z`;
+  /* as animações saem dos ângulos acima (uma regra por parte); o objeto na mão gira ao contrário e fica sempre de pé */
+  (function estilo(){
+    if(typeof document === "undefined" || document.getElementById("estiloArt")) return;
+    let css = "", kfs = "";
+    Object.keys(MOV_ART).forEach(m => { const A = MOV_ART[m], ks = Object.keys(A.kf).map(Number).sort((a, b) => a - b);
+      const anim = (nome, f) => { kfs += `@keyframes ar-${m}-${nome}{${ks.map(k => `${k}%{transform:${f(A.kf[k])}}`).join("")}100%{transform:${f(A.kf[ks[0]])}}}\n`;
+        return `animation:ar-${m}-${nome} ${A.dur}s ease-in-out infinite`; };
+      css += `.av-art-${m} .ar-ue{${anim("ue", k => `rotate(${k.ue}deg)`)}}.av-art-${m} .ar-fe{${anim("fe", k => `rotate(${k.fe}deg)`)}}.av-art-${m} .ar-oe{${anim("oe", k => `rotate(${-(k.ue + k.fe)}deg)`)}}\n`;
+      css += `.av-art-${m} .ar-ud{${anim("ud", k => `rotate(${k.ud}deg)`)}}.av-art-${m} .ar-fd{${anim("fd", k => `rotate(${k.fd}deg)`)}}.av-art-${m} .ar-od{${anim("od", k => `rotate(${-(k.ud + k.fd)}deg)`)}}\n`;
+      if(ks.some(k => A.kf[k].pe || A.kf[k].pd)) css += `.av-art-${m} .ar-pee{${anim("pe", k => `translateY(${k.pe || 0}px)`)}}.av-art-${m} .ar-ped{${anim("pd", k => `translateY(${k.pd || 0}px)`)}}\n`;
+      if(A.kf[0].b) css += `.av-art-${m} .ar-bi{${anim("bi", k => `scale(${k.b})`)}}\n`;
+      if(A.kf[0].c) css += `.runner.mov-${m} .avatar.art{transform-origin:50% 100%;${anim("c", k => k.c)}}\n`; });
+    const el = document.createElement("style"); el.id = "estiloArt";
+    el.textContent = kfs + `@media (prefers-reduced-motion: no-preference){\n${css}}\n@media (prefers-reduced-motion: reduce){.runner[class*="mov-"] .avatar.art{animation:none}}`;
+    document.head.appendChild(el);
+  })();
+  const emblemas = {};
+  /* o objeto do personagem como imagem (os mesmos quadradinhos do desenho, ampliados e com contorno) */
+  function emblemaURL(k){
+    if(emblemas[k] !== undefined) return emblemas[k];
+    const ic = SPR.ICONES[k]; if(!ic || typeof document === "undefined"){ emblemas[k] = null; return null; }
+    let m = ic.m; for(let i = 0; i < 3; i++) m = SPR.scale2x(m);
+    const H = m.length, W = m[0].length, B = 4, cv = document.createElement("canvas"); cv.width = W + 2 * B; cv.height = H + 2 * B;
+    const x = cv.getContext("2d"), le = mix(Object.values(ic.p)[0], "#1A1030", .75);
+    x.fillStyle = le;
+    for(let r = 0; r < H; r++) for(let c = 0; c < W; c++) if(m[r][c] !== "." && ic.p[m[r][c]]) x.fillRect(c, r, 2 * B + 1, 2 * B + 1);
+    for(let r = 0; r < H; r++) for(let c = 0; c < W; c++){ const ch = m[r][c]; if(ch !== "." && ic.p[ch]){ x.fillStyle = ic.p[ch]; x.fillRect(c + B, r + B, 1, 1); } }
+    return (emblemas[k] = { u: cv.toDataURL("image/png"), w: ic.m[0].length, h: ic.m.length, b: B / 8 });
+  }
+  const pegaDe = k => { const ic = SPR.ICONES[k]; return SPR.PEGA[k] || [ic.m.length - 1.5, ic.m[0].length / 2]; };
+  /* uma parte do braço: contorno, sombra, a cor e um brilho fino */
+  /* O braço é desenhado em camadas, cada uma com o mesmo esqueleto (ombro, cotovelo, mão) e as mesmas animações:
+     primeiro o contorno do braço inteiro, depois a sombra, a cor e o brilho. Assim braço e antebraço viram uma peça só,
+     sem linha no cotovelo, e o contorno começa no meio do braço (como no desenho), sem marcar o ombro. */
+  function mao(pele, linhaP, aberta, lado, camada){
+    if(!aberta) return camada === "linha" ? `<circle cx="0" cy="${HY}" r="1.22" fill="${linhaP}"/>`
+      : `<circle cx="0" cy="${HY}" r="1.04" fill="${pele.s}"/><circle cx="-.16" cy="${HY - .1}" r=".84" fill="${pele.b}"/>`;
+    const y = LF + .2, ded = [-.72, -.24, .24, .72].map((dx, i) => [dx, y + .55, dx * 1.18, y + 2 - Math.abs(i - 1.5) * .28]), pol = [lado * .8, y + .2, lado * 1.75, y + .95];
+    const traco = (a, w, cor) => `<path d="M${a[0]} ${a[1]}L${a[2]} ${a[3]}" stroke="${cor}" stroke-width="${w}" stroke-linecap="round"/>`;
+    return camada === "linha" ? `${ded.map(a => traco(a, .8, linhaP)).join("")}${traco(pol, .84, linhaP)}<ellipse cx="0" cy="${y + .2}" rx="1.22" ry="1.1" fill="${linhaP}"/>`
+      : `${ded.map(a => traco(a, .5, pele.b)).join("")}${traco(pol, .54, pele.b)}<ellipse cx="0" cy="${y + .2}" rx="1" ry=".88" fill="${pele.b}"/>`;
+  }
+  function braco(lado, p, cfg){
+    const vc = p.listras ? p.listras[2 % p.listras.length] : p.veste, V = rampa(vc);
+    const tom = lado === "e" ? V : { b: V.s, s: V.d, d: mix(V.d, "#1A1030", .35), l: V.b };
+    const linha = mix(V.d, "#1A1030", .62), pele = { b: p.pele, s: mix(p.pele, "#7A3E4A", .28), d: mix(p.pele, "#4A2236", .48) }, linhaP = mix(pele.d, "#1A1030", .45);
+    /* o objeto do personagem fica na mão direita da tela; o acessório de mão da loja, na outra (a mão aberta não segura) */
+    const ab = cfg.aberta || "", aberta = ab.includes(lado), acMao = p.emb2 && !FIX.includes(p.emb2) ? p.emb2 : null;
+    /* com a mão direita aberta, o objeto do personagem passa para a outra mão (se ela estiver livre) */
+    const k = cfg.semObj || aberta ? null : lado === "d" ? p.emb : (acMao || (ab.includes("d") ? p.emb : null));
+    let obj = "";
+    if(k){ const e = emblemaURL(k); if(e){ const g = pegaDe(k), s = .75;
+      obj = `<g transform="translate(0 ${HY})"><g class="ar-o${lado}"><image href="${e.u}" x="${(-(g[1] + e.b) * s).toFixed(2)}" y="${(-(g[0] + e.b) * s).toFixed(2)}" width="${((e.w + 2 * e.b) * s).toFixed(2)}" height="${((e.h + 2 * e.b) * s).toFixed(2)}" preserveAspectRatio="none"/></g></g>`; } }
+    const [ox, oy] = OMBRO[lado], k0 = cfg.kf[0], rf = R * .93;
+    /* o esqueleto: o que vai no braço (u), no antebraço (f) e depois da mão (m) */
+    const osso = (u, f) => `<g transform="translate(${ox} ${oy})"><g class="ar-u${lado}" style="transform:rotate(${k0["u" + lado]}deg)">${u}`
+      + `<g transform="translate(0 ${LU})"><g class="ar-f${lado}" style="transform:rotate(${k0["f" + lado]}deg)">${f}</g></g></g></g>`;
+    const biL = k0.b ? `<g transform="translate(${lado === "e" ? -.62 : .62} ${(LU * .55).toFixed(2)})"><ellipse class="ar-bi" rx="1.05" ry=".72" fill="${linha}"/></g>` : "";
+    const biC = k0.b ? `<g transform="translate(${lado === "e" ? -.62 : .62} ${(LU * .55).toFixed(2)})"><ellipse class="ar-bi" rx=".82" ry=".52" fill="${tom.b}"/></g>` : "";
+    const lado1 = lado === "e" ? -1 : 1;
+    return osso(`<path d="${capsula(R + .24, (LU * .45).toFixed(2), LU)}" fill="${linha}"/>${biL}`, `<path d="${capsula(rf + .24, 0, LF)}" fill="${linha}"/>${mao(pele, linhaP, aberta, lado1, "linha")}`)
+      + osso(`<path d="${capsula(R, 0, LU)}" fill="${tom.s}"/>`, `<path d="${capsula(rf, 0, LF)}" fill="${tom.s}"/>`)
+      + osso(`<path d="${capsula(R - .22, .05, LU + .4)}" transform="translate(-.2 0)" fill="${tom.b}"/>${biC}`, `<path d="${capsula(rf - .22, -.4, LF - .05)}" transform="translate(-.2 0)" fill="${tom.b}"/><path d="${capsula(rf, (LF - .85).toFixed(2), (LF - .1).toFixed(2))}" fill="${tom.s}"/>`)
+      + osso(`<path d="${capsula(.26, .6, LU - .5)}" transform="translate(${(-R * .55).toFixed(2)} 0)" fill="${tom.l}" opacity=".35"/>`, `${obj}${mao(pele, linhaP, aberta, lado1, "cor")}`);
+  }
+  function pes(p){
+    const ps = mix(p.pele, "#7A3E4A", .28);
+    const pe = (cls, lx, cor, sand) => `<g class="${cls}"><rect x="${lx}" y="26.3" width="3" height=".9" fill="${cor}"/><rect x="${(lx - .75).toFixed(2)}" y="26.72" width="3.9" height="1.05" rx=".5" fill="${sand}" stroke="${mix(sand, "#1A1030", .72)}" stroke-width=".22"/></g>`;
+    return pe("ar-pee", 7.25, p.pele, "#6B4A33") + pe("ar-ped", 11.75, ps, "#4E3424");
+  }
+  return { bracos: (p, cfg) => braco("e", p, cfg) + braco("d", p, cfg), pes };
+})();
 
 /* ============================================================
    MOEDAS, LOJA E PERFIL DO JOGADOR
@@ -9789,7 +10094,16 @@ const LOJA_MOVIMENTOS = [
   { id: "beijo",   nome: "Beijo da Saudação",  ref: "Romanos 16:16",   preco: 40 },
   { id: "dormir",  nome: "Sono Tranquilo",     ref: "Salmo 4:8",       preco: 45 },
   { id: "biceps",  nome: "Força no Senhor",    ref: "Efésios 6:10",    preco: 50 },
-  { id: "orar",    nome: "De Joelhos em Oração", ref: "Daniel 6:10",   preco: 60 }
+  { id: "orar",    nome: "De Joelhos em Oração", ref: "Daniel 6:10",   preco: 60 },
+  { id: "palmas",  nome: "Palmas de Louvor",   ref: "Salmo 47:1",      preco: 35 },
+  { id: "canto",   nome: "Cântico Novo",       ref: "Salmo 96:1",      preco: 40 },
+  { id: "escada",  nome: "Escada de Jacó",     ref: "Gênesis 28:12",   preco: 50 },
+  { id: "aguas",   nome: "Andar sobre as Águas", ref: "Mateus 14:29",  preco: 55 },
+  { id: "funda",   nome: "Funda de Davi",      ref: "1 Samuel 17:49",  preco: 55 },
+  { id: "pomba",   nome: "Pomba do Espírito",  ref: "Mateus 3:16",     preco: 60 },
+  { id: "brilho",  nome: "Rosto Resplandecente", ref: "Êxodo 34:29",   preco: 65 },
+  { id: "mar",     nome: "Mar se Abrindo",     ref: "Êxodo 14:21",     preco: 80 },
+  { id: "redemoinho", nome: "Redemoinho de Elias", ref: "2 Reis 2:11", preco: 90 }
 ];
 const LOJA_EXTRAS = {
   m: { lista: LOJA_MOLDURAS, campo: "moldura", usar: "Moldura em uso.", tirar: "Moldura guardada." },
