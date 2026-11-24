@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261123.201734">
+<meta name="versao" content="20261124.113201">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -3032,6 +3032,69 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .zoom-dica.sai{opacity:0}
 @keyframes zdica{from{opacity:0;transform:translate(-50%,-44%)}}
 @keyframes zpinca{0%,100%{transform:scale(.9)}50%{transform:scale(1.1)}}
+/* p71: pódio da Corrida */
+.pod{position:relative;overflow:hidden;isolation:isolate;margin:0 0 14px;padding:16px 12px 0;border-radius:26px;background:radial-gradient(70% 60% at 50% 38%,rgba(255,215,110,.32),transparent 70%),linear-gradient(170deg,#17134A 0%,#2B2280 52%,#4637A8 100%);border:1px solid rgba(255,226,122,.45);box-shadow:0 18px 36px rgba(15,8,60,.4),inset 0 1px 0 rgba(255,255,255,.18);color:#fff}
+.pod-raios{position:absolute;left:50%;top:44%;width:760px;height:760px;margin:-380px 0 0 -380px;z-index:-1;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,236,170,.13) 0 7deg,transparent 7deg 18deg);-webkit-mask:radial-gradient(closest-side,#000 10%,transparent 72%);mask:radial-gradient(closest-side,#000 10%,transparent 72%);animation:ljngira 60s linear infinite;pointer-events:none}
+.pod-luz{position:absolute;left:50%;top:-10px;width:220px;height:100%;margin-left:-110px;z-index:-1;clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(255,244,200,.34),rgba(255,244,200,0) 78%);pointer-events:none}
+.pod-pontos{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.pod-pontos i{position:absolute;width:5px;height:5px;border-radius:50%;background:#FFF3C8;box-shadow:0 0 8px 2px rgba(255,236,170,.75);animation:ljnpisca 2.8s ease-in-out infinite}
+.pod-pontos i:nth-child(1){left:9%;top:22%}.pod-pontos i:nth-child(2){left:88%;top:18%;animation-delay:.6s}.pod-pontos i:nth-child(3){left:22%;top:52%;animation-delay:1.2s;width:3px;height:3px}.pod-pontos i:nth-child(4){left:78%;top:48%;animation-delay:.3s;width:3px;height:3px}
+.pod-pontos i:nth-child(5){left:36%;top:14%;animation-delay:1.8s;width:3px;height:3px}.pod-pontos i:nth-child(6){left:64%;top:10%;animation-delay:2.2s}.pod-pontos i:nth-child(7){left:5%;top:70%;animation-delay:1s;width:3px;height:3px}.pod-pontos i:nth-child(8){left:94%;top:66%;animation-delay:1.5s;width:3px;height:3px}
+.pod-cab{display:grid;justify-items:center;gap:6px;text-align:center}
+.pod-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 9px;border-radius:99px;background:linear-gradient(90deg,#FFE27A,#F2A53A);color:#3A2A00;font:800 11px/1.2 "Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 4px 12px rgba(242,165,58,.4)}
+.pod-tag svg{width:15px;height:15px}
+.pod-cab h2{margin:0;font:400 30px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.6px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.pod-degraus{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:8px}
+.pod-l{display:grid;justify-items:center;gap:6px;min-width:0}
+.pod-l .pod-nome{margin-bottom:12px}
+.pod-l.p1{order:2}.pod-l.p2{order:1}.pod-l.p3{order:3}
+.pod-boneco{position:relative;display:grid;justify-items:center;align-items:end;width:100%;cursor:pointer;animation:pod-entra .7s cubic-bezier(.2,.9,.3,1.25) both}
+.pod-l.p2 .pod-boneco{animation-delay:.35s}.pod-l.p1 .pod-boneco{animation-delay:.55s}.pod-l.p3 .pod-boneco{animation-delay:.2s}
+.pod-boneco:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:14px}
+.pod-boneco .runner{position:relative;left:auto;top:auto;width:44px;height:56px;transition:none;zoom:1.55}
+.pod-boneco .runner .avatar{width:44px;height:56px}
+.pod-l.p1 .pod-boneco .runner{zoom:1.95}
+.pod-chao{position:absolute;left:50%;bottom:-6px;width:84%;height:16px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(10,6,40,.55),transparent)}
+.pod-coroa{position:absolute;left:50%;top:-30px;z-index:2;width:46px;height:32px;margin-left:-23px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4)) drop-shadow(0 0 10px rgba(255,226,122,.55));animation:pod-coroa 2.8s ease-in-out infinite}
+.pod-coroa svg{width:100%;height:100%}
+.pod-l.p1{padding-top:30px}
+.pod-nome{display:grid;justify-items:center;gap:2px;max-width:100%;text-align:center}
+.pod-nome b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 14px/1.15 "Barlow",sans-serif}
+.pod-l.p1 .pod-nome b{font-size:16px;color:#FFE27A}
+.pod-nome em{font-style:normal;padding:2px 8px;border-radius:99px;background:rgba(125,240,184,.2);border:1px solid rgba(125,240,184,.6);color:#B9F7D8;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.pod-nome small{font:700 11.5px/1.2 "Barlow",sans-serif;color:#D9D3FF;white-space:nowrap}
+.pod-bloco{position:relative;width:100%;display:grid;justify-items:center;align-content:start;gap:2px;padding-top:12px;border-radius:14px 14px 0 0;transform-origin:50% 100%;animation:pod-sobe .8s cubic-bezier(.2,.9,.25,1) both;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -14px 24px rgba(0,0,0,.18),0 -2px 18px rgba(0,0,0,.25)}
+.pod-bloco::before{content:"";position:absolute;left:0;right:0;top:-9px;height:12px;border-radius:12px 12px 4px 4px;background:inherit;filter:brightness(1.18);box-shadow:inset 0 2px 0 rgba(255,255,255,.7)}
+.pod-l.p1 .pod-bloco{height:132px;background:linear-gradient(180deg,#FFE88F 0%,#F6C342 38%,#E0A12A 70%,#B9761B 100%)}
+.pod-l.p2 .pod-bloco{height:106px;background:linear-gradient(180deg,#FFFFFF 0%,#DDE2EE 38%,#B9C1D6 72%,#8E97AE 100%);animation-delay:.15s}
+.pod-l.p3 .pod-bloco{height:92px;background:linear-gradient(180deg,#FFD9BA 0%,#EBA06D 40%,#C9733F 72%,#8E4A22 100%);animation-delay:0s}
+.pod-l.p1 .pod-bloco{animation-delay:.3s}
+.pod-bloco b{position:relative;font:400 50px/.9 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1px;color:rgba(0,0,0,.2);text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(0,0,0,.15)}
+.pod-l.p2 .pod-bloco b,.pod-l.p3 .pod-bloco b{font-size:40px}
+.pod-med{position:relative;z-index:1;width:26px;height:34px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3))}
+.pod-l.p1 .pod-med{width:32px;height:42px}
+.pod-med svg{width:100%;height:100%}
+.pod-brilho{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.pod-brilho::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:pod-brilho 4.5s ease-in-out infinite}
+.pod-l.p2 .pod-brilho::after{animation-delay:1.4s}.pod-l.p3 .pod-brilho::after{animation-delay:2.6s}
+.pod-l.eu .pod-bloco{box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -14px 24px rgba(0,0,0,.18),0 0 0 3px rgba(125,240,184,.75),0 -2px 18px rgba(0,0,0,.25)}
+.pod-l.vago .pod-boneco{cursor:default;animation:none}
+.pod-vago{display:grid;place-items:center;width:58px;height:72px;margin-bottom:4px;border-radius:18px;border:2px dashed rgba(255,255,255,.35);color:rgba(255,255,255,.55);font:400 36px/1 "Bebas Neue",sans-serif}
+.pod-l.vago .pod-bloco{opacity:.55;filter:saturate(.4)}
+.pod-l.vago .pod-nome b{color:#D9D3FF}
+@keyframes pod-sobe{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pod-entra{0%{opacity:0;transform:translateY(-26px) scale(.85)}100%{opacity:1;transform:none}}
+@keyframes pod-coroa{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes pod-brilho{0%,55%{left:-60%}85%,100%{left:130%}}
+@media (min-width:700px){
+  .pod{padding:22px 26px 0}.pod-cab h2{font-size:38px}
+  .pod-degraus{gap:16px;max-width:560px;margin:16px auto 0}
+  .pod-boneco .runner{zoom:2}.pod-l.p1 .pod-boneco .runner{zoom:2.5}
+  .pod-l.p1 .pod-bloco{height:158px}.pod-l.p2 .pod-bloco{height:122px}.pod-l.p3 .pod-bloco{height:98px}.pod-med{width:30px;height:39px}.pod-l.p1 .pod-med{width:38px;height:50px}
+  .pod-nome b{font-size:16px}.pod-l.p1 .pod-nome b{font-size:19px}.pod-nome small{font-size:12.5px}
+  .pod-coroa{width:58px;height:40px;margin-left:-29px;top:-40px}.pod-l.p1{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){.pod-raios,.pod-pontos i,.pod-coroa,.pod-brilho::after,.pod-boneco,.pod-bloco{animation:none}}
 </style>
 </head>
 <body class="sem-menu">
@@ -5244,10 +5307,10 @@ function telaEstudarDias(){
   const d = L.dias[estudoDia] || L.dias[0];
   const texto = (L.textos && L.textos[estudoDia]) || "", resumo = (L.resumos && L.resumos[estudoDia]) || "";
   let corpo = `<div class="paginas" id="pgs"><p class="vazio">Carregando páginas…</p></div>`;
-  /* o texto por escrito só aparece se o dia não tiver as páginas da lição (mostrarPaginas tira quando elas existem) */
+  /* o texto por escrito nasce escondido e só aparece se o dia não tiver as páginas da lição (mostrarPaginas decide) */
   const htmlTexto = texto ? `<div class="estudo">${texto.split(/\n{2,}/).map(p=>`<p>${esc(p.trim().replace(/\n(?![•\-–\d(])/g, " "))}</p>`).join("")}</div>` : "";
-  corpo += `<div id="txtDia">${resumo ? `<div class="resumo">${esc(resumo)}</div>` : ""}${htmlTexto}</div>`;
-  if(!texto && !resumo) corpo += `<p class="vazio" id="semTexto">O texto desta lição não foi importado. Leia o dia <b>${esc(d.nome)}</b> na sua lição impressa ou no app e depois faça o quiz.</p>`;
+  corpo += `<div id="txtDia" style="display:none">${resumo ? `<div class="resumo">${esc(resumo)}</div>` : ""}${htmlTexto}</div>`;
+  if(!texto && !resumo) corpo += `<p class="vazio" id="semTexto" style="display:none">O texto desta lição não foi importado. Leia o dia <b>${esc(d.nome)}</b> na sua lição impressa ou no app e depois faça o quiz.</p>`;
   corpo += htmlObservacoes(d);
   const s = status(L, d);
   app.innerHTML = `<div class="estudo-area lic-tela">${topoDaLicao(L, "edVoltar")}${abasDaLicao("licao", L)}<section class="panel pg-card aba-corpo" role="tabpanel" aria-labelledby="abaLicao">
@@ -5277,7 +5340,7 @@ async function mostrarPaginas(L, k, htmlTexto){
   }catch(e){ PAG_CACHE[chave] = []; }
   const pags = PAG_CACHE[chave];
   if(!$("pgs") || $("pgs") !== el) return;   // mudou de tela enquanto carregava
-  if(!pags.length){ el.remove(); return; }
+  if(!pags.length){ el.remove(); ["txtDia", "semTexto"].forEach(id => { const e = $(id); if(e) e.style.display = ""; }); return; }      // sem páginas: aí sim mostra a lição por escrito
   el.innerHTML = pags.map((p,i)=>`<img src="${p.img}" alt="Página ${i+1} de ${esc(L.dias[k].nome)}" loading="${i?"lazy":"eager"}" data-i="${i}">`).join("");
   const st = $("semTexto"); if(st) st.remove();
   const tx = $("txtDia"); if(tx) tx.remove();          // com as páginas na tela, a lição por escrito não aparece mais
@@ -5356,6 +5419,8 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
   const ids = Object.keys(jov).sort((a,b)=> jov[b].passos - jov[a].passos || jov[b].pts - jov[a].pts || jov[a].nome.localeCompare(jov[b].nome,"pt-BR"));
   const fmt1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR");
   let h = "";
+  /* o pódio: os três primeiros (só quem já deu algum passo) */
+  if(ids.length) h += htmlPodio(ids.filter(id => jov[id].passos > 0).slice(0, 3).map(id => jov[id]), licSel ? `Lição ${licSel.n}` : "Trimestre");
   h += `<section class="panel pg-card"><div class="hm-cab"><span>A pista</span><span class="hm-meta">${ids.length} ${ids.length === 1 ? "corredor" : "corredores"}</span></div>`;
   if(!ids.length) h += `<p class="vazio">${licSel ? "Ninguém fez o quiz desta lição ainda." : "A corrida desta sala começa quando chegarem os primeiros resultados do quiz."}</p>`;
   else {
@@ -5436,6 +5501,38 @@ function telaConta(){
   $("mRetro").onclick = modalRetrospectiva;
   $("mTutorial").onclick = ()=> mostrarTutorial();
   $("mSair").onclick = async ()=>{ if(await confirmar("Sair da conta", "Quer mesmo sair? Seus pontos continuam salvos.", "Sair")) DB.sair(); };
+}
+
+/* ============================================================
+   PÓDIO DA CORRIDA: os três primeiros da pista, num palco com luz, degraus de ouro, prata e bronze,
+   medalhas e a coroa do primeiro. Mesma ordem da pista (passos, depois pontos). Tocar no personagem abre o perfil.
+   ============================================================ */
+function medalhaSVG(k){
+  const c = [["#FFF3B0", "#F2BE2E", "#B9761B"], ["#FFFFFF", "#C9CFDF", "#7F889F"], ["#FFD3B0", "#D9844E", "#8E4A22"]][k];
+  return `<svg viewBox="0 0 40 52" aria-hidden="true"><path d="M8 0h9l5 16-7 4zM32 0h-9l-5 16 7 4z" fill="${["#E0483C", "#3B7BE0", "#2BA486"][k]}"/><path d="M8 0h3l6 18-2 1zM32 0h-3l-6 18 2 1z" fill="#000" opacity=".18"/>`
+    + `<circle cx="20" cy="33" r="16" fill="${c[2]}"/><circle cx="20" cy="32" r="15" fill="${c[1]}"/><circle cx="20" cy="32" r="11.5" fill="none" stroke="${c[0]}" stroke-width="1.6" opacity=".9"/>`
+    + `<path d="M11 24a13 13 0 0 1 16-5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>`
+    + `<text x="20" y="38.5" text-anchor="middle" font-family="'Bebas Neue','Arial Narrow',sans-serif" font-size="17" fill="${c[2]}">${k + 1}</text></svg>`;
+}
+const COROA_PODIO = `<svg viewBox="0 0 64 44" aria-hidden="true"><path d="M6 14l12 12 14-22 14 22 12-12-5 26H11z" fill="#C9952B"/><path d="M6 12l12 12 14-22 14 22 12-12-5 26H11z" fill="#FFD866"/>`
+  + `<path d="M11 38h42v5H11z" fill="#C9952B"/><path d="M11 36h42v4H11z" fill="#FFE58A"/><circle cx="32" cy="27" r="4" fill="#E0483C"/><circle cx="19" cy="30" r="2.6" fill="#3B7BE0"/><circle cx="45" cy="30" r="2.6" fill="#2BA486"/>`
+  + `<circle cx="6" cy="12" r="3" fill="#FFF3B0"/><circle cx="32" cy="2.6" r="3" fill="#FFF3B0"/><circle cx="58" cy="12" r="3" fill="#FFF3B0"/><path d="M14 22l4 4M26 12l3-4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>`;
+function htmlPodio(top, titulo){
+  if(!top.length) return "";
+  const f1 = n => (Math.round(n * 10) / 10).toLocaleString("pt-BR"), NOMES = ["Ouro", "Prata", "Bronze"];
+  const lugar = k => { const j = top[k];
+    if(!j) return `<li class="pod-l p${k + 1} vago"><div class="pod-boneco"><span class="pod-vago">?</span></div><div class="pod-nome"><b>Ainda livre</b><small>Faça o quiz e suba</small></div><div class="pod-bloco"><b>${k + 1}</b></div></li>`;
+    const eu = j.uid === usuario.uid;
+    return `<li class="pod-l p${k + 1} ${eu ? "eu" : ""}"><div class="pod-boneco" role="button" tabindex="0" data-perfil="${esc(j.uid)}" data-nome="${esc(j.nome)}" data-boneco="${esc(j.profeta || "")}" data-nivel="${j.nivel || 0}" aria-label="${k + 1}º lugar, ${esc(j.nome)}: ver o perfil">
+        ${k === 0 ? `<span class="pod-coroa">${COROA_PODIO}</span>` : ""}<span class="pod-chao" aria-hidden="true"></span>
+        <div class="runner${classeMovimento(j.mov, j.profeta, j.nivel)}">${avatarSVG(personagemDe(j.profeta, j.nivel), j.nome, 0, j.nivel, movDe(j.mov, j.profeta, j.nivel))}</div></div>
+      <div class="pod-nome"><b>${esc(j.nome)}</b>${eu ? `<em>você</em>` : ""}<small>${f1(j.passos)} ${j.passos === 1 ? "passo" : "passos"} · ${fmt(j.pts)} pts</small></div>
+      <div class="pod-bloco" title="${NOMES[k]}"><span class="pod-med">${medalhaSVG(k)}</span><b>${k + 1}</b><i class="pod-brilho" aria-hidden="true"></i></div></li>`; };
+  return `<section class="pod" aria-label="Pódio da corrida: os três primeiros">
+    <span class="pod-raios" aria-hidden="true"></span><span class="pod-luz" aria-hidden="true"></span>
+    <span class="pod-pontos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <div class="pod-cab"><span class="pod-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v3a5 5 0 0 1-10 0zM7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3M12 12v4M8.5 20h7M9.5 16h5v4h-5z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Pódio</span><h2>${titulo}</h2></div>
+    <ol class="pod-degraus">${lugar(0)}${lugar(1)}${lugar(2)}</ol></section>`;
 }
 
 /* Livro do trimestre que já vem neste arquivo: nome e capa (primeira página do PDF da lição, reduzida). O que o master gravar em Admin → Livros ou ao importar a lição passa na frente. */
