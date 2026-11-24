@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261124.104039">
+<meta name="versao" content="20261124.123538">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Corrida do Rolo · Quiz da Lição</title>
+<title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1297,6 +1297,11 @@ input[type=text],input[type=email],input[type=password],input[type=number],input
 @keyframes avlonda{0%,100%{transform:translateY(0)}50%{transform:translateY(-.9px)}}
 @keyframes avlfita{to{stroke-dashoffset:-18}}
 @media (prefers-reduced-motion:reduce){.avatar .avl,.avatar .av-holo,.avatar .av-ped-anel{animation:none}}
+/* VERSÃO DE TESTE: a faixa no alto e o aviso na tela do Álbum */
+.faixa-teste{position:fixed;left:50%;top:0;transform:translateX(-50%);z-index:99999;padding:2px 12px 3px;border-radius:0 0 9px 9px;background:#E0483C;color:#fff;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.alb-teste{margin-top:16px;display:grid;justify-items:center;gap:8px;text-align:center;border:1.5px dashed rgba(255,150,140,.75)}
+.alb-teste b{font:800 12px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#FFB4AB}
+.alb-teste p{margin:0;font-size:13px;line-height:1.4;color:var(--soft)}
 /* vitrine da loja: o nome do efeito do personagem */
 .lj-item .lj-ef{display:grid;align-items:center;min-height:30px;margin-top:3px;padding:3px 8px;border-radius:99px;background:linear-gradient(90deg,rgba(143,243,255,.22),rgba(199,125,255,.26));border:1px solid rgba(190,170,255,.5);font:800 10px/1.2 "Barlow",sans-serif;font-style:normal;letter-spacing:.02em;color:#F1E9FF}
 /* janela da missão: cartão de jogo (paisagem da etapa, moeda da casa, progresso, recompensa) */
@@ -1882,6 +1887,93 @@ body:has(.an-lb):not(:has(.modal-bg)) .toast{top:auto;bottom:calc(24px + env(saf
 .lj-nota{margin:0 0 10px;font-size:12.5px;line-height:1.4;color:var(--soft)}
 .lj-nota.alerta{padding:8px 10px;border-radius:10px;background:rgba(242,190,46,.14);border:1px solid rgba(242,190,46,.4);color:#FFE9A8}
 .lj-nota b{color:#fff}
+/* p66: movimentos novos */
+.fx-pisca,.fx-sai,.fx-onda,.fx-halo,.fx-raios,.fx-parede,.fx-asa,.fx-faisca,.fx-nota{transform-box:fill-box;transform-origin:50% 50%}
+.fx-pisca{animation:fx-pisca 1.6s ease-in-out infinite}.fx-pisca.p2{animation-delay:-.8s}.fx-pisca.p3{animation-delay:-.4s}
+@keyframes fx-pisca{0%,100%{opacity:.15;transform:scale(.35)}50%{opacity:1;transform:scale(1)}}
+/* Palmas de Louvor */
+.av-mv-palmas .av-q{animation-duration:.56s}
+.runner.mov-palmas .avatar{animation:mov-palmas .56s ease-in-out infinite}
+@keyframes mov-palmas{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px) scale(1.02,.98)}}
+.fx-palmas > g{transform-box:fill-box;transform-origin:50% 100%;animation:fx-palmas .56s ease-out infinite}
+@keyframes fx-palmas{0%,49%{opacity:0;transform:scale(.5)}53%{opacity:1;transform:scale(.9)}90%,100%{opacity:0;transform:scale(1.3)}}
+/* Cântico Novo */
+.av-mv-canto .av-q{animation-duration:1.6s}
+.runner.mov-canto .avatar{animation:mov-canto 1.6s ease-in-out infinite}
+@keyframes mov-canto{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-1px)}}
+.fx-nota{opacity:0;animation:fx-nota1 2.4s ease-out infinite}
+.fx-nota.n2{animation-name:fx-nota2;animation-delay:.8s}.fx-nota.n3{animation-name:fx-nota3;animation-delay:1.6s}
+@keyframes fx-nota1{0%{opacity:0;transform:translate(0,0) scale(.4) rotate(-10deg)}15%{opacity:1}100%{opacity:0;transform:translate(7px,-12px) scale(1.15) rotate(14deg)}}
+@keyframes fx-nota2{0%{opacity:0;transform:translate(0,0) scale(.4) rotate(10deg)}15%{opacity:1}100%{opacity:0;transform:translate(-9px,-11px) scale(1.1) rotate(-16deg)}}
+@keyframes fx-nota3{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(2px,-15px) scale(1.2) rotate(8deg)}}
+/* Escada de Jacó */
+.runner.mov-escada .avatar{animation:mov-escada 3s ease-in-out infinite}
+@keyframes mov-escada{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+.fx-esc-ceu{transform-box:fill-box;transform-origin:50% 50%;animation:fx-halo 3s ease-in-out infinite}
+.fx-escada > g:first-of-type{animation:fx-coluna 2.6s ease-in-out infinite}
+.fx-anjo{transform-box:fill-box;transform-origin:50% 50%;opacity:0;animation:fx-anjo-sobe 3.6s ease-in-out infinite}
+.fx-anjo.a2{animation-name:fx-anjo-desce;animation-delay:-1.2s}.fx-anjo.a3{animation-delay:-2.4s}
+@keyframes fx-anjo-sobe{0%{opacity:0;transform:translate(0,0) scale(.9)}15%{opacity:1}75%{opacity:.8}100%{opacity:0;transform:translate(0,-36px) scale(.4)}}
+@keyframes fx-anjo-desce{0%{opacity:0;transform:translate(0,-36px) scale(.4)}25%{opacity:.8}85%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.9)}}
+/* Andar sobre as Águas */
+.runner.mov-aguas .avatar{animation:mov-aguas 1.4s ease-in-out infinite}
+@keyframes mov-aguas{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-1px) rotate(1.5deg)}}
+.fx-onda{opacity:0;animation:fx-onda 2.1s ease-out infinite}.fx-onda.o2{animation-delay:.7s}.fx-onda.o3{animation-delay:1.4s}
+@keyframes fx-onda{0%{opacity:.95;transform:scale(.35)}100%{opacity:0;transform:scale(2.1)}}
+.fx-marola{animation:fx-marola 1.2s linear infinite}
+@keyframes fx-marola{to{transform:translateX(-3px)}}
+/* Funda de Davi */
+.av-mv-funda .av-q{animation-duration:.36s}
+.runner.mov-funda .avatar{animation:mov-funda .72s ease-in-out infinite}
+@keyframes mov-funda{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.fx-funda-gira{transform-box:fill-box;transform-origin:50% 50%;animation:fx-funda .42s linear infinite}
+@keyframes fx-funda{to{transform:rotate(-360deg)}}
+.fx-funda-rastro{animation:fx-funda-r .42s linear infinite}
+@keyframes fx-funda-r{to{stroke-dashoffset:4.2}}
+.fx-pedra{opacity:0;animation:fx-pedra 2.4s ease-in infinite}
+@keyframes fx-pedra{0%,72%{opacity:0;transform:translate(0,0)}75%{opacity:1;transform:translate(1px,0)}100%{opacity:0;transform:translate(17px,-5px)}}
+/* Pomba do Espírito */
+.av-mv-pomba .av-q{animation-duration:2s}
+.runner.mov-pomba .avatar{animation:mov-pomba 2s ease-in-out infinite}
+@keyframes mov-pomba{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+.fx-coluna{animation:fx-coluna 2.6s ease-in-out infinite}
+@keyframes fx-coluna{0%,100%{opacity:.7}50%{opacity:1}}
+.fx-pomba-voo{transform-box:fill-box;transform-origin:50% 50%;animation:fx-pomba 4.2s linear infinite}
+@keyframes fx-pomba{0%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}12.5%{transform:translate(18px,.5px) scale(-.8,.8);opacity:.7}25%{transform:translate(11px,-1px) scale(-.7,.7);opacity:.55}37.5%{transform:translate(4px,.5px) scale(-.8,.8);opacity:.7}49.9%{transform:translate(-.5px,6px) scale(-.95,.95);opacity:.95}50%{transform:translate(-.5px,6px) scale(.95,.95)}62.5%{transform:translate(3.5px,12.5px) scale(1.1,1.1);opacity:1}75%{transform:translate(11px,15px) scale(1.25,1.25);opacity:1}87.5%{transform:translate(18.5px,12.5px) scale(1.1,1.1);opacity:1}99.9%{transform:translate(22.5px,6px) scale(.95,.95)}100%{transform:translate(22.5px,6px) scale(-.95,.95);opacity:.95}}
+.fx-asa{transform-origin:50% 100%;animation:fx-asa .32s ease-in-out infinite alternate}
+.fx-pa-asa{animation:fx-pa-bate .62s cubic-bezier(.45,0,.35,1) infinite}
+.fx-pa-asa2{animation:fx-pa-bate2 .62s cubic-bezier(.45,0,.35,1) infinite}
+@keyframes fx-pa-bate{0%,100%{transform:rotate(-4deg) scaleY(1)}42%{transform:rotate(16deg) scaleY(-.7)}}
+@keyframes fx-pa-bate2{0%,100%{transform:rotate(-12deg) scaleY(.92)}42%{transform:rotate(10deg) scaleY(-.55)}}
+.fx-pa-corpo{animation:fx-pa-sobe .62s cubic-bezier(.45,0,.35,1) infinite}
+@keyframes fx-pa-sobe{0%,100%{transform:translateY(2px)}42%{transform:translateY(-2.5px)}}.fx-asa2{animation-delay:-.16s}
+@keyframes fx-asa{to{transform:scaleY(-.35)}}
+/* Rosto Resplandecente */
+.runner.mov-brilho .avatar{animation:mov-brilho 2.6s ease-in-out infinite}
+@keyframes mov-brilho{0%,100%{filter:drop-shadow(0 0 1.5px rgba(255,233,160,.7))}50%{filter:drop-shadow(0 0 5px rgba(255,243,184,1))}}
+.fx-raios{animation:fx-raios 14s linear infinite}
+@keyframes fx-raios{to{transform:rotate(360deg)}}
+.fx-halo{animation:fx-halo 2.6s ease-in-out infinite}.fx-halo.h2{animation-delay:-1.3s}
+@keyframes fx-halo{0%,100%{opacity:.5;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+/* Mar se Abrindo */
+.runner.mov-mar .avatar{animation:mov-mar 2.2s ease-in-out infinite}
+@keyframes mov-mar{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+.fx-parede{transform-origin:50% 100%;animation:fx-parede 2.2s ease-in-out infinite alternate}
+.fx-mar > g .fx-parede{animation-delay:-1.1s}
+@keyframes fx-parede{0%{transform:scale(1,.93)}100%{transform:scale(1.03,1.03)}}
+.fx-gota{animation:fx-gota 1.4s ease-out infinite}
+.fx-peixe{animation:fx-peixe 3.2s ease-in-out infinite}
+@keyframes fx-peixe{0%{transform:translate(-1px,3px)}50%{transform:translate(4px,-6px)}100%{transform:translate(-1px,3px)}}.fx-gota.g2{animation-delay:.45s}.fx-gota.g3{animation-delay:.9s}
+@keyframes fx-gota{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(1.6px,-2.4px)}}
+/* Redemoinho de Elias */
+.runner.mov-redemoinho .avatar{animation:mov-redemoinho 2.6s ease-in-out infinite}
+@keyframes mov-redemoinho{0%,100%{transform:translateY(-2px) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+.fx-v{animation:fx-vento .7s linear infinite}.fx-v.v2{animation-duration:.85s}.fx-v.v3{animation-duration:1s}.fx-v.v4{animation-duration:1.15s}.fx-v.v5{animation-duration:1.3s}
+@keyframes fx-vento{to{stroke-dashoffset:-10.8}}
+.fx-faisca{opacity:0;animation:fx-faisca 1.8s ease-out infinite}
+.fx-faisca.f1{--dx:4px}.fx-faisca.f2{--dx:-5px;animation-delay:.45s}.fx-faisca.f3{--dx:6px;animation-delay:.9s}.fx-faisca.f4{--dx:-3px;animation-delay:1.35s}
+@keyframes fx-faisca{0%{opacity:0;transform:translate(0,0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-16px) scale(.5)}}
+@media (prefers-reduced-motion:reduce){.fx-pisca,.fx-palmas > g,.fx-nota,.fx-esc-ceu,.fx-anjo,.fx-sai,.fx-onda,.fx-marola,.fx-funda-gira,.fx-funda-rastro,.fx-pedra,.fx-coluna,.fx-pomba-voo,.fx-asa,.fx-pa-asa,.fx-pa-asa2,.fx-pa-corpo,.fx-raios,.fx-halo,.fx-parede,.fx-gota,.fx-v,.fx-faisca{animation:none}}
 .ar-bi{transform-box:fill-box;transform-origin:50% 50%}
 @media (prefers-reduced-motion:reduce){.runner[class*="mov-"] .avatar{animation:none}}
 /* ---------- temas da pista com cenário em pixel art: uma cena presa em cima (--t), o chão embaixo (--c), um piso opcional (--x) e o fundo (--b) ---------- */
@@ -2940,6 +3032,72 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .zoom-dica.sai{opacity:0}
 @keyframes zdica{from{opacity:0;transform:translate(-50%,-44%)}}
 @keyframes zpinca{0%,100%{transform:scale(.9)}50%{transform:scale(1.1)}}
+/* p71: pódio da Corrida */
+.pod{position:relative;overflow:hidden;isolation:isolate;margin:0 0 14px;padding:16px 12px 0;border-radius:26px;background:radial-gradient(70% 60% at 50% 38%,rgba(255,215,110,.32),transparent 70%),linear-gradient(170deg,#17134A 0%,#2B2280 52%,#4637A8 100%);border:1px solid rgba(255,226,122,.45);box-shadow:0 18px 36px rgba(15,8,60,.4),inset 0 1px 0 rgba(255,255,255,.18);color:#fff}
+.pod-raios{position:absolute;left:50%;top:44%;width:760px;height:760px;margin:-380px 0 0 -380px;z-index:-1;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,236,170,.13) 0 7deg,transparent 7deg 18deg);-webkit-mask:radial-gradient(closest-side,#000 10%,transparent 72%);mask:radial-gradient(closest-side,#000 10%,transparent 72%);animation:ljngira 60s linear infinite;pointer-events:none}
+.pod-luz{position:absolute;left:50%;top:-10px;width:220px;height:100%;margin-left:-110px;z-index:-1;clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(255,244,200,.34),rgba(255,244,200,0) 78%);pointer-events:none}
+.pod-pontos{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.pod-pontos i{position:absolute;width:5px;height:5px;border-radius:50%;background:#FFF3C8;box-shadow:0 0 8px 2px rgba(255,236,170,.75);animation:ljnpisca 2.8s ease-in-out infinite}
+.pod-pontos i:nth-child(1){left:9%;top:22%}.pod-pontos i:nth-child(2){left:88%;top:18%;animation-delay:.6s}.pod-pontos i:nth-child(3){left:22%;top:52%;animation-delay:1.2s;width:3px;height:3px}.pod-pontos i:nth-child(4){left:78%;top:48%;animation-delay:.3s;width:3px;height:3px}
+.pod-pontos i:nth-child(5){left:36%;top:14%;animation-delay:1.8s;width:3px;height:3px}.pod-pontos i:nth-child(6){left:64%;top:10%;animation-delay:2.2s}.pod-pontos i:nth-child(7){left:5%;top:70%;animation-delay:1s;width:3px;height:3px}.pod-pontos i:nth-child(8){left:94%;top:66%;animation-delay:1.5s;width:3px;height:3px}
+.pod-cab{display:grid;justify-items:center;gap:6px;text-align:center}
+.pod-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 9px;border-radius:99px;background:linear-gradient(90deg,#FFE27A,#F2A53A);color:#3A2A00;font:800 11px/1.2 "Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 4px 12px rgba(242,165,58,.4)}
+.pod-tag svg{width:15px;height:15px}
+.pod-cab h2{margin:0;font:400 30px/1 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:.6px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.pod-degraus{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:8px}
+.pod-l{display:grid;justify-items:center;gap:6px;min-width:0}
+.pod-l .pod-nome{margin-bottom:12px}
+.pod-l.p1{order:2}.pod-l.p2{order:1}.pod-l.p3{order:3}
+.pod-boneco{position:relative;display:grid;justify-items:center;align-items:end;width:100%;cursor:pointer;animation:pod-entra .7s cubic-bezier(.2,.9,.3,1.25) both}
+.pod-l.p2 .pod-boneco{animation-delay:.35s}.pod-l.p1 .pod-boneco{animation-delay:.55s}.pod-l.p3 .pod-boneco{animation-delay:.2s}
+.pod-boneco:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:14px}
+.pod-boneco .runner{position:relative;left:auto;top:auto;width:44px;height:56px;transition:none;zoom:1.55}
+.pod-boneco .runner .avatar{width:44px;height:56px}
+.pod-l.p1 .pod-boneco .runner{zoom:1.95}
+.pod-chao{position:absolute;left:50%;bottom:-6px;width:84%;height:16px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(10,6,40,.55),transparent)}
+.pod-coroa{position:absolute;left:50%;top:-30px;z-index:2;width:46px;height:32px;margin-left:-23px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4)) drop-shadow(0 0 10px rgba(255,226,122,.55));animation:pod-coroa 2.8s ease-in-out infinite}
+.pod-coroa svg{width:100%;height:100%}
+.pod-l.p1{padding-top:30px}
+.pod-nome{display:grid;justify-items:center;gap:2px;max-width:100%;text-align:center}
+.pod-nome b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:800 14px/1.15 "Barlow",sans-serif}
+.pod-l.p1 .pod-nome b{font-size:16px;color:#FFE27A}
+.pod-nome em{font-style:normal;padding:2px 8px;border-radius:99px;background:rgba(125,240,184,.2);border:1px solid rgba(125,240,184,.6);color:#B9F7D8;font:800 10px/1.2 "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.pod-nome small{font:700 11.5px/1.2 "Barlow",sans-serif;color:#D9D3FF;white-space:nowrap}
+.pod-bloco{position:relative;width:100%;display:grid;justify-items:center;align-content:start;gap:2px;padding-top:12px;border-radius:14px 14px 0 0;transform-origin:50% 100%;animation:pod-sobe .8s cubic-bezier(.2,.9,.25,1) both;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -14px 24px rgba(0,0,0,.18),0 -2px 18px rgba(0,0,0,.25)}
+.pod-bloco::before{content:"";position:absolute;left:0;right:0;top:-9px;height:12px;border-radius:12px 12px 4px 4px;background:inherit;filter:brightness(1.18);box-shadow:inset 0 2px 0 rgba(255,255,255,.7)}
+.pod-l.p1 .pod-bloco{height:132px;background:linear-gradient(180deg,#FFE88F 0%,#F6C342 38%,#E0A12A 70%,#B9761B 100%)}
+.pod-l.p2 .pod-bloco{height:106px;background:linear-gradient(180deg,#FFFFFF 0%,#DDE2EE 38%,#B9C1D6 72%,#8E97AE 100%);animation-delay:.15s}
+.pod-l.p3 .pod-bloco{height:92px;background:linear-gradient(180deg,#FFD9BA 0%,#EBA06D 40%,#C9733F 72%,#8E4A22 100%);animation-delay:0s}
+.pod-l.p1 .pod-bloco{animation-delay:.3s}
+.pod-bloco b{position:relative;font:400 50px/.9 "Bebas Neue","Arial Narrow",sans-serif;letter-spacing:1px;color:rgba(0,0,0,.2);text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(0,0,0,.15)}
+.pod-l.p2 .pod-bloco b,.pod-l.p3 .pod-bloco b{font-size:40px}
+.pod-med{position:relative;z-index:1;width:26px;height:34px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3))}
+.pod-l.p1 .pod-med{width:32px;height:42px}
+.pod-med svg{width:100%;height:100%}
+.pod-brilho{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.pod-brilho::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:pod-brilho 4.5s ease-in-out infinite}
+.pod-l.p2 .pod-brilho::after{animation-delay:1.4s}.pod-l.p3 .pod-brilho::after{animation-delay:2.6s}
+.pod-l.eu .pod-bloco{box-shadow:inset 0 2px 0 rgba(255,255,255,.65),inset 0 -14px 24px rgba(0,0,0,.18),0 0 0 3px rgba(125,240,184,.75),0 -2px 18px rgba(0,0,0,.25)}
+.pod-l.vago .pod-boneco{cursor:default;animation:none}
+.pod-vago{display:grid;place-items:center;width:58px;height:72px;margin-bottom:4px;border-radius:18px;border:2px dashed rgba(255,255,255,.35);color:rgba(255,255,255,.55);font:400 36px/1 "Bebas Neue",sans-serif}
+.pod-l.vago .pod-bloco{opacity:.55;filter:saturate(.4)}
+.pod-l.vago .pod-nome b{color:#D9D3FF}
+.pod-share{position:absolute;right:12px;top:12px;z-index:3;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 13px 0 11px;border-radius:99px;border:1px solid rgba(255,255,255,.3);background:rgba(10,8,40,.42);color:#fff;font:800 12.5px/1 "Barlow",sans-serif;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 4px 12px rgba(0,0,0,.25);transition:background .2s,transform .14s}
+.pod-share svg{width:18px;height:18px}.pod-share:hover{background:rgba(255,255,255,.18)}.pod-share:active{transform:scale(.95)}
+@media (max-width:420px){.pod-share{width:38px;padding:0;justify-content:center}.pod-share span{display:none}}
+@keyframes pod-sobe{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pod-entra{0%{opacity:0;transform:translateY(-26px) scale(.85)}100%{opacity:1;transform:none}}
+@keyframes pod-coroa{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
+@keyframes pod-brilho{0%,55%{left:-60%}85%,100%{left:130%}}
+@media (min-width:700px){
+  .pod{padding:22px 26px 0}.pod-cab h2{font-size:38px}
+  .pod-degraus{gap:16px;max-width:560px;margin:16px auto 0}
+  .pod-boneco .runner{zoom:2}.pod-l.p1 .pod-boneco .runner{zoom:2.5}
+  .pod-l.p1 .pod-bloco{height:158px}.pod-l.p2 .pod-bloco{height:122px}.pod-l.p3 .pod-bloco{height:98px}.pod-med{width:30px;height:39px}.pod-l.p1 .pod-med{width:38px;height:50px}
+  .pod-nome b{font-size:16px}.pod-l.p1 .pod-nome b{font-size:19px}.pod-nome small{font-size:12.5px}
+  .pod-coroa{width:58px;height:40px;margin-left:-29px;top:-40px}.pod-l.p1{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){.pod-raios,.pod-pontos i,.pod-coroa,.pod-brilho::after,.pod-boneco,.pod-bloco{animation:none}}
 </style>
 </head>
 <body class="sem-menu">
@@ -5264,6 +5422,8 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
   const ids = Object.keys(jov).sort((a,b)=> jov[b].passos - jov[a].passos || jov[b].pts - jov[a].pts || jov[a].nome.localeCompare(jov[b].nome,"pt-BR"));
   const fmt1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR");
   let h = "";
+  /* o pódio: os três primeiros (só quem já deu algum passo) */
+  if(ids.length) h += htmlPodio(ids.filter(id => jov[id].passos > 0).slice(0, 3).map(id => jov[id]), licSel ? `Lição ${licSel.n}` : "Trimestre");
   h += `<section class="panel pg-card"><div class="hm-cab"><span>A pista</span><span class="hm-meta">${ids.length} ${ids.length === 1 ? "corredor" : "corredores"}</span></div>`;
   if(!ids.length) h += `<p class="vazio">${licSel ? "Ninguém fez o quiz desta lição ainda." : "A corrida desta sala começa quando chegarem os primeiros resultados do quiz."}</p>`;
   else {
@@ -5289,6 +5449,7 @@ function renderCorrida(cfg, res, pessoas, licSel, membros){
   }
   h += `<p class="rodape">Atualizado em ${new Date().toLocaleDateString("pt-BR")} às ${new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}</p>`;
   $("rkCorpo").innerHTML = h;
+  const ps = $("podShare"); if(ps) ps.onclick = () => { tocar("toque"); compartilharPodio(ps); };
   requestAnimationFrame(()=> $("rkCorpo") && $("rkCorpo").querySelectorAll(".runner").forEach(r => r.style.left = ""));
 }
 
@@ -5344,6 +5505,153 @@ function telaConta(){
   $("mRetro").onclick = modalRetrospectiva;
   $("mTutorial").onclick = ()=> mostrarTutorial();
   $("mSair").onclick = async ()=>{ if(await confirmar("Sair da conta", "Quer mesmo sair? Seus pontos continuam salvos.", "Sair")) DB.sair(); };
+}
+
+/* ============================================================
+   PÓDIO DA CORRIDA: os três primeiros da pista, num palco com luz, degraus de ouro, prata e bronze,
+   medalhas e a coroa do primeiro. Mesma ordem da pista (passos, depois pontos). Tocar no personagem abre o perfil.
+   ============================================================ */
+function medalhaSVG(k){
+  const c = [["#FFF3B0", "#F2BE2E", "#B9761B"], ["#FFFFFF", "#C9CFDF", "#7F889F"], ["#FFD3B0", "#D9844E", "#8E4A22"]][k];
+  return `<svg viewBox="0 0 40 52" aria-hidden="true"><path d="M8 0h9l5 16-7 4zM32 0h-9l-5 16 7 4z" fill="${["#E0483C", "#3B7BE0", "#2BA486"][k]}"/><path d="M8 0h3l6 18-2 1zM32 0h-3l-6 18 2 1z" fill="#000" opacity=".18"/>`
+    + `<circle cx="20" cy="33" r="16" fill="${c[2]}"/><circle cx="20" cy="32" r="15" fill="${c[1]}"/><circle cx="20" cy="32" r="11.5" fill="none" stroke="${c[0]}" stroke-width="1.6" opacity=".9"/>`
+    + `<path d="M11 24a13 13 0 0 1 16-5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>`
+    + `<text x="20" y="38.5" text-anchor="middle" font-family="'Bebas Neue','Arial Narrow',sans-serif" font-size="17" fill="${c[2]}">${k + 1}</text></svg>`;
+}
+const COROA_PODIO = `<svg viewBox="0 0 64 44" aria-hidden="true"><path d="M6 14l12 12 14-22 14 22 12-12-5 26H11z" fill="#C9952B"/><path d="M6 12l12 12 14-22 14 22 12-12-5 26H11z" fill="#FFD866"/>`
+  + `<path d="M11 38h42v5H11z" fill="#C9952B"/><path d="M11 36h42v4H11z" fill="#FFE58A"/><circle cx="32" cy="27" r="4" fill="#E0483C"/><circle cx="19" cy="30" r="2.6" fill="#3B7BE0"/><circle cx="45" cy="30" r="2.6" fill="#2BA486"/>`
+  + `<circle cx="6" cy="12" r="3" fill="#FFF3B0"/><circle cx="32" cy="2.6" r="3" fill="#FFF3B0"/><circle cx="58" cy="12" r="3" fill="#FFF3B0"/><path d="M14 22l4 4M26 12l3-4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>`;
+function htmlPodio(top, titulo){
+  if(!top.length) return "";
+  PODIO_ATUAL = { top, titulo, sala: (typeof salaAtual === "function" && salaAtual() || {}).nome || "" };
+  top.forEach(j => { try{ HD.pronto(personagemDoBoneco(j.profeta, j.nivel)); }catch(e){} });          // já pede os desenhos grandes, para a imagem de compartilhar sair na hora
+  const f1 = n => (Math.round(n * 10) / 10).toLocaleString("pt-BR"), NOMES = ["Ouro", "Prata", "Bronze"];
+  const lugar = k => { const j = top[k];
+    if(!j) return `<li class="pod-l p${k + 1} vago"><div class="pod-boneco"><span class="pod-vago">?</span></div><div class="pod-nome"><b>Ainda livre</b><small>Faça o quiz e suba</small></div><div class="pod-bloco"><b>${k + 1}</b></div></li>`;
+    const eu = j.uid === usuario.uid;
+    return `<li class="pod-l p${k + 1} ${eu ? "eu" : ""}"><div class="pod-boneco" role="button" tabindex="0" data-perfil="${esc(j.uid)}" data-nome="${esc(j.nome)}" data-boneco="${esc(j.profeta || "")}" data-nivel="${j.nivel || 0}" aria-label="${k + 1}º lugar, ${esc(j.nome)}: ver o perfil">
+        ${k === 0 ? `<span class="pod-coroa">${COROA_PODIO}</span>` : ""}<span class="pod-chao" aria-hidden="true"></span>
+        <div class="runner${classeMovimento(j.mov, j.profeta, j.nivel)}">${avatarSVG(personagemDe(j.profeta, j.nivel), j.nome, 0, j.nivel, movDe(j.mov, j.profeta, j.nivel))}</div></div>
+      <div class="pod-nome"><b>${esc(j.nome)}</b>${eu ? `<em>você</em>` : ""}<small>${f1(j.passos)} ${j.passos === 1 ? "passo" : "passos"} · ${fmt(j.pts)} pts</small></div>
+      <div class="pod-bloco" title="${NOMES[k]}"><span class="pod-med">${medalhaSVG(k)}</span><b>${k + 1}</b><i class="pod-brilho" aria-hidden="true"></i></div></li>`; };
+  return `<section class="pod" aria-label="Pódio da corrida: os três primeiros">
+    <span class="pod-raios" aria-hidden="true"></span><span class="pod-luz" aria-hidden="true"></span>
+    <span class="pod-pontos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <div class="pod-cab"><span class="pod-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v3a5 5 0 0 1-10 0zM7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3M12 12v4M8.5 20h7M9.5 16h5v4h-5z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Pódio</span><h2>${titulo}</h2></div>
+    <button type="button" class="pod-share" id="podShare" aria-label="Compartilhar o pódio" title="Compartilhar o pódio"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3.5M7.5 8L12 3.5 16.5 8"/><path d="M8 11H6.5A2.5 2.5 0 0 0 4 13.5v5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5v-5a2.5 2.5 0 0 0-2.5-2.5H16"/></svg><span>Compartilhar</span></button>
+    <ol class="pod-degraus">${lugar(0)}${lugar(1)}${lugar(2)}</ol></section>`;
+}
+
+/* ============================================================
+   COMPARTILHAR O PÓDIO: uma imagem 1080×1350 (o tamanho do feed e do status) com o palco, os três degraus,
+   os personagens de cada um (com o acessório da loja), a coroa, as medalhas, os nomes e os passos.
+   No celular abre a janela de compartilhar (WhatsApp, Instagram...); no computador, baixa a imagem.
+   ============================================================ */
+let PODIO_ATUAL = null;
+/* o personagem como no jogo (acessório da loja e a outra mão), para desenhar em 992×1000 */
+function personagemDoBoneco(id, nivel){
+  const partes = String(personagemDe(id, nivel) || "").split("~"), p0 = acharProfeta(partes[0]) || acharProfeta(PROFETA_PADRAO);
+  let ac = "", mao = null; partes.slice(1).forEach(t => { if(t.indexOf("m:") === 0) mao = t.slice(2); else if(t && t !== "v" && !ac) ac = t; });
+  const a = ac && LOJA_AC[ac], m = mao && mao !== "-" && naMao(mao) ? LOJA_AC[mao] : null;
+  let p = a ? Object.assign({}, p0, { id: p0.id + "+" + a.id, modelo: p0.modelo || p0.id, emb2: a.emb, emb2o: a.o, emb2atras: !!a.atras }) : p0;
+  if(m || mao === "-") p = Object.assign({}, p, { id: p.id + "+m" + (m ? m.id : "0"), modelo: p.modelo || p0.modelo || p0.id, emb: m ? m.emb : null, embMao: !!m });
+  return p;
+}
+function desenharPodio(x, top, imgs, titulo, sala){
+  const W = 1080, H = 1350, BB = FONTES, BR = '"Barlow",system-ui,sans-serif', cx = W / 2;
+  if(!x.roundRect) x.roundRect = function(a, b, w, h, r){ const q = Array.isArray(r) ? r[0] : r; this.moveTo(a + q, b); this.arcTo(a + w, b, a + w, b + h, q); this.lineTo(a + w, b + h); this.lineTo(a, b + h); this.arcTo(a, b, a + w, b, q); this.closePath(); };
+  x.save();
+  /* o palco: roxo profundo, luz dourada no meio, raios e um holofote */
+  let g = x.createLinearGradient(0, 0, W * .3, H); g.addColorStop(0, "#120E3A"); g.addColorStop(.5, "#2B2280"); g.addColorStop(1, "#4637A8");
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  g = x.createRadialGradient(cx, 560, 30, cx, 560, 620); g.addColorStop(0, "rgba(255,215,110,.42)"); g.addColorStop(1, "rgba(255,215,110,0)");
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  x.save(); x.translate(cx, 600); x.fillStyle = "rgba(255,236,170,.075)";
+  for(let i = 0; i < 20; i++){ const a = i * Math.PI / 10; x.beginPath(); x.moveTo(0, 0); x.arc(0, 0, 900, a, a + Math.PI / 26); x.closePath(); x.fill(); }
+  x.restore();
+  g = x.createLinearGradient(0, 120, 0, 1100); g.addColorStop(0, "rgba(255,244,200,.38)"); g.addColorStop(1, "rgba(255,244,200,0)");
+  x.fillStyle = g; x.beginPath(); x.moveTo(cx - 70, 120); x.lineTo(cx + 70, 120); x.lineTo(cx + 260, 1100); x.lineTo(cx - 260, 1100); x.closePath(); x.fill();
+  x.fillStyle = "#FFF3C8";
+  [[110, 300, 5], [960, 260, 6], [210, 640, 4], [880, 620, 4], [330, 200, 3], [760, 170, 5]].forEach(([a, b, r]) => { x.globalAlpha = .85; x.beginPath(); x.arc(a, b, r, 0, Math.PI * 2); x.fill(); });
+  x.globalAlpha = 1;
+  /* o alto: a etiqueta Pódio, o título e a sala */
+  x.textAlign = "center"; x.textBaseline = "alphabetic";
+  x.font = "800 30px " + BR; const et = "PÓDIO DA CORRIDA", ew = x.measureText(et).width + 64;
+  g = x.createLinearGradient(cx - ew / 2, 0, cx + ew / 2, 0); g.addColorStop(0, "#FFE27A"); g.addColorStop(1, "#F2A53A");
+  x.fillStyle = g; x.beginPath(); x.roundRect(cx - ew / 2, 70, ew, 58, 29); x.fill();
+  x.fillStyle = "#3A2A00"; x.fillText(et, cx, 110);
+  x.font = "112px " + BB; x.fillStyle = "#fff"; x.shadowColor = "rgba(0,0,0,.3)"; x.shadowOffsetY = 6; x.fillText(titulo.toUpperCase(), cx, 238); x.shadowColor = "transparent"; x.shadowOffsetY = 0;
+  if(sala){ x.font = "700 36px " + BR; x.fillStyle = "#D9D3FF"; x.fillText(sala, cx, 290); }
+  /* os degraus: 2º à esquerda, 1º no meio, 3º à direita */
+  const base = 1190, col = [{ k: 1, x: 205, w: 270, h: 250 }, { k: 0, x: cx, w: 310, h: 330 }, { k: 2, x: 875, w: 270, h: 225 }];
+  const cores = [["#FFE88F", "#F6C342", "#E0A12A", "#B9761B"], ["#FFFFFF", "#DDE2EE", "#B9C1D6", "#8E97AE"], ["#FFD9BA", "#EBA06D", "#C9733F", "#8E4A22"]];
+  const fita = ["#E0483C", "#3B7BE0", "#2BA486"];
+  col.forEach(c => {
+    const j = top[c.k], top0 = base - c.h, x0 = c.x - c.w / 2, cs = cores[c.k];
+    /* o bloco, com a tampa clara e o número gravado */
+    g = x.createLinearGradient(0, top0, 0, base); g.addColorStop(0, cs[0]); g.addColorStop(.35, cs[1]); g.addColorStop(.7, cs[2]); g.addColorStop(1, cs[3]);
+    x.fillStyle = g; x.beginPath(); x.roundRect(x0, top0, c.w, c.h, [22, 22, 0, 0]); x.fill();
+    x.fillStyle = "rgba(255,255,255,.55)"; x.fillRect(x0 + 14, top0 + 6, c.w - 28, 5);
+    x.fillStyle = "rgba(255,255,255,.22)"; x.beginPath(); x.moveTo(x0 + c.w * .62, top0); x.lineTo(x0 + c.w * .82, top0); x.lineTo(x0 + c.w * .52, base); x.lineTo(x0 + c.w * .32, base); x.closePath(); x.fill();
+    /* a medalha */
+    const my = top0 + 78;
+    x.fillStyle = fita[c.k]; x.beginPath(); x.moveTo(c.x - 26, top0 + 18); x.lineTo(c.x - 8, top0 + 18); x.lineTo(c.x + 4, my - 20); x.lineTo(c.x - 12, my - 14); x.closePath(); x.fill();
+    x.beginPath(); x.moveTo(c.x + 26, top0 + 18); x.lineTo(c.x + 8, top0 + 18); x.lineTo(c.x - 4, my - 20); x.lineTo(c.x + 12, my - 14); x.closePath(); x.fill();
+    x.fillStyle = cs[3]; x.beginPath(); x.arc(c.x, my + 3, 34, 0, Math.PI * 2); x.fill();
+    x.fillStyle = cs[1]; x.beginPath(); x.arc(c.x, my, 32, 0, Math.PI * 2); x.fill();
+    x.strokeStyle = cs[0]; x.lineWidth = 3; x.beginPath(); x.arc(c.x, my, 24, 0, Math.PI * 2); x.stroke();
+    x.font = "40px " + BB; x.fillStyle = cs[3]; x.fillText(String(c.k + 1), c.x, my + 14);
+    x.font = (c.k ? 120 : 150) + "px " + BB; x.fillStyle = "rgba(0,0,0,.18)"; x.fillText(String(c.k + 1), c.x, my + (c.k ? 142 : 190));
+    x.fillStyle = "rgba(255,255,255,.35)"; x.fillText(String(c.k + 1), c.x, my + (c.k ? 144 : 192) - 4);
+    /* o nome e os passos, logo acima do degrau */
+    const ny = top0 - 30;
+    if(!j){ x.font = "700 34px " + BR; x.fillStyle = "rgba(217,211,255,.8)"; x.fillText("Ainda livre", c.x, ny - 40); return; }
+    x.font = "700 " + (c.k ? 38 : 46) + "px " + BR; x.fillStyle = c.k ? "#fff" : "#FFE27A";
+    let nome = j.nome; while(x.measureText(nome).width > c.w + 40 && nome.length > 3) nome = nome.slice(0, -2).trim() + "…";
+    x.fillText(nome, c.x, ny - 40);
+    x.font = "600 28px " + BR; x.fillStyle = "#D9D3FF";
+    x.fillText(`${(Math.round(j.passos * 10) / 10).toLocaleString("pt-BR")} ${j.passos === 1 ? "passo" : "passos"} · ${fmt(j.pts)} pts`, c.x, ny);
+    /* o personagem em pé sobre o nome */
+    const img = imgs[c.k];
+    if(img){ const ih = c.k ? 260 : 330, iw = ih * img.width / img.height, py = ny - 86 - ih;
+      x.fillStyle = "rgba(10,6,40,.45)"; x.beginPath(); x.ellipse(c.x, py + ih - 6, iw * .3, 16, 0, 0, Math.PI * 2); x.fill();
+      x.imageSmoothingEnabled = img.height > 700; x.imageSmoothingQuality = "high"; x.drawImage(img, c.x - iw / 2, py, iw, ih); x.imageSmoothingEnabled = true;   // o de 992×1000 reduz com suavidade; o pequeno fica nítido
+      if(c.k === 0){ /* a coroa flutuando */
+        const kx = c.x, ky = py - 14, s = 1.6;
+        x.save(); x.translate(kx - 32 * s, ky - 22 * s); x.scale(s, s);
+        x.shadowColor = "rgba(255,226,122,.7)"; x.shadowBlur = 18;
+        x.fillStyle = "#FFD866"; x.beginPath(); x.moveTo(6, 12); x.lineTo(18, 24); x.lineTo(32, 2); x.lineTo(46, 24); x.lineTo(58, 12); x.lineTo(53, 38); x.lineTo(11, 38); x.closePath(); x.fill();
+        x.shadowBlur = 0; x.fillStyle = "#FFE58A"; x.fillRect(11, 36, 42, 5);
+        x.fillStyle = "#E0483C"; x.beginPath(); x.arc(32, 27, 4, 0, Math.PI * 2); x.fill();
+        x.fillStyle = "#3B7BE0"; x.beginPath(); x.arc(19, 30, 2.6, 0, Math.PI * 2); x.fill();
+        x.fillStyle = "#2BA486"; x.beginPath(); x.arc(45, 30, 2.6, 0, Math.PI * 2); x.fill();
+        x.fillStyle = "#FFF3B0"; [[6, 12], [32, 2.6], [58, 12]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b, 3, 0, Math.PI * 2); x.fill(); });
+        x.restore(); }
+    }
+  });
+  /* o chão do palco e o rodapé */
+  g = x.createLinearGradient(0, base, 0, H); g.addColorStop(0, "#1C1656"); g.addColorStop(1, "#120E3A");
+  x.fillStyle = g; x.fillRect(0, base, W, H - base);
+  g = x.createLinearGradient(0, 0, W, 0); g.addColorStop(0, "rgba(255,226,122,0)"); g.addColorStop(.5, "rgba(255,226,122,.9)"); g.addColorStop(1, "rgba(255,226,122,0)");
+  x.fillStyle = g; x.fillRect(0, base, W, 4);
+  x.font = "48px " + BB; x.fillStyle = "#fff"; x.textAlign = "left"; x.fillText("CORRIDA DO ROLO", 72, H - 62);
+  x.textAlign = "right"; x.font = "38px " + BB; x.fillStyle = "#FFE27A"; x.fillText("#EUESTUDOMINHALIÇÃO", W - 72, H - 62);
+  x.restore();
+}
+async function compartilharPodio(btn){
+  const d = PODIO_ATUAL; if(!d || !d.top.length) return;
+  if(btn) ocupado(btn, true);
+  try{
+    d.top.forEach(j => { try{ HD.priorizar(personagemDoBoneco(j.profeta, j.nivel)); }catch(e){} });
+    const imgs = await Promise.all([0, 1, 2].map(k => { const j = d.top[k]; if(!j) return null;
+      return spriteMelhor(personagemDoBoneco(j.profeta, j.nivel)).then(sp => new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = sp.url; })).catch(() => null); }));
+    await carregarFontes();
+    const c = document.createElement("canvas"); c.width = 1080; c.height = 1350;
+    desenharPodio(c.getContext("2d"), d.top, imgs, d.titulo, d.sala);
+    const blob = await new Promise(r => c.toBlob(r, "image/jpeg", .92));
+    await compartilharImagem(blob, "podio-" + slug(d.titulo) + ".jpg");
+  }catch(e){ aviso("Não deu para montar a imagem: " + erroMsg(e)); }
+  finally{ if(btn) ocupado(btn, false); }
 }
 
 /* Livro do trimestre que já vem neste arquivo: nome e capa (primeira página do PDF da lição, reduzida). O que o master gravar em Admin → Livros ou ao importar a lição passa na frente. */
@@ -7652,7 +7960,9 @@ const GESTOS = { nuvem: "sobe", pao: "sobe", coroa: "sobe", estrelas: "brilha", 
 /* Movimentos da loja: os quadros (poses) que o personagem alterna na raia. Cada quadro é um desenho próprio, com os braços,
    as pernas e os objetos de verdade nas mãos. */
 const MOV_QUADROS = { marcha: ["passoA", "passoB"], salto: ["agacha", "salto"], danca: ["dancaA", "dancaB"], corrida: ["corridaA", "corridaB"], aguia: ["asasA", "asasB"],
-  beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"] };
+  beijo: ["beijoA", "beijoB"], tchau: ["tchauA", "tchauB"], dormir: ["dormir"], biceps: ["bicepsA", "bicepsB"], orar: ["orar"],
+  palmas: ["palmasA", "palmasB"], canto: ["cantoA", "cantoB"], escada: ["escada"], aguas: ["passoA", "passoB"], funda: ["fundaA", "fundaB"],
+  pomba: ["louvorA", "louvorB"], brilho: ["louvorB"], mar: ["salto"], redemoinho: ["asasA"] };
 /* ---------- Personagens da loja: o que só eles têm ----------
    Brilho holográfico (uma faixa de luz que atravessa o boneco), base de luz no chão e um efeito próprio da história de cada um.
    Tudo é desenhado por cima do boneco, em unidades do desenho (o boneco ocupa de 0 a 22 na largura e de 0 a 30 na altura).
@@ -7698,6 +8008,87 @@ const EFEITOS_LOJA = (() => {
     madalena: { nome: "Manhã da ressurreição", ref: "João 20:1", cor: "#FFD9A0",
       atras: `<path class="avl avl-gira" d="${raios(11, 12, 11.3, 13.5, 12)}" fill="none" stroke="#FFEFC9" stroke-width=".55" stroke-linecap="round" opacity=".8"${st(0, 28)}/>`,
       frente: folha(0, 19, "#F7A8C4", .6, 5.2) + folha(19.4, 24, "#FFC6DA", 2.4, 5.6) + folha(19.8, 9, "#F7A8C4", 3.9, 5) }
+  };
+})();
+/* ---------- Movimentos novos (p66): o que aparece por trás (atras) e pela frente (frente) do personagem ----------
+   Unidades do desenho do boneco (viewBox -1 -1 24 31): a cabeça fica em volta de (11, 9), as mãos perto de y 17-22 e os pés em y 28,5. */
+const MOV_FX = (() => {
+  const G = (cls, d) => `<g class="${cls}" shape-rendering="geometricPrecision">${d}</g>`;
+  const estrela = (x, y, r, cor, cls) => `<path class="${cls || ""}" d="M${x} ${y - r}l${r * .28} ${r * .72} ${r * .72} ${r * .28}-${r * .72} ${r * .28}-${r * .28} ${r * .72}-${r * .28}-${r * .72}-${r * .72}-${r * .28} ${r * .72}-${r * .28}z" fill="${cor}"/>`;
+  const nota = (cls, cor, dupla) => `<g class="${cls}"><g fill="${cor}" stroke="#2E2B6E" stroke-width=".22" paint-order="stroke">${dupla
+      ? `<ellipse cx="0" cy="0" rx=".95" ry=".7" transform="rotate(-22)"/><ellipse cx="2.6" cy="-.7" rx=".95" ry=".7" transform="rotate(-22 2.6 -.7)"/><path d="M.8-.2v-3.6l2.6-.8v3.6M.8-3.1l2.6-.8" fill="none" stroke="${cor}" stroke-width=".42"/>`
+      : `<ellipse cx="0" cy="0" rx="1" ry=".74" transform="rotate(-22)"/><path d="M.85-.25v-3.9c.9.4 1.8 1 1.9 2" fill="none" stroke="${cor}" stroke-width=".42"/>`}</g></g>`;
+  /* a pomba (de perfil, olhando para a direita) com as asas batendo */
+  /* a pomba: de perfil, voando para a direita, desenhada pena por pena (corpo, cauda em leque, asa de trás e asa da frente
+     com coberteiras, secundárias e primárias), olho, bico e pés recolhidos; as asas batem de verdade (giram e passam por
+     baixo do corpo) e ela tem um brilho suave em volta. Desenho em 100×70, reduzido para o tamanho do boneco. */
+  const pena = (bx, by, tx, ty, w, cor, borda) => { const cx = (bx + tx) / 2, cy = (by + ty) / 2, L = Math.hypot(tx - bx, ty - by) / 2, a = Math.atan2(ty - by, tx - bx) * 180 / Math.PI;
+    return `<ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="${L.toFixed(1)}" ry="${w}" transform="rotate(${a.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="${cor}" stroke="${borda}" stroke-width=".9"/>`; };
+  /* a asa, com a raiz em (0,0) e erguida para cima e para trás */
+  const asa = (c1, c2, borda) => {
+    const prim = [[-14, -24, -36, -50], [-16, -22, -41, -43], [-17, -19, -44, -34], [-17, -15, -43, -25], [-16, -11, -39, -16], [-14, -8, -33, -9]];
+    const sec = [[-10, -6, -27, -4], [-7, -4, -21, 0], [-4, -2, -14, 3]];
+    return prim.map(([a, b, c, d]) => pena(a, b, c, d, 3.4, c1, borda)).join("") + sec.map(([a, b, c, d]) => pena(a, b, c, d, 3.6, c1, borda)).join("")
+      + `<path d="M3 3C8-4 9-16 4-26C1-31-5-36-12-38C-10-30-12-22-16-15C-18-9-16-3-9 1C-5 3-1 4 3 3Z" fill="${c1}" stroke="${borda}" stroke-width=".9"/>`
+      + `<path d="M-11-31C-9-24-12-17-15-12M-3-27C-2-20-5-13-9-8M3-17C1-11-2-6-6-2" fill="none" stroke="${c2}" stroke-width="1.1" stroke-linecap="round"/>`
+      + `<path d="M4-25C2-30-4-35-11-37" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>`;
+  };
+  const pomba = `<g class="fx-pomba-voo"><circle r="6.6" fill="none"/><g transform="scale(.1) translate(-52 -30)">
+      <g class="fx-halo" fill="#FFF6D8"><circle cx="52" cy="32" r="46" opacity=".08"/><circle cx="52" cy="32" r="38" opacity=".1"/><circle cx="52" cy="32" r="30" opacity=".12"/><circle cx="52" cy="32" r="22" opacity=".14"/></g>
+      <g class="fx-pa-corpo">
+        <g transform="translate(61 27)"><g class="fx-pa-asa2">${asa("#E4E1F3", "#C9C4E4", "#A9A3CF")}</g></g>
+        ${[[24, 40, 3, 33], [24, 41, 0, 38.5], [24, 42, 1, 44], [24, 43, 4, 49], [25, 44, 9, 53]].map(([a, b, c, d]) => pena(a, b, c, d, 3.2, "#F4F3FB", "#A9A3CF")).join("")}
+        <path d="M90 31C90 25 85.5 21 80 21C75 21 71.5 23.5 69.5 26.5C63 24.5 52 25 43 29C34 33 25 38 15 40.5C22 45 32 49 44 50.5C56 52 67 50 74 45C79 41.5 83 38.5 86.5 36C89 34.5 90 33 90 31Z" fill="#FFFFFF" stroke="#9E98C6" stroke-width="1.1"/>
+        <path d="M24 44C35 49 51 51.5 63 49C70 47.4 76 43.5 80.5 38C76 46 64 53 48 52.6C37 52.3 29 48.6 24 44Z" fill="#E3E0F2"/><path d="M66 33C71 36 73 41 71 46" fill="none" stroke="#EEEBF7" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M68 28.2C72 31 74 35 73 39M62 29C65 32 66 36 64.5 40" fill="none" stroke="#E6E3F4" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M74 24.6C77 22.8 81 22.6 84 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M54 51l-1.4 3.2M57 50.8l-.6 3.4M53 54.2l2.8.2M56.2 54.2l2.6.2" stroke="#E07F86" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M89 30.4L97 32.2L89 34.1Q87.8 32.2 89 30.4Z" fill="#EDA27E" stroke="#B9735A" stroke-width=".7"/><path d="M89.2 32.2H95.6" stroke="#B9735A" stroke-width=".55"/>
+        <ellipse cx="88.4" cy="30.4" rx="1.6" ry="1.1" fill="#F6F0F3" stroke="#D6CFE0" stroke-width=".4"/>
+        <circle cx="82.6" cy="28.6" r="2.7" fill="#E6E2F2"/><circle cx="82.8" cy="28.6" r="2" fill="#2A1C38"/><circle cx="83.5" cy="27.9" r=".7" fill="#FFFFFF"/>
+        <g transform="translate(56 29)"><g class="fx-pa-asa">${asa("#FFFFFF", "#D9D5EC", "#9E98C6")}</g></g>
+      </g></g></g>`;
+  const raios = Array.from({ length: 12 }, (_, i) => `<path d="M11 9L${(11 + 16 * Math.cos((i * 30 - 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 - 4) * Math.PI / 180)).toFixed(2)}L${(11 + 16 * Math.cos((i * 30 + 4) * Math.PI / 180)).toFixed(2)} ${(9 + 16 * Math.sin((i * 30 + 4) * Math.PI / 180)).toFixed(2)}z"/>`).join("");
+  /* parede de água (a da esquerda; a da direita é a mesma espelhada) */
+  const parede = `<g class="fx-parede"><path d="M-12 29.6V14C-12 8-7 4-2 4.5 1 4.8 2.2 7.2.6 8.6-.6 9.6-2.4 9-2.4 7.6-3.4 9.4-1.6 12 .4 13V29.6z" fill="#1F6FC2"/>
+      <path d="M-10.4 29.6V15.2C-10.4 10.6-7 7.2-3.4 6.8-5.6 8.4-6.6 11-6.4 14 -4.6 16-2 16.6.4 16.4V29.6z" fill="#3C93E0" opacity=".9"/><path d="M-8.4 29.6V18.6c.4-2.6 1.6-4.4 3.4-5.6-.6 1.8-.6 3.6.2 5.2 1.2 1.2 3 1.8 5.2 1.8V29.6z" fill="#7CC4FF" opacity=".55"/>
+      <g fill="none" stroke="#CFEFFF" stroke-width=".35" stroke-linecap="round" opacity=".7"><path d="M-10.8 20.4q1.2-.7 2.4 0t2.4 0 2.4 0"/><path d="M-9.6 24.6q1.2-.7 2.4 0t2.4 0 2.4 0 2.4 0"/><path d="M-11.4 27.6q1.2-.7 2.4 0t2.4 0"/></g>
+      <g class="fx-peixe"><path d="M-7 22.8c.9-.8 2.1-.8 3 0-.9.8-2.1.8-3 0zM-7 22.8l-.9-.6v1.2z" fill="#FFB347" opacity=".85"/></g>
+      <path d="M-12 14C-12 8-7 4-2 4.5 1 4.8 2.2 7.2.6 8.6-.6 9.6-2.4 9-2.4 7.6" fill="none" stroke="#F2FBFF" stroke-width=".8" stroke-linecap="round"/>
+      <g fill="#F2FBFF"><circle class="fx-gota g1" cx="0" cy="4.2" r=".45"/><circle class="fx-gota g2" cx="-2.6" cy="3.6" r=".35"/><circle class="fx-gota g3" cx="1.6" cy="6" r=".35"/><circle class="fx-gota g1" cx="-6" cy="4.8" r=".3"/></g></g>`;
+  /* a escada de luz: dois trilhos que sobem e se afinam (perspectiva) e degraus cada vez mais juntos e mais apagados */
+  const xE = y => 3 + (29 - y) / 47 * 5, xD = y => 19 - (29 - y) / 47 * 5, ys = [26, 22, 18.4, 15, 11.9, 9, 6.3, 3.8, 1.5, -.7, -2.7, -4.6, -6.4, -8.1, -9.7, -11.2, -12.6, -13.9, -15.1];
+  const degrau = (y, k, w, cor, op) => `<path d="M${xE(y).toFixed(2)} ${y}H${xD(y).toFixed(2)}" stroke="${cor}" stroke-width="${(w - k * .03).toFixed(2)}" opacity="${op}"/>`;
+  const degraus = `<path d="M3 29L8-18M19 29L14-18" stroke="#FFF6D8" stroke-width="2.2" opacity=".18"/>` + ys.map((y, k) => degrau(y, k, 2, "#FFF6D8", ".14")).join("")
+    + `<path d="M3 29L8-18M19 29L14-18" stroke-width=".85"/>` + ys.map((y, k) => degrau(y, k, .8, "#FFE27A", Math.max(.35, .95 - k * .03).toFixed(2))).join("");
+  /* um anjinho de luz: cabeça, túnica e duas asas */
+  const anjo = `<g transform="translate(11 20) scale(1.6) translate(-11 -20)"><circle cx="11" cy="20" r="3.2" fill="#FFF3B8" opacity=".45"/><path d="M9.2 20.6c-1.4-1.4-2.6-1.2-3 .2 1 .1 1.8.6 2.4 1.3zM12.8 20.6c1.4-1.4 2.6-1.2 3 .2-1 .1-1.8.6-2.4 1.3z" fill="#FFFFFF" opacity=".9"/><path d="M11 19.6l1.6 3.4h-3.2z" fill="#FFFFFF"/><circle cx="11" cy="18.8" r=".9" fill="#FFF6D8"/></g>`;
+  const vento = (cy, rx, ry, cls) => `<ellipse class="${cls}" cx="11" cy="${cy}" rx="${rx}" ry="${ry}"/>`;
+  const frenteVento = (cy, rx, ry, cls) => `<path class="${cls}" d="M${11 - rx} ${cy}a${rx} ${ry} 0 0 0 ${2 * rx} 0"/>`;
+  return {
+    palmas: { frente: G("fx-palmas", `<g stroke="#FFE27A" stroke-width=".75" stroke-linecap="round" fill="none"><path d="M11 13.2v-2.4M7.6 14.4l-1.8-1.5M14.4 14.4l1.8-1.5M6.8 17.2H4.4M15.2 17.2h2.4"/></g>${estrela(5.4, 13.6, .9, "#FFFFFF", "fx-pisca")}${estrela(16.8, 13.2, .75, "#FFE27A", "fx-pisca p2")}`) },
+    canto: { frente: G("fx-canto", `<g transform="translate(13.6 14.6) scale(1.45)">${nota("fx-nota n1", "#FFE27A", false)}</g><g transform="translate(11.6 14.2) scale(1.45)">${nota("fx-nota n2", "#8FE6FF", true)}</g><g transform="translate(12.6 14.8) scale(1.45)">${nota("fx-nota n3", "#FF9BE8", false)}</g>`) },
+    escada: { atras: G("fx-escada", `<path d="M2.4 29L7.4-18H14.6L19.6 29z" fill="#FFF3B8" opacity=".13"/>
+        <g stroke="#FFE27A" stroke-linecap="round" fill="none">${degraus}</g>
+        <g class="fx-anjo a1">${anjo}</g><g class="fx-anjo a2">${anjo}</g><g class="fx-anjo a3">${anjo}</g>
+        <g class="fx-esc-ceu"><ellipse cx="11" cy="-18" rx="7" ry="3.6" fill="#FFF3B8" opacity=".35"/><ellipse cx="11" cy="-18.2" rx="3.8" ry="2" fill="#FFFBE6" opacity=".75"/>
+          <g fill="#FFFFFF" opacity=".9"><circle cx="5.8" cy="-16.6" r="1.6"/><circle cx="8.2" cy="-18" r="2.1"/><circle cx="11" cy="-18.8" r="2.3"/><circle cx="13.8" cy="-18" r="2.1"/><circle cx="16.2" cy="-16.6" r="1.6"/><rect x="5.8" y="-17.2" width="10.4" height="2.2" rx="1.1"/></g></g>`),
+      frente: G("fx-escada-f", `${estrela(3, 6, .8, "#FFF3B8", "fx-pisca")}${estrela(19.4, 3.4, .7, "#FFFFFF", "fx-pisca p2")}${estrela(18.6, 16, .55, "#FFE27A", "fx-pisca p3")}`) },
+    aguas: { atras: G("fx-aguas", `<ellipse cx="11" cy="28.7" rx="13" ry="2.5" fill="#2B7FD0" opacity=".55"/><ellipse cx="11" cy="28.6" rx="10" ry="1.8" fill="#6FC3FF" opacity=".45"/>
+        <g fill="none" stroke="#EAF8FF" stroke-width=".38"><ellipse class="fx-onda o1" cx="11" cy="28.7" rx="5" ry=".95"/><ellipse class="fx-onda o2" cx="11" cy="28.7" rx="5" ry=".95"/><ellipse class="fx-onda o3" cx="11" cy="28.7" rx="5" ry=".95"/></g>`),
+      frente: G("fx-aguas-f", `<path class="fx-marola" d="M-4 29.3q.75-.45 1.5 0t1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0 1.5 0" fill="none" stroke="#EAF8FF" stroke-width=".32" opacity=".85"/>${estrela(3, 27.6, .55, "#FFFFFF", "fx-pisca")}${estrela(19.5, 28.2, .5, "#FFFFFF", "fx-pisca p2")}`) },
+    funda: { frente: G("fx-funda", `<circle cx="19.2" cy="11.2" r="5.2" fill="none" stroke="#FFFFFF" stroke-width=".32" stroke-dasharray="1.8 2.4" opacity=".5" class="fx-funda-rastro"/>
+        <g class="fx-funda-gira"><circle cx="19.2" cy="11.2" r="6.4" fill="none"/><path d="M24.4 11.2A5.2 5.2 0 0 1 21.8 15.7" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+          <path d="M19.2 11.2H23.6" stroke="#8A5A2B" stroke-width=".48" stroke-linecap="round"/><path d="M23.4 10.5h1.8v1.4h-1.8z" fill="#8A5A2B"/><circle cx="24.4" cy="11.2" r="1" fill="#B4B4C4" stroke="#4A4A58" stroke-width=".3"/></g>
+        <g class="fx-pedra"><path d="M19 9.6h-5" stroke="#FFFFFF" stroke-width=".5" stroke-linecap="round" opacity=".7"/><circle cx="19.6" cy="9.6" r=".85" fill="#A9A9B8" stroke="#4A4A58" stroke-width=".28"/></g>`) },
+    pomba: { atras: G("fx-coluna", `<path d="M6.2-8h9.6l3.4 37.4H2.8z" fill="#FFF3B8" opacity=".2"/><path d="M8.6-8h4.8l1.6 37.4H7z" fill="#FFFBE6" opacity=".22"/>`),
+      frente: G("fx-pomba", pomba + estrela(4, 3, .6, "#FFF3B8", "fx-pisca") + estrela(18.4, 2, .7, "#FFFFFF", "fx-pisca p2")) },
+    brilho: { atras: G("fx-brilho", `<circle cx="11" cy="9" r="11" fill="#FFE9A0" opacity=".22" class="fx-halo"/><g class="fx-raios" fill="#FFE27A" opacity=".42">${raios}</g><circle cx="11" cy="9" r="7.4" fill="#FFF6D8" opacity=".38" class="fx-halo h2"/>`),
+      frente: G("fx-brilho-f", `${estrela(2.4, 4, .9, "#FFFFFF", "fx-pisca")}${estrela(20, 5.5, .75, "#FFF3B8", "fx-pisca p2")}${estrela(19, 15, .6, "#FFFFFF", "fx-pisca p3")}`) },
+    mar: { atras: G("fx-mar", `<ellipse cx="11" cy="29" rx="10" ry="1.4" fill="#C9A66B" opacity=".55"/>${parede}<g transform="matrix(-1 0 0 1 22 0)">${parede}</g>`) },
+    redemoinho: { atras: G("fx-vento", `<path d="M8.4 29.8L1.6 16.6Q11 13.6 20.4 16.6L13.6 29.8Z" fill="#D6D2FF" opacity=".2"/><g fill="none" stroke="#E6E3FF" stroke-width=".7" stroke-dasharray="3.2 2.2" stroke-linecap="round">${vento(29, 2.4, .6, "fx-v v1")}${vento(26.6, 4, .9, "fx-v v2")}${vento(24, 5.6, 1.2, "fx-v v3")}${vento(21.2, 7.2, 1.5, "fx-v v4")}${vento(18.2, 8.8, 1.8, "fx-v v5")}</g>
+        <g fill="#FF9A3C"><circle class="fx-faisca f1" cx="5" cy="26" r=".45"/><circle class="fx-faisca f2" cx="17" cy="24" r=".4"/><circle class="fx-faisca f3" cx="9" cy="28" r=".35"/><circle class="fx-faisca f4" cx="14" cy="27" r=".45" fill="#FFE27A"/></g>`),
+      frente: G("fx-vento-f", `<g fill="none" stroke="#FFFFFF" stroke-width=".5" stroke-dasharray="2.6 2.6" stroke-linecap="round" opacity=".85">${frenteVento(29, 2.4, .6, "fx-v v1")}${frenteVento(26.6, 4, .9, "fx-v v2")}${frenteVento(24, 5.6, 1.2, "fx-v v3")}${frenteVento(21.2, 7.2, 1.5, "fx-v v4")}</g>`) }
   };
 })();
 /* o efeito de um personagem da loja (null para os outros) */
@@ -7751,6 +8142,7 @@ function avatarSVG(id, rotulo, nivel, nvAcess, mov){
         : "";
       const luz = mov === "orar" ? `<g class="av-luz" shape-rendering="geometricPrecision"><ellipse cx="11" cy="9" rx="10" ry="10" fill="#FFF3B8" opacity=".35"/><ellipse cx="11" cy="9" rx="6.5" ry="6.5" fill="#FFFBE6" opacity=".45"/><g stroke="#FFE27A" stroke-width=".6" stroke-linecap="round" opacity=".8"><path d="M11 -2.6v2.4M3 1l1.6 1.6M19 1l-1.6 1.6M-.8 8.6h2.2M20.6 8.6h2.2"/></g></g>` : "";
       corpo = luz + `<g class="av-mv av-mv-${mov}">${fr.map((d, i) => d.img(fr.length > 1 ? "av-q av-q" + (i + 1) : "av-q", "u")).join("")}</g>` + extra;
+      const fx = MOV_FX[mov]; if(fx) corpo = (fx.atras || "") + corpo + (fx.frente || "");
     }
   } else {
     const d = desenho(p);
@@ -9224,6 +9616,15 @@ const POSES = {
   corpoBeijo:   { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, boca:"bico" },
   corpoCanto:   { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, boca:"canto" },
   corpoFechado: { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, semObj:1, semBracos:1, semPes:1, olhos:"f" },
+  palmasA: { e:{c:[8.9,25.6],m:[11.2,22.6],t:"a",s:false}, d:{c:[23.1,25.6],m:[20.8,22.6],t:"a",s:false}, semObj:1 },
+  palmasB: { e:{c:[10.2,25.8],m:[15.3,22.4],t:"j",s:false}, d:{c:[21.8,25.8],m:[16.7,22.4],t:"j",s:false}, olhos:"f", semObj:1 },
+  cantoA:  { e:{c:[8.6,26.4],m:[8.9,30.1]}, d:{c:[25.9,21.6],m:[27.4,17.2]}, boca:"canto" },
+  cantoB:  { e:{c:[6.1,21.6],m:[4.6,17.2]}, d:{c:[23.4,26.4],m:[23.1,30.1]}, boca:"canto", olhos:"f" },
+  fundaA:  { e:{c:[8.6,26.4],m:[8.9,30.1],t:"a",s:false}, d:{c:[25.4,19.6],m:[26.8,15.2],s:false}, semObj:1 },
+  fundaB:  { e:{c:[8.3,26.2],m:[7.6,29.8],t:"a",s:false}, d:{c:[25.8,19.2],m:[25.8,14.8],s:false}, semObj:1 },
+  louvorA: { e:{c:[5.4,20.6],m:[3.4,16.2]}, d:{c:[26.6,20.6],m:[28.6,16.2]}, olhos:"f" },
+  louvorB: { e:{c:[5.6,20.2],m:[4,15.6]},   d:{c:[26.4,20.2],m:[28,15.6]},   olhos:"f" },
+  escada:  { e:{c:[10.2,25.8],m:[15.3,22.2],t:"j",s:false}, d:{c:[21.8,25.8],m:[16.7,22.2],t:"j",s:false}, semObj:1 }
 };
 /* onde a mão segura cada objeto: [linha, coluna] dentro do desenho do objeto (1 quadradinho = 1 unidade) */
 const PEGA = { tabuas:[7.2,4.5], tamborim:[7.4,4], palmeira:[8.2,4.8], chifre:[6.8,2], chama:[8.3,4], jarro:[5.6,1.4], livro:[6.2,1.2], brasa:[1.2,1.4],
@@ -9458,6 +9859,7 @@ function gerarSprite(p, W, H){
   /* ---- pose: braços, objetos na mão e mãos ---- */
   if(PO){
     const linha=mistura(V(24).d,"#1A1030",.62), linhaPele=mistura(pele.d,"#1A1030",.45);
+    if(PO.boca==="canto"){ camada(E(16,17.3,1.3,.62),pele.b,"",{plano:1}); camada(E(16,17.55,.82,.78),"#6A2232","",{plano:1}); camada(E(16,17.95,.5,.3),"#E0607A","",{plano:1}); }
     if(PO.boca==="bico"){ camada(E(16,17.3,1.3,.62),pele.b,"",{plano:1}); camada(E(16,17.4,.78,.68),"#7A2E3A","",{plano:1}); camada(E(16,17.4,.5,.42),"#C9506A","",{plano:1}); camada(E(15.85,17.25,.16,.12),"#F2A0B0","",{plano:1}); }
     const SH={e:[9.4,22.6],d:[22.6,22.6]};
     const tom={e:V, d:y=>({b:V(y).s,s:V(y).d,d:mistura(V(y).d,"#1A1030",.35),l:V(y).b})};
@@ -9723,7 +10125,9 @@ onmessage=async e=>{ const {n,p,W,H}=e.data; try{
     /* para as imagens de compartilhar: espera o desenho grande (até 20 s) */
     esperar(p){ if(!temHD(p) || semApoio) return Promise.resolve(null); if(prontos[p.id]) return Promise.resolve(prontos[p.id]);
       return new Promise(ok => { (esperas[p.id] = esperas[p.id] || []).push(ok); setTimeout(() => ok(null), 20000); pedir(p); }); },
-    get ativo(){ return !semApoio; }
+    get ativo(){ return !semApoio; },
+    /* passa um desenho que já está na fila para a frente (a imagem de compartilhar espera por ele) */
+    priorizar(p){ if(!temHD(p)) return; if(!prontos[p.id] && !pedidos[p.id]) pedir(p); const f = fila.find(x => x.chave === p.id); if(f){ f.lote = ++lote; f.n = -1; } }
   };
 })();
 /* o melhor desenho disponível de um personagem (para as imagens de compartilhar): o de 992×1000 se der, senão o desenho imediato */
@@ -9940,7 +10344,16 @@ const LOJA_MOVIMENTOS = [
   { id: "beijo",   nome: "Beijo da Saudação",  ref: "Romanos 16:16",   preco: 40 },
   { id: "dormir",  nome: "Sono Tranquilo",     ref: "Salmo 4:8",       preco: 45 },
   { id: "biceps",  nome: "Força no Senhor",    ref: "Efésios 6:10",    preco: 50 },
-  { id: "orar",    nome: "De Joelhos em Oração", ref: "Daniel 6:10",   preco: 60 }
+  { id: "orar",    nome: "De Joelhos em Oração", ref: "Daniel 6:10",   preco: 60 },
+  { id: "palmas",  nome: "Palmas de Louvor",   ref: "Salmo 47:1",      preco: 35 },
+  { id: "canto",   nome: "Cântico Novo",       ref: "Salmo 96:1",      preco: 40 },
+  { id: "escada",  nome: "Escada de Jacó",     ref: "Gênesis 28:12",   preco: 50 },
+  { id: "aguas",   nome: "Andar sobre as Águas", ref: "Mateus 14:29",  preco: 55 },
+  { id: "funda",   nome: "Funda de Davi",      ref: "1 Samuel 17:49",  preco: 55 },
+  { id: "pomba",   nome: "Pomba do Espírito",  ref: "Mateus 3:16",     preco: 60 },
+  { id: "brilho",  nome: "Rosto Resplandecente", ref: "Êxodo 34:29",   preco: 65 },
+  { id: "mar",     nome: "Mar se Abrindo",     ref: "Êxodo 14:21",     preco: 80 },
+  { id: "redemoinho", nome: "Redemoinho de Elias", ref: "2 Reis 2:11", preco: 90 }
 ];
 const LOJA_EXTRAS = {
   m: { lista: LOJA_MOLDURAS, campo: "moldura", usar: "Moldura em uso.", tirar: "Moldura guardada." },
@@ -11407,7 +11820,19 @@ const ALBUM_MOEDAS_PAGINA = 20, ALBUM_MOEDAS_ALBUM = 50, ALBUM_POR_PACOTE = 3, A
 /* ESTREIA DO ÁLBUM. Antes desta hora o álbum aparece trancado, com contagem regressiva: não dá para ganhar, comprar nem trocar.
    Só os quizzes FEITOS a partir dela dão pacote (os antigos não contam). É a hora do aparelho de cada jogador.
    O que foi ganho nos testes ficou em campos antigos do perfil (albumAbertos, albumTrocas…) e não é lido: todo mundo começa do zero. */
-let ALBUM_INICIO = new Date(2026, 10, 20, 5, 0, 0).getTime();           // sexta-feira, 20/11/2026, 5h da manhã
+let ALBUM_INICIO = 0;           // VERSÃO DE TESTE: álbum liberado desde sempre. No oficial: new Date(2026, 10, 20, 5, 0, 0).getTime(), sexta-feira, 20/11/2026, 5h da manhã
+const ALBUM_TESTE = true;
+/* a faixa vermelha no alto da tela, para ninguém confundir esta versão com a oficial */
+(() => { try{ const fx = document.createElement("div"); fx.className = "faixa-teste"; fx.textContent = "Versão de teste · álbum liberado"; document.body.appendChild(fx); }catch(e){} })();
+/* apaga as figurinhas desta conta (pacotes abertos, trocas anotadas, prêmios de página e de álbum), para ela chegar limpa à estreia */
+async function zerarAlbumDeTeste(){
+  if(!(await confirmar("Zerar o meu álbum", "Apaga todas as figurinhas desta conta e os prêmios de página e de álbum (as moedas desses prêmios também saem). Não dá para desfazer.", "Zerar"))) return;
+  const vazio = { figAbertos: [], figPag: [], figFeitos: [], figFim: 0, viuAlbum: "" };
+  const semTrocas = FB_OK && typeof firebase !== "undefined" ? firebase.firestore.FieldValue.delete() : {};
+  try{ await DB.salvarUsuario(usuario.uid, Object.assign({ figTrocas: semTrocas }, vazio)); }catch(e){ aviso("Não deu para zerar: " + erroMsg(e)); return; }
+  Object.assign(perfil, vazio, { figTrocas: {} });
+  albumAberto = ""; atualizarCasca(); if(typeof sincronizarPerfilPublico === "function") sincronizarPerfilPublico(); telaAlbum(); aviso("Álbum zerado.");
+}
 const ALBUM_ERA = "2026-11-20", ALBUM_QUANDO = "sexta-feira, 20/11, às 5h da manhã", ALBUM_QUANDO_CURTO = "sexta-feira, às 5h";
 const ALBUM_AVISO = "2026-11-20T05";          // marca do balão de novidade. Versões anteriores anunciaram 0h (marca "2026-11-20") e 10h ("2026-11-20T10"): quem viu aquelas vê o balão de novo, com o horário certo
 const albumAvisoVisto = v => v === ALBUM_AVISO;
@@ -12110,11 +12535,13 @@ function telaAlbum(){
     ${nf > 1 ? `<button type="button" class="hub-todos" id="albTodos">Abrir ${nf > 10 ? "10 pacotes de uma vez" : `os ${nf} pacotes de uma vez`}</button>` : ""}
     ${!trocasOk ? `<section class="panel alb-trocas"><p class="hm-sub" style="margin:0">As trocas ainda não foram liberadas: falta publicar as regras novas do Firestore.</p></section>` : propostas}
     <div class="est">${ALBUNS.map((a, k) => htmlCapa(a, k, inv)).join("")}</div>
-    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p></div>`;
+    <p class="est-nota">Toque numa capa para abrir o álbum. Novos álbuns chegam com o tempo.</p>
+    <section class="panel alb-teste"><b>Versão de teste</b><p>Aqui o álbum já está liberado. O que for feito com uma conta de verdade fica salvo nela e aparece também no jogo oficial.</p><button type="button" class="btn btn-ghost btn-sm" id="albZerar">Zerar o meu álbum</button></section></div>`;
   figEscala(app); desenharFigurinhas(app);
   app.querySelectorAll("[data-album]").forEach(b => b.onclick = () => { albumAberto = b.dataset.album; albumAbrindo = true; tocar("toque"); window.scrollTo(0, 0); telaAlbum(); });
   $("albAbrir").onclick = () => { if(nf) abrirPacotes(fechados.slice(0, 1)); else aviso("Nenhum pacote para abrir. Faça o quiz do dia para ganhar um, ou compre com moedas."); };
   const td = $("albTodos"); if(td) td.onclick = () => abrirPacotes(fechados.slice(0, 10));
+  const zr = $("albZerar"); if(zr) zr.onclick = zerarAlbumDeTeste;
   $("albComprar").onclick = comprarPacote;
   $("albTrocar").onclick = modalTrocar;
   const pr = $("albTrocas"); if(pr && pr.tagName === "BUTTON") pr.onclick = () => { tocar("toque"); window.scrollTo(0, 0); telaTrocas(); };
@@ -12137,6 +12564,24 @@ function ligarAlbumInicio(){
   e.onclick = () => { tocar("toque"); nav("album"); }; e.onkeydown = ev => { if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); e.click(); } };
   if(Date.now() - trocasEm > 3 * 60000) carregarTrocas().then(() => { const x = $("inAlbum"); if(x && tabAtual === "inicio"){ x.outerHTML = htmlAlbumInicio(); const y = $("inAlbum"); if(y){ y.onclick = () => { tocar("toque"); nav("album"); }; } } });
 }
+
+/* ============================================================
+   VERSÃO DE TESTE: o master tem tudo (moedas sem fim, a loja inteira, todos os personagens e todas as figurinhas).
+   Só muda o jeito de esta versão ler o perfil; nada é gravado na conta.
+   ============================================================ */
+(() => {
+  const tudo = () => { try{ return typeof ehMaster === "function" && ehMaster(); }catch(e){ return false; } };
+  const _comprado = comprado, _moedas = moedas, _liberado = profetaLiberado, _inv = albumInventario, _paginas = conferirPaginasDoAlbum, _pacote = comprarPacote;
+  comprado = id => tudo() || _comprado(id);
+  moedas = () => tudo() ? 99999 : _moedas();
+  profetaLiberado = p => tudo() || _liberado(p);
+  /* o álbum mostra todas as figurinhas; as trocas e o perfil público continuam com as de verdade */
+  albumInventario = () => { const inv = _inv(); if(tudo()) ALBUM_CARTAS.forEach(c => { if(!((inv[c.id] || 0) > 0)) inv[c.id] = 1; }); return inv; };
+  albumPublico = () => { const inv = _inv(); return ALBUM_CARTAS.map(c => Math.max(0, Math.min(9, inv[c.id] || 0))).join(""); };
+  repetidasLivres = (fn => inv => fn(tudo() ? _inv() : inv))(repetidasLivres);
+  conferirPaginasDoAlbum = () => { if(!tudo()) _paginas(); };
+  comprarPacote = (...a) => { if(tudo()){ aviso("Na versão de teste, o master já tem todas as figurinhas."); return; } return _pacote(...a); };
+})();
 
 /* ============================================================
    ÍCONES PRÓPRIOS (modelo Joia)
