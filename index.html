@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261126.005744">
+<meta name="versao" content="20261126.023321">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -3185,6 +3185,10 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .ajudas-wrap .ajuda-btn.off,.ajudas-wrap .ajuda-btn.usada{opacity:.4;filter:grayscale(.85);box-shadow:none;cursor:default;font-size:13.5px}
 .ajudas-wrap .ajuda-btn.off b{background:rgba(255,255,255,.5)}
 @media (min-width:700px){.ajudas-wrap .ajuda-btn{min-height:74px;font-size:14.5px}.ajudas-wrap .ajuda-btn .ic{font-size:24px}}
+/* p80: avisos no celular */
+.hm-avisos .hi-ic{font-size:26px}
+.av-status{margin:4px 0 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.10);border:1px solid var(--panel-line)}
+.adm-avisos .ip-passos a{color:var(--accent);font-weight:700}
 </style>
 </head>
 <body class="sem-menu">
@@ -3735,7 +3739,8 @@ function dbFirebase(){
       // trocas que eu aceitei ficam (quem propôs ainda anota as figurinhas que recebeu), só sem o meu nome
       for(const d of await docs(col("trocas").where("para","==",uid))){ if(d.data().status === "aceito") await d.ref.update({ paraNome: "Jogador removido" }); else await d.ref.delete(); }
     },
-    async excluirLogin(){ await auth.currentUser.delete(); }
+    async excluirLogin(){ await auth.currentUser.delete(); },
+    async salvarAvisoToken(uid, k, v){ await col("privado").doc(uid).set({ avisoTokens: { [k]: v === null ? firebase.firestore.FieldValue.delete() : v } }, { merge: true }); }
   };
 }
 /* IndexedDB (modo demonstração) para as páginas do PDF, que não cabem no localStorage */
@@ -3858,7 +3863,8 @@ function dbLocal(){
       delete d.usuarios[uid];
       gravar(d);
     },
-    async excluirLogin(){ const d = ler(); delete d.senhas[usuario.uid]; if(d.sessao === usuario.uid) d.sessao = ""; gravar(d); avisar(); }
+    async excluirLogin(){ const d = ler(); delete d.senhas[usuario.uid]; if(d.sessao === usuario.uid) d.sessao = ""; gravar(d); avisar(); },
+    async salvarAvisoToken(uid, k, v){ const d = ler(); d.privado = d.privado || {}; const p = d.privado[uid] = d.privado[uid] || {}; p.avisoTokens = p.avisoTokens || {}; if(v === null) delete p.avisoTokens[k]; else p.avisoTokens[k] = v; gravar(d); }
   };
 }
 const DB = FB_OK ? dbFirebase() : dbLocal();
@@ -4796,6 +4802,7 @@ function telaInicio(){
   /* linha fina: ganhar moedas à esquerda; sequência e nível à direita */
   html += `<div class="hm-linha">${typeof htmlMoedasInicio === "function" ? htmlMoedasInicio() : ""}<div class="hm-chips"><span class="hm-chip" title="Sequência no prazo">${st >= 5 ? "🔥" : "⚡"} ${st}</span><span class="hm-chip ouro" title="Nível ${nv}: ${esc(nomeNivel(nv))}">Nv ${nv}</span></div></div>`;
   html += typeof htmlInstalarInicio === "function" ? htmlInstalarInicio() : "";
+  html += typeof htmlAvisosInicio === "function" ? htmlAvisosInicio() : "";
   html += typeof htmlDesafiosInicio === "function" ? htmlDesafiosInicio() : "";
   if(typeof htmlSuperQuizInicio === "function") html += htmlSuperQuizInicio();         // super quiz: o relógio fica sempre no alto
   /* hoje */
@@ -5600,6 +5607,7 @@ function telaConta(){
       <button id="mSom" role="switch" aria-checked="${SOM.on}"><span class="ic">🔊</span>Sons do jogo<span class="switch" aria-hidden="true" aria-checked="${SOM.on}"></span></button>
       <button id="mMus" role="switch" aria-checked="${SOM.mus}"><span class="ic">🎵</span>Música (quiz e missões)<span class="switch" aria-hidden="true" aria-checked="${SOM.mus}"></span></button>
       <button id="mVib" role="switch" aria-checked="${SOM.vib}"><span class="ic">📳</span>Vibração<span class="switch" aria-hidden="true" aria-checked="${SOM.vib}"></span></button>
+      <button id="mAvisos" role="switch" aria-checked="${avisosLigados()}"><span class="ic">📣</span><span class="mc-2">Avisos no celular<small>${avisosLigados() ? "Ligados neste aparelho" : "Lição nova, Super Quiz e recados no seu celular"}</small></span><span class="switch" aria-hidden="true" aria-checked="${avisosLigados()}"></span></button>
       <button id="mNotif"><span class="ic">🔔</span>Notificações${NOTIF.total > 0 ? `<span class="nt-n">${NOTIF.total}</span>` : ""}<span class="seta">›</span></button>
       <button id="mDesempenho"><span class="ic">📈</span>Meu desempenho<span class="seta">›</span></button>
       <button id="mRetro"><span class="ic">📜</span>Retrospectiva do trimestre<span class="seta">›</span></button>
@@ -5633,6 +5641,7 @@ function telaConta(){
   $("mRetro").onclick = modalRetrospectiva;
   $("mTutorial").onclick = ()=> mostrarTutorial();
   $("mExcluir").onclick = ()=> modalExcluirConta();
+  $("mAvisos").onclick = ()=> alternarAvisos($("mAvisos"));
   $("mSair").onclick = async ()=>{ if(await confirmar("Sair da conta", "Quer mesmo sair? Seus pontos continuam salvos.", "Sair")) DB.sair(); };
 }
 
@@ -6023,6 +6032,145 @@ function modalTemas(){
       try{ await DB.salvarUsuario(usuario.uid, { tema: b.dataset.t }); }catch(e){}
     });
   });
+}
+
+/* ============================================================
+   AVISOS NO CELULAR (notificações), pelo Firebase Cloud Messaging.
+   - O jogador liga em Minha conta › Avisos no celular (ou no cartão do Início). No iPhone, só com o jogo instalado.
+   - O master cola uma vez a "chave pública" (Admin › Avisos no celular) e manda os avisos pelo painel do Firebase.
+   - O sw.js mostra o aviso e, ao tocar, abre o jogo.
+   ============================================================ */
+const AVISO_SDK = "https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js";
+const avisoChave = () => usuario ? lsGet(KEY + ":aviso:" + usuario.uid, "") : "";
+function avisosSuportados(){ return "serviceWorker" in navigator && "PushManager" in window && "Notification" in window; }
+function avisosLigados(){ return avisosSuportados() && Notification.permission === "granted" && !!avisoChave(); }
+function avisosNoJogo(){ return !!String(CONFIG.vapid || "").trim(); }
+function carregarScriptAvisos(){
+  if(typeof firebase !== "undefined" && typeof firebase.messaging === "function") return Promise.resolve();
+  return new Promise((res, rej) => { const s = document.createElement("script"); s.src = AVISO_SDK; s.onload = () => res(); s.onerror = () => rej(new Error("não deu para carregar o serviço de avisos")); document.head.appendChild(s); });
+}
+async function registroDoJogo(){
+  let r = await navigator.serviceWorker.getRegistration();
+  if(!r) r = await navigator.serviceWorker.register("sw.js");
+  await navigator.serviceWorker.ready;
+  return r;
+}
+async function mostrarAvisoLocal(titulo, corpo){
+  const r = await registroDoJogo();
+  await r.showNotification(titulo, { body: corpo, icon: "app-icone-192.png", badge: "app-icone-192.png", tag: "corrida-teste" });
+}
+/* explica por que não dá para ligar agora; devolve true se dá para seguir */
+function avisoPodeLigar(){
+  const ok = (t, h) => modal(t, `${h}<div class="btn-row uma"><button class="btn btn-main" id="avOk" style="width:100%">Entendi</button></div>`, (m, f) => { m.querySelector("#avOk").onclick = f; });
+  if(!avisosNoJogo()){ ok("Avisos no celular", `<p>Os avisos ainda não foram ligados pelo administrador do jogo. Assim que forem, é só voltar aqui.</p>`); return false; }
+  if(ehIOS() && !appInstalado()){
+    modal("Avisos no iPhone", `<p>No iPhone, os avisos só chegam com o jogo <b>instalado na tela inicial</b>.</p><ol class="ip-passos"><li><span class="ip-n">1</span><span>Instale o jogo (botão abaixo).</span></li><li><span class="ip-n">2</span><span>Abra o jogo pelo ícone novo, na tela do iPhone.</span></li><li><span class="ip-n">3</span><span>Volte em <b>Minha conta › Avisos no celular</b> e ligue.</span></li></ol><div class="btn-row"><button class="btn btn-main" id="avInst">Instalar o jogo</button><button class="btn btn-ghost" id="avNao">Agora não</button></div>`,
+      (m, f) => { m.querySelector("#avInst").onclick = () => { f(); instalarApp(); }; m.querySelector("#avNao").onclick = f; });
+    return false;
+  }
+  if(navegadorDeApp()){ ok("Avisos no celular", `<p>Você abriu o jogo por dentro de outro aplicativo (WhatsApp, Instagram…). Daqui não dá para ligar os avisos. Abra o jogo no ${ehIOS() ? "Safari" : "Chrome"} ou pelo ícone instalado.</p>`); return false; }
+  if(!avisosSuportados()){ ok("Avisos no celular", `<p>Este navegador não recebe avisos. No Android, use o <b>Chrome</b>; no iPhone, instale o jogo na tela inicial.</p>`); return false; }
+  if(Notification.permission === "denied"){
+    ok("Avisos bloqueados", `<p>Os avisos estão bloqueados para o jogo neste aparelho. Para liberar:</p><ol class="ip-passos">${ehIOS()
+      ? `<li><span class="ip-n">1</span><span>Abra os <b>Ajustes</b> do iPhone › <b>Notificações</b>.</span></li><li><span class="ip-n">2</span><span>Toque em <b>Corrida do Rolo</b> e ligue <b>Permitir Notificações</b>.</span></li>`
+      : `<li><span class="ip-n">1</span><span>Toque no cadeado (ou nos três pontinhos) ao lado do endereço, ou segure o ícone do jogo › <b>Informações do app</b>.</span></li><li><span class="ip-n">2</span><span>Em <b>Notificações</b>, escolha <b>Permitir</b>.</span></li>`}<li><span class="ip-n">3</span><span>Volte aqui e ligue de novo.</span></li></ol>`);
+    return false;
+  }
+  return true;
+}
+async function ligarAvisos(){
+  if(!avisoPodeLigar()) return false;
+  const perm = await Notification.requestPermission();
+  if(perm !== "granted"){ aviso("Tudo bem! Dá para ligar os avisos depois em Minha conta."); return false; }
+  if(typeof firebase === "undefined") throw new Error("os avisos só funcionam no jogo publicado");
+  const reg = await registroDoJogo();
+  await carregarScriptAvisos();
+  const token = await firebase.messaging().getToken({ vapidKey: String(CONFIG.vapid).trim(), serviceWorkerRegistration: reg });
+  if(!token) throw new Error("o aparelho não liberou os avisos");
+  const k = token.slice(-20).replace(/[^A-Za-z0-9_-]/g, "_");
+  await DB.salvarAvisoToken(usuario.uid, k, { t: token, em: Date.now(), ap: navigator.userAgent.slice(0, 120) });
+  lsSet(KEY + ":aviso:" + usuario.uid, k);
+  try{ await mostrarAvisoLocal("Avisos ligados!", "Você vai receber aqui os avisos da Corrida do Rolo."); }catch(e){}
+  return true;
+}
+async function desligarAvisos(){
+  const k = avisoChave();
+  try{ if(typeof firebase !== "undefined" && avisosSuportados()){ await carregarScriptAvisos(); await firebase.messaging().deleteToken(); } }catch(e){}
+  if(k && usuario) try{ await DB.salvarAvisoToken(usuario.uid, k, null); }catch(e){}
+  if(usuario) lsSet(KEY + ":aviso:" + usuario.uid, "");
+}
+async function alternarAvisos(b){
+  const ligado = avisosLigados();
+  ocupado(b, true);
+  try{
+    if(ligado){ await desligarAvisos(); aviso("Avisos desligados neste aparelho."); }
+    else if(await ligarAvisos()) aviso("Pronto! Os avisos do jogo vão chegar neste aparelho.");
+  }catch(e){ aviso("Não deu para ligar os avisos: " + erroMsg(e)); }
+  ocupado(b, false);
+  if(tabAtual === "conta") telaConta();
+  const c = $("hmAvisos"); if(c && (avisosLigados() || (typeof Notification !== "undefined" && Notification.permission === "denied"))) c.remove();
+}
+/* quem exclui a conta para de receber os avisos neste aparelho */
+excluirMinhaConta = (f => async (...a) => { try{ await desligarAvisos(); }catch(e){} return f(...a); })(excluirMinhaConta);
+
+/* cartão do Início: só depois que o jogo está instalado (ou já dispensaram o de instalar), até ligar ou dispensar */
+function htmlAvisosInicio(){
+  try{
+    if(!avisosNoJogo() || !avisosSuportados() || Notification.permission !== "default" || navegadorDeApp()) return "";
+    if(podeOferecerInstalar() && !lsGet(KEY + ":instalarDispensado", 0)) return "";
+    if(lsGet(KEY + ":avisosDispensado", 0)) return "";
+  }catch(e){ return ""; }
+  return `<section class="panel hm-instalar hm-avisos" id="hmAvisos"><div class="hi-ic" aria-hidden="true">🔔</div>
+    <div class="hi-tx"><b>Ligue os avisos do jogo</b><span>Lição nova, Super Quiz e recados da sua turma chegam no seu celular.</span></div>
+    <div class="hi-bt"><button type="button" class="btn btn-main btn-sm" data-ligar-avisos>Ligar</button><button type="button" class="hi-x" id="avFechar" aria-label="Dispensar">✕</button></div></section>`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest ? e.target.closest("[data-ligar-avisos]") : null;
+  if(b){ e.preventDefault(); alternarAvisos(b); return; }
+  const x = e.target.closest ? e.target.closest("#avFechar") : null;
+  if(x){ lsSet(KEY + ":avisosDispensado", 1); const c = $("hmAvisos"); if(c) c.remove(); aviso("Tudo bem! Dá para ligar depois em Minha conta."); }
+});
+
+/* ---------- Admin: avisos no celular ---------- */
+async function admAvisos(){
+  const c = $("admC"), proj = (FIREBASE_CONFIG && FIREBASE_CONFIG.projectId) || "";
+  const painel = proj ? `https://console.firebase.google.com/project/${encodeURIComponent(proj)}/messaging` : "https://console.firebase.google.com/";
+  const config = proj ? `https://console.firebase.google.com/project/${encodeURIComponent(proj)}/settings/cloudmessaging` : "https://console.firebase.google.com/";
+  const passo = (n, t) => `<li><span class="ip-n">${n}</span><span>${t}</span></li>`;
+  const meu = avisoChave();
+  c.innerHTML = `<section class="panel larga"><h3 class="h3">Avisos no celular</h3>
+      <p class="muted small" style="margin-top:0">Os jogadores ligam os avisos em <b>Minha conta › Avisos no celular</b>. Você manda os avisos pelo painel do Firebase, de graça. No iPhone, o aviso só chega para quem instalou o jogo na tela inicial.</p>
+      <p class="av-status" id="avConta">Contando aparelhos…</p></section>
+    <section class="panel"><h3 class="h3">1. Chave dos avisos (uma vez só)</h3>
+      <ol class="ip-passos">${passo(1, `Abra <a href="${config}" target="_blank" rel="noopener">Configurações do projeto › Cloud Messaging</a> no Firebase.`)}${passo(2, "Em <b>Configuração da Web › Certificados push da Web</b>, toque em <b>Gerar par de chaves</b>.")}${passo(3, "Copie a chave que aparece e cole aqui embaixo.")}</ol>
+      <div class="field"><label for="avChave">Chave pública (par de chaves)</label><input type="text" id="avChave" autocomplete="off" spellcheck="false" placeholder="Começa com B…" value="${esc(CONFIG.vapid || "")}"></div>
+      <p class="erro" id="avErro"></p>
+      <div class="btn-row uma"><button class="btn btn-main" id="avSalvar" style="width:100%">${CONFIG.vapid ? "Trocar a chave" : "Salvar a chave"}</button></div></section>
+    <section class="panel"><h3 class="h3">2. Mandar um aviso</h3>
+      <ol class="ip-passos">${passo(1, `Abra o <a href="${painel}" target="_blank" rel="noopener">Messaging no Firebase</a> e toque em <b>Nova campanha › Notificações</b>.`)}${passo(2, "Escreva o <b>título</b> e o <b>texto</b> (ex.: “Lição 10 no ar!” / “Bora fazer o quiz de hoje?”).")}${passo(3, "Em <b>Segmentação</b>, escolha o app da Web do jogo.")}${passo(4, "Em <b>Programação</b>, escolha <b>Agora</b> ou um dia e hora, e publique.")}</ol>
+      <p class="note">O aviso vai para todos os aparelhos que ligaram os avisos. Ao tocar nele, o jogo abre.</p></section>
+    <section class="panel"><h3 class="h3">3. Testar neste aparelho</h3>
+      <p class="muted small" style="margin-top:0">${meu ? "Os avisos estão ligados neste aparelho." : "Ligue os avisos neste aparelho em Minha conta para testar."}</p>
+      <div class="btn-row"><button class="btn btn-ghost" id="avVer" ${avisosLigados() ? "" : "disabled"}>Ver como o aviso aparece</button><button class="btn btn-ghost" id="avCopiar" ${meu ? "" : "disabled"}>Copiar o código deste aparelho</button></div>
+      <p class="note">No Firebase, em <b>Enviar mensagem de teste</b>, cole o código deste aparelho para mandar o aviso só para você antes de mandar para todos.</p></section>`;
+  if(typeof ajustarGradeAdmin === "function") ajustarGradeAdmin(c);
+  $("avSalvar").onclick = async () => {
+    const v = $("avChave").value.trim().replace(/\s+/g, "");
+    if(v && !/^[A-Za-z0-9_-]{80,100}$/.test(v)){ $("avErro").textContent = "Essa não parece a chave pública. Ela tem cerca de 88 letras e números e começa com B."; return; }
+    ocupado($("avSalvar"), true);
+    try{ await DB.salvarConfig({ vapid: v }); CONFIG.vapid = v; aviso(v ? "Chave salva! Os jogadores já podem ligar os avisos." : "Chave apagada: os avisos ficam desligados."); admAvisos(); }
+    catch(e){ $("avErro").textContent = erroMsg(e); ocupado($("avSalvar"), false); }
+  };
+  $("avVer").onclick = async () => { try{ await mostrarAvisoLocal("Corrida do Rolo", "Assim o aviso aparece no celular. Toque para abrir o jogo."); }catch(e){ aviso(erroMsg(e)); } };
+  $("avCopiar").onclick = async () => {
+    try{ const p = (await DB.listarPrivados()).find(x => x.id === usuario.uid); const t = p && p.avisoTokens && p.avisoTokens[meu] && p.avisoTokens[meu].t; if(t) copiarTexto(t, "Código copiado! Cole no Firebase, em Enviar mensagem de teste."); else aviso("Este aparelho ainda não tem código. Ligue os avisos de novo."); }
+    catch(e){ aviso(erroMsg(e)); }
+  };
+  try{
+    const ps = await DB.listarPrivados();
+    let ap = 0, pes = 0; ps.forEach(p => { const n = Object.keys(p.avisoTokens || {}).length; ap += n; if(n) pes++; });
+    const el = $("avConta"); if(el) el.innerHTML = `<b>${pes}</b> ${pes === 1 ? "jogador" : "jogadores"} com avisos ligados (${ap} ${ap === 1 ? "aparelho" : "aparelhos"}).${CONFIG.vapid ? "" : " <span class='badge warn'>falta a chave</span>"}`;
+  }catch(e){ const el = $("avConta"); if(el) el.textContent = ""; }
 }
 
 /* Livro do trimestre que já vem neste arquivo: nome e capa (primeira página do PDF da lição, reduzida). O que o master gravar em Admin → Livros ou ao importar a lição passa na frente. */
@@ -6430,7 +6578,7 @@ const ADM_TABS = [
   ["resultados", "📊", "Resultados", "Acompanhar"], ["salas", "🏫", "Salas", "Acompanhar"],
   ["usuarios", "👥", "Usuários", "Pessoas"], ["aprovar", "✅", "Aprovar", "Pessoas"], ["cadastrar", "➕", "Novo usuário", "Pessoas"],
   ["licao", "📥", "Importar lição", "Conteúdo"], ["perguntas", "📝", "Perguntas", "Conteúdo"], ["livros", "📚", "Livros (capas)", "Conteúdo"],
-  ["icone", "🖼️", "Ícone do site", "Aparência"], ["auditoria", "🔍", "Auditoria", "Segurança"], ["exportar", "💾", "Exportar dados", "Segurança"]];
+  ["avisos", "📣", "Avisos no celular", "Comunicação"], ["icone", "🖼️", "Ícone do site", "Aparência"], ["auditoria", "🔍", "Auditoria", "Segurança"], ["exportar", "💾", "Exportar dados", "Segurança"]];
 let admPend = null;                      // contas aguardando aprovação (preenchido quando a lista de usuários é carregada)
 function marcarPendentes(usuarios){
   admPend = usuarios.filter(u => !u.aprovado && !u.admin && !u.master).length;
@@ -6465,7 +6613,7 @@ function telaAdmin(){
     <div id="admC" class="adm-c adm-${admTab}"></div></div>`;
   $("admVoltar").onclick = ()=> nav("conta");
   app.querySelectorAll(".adm-nav [data-t]").forEach(b=> b.onclick = ()=>{ admTab = b.dataset.t; telaAdmin(); });
-  ({resultados:admResultados, salas:admSalas, usuarios:admUsuarios, aprovar:admAprovar, cadastrar:admCadastrar, licao:admLicao, perguntas:admPerguntas, livros:admLivros, icone:admIcone, auditoria:admAuditoria, exportar:admExportar}[admTab])();
+  ({resultados:admResultados, salas:admSalas, usuarios:admUsuarios, aprovar:admAprovar, cadastrar:admCadastrar, licao:admLicao, perguntas:admPerguntas, livros:admLivros, icone:admIcone, avisos:admAvisos, auditoria:admAuditoria, exportar:admExportar}[admTab])();
 }
 function linhaUsuario(u, pendente){
   const eu = u.id === usuario.uid;
@@ -12472,7 +12620,8 @@ const FIG_FOTOS_OBJ = new Set(("folha flor nuvem arca pomba_ramo estrelas tenda 
   "tunica arca_alianca fornalha tumulo barco escudo espada sandalias ancora calice coroa_vida").split(" "));
 const figTemFoto = c => c.t === "p" ? FIG_FOTOS.has(c.k) : FIG_FOTOS_OBJ.has(c.k);
 /* imagens refeitas depois de publicadas: o endereço muda (?v=) para o navegador buscar de novo em vez de usar a guardada */
-const FIG_VERSAO = { "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 3, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2, "o:nuvem": 2, "o:tenda": 2 };
+const FIG_VERSAO = { "p:abraao": 3, "p:amos": 3, "p:davi": 3, "p:debora": 3, "p:elias": 3, "p:eliseu": 3, "p:enoque": 3, "p:farao": 3, "p:gideao": 3, "p:habacuque": 3, "p:hulda": 3, "p:isaias": 3, "p:jeremias": 3, "p:jo": 3, "p:jose": 3, "p:josue": 3, "p:miqueias": 3, "p:miria": 3, "p:moises": 3, "p:nata": 3, "p:noe": 3, "p:raabe": 3, "p:rute": 3, "p:salomao": 4, "p:samuel": 3, "p:sansao": 3, "p:sara": 3, "p:zaqueu": 3, "o:arca": 2, "o:pomba_ramo": 2, "o:estrelas": 2, "o:tabuas": 2, "o:cajado": 3, "o:candelabro": 2, "o:trombeta": 2, "o:livro": 2, "o:lamparina": 2, "o:coracao": 2, "o:nuvem": 2, "o:tenda": 2 };
+/* 3 (26/11/2026): 28 personagens com imagem nova, marcados um a um em FIG_VERSAO */
 const FIG_VERSAO_P = 2;          /* personagens: 2 = pés e barra da túnica refeitos, olhos sem a marca branca (20/11/2026) */
 const figArquivo = c => (c.t === "p" ? "" : "o_") + c.k + ".webp" + (FIG_VERSAO[c.id] ? "?v=" + FIG_VERSAO[c.id] : c.t === "p" ? "?v=" + FIG_VERSAO_P : "");
 /* titulo curto e objeto de cada personagem */
@@ -12892,7 +13041,7 @@ function htmlCapa(a, k, inv, trancada){
   return `<button type="button" class="cp${trancada ? " trancada" : ""}" data-album="${a.id}" style="--c:${a.cor};--c2:${a.cor2}" aria-label="Álbum ${esc(a.nome)}: ${tenho} de ${a.cartas.length} figurinhas">
     <span class="cp-in"><span class="cp-couro"></span><span class="cp-raios"></span><span class="cp-luz"></span><span class="cp-lomb"></span><span class="cp-mold"></span>
       <span class="cp-n">Álbum ${k + 1}</span><span class="cp-tit">${esc(tit.slice(0, meio).join(" "))}<br>${esc(tit.slice(meio).join(" "))}</span><span class="cp-sub">${esc(a.sub)}</span>
-      <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp?v=${FIG_VERSAO_P}" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
+      <span class="cp-chao"></span><span class="cp-arte">${a.capa.map((p, i) => `<img class="${"abc"[i]}" src="${FIG_DIR}p/${p}.webp?v=${FIG_VERSAO["p:" + p] || FIG_VERSAO_P}" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
       <span class="cp-pe"><span class="cp-barra"><i style="width:${Math.round(100 * tenho / a.cartas.length)}%"></i></span><span class="cp-conta"><span>${tenho} de ${a.cartas.length}</span><em class="${feito ? "ok" : ""}">${feito ? "✓ completo" : `+${a.premio}${MOEDA}`}</em></span></span>
       <span class="cp-brilho"></span>${trancada ? `<span class="cp-cadeado">${iconeSVG("cadeado")}</span>` : ""}</span></button>`;
 }
