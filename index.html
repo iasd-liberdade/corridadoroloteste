@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261124.123538">
+<meta name="versao" content="20261126.001403">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Quiz da Lição">
 <link rel="icon" id="favicon" href="">
-<link rel="apple-touch-icon" id="touchicon" href="">
-<link rel="manifest" id="manifest" href="">
+<link rel="apple-touch-icon" id="touchicon" href="app-icone-180.png">
+<link rel="manifest" id="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -3098,6 +3098,80 @@ button.fig.vaga:hover{transform:translateY(-2px)}
   .pod-coroa{width:58px;height:40px;margin-left:-29px;top:-40px}.pod-l.p1{padding-top:40px}
 }
 @media (prefers-reduced-motion:reduce){.pod-raios,.pod-pontos i,.pod-coroa,.pod-brilho::after,.pod-boneco,.pod-bloco{animation:none}}
+/* p73: quiz — pergunta maior e ajudas grandes embaixo das alternativas */
+.quiz-area .qtext{font-size:clamp(23px,6.6vw,29px);line-height:1.2;letter-spacing:-.2px;margin:2px 0 6px;text-wrap:balance}
+.quiz-area .qhint{font-size:13px;margin-bottom:14px}
+/* p74: a dica do tempo fica em cima da pergunta */
+.quiz-area .qhint{display:inline-flex;align-items:center;gap:6px;margin:4px 0 10px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:700;letter-spacing:.02em}
+.quiz-area .qtext{margin-top:0}
+.ajudas-wrap{margin-top:16px;padding:12px 12px 14px;border-radius:20px;background:rgba(10,8,40,.2);border:1px solid var(--panel-line)}
+.ajudas-tit{display:block;margin:0 2px 12px;font:800 11px/1.2 "Barlow",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.ajudas-wrap .ajudas-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:12px;margin:0}
+.ajudas-wrap .ajuda-btn{position:relative;display:grid;justify-items:center;align-content:center;gap:6px;min-height:86px;padding:12px 8px 10px;border-radius:18px;border:2px solid rgba(255,255,255,.3);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08));color:#fff;font:800 14.5px/1.15 "Barlow",sans-serif;text-align:center;box-shadow:0 4px 0 rgba(10,8,40,.35);cursor:pointer;transition:transform .12s,box-shadow .12s,background .2s}
+.ajudas-wrap .ajuda-btn .ic{font-size:30px;line-height:1}
+.ajudas-wrap .ajuda-btn .ic .ij{width:32px;height:32px;vertical-align:0}
+.ajudas-wrap .ajuda-btn b{position:absolute;top:-9px;right:-7px;min-width:27px;height:27px;padding:0 6px;font-size:13.5px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.ajudas-wrap .ajuda-btn:not(:disabled):hover{background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.12))}
+.ajudas-wrap .ajuda-btn:not(:disabled):active{transform:translateY(3px);box-shadow:0 1px 0 rgba(10,8,40,.35)}
+.ajudas-wrap .ajuda-btn.ativa,.ajudas-wrap .ajuda-btn.ativa:not(:disabled):hover{background:linear-gradient(180deg,#FFE27A,#F2A53A);border-color:#fff;color:#3A2A00;box-shadow:0 4px 0 #A8650E,0 0 18px rgba(255,226,122,.5)}
+.ajudas-wrap .ajuda-btn.usada{opacity:.5;box-shadow:none;cursor:default;font-size:13px}
+.ajudas-wrap .ajuda-dica{margin:12px 2px 0;font-size:13.5px;text-align:center}
+.quiz-area:has(#tiles.done) .ajudas-wrap{display:none}
+@media (min-width:700px){.quiz-area .qtext{font-size:34px}.ajudas-wrap .ajuda-btn{min-height:92px;font-size:15.5px}.ajudas-wrap .ajuda-btn .ic{font-size:34px}}
+/* p76: conta (instalar, privacidade, excluir) */
+.menu-conta button.perigo,.menu-conta button.perigo .ic{color:var(--bad)}
+.menu-conta button[hidden]{display:none}
+.ex-lista,.ex-salas{margin:0 0 12px;padding-left:20px;display:grid;gap:4px}
+.ex-aviso{margin:0 0 14px;padding:10px 12px;border-radius:12px;background:rgba(255,154,162,.16);border:1px solid rgba(255,154,162,.45);font-weight:700}
+.ex-check{display:flex;gap:10px;align-items:flex-start;margin:4px 0 10px;font-size:15px;line-height:1.35;cursor:pointer}
+.ex-check input{width:20px;height:20px;margin:1px 0 0;flex:0 0 auto;accent-color:var(--bad)}
+.modal.modal-priv{max-width:620px}
+.priv{font-size:15.5px;line-height:1.5}
+.priv h4{margin:18px 0 6px;font:800 13px/1.2 "Barlow",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.priv p{margin:0 0 10px}.priv ul{margin:0 0 10px;padding-left:20px;display:grid;gap:6px}
+.priv a{color:var(--accent);font-weight:700}
+.priv-data{color:var(--soft);font-size:13.5px}
+.priv-nota a{color:var(--accent);font-weight:700}
+.hm-instalar{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.hm-instalar .hi-ic{flex:0 0 auto;width:48px;height:48px;border-radius:14px;overflow:hidden;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.14);box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.hm-instalar .hi-ic img{width:100%;height:100%;display:block}
+.hm-instalar .hi-tx{flex:1 1 auto;min-width:0;display:grid;gap:2px}
+.hm-instalar .hi-tx b{font-size:16px;line-height:1.2}
+.hm-instalar .hi-tx span{font-size:13.5px;line-height:1.3;color:var(--muted)}
+.hm-instalar .hi-bt{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.hm-instalar .hi-x{border:0;background:none;color:var(--soft);font-size:15px;padding:2px 6px;line-height:1}
+.ip-passos{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px}
+.ip-passos li{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.10);border:1px solid var(--panel-line);line-height:1.4}
+.ip-n{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--deep);font-weight:800}
+.ip-ic{width:22px;height:22px;vertical-align:-5px;color:var(--accent)}
+.ip-link{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.18);word-break:break-all}
+.ip-link code{font-size:13.5px}
+/* p77: temas. Claro = céu da manhã; Pôr do sol e Clássico para escolher. (o Escuro continua o de antes) */
+:root[data-theme="light"]{--g1:#5B4FE0;--g2:#3F86E6;--g3:#1FA7BD;--panel:rgba(255,255,255,.15);--panel-line:rgba(255,255,255,.32);--field:rgba(255,255,255,.17);--deep:#2B2580}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--g1:#5B4FE0;--g2:#3F86E6;--g3:#1FA7BD;--panel:rgba(255,255,255,.15);--panel-line:rgba(255,255,255,.32);--field:rgba(255,255,255,.17);--deep:#2B2580}}
+:root[data-theme="sol"]{--g1:#5E45D6;--g2:#B4519F;--g3:#E9785A;--panel:rgba(255,255,255,.15);--panel-line:rgba(255,255,255,.32);--field:rgba(255,255,255,.17);--deep:#3A1F78}
+:root[data-theme="classico"]{--g1:#524F9C;--g2:#6889AE;--g3:#83C6BD;--panel:rgba(255,255,255,.14);--panel-line:rgba(255,255,255,.30);--field:rgba(255,255,255,.16);--deep:#2E2B6E}
+.temas{display:grid;gap:10px}
+.tema-op{display:flex;align-items:center;gap:14px;width:100%;padding:10px 14px 10px 10px;border-radius:18px;border:2px solid var(--panel-line);background:var(--panel);color:#fff;text-align:left;transition:border-color .15s,background .15s,transform .1s}
+.tema-op:active{transform:scale(.985)}
+.tema-op[aria-checked="true"]{border-color:#fff;background:rgba(255,255,255,.24);box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+.tema-am{position:relative;flex:0 0 auto;width:64px;height:64px;border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35),0 4px 10px rgba(0,0,0,.22)}
+.tema-am i{position:absolute;left:9px;right:9px;height:9px;border-radius:5px;background:rgba(255,255,255,.28)}
+.tema-am i:nth-child(1){top:10px;right:26px;background:rgba(255,255,255,.85)}
+.tema-am i:nth-child(2){top:25px}.tema-am i:nth-child(3){top:39px;right:20px}
+.tema-am b{position:absolute;right:8px;bottom:8px;width:14px;height:14px;border-radius:50%;background:#FFD866;box-shadow:0 0 8px rgba(255,216,102,.8)}
+.tema-am-claro{background:linear-gradient(160deg,#5B4FE0,#3F86E6 55%,#1FA7BD)}
+.tema-am-escuro{background:linear-gradient(160deg,#2B2966,#344D78 55%,#2F6E6C)}
+.tema-am-escuro b{background:#F4F1DE;box-shadow:-4px -3px 0 0 #344D78 inset,0 0 8px rgba(244,241,222,.5)}
+.tema-am-sol{background:linear-gradient(160deg,#5E45D6,#B4519F 55%,#E9785A)}
+.tema-am-sol b{background:#FFB45C}
+.tema-am-classico{background:linear-gradient(160deg,#524F9C,#6889AE 55%,#83C6BD)}
+.tema-am-auto{background:linear-gradient(160deg,#5B4FE0,#3F86E6 49.5%,#2B2966 50.5%,#2F6E6C)}
+.tema-tx{flex:1 1 auto;min-width:0;display:grid;gap:3px}
+.tema-tx b{font-size:16.5px;line-height:1.2}
+.tema-tx small{font-size:13.5px;line-height:1.3;color:var(--muted)}
+.tema-ok{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:15px;color:transparent;border:2px solid var(--panel-line)}
+.tema-op[aria-checked="true"] .tema-ok{background:#fff;border-color:#fff;color:var(--deep)}
 </style>
 </head>
 <body class="sem-menu">
@@ -3482,13 +3556,6 @@ function aplicarIcone(url){
   url = url || ICONE_PADRAO;
   const padrao = url === ICONE_PADRAO, urlPng = padrao ? ICONE_PADRAO_PNG : url;
   $("favicon").href = url; $("touchicon").href = urlPng;
-  try{
-    const man = { name:"Corrida do Rolo – Quiz da Lição", short_name:"Corrida do Rolo", start_url: location.href.split("#")[0], display:"standalone", background_color:"#524F9C", theme_color:"#524F9C",
-      icons:[{ src:urlPng, sizes:"180x180 192x192 512x512", type:"image/png", purpose:"any" }] };
-    if(manifestUrl) URL.revokeObjectURL(manifestUrl);
-    manifestUrl = URL.createObjectURL(new Blob([JSON.stringify(man)], {type:"application/manifest+json"}));
-    $("manifest").href = manifestUrl;
-  }catch(e){}
   if(url === ICONE_PADRAO) localStorage.removeItem(KEY + ":icone"); else lsSet(KEY + ":icone", url);
 }
 aplicarIcone(lsGet(KEY + ":icone", ""));
@@ -3634,7 +3701,28 @@ function dbFirebase(){
     // Páginas do PDF como imagem (uma por documento, campo "chave" = licaoId|dia)
     async salvarPagina(p){ await col("paginas").doc(p.id).set(p); },
     async listarPaginas(licaoId, dia){ return (await lista(col("paginas").where("chave","==",licaoId+"|"+dia))).sort((a,b)=>a.seq-b.seq); },
-    async excluirPaginas(licaoId){ const s = await col("paginas").where("licaoId","==",licaoId).get(); for(const d of s.docs) await d.ref.delete(); }
+    async excluirPaginas(licaoId){ const s = await col("paginas").where("licaoId","==",licaoId).get(); for(const d of s.docs) await d.ref.delete(); },
+    /* excluir a própria conta */
+    async reautenticar(senha){ const u = auth.currentUser; await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, senha)); },
+    async apagarMeusDados(uid, tiposReacao){
+      const FV = firebase.firestore.FieldValue, docs = async q => (await q.get()).docs;
+      const apagar = async q => { const ds = await docs(q); await Promise.all(ds.map(d => d.ref.delete())); };
+      // reações nas publicações dos outros (precisa do perfil ainda existir)
+      for(const t of tiposReacao){ for(const d of await docs(col("mural").where("reacoes." + t, "array-contains", uid))){ if(d.data().uid !== uid) await d.ref.update({ ["reacoes." + t]: FV.arrayRemove(uid) }).catch(()=>{}); } }
+      await apagar(col("mural").where("uid","==",uid));
+      await apagar(col("progresso").where("uid","==",uid));
+      await apagar(col("membros").where("uid","==",uid));
+      await col("privado").doc(uid).delete().catch(()=>{});
+      await col("usuarios").doc(uid).delete();
+      // resultados, desafios e trocas só podem ser apagados depois do perfil
+      // (assim ninguém apaga um quiz para jogar de novo, nem um desafio que ia perder)
+      await apagar(col("resultados").where("uid","==",uid));
+      await apagar(col("desafios").where("de","==",uid)); await apagar(col("desafios").where("para","==",uid));
+      await apagar(col("trocas").where("de","==",uid));
+      // trocas que eu aceitei ficam (quem propôs ainda anota as figurinhas que recebeu), só sem o meu nome
+      for(const d of await docs(col("trocas").where("para","==",uid))){ if(d.data().status === "aceito") await d.ref.update({ paraNome: "Jogador removido" }); else await d.ref.delete(); }
+    },
+    async excluirLogin(){ await auth.currentUser.delete(); }
   };
 }
 /* IndexedDB (modo demonstração) para as páginas do PDF, que não cabem no localStorage */
@@ -3743,7 +3831,21 @@ function dbLocal(){
     async excluirProgresso(id){ const d = ler(); if(d.progresso) delete d.progresso[id]; gravar(d); },
     async salvarPagina(p){ await idbTx("readwrite", st => st.put(p)); },
     async listarPaginas(licaoId, dia){ const todas = await idbTx("readonly", st => st.getAll()); return (todas||[]).filter(p=>p.chave===licaoId+"|"+dia).sort((a,b)=>a.seq-b.seq); },
-    async excluirPaginas(licaoId){ const todas = await idbTx("readonly", st => st.getAll()); for(const p of (todas||[]).filter(p=>p.licaoId===licaoId)) await idbTx("readwrite", st => st.delete(p.id)); }
+    async excluirPaginas(licaoId){ const todas = await idbTx("readonly", st => st.getAll()); for(const p of (todas||[]).filter(p=>p.licaoId===licaoId)) await idbTx("readwrite", st => st.delete(p.id)); },
+    async reautenticar(senha){ const d = ler(); if(d.senhas[usuario.uid] !== senha) throw err("auth/wrong-password"); },
+    async apagarMeusDados(uid, tiposReacao){
+      const d = ler(), tira = (nome, f) => { const m = d[nome] || {}; Object.keys(m).forEach(k => { if(f(m[k])) delete m[k]; }); };
+      Object.values(d.mural || {}).forEach(p => { if(p.uid !== uid && p.reacoes) tiposReacao.forEach(t => { if(Array.isArray(p.reacoes[t])) p.reacoes[t] = p.reacoes[t].filter(x => x !== uid); }); });
+      tira("mural", p => p.uid === uid); tira("progresso", p => p.uid === uid); tira("membros", m => m.uid === uid);
+      tira("desafios", x => x.de === uid || x.para === uid);
+      Object.values(d.trocas || {}).forEach(x => { if(x.para === uid && x.status === "aceito") x.paraNome = "Jogador removido"; });
+      tira("trocas", x => x.de === uid || (x.para === uid && x.status !== "aceito"));
+      tira("resultados", r => r.uid === uid);
+      if(d.privado) delete d.privado[uid];
+      delete d.usuarios[uid];
+      gravar(d);
+    },
+    async excluirLogin(){ const d = ler(); delete d.senhas[usuario.uid]; if(d.sessao === usuario.uid) d.sessao = ""; gravar(d); avisar(); }
   };
 }
 const DB = FB_OK ? dbFirebase() : dbLocal();
@@ -4086,7 +4188,8 @@ function nomeProfeta(){ const p = acharProfeta(perfil && perfil.profeta); return
 function quem(){ return (perfil ? perfil.nome : ""); }
 function aplicarTema(t){
   const r = document.documentElement;
-  if(t === "claro") r.setAttribute("data-theme","light"); else if(t === "escuro") r.setAttribute("data-theme","dark"); else r.removeAttribute("data-theme");
+  const attr = { claro: "light", escuro: "dark", sol: "sol", classico: "classico" }[t];
+  if(attr) r.setAttribute("data-theme", attr); else r.removeAttribute("data-theme");
   lsSet(KEY + ":tema", t || "auto");
 }
 aplicarTema(lsGet(KEY + ":tema", "auto"));
@@ -4487,6 +4590,7 @@ function telaCadastro(){
     <div class="field"><label for="cSenha">Senha (mínimo 6 caracteres)</label><input type="password" id="cSenha" autocomplete="new-password"></div>
     <div class="field"><label for="cSenha2">Repita a senha</label><input type="password" id="cSenha2" autocomplete="new-password"></div>
     <p class="note">Depois de criar a conta, um administrador precisa aprovar seu acesso antes de você jogar.</p>
+    <p class="note priv-nota">Ao criar a conta, você concorda com a <a href="privacidade.html" data-privacidade>Política de privacidade</a>.</p>
     <p class="erro" id="cErro"></p>
     <div class="btn-row"><button class="btn btn-main" id="cOk">Criar conta</button><button class="btn btn-ghost" id="cVoltar">Já tenho conta</button></div></section>`;
   $("cVoltar").onclick = telaLogin;
@@ -4678,6 +4782,7 @@ function telaInicio(){
   html += `<header class="hm-ola"><div class="hm-av${classeMoldura(minhaMoldura())}">${meuAvatar()}</div><div class="hm-ola-tx"><small>${saudacao()}</small><h2>${esc(String(perfil.nome || "").split(" ")[0])}</h2>${fala ? `<p>“${esc(fala)}”</p>` : ""}</div></header>`;
   /* linha fina: ganhar moedas à esquerda; sequência e nível à direita */
   html += `<div class="hm-linha">${typeof htmlMoedasInicio === "function" ? htmlMoedasInicio() : ""}<div class="hm-chips"><span class="hm-chip" title="Sequência no prazo">${st >= 5 ? "🔥" : "⚡"} ${st}</span><span class="hm-chip ouro" title="Nível ${nv}: ${esc(nomeNivel(nv))}">Nv ${nv}</span></div></div>`;
+  html += typeof htmlInstalarInicio === "function" ? htmlInstalarInicio() : "";
   html += typeof htmlDesafiosInicio === "function" ? htmlDesafiosInicio() : "";
   if(typeof htmlSuperQuizInicio === "function") html += htmlSuperQuizInicio();         // super quiz: o relógio fica sempre no alto
   /* hoje */
@@ -4976,13 +5081,12 @@ function telaPergunta(){
       <div class="num" id="num">${TEMPO}</div></div>`;
   }
   h += `</div>
-    <h2 class="qtext">${esc(p.p)}</h2>
     <p class="qhint">${p.reflexao ? "Reflexão: qualquer resposta vale ponto" : p.vf ? "Verdadeiro ou falso? Quanto mais rápido, mais pontos" : "Quanto mais rápido, mais pontos"}</p>
-    ${p.reflexao ? "" : barraAjudas(p)}
+    <h2 class="qtext">${esc(p.p)}</h2>
     <div class="tiles ${p.vf ? "vf" : ""}" id="tiles">
       ${p.vf ? ["Verdadeiro", "Falso"].map((op,k)=>`<button class="tile t${k} ${k ? "tf" : "tv"}" data-k="${k}"><span class="letter" aria-hidden="true">${k ? "✕" : "✓"}</span><span>${op}</span></button>`).join("")
         : p.o.map((op,k)=>`<button class="tile t${k}" data-k="${k}"><span class="letter">${LETRAS[k]}</span><span>${esc(op)}</span></button>`).join("")}
-    </div><div id="fb"></div></div>`;
+    </div><div id="fb"></div>${(() => { const aj = p.reflexao ? "" : barraAjudas(p); return aj ? `<section class="ajudas-wrap" aria-label="Ajudas"><span class="ajudas-tit">Ajudas</span>${aj}</section>` : ""; })()}</div>`;
   app.innerHTML = h;
   window.scrollTo(0,0);
   app.querySelectorAll(".tile").forEach(t=> t.onclick = ()=> responder(+t.dataset.k));
@@ -5462,6 +5566,7 @@ function telaConta(){
     <div class="pf ct-pf" id="ctPerfil"></div>
     <div class="menu-conta">
       ${ehMaster() || souAdminDeSala() ? `<button id="mAdmin" class="adm"><span class="ic">🛠️</span>Área do administrador${typeof admPend === "number" && admPend > 0 ? `<span class="nt-n">${admPend}</span>` : ""}<span class="seta">›</span></button>` : ""}
+      <button id="mInstalar" data-instalar ${podeOferecerInstalar() ? "" : "hidden"}><span class="ic">📲</span><span class="mc-2">Instalar o app<small>Ícone na tela do celular, em tela cheia</small></span><span class="seta">›</span></button>
       <button id="mNome"><span class="ic">✏️</span>Alterar nome<span class="seta">›</span></button>
       <button id="mSenha"><span class="ic">🔑</span>Alterar senha<span class="seta">›</span></button>
       <button id="mTema"><span class="ic">🌗</span>Alterar tema<span class="seta">›</span></button>
@@ -5478,7 +5583,9 @@ function telaConta(){
       <button id="mTutorial"><span class="ic">💡</span>Como funciona<span class="seta">›</span></button>
       ${VERSAO ? `<button id="mVersao"><span class="ic">🔄</span><span class="mc-2">Atualizar o jogo<small>Versão em uso: ${esc(versaoLegivel(VERSAO))}</small></span><span class="seta">›</span></button>` : ""}
       <button id="mBaixar"><span class="ic">📥</span><span class="mc-2">Baixar os dados de novo<small>Apaga o que está guardado neste aparelho e busca tudo outra vez</small></span><span class="seta">›</span></button>
+      <button id="mPriv" data-privacidade><span class="ic">🔒</span>Política de privacidade<span class="seta">›</span></button>
       <button id="mSair"><span class="ic">🚪</span>Sair da conta<span class="seta">›</span></button>
+      <button id="mExcluir" class="perigo"><span class="ic">🗑️</span><span class="mc-2">Excluir minha conta<small>Apaga a conta e todos os seus dados</small></span><span class="seta">›</span></button>
     </div></section></div>`;
   const mAdm = $("mAdmin"); if(mAdm) mAdm.onclick = ()=> nav("admin");
   const mVer = $("mVersao"); if(mVer) mVer.onclick = ()=> recarregarJogo();
@@ -5494,9 +5601,7 @@ function telaConta(){
       if(!a || !n1){ er.textContent = "Preencha os campos."; return; } if(n1 !== n2){ er.textContent = "As senhas novas não são iguais."; return; }
       ocupado(m.querySelector("#sOk"), true); try{ await DB.alterarSenha(a, n1); fechar(); aviso("Senha alterada"); }catch(e){ er.textContent = erroMsg(e); ocupado(m.querySelector("#sOk"), false); } };
   });
-  $("mTema").onclick = ()=> modal("Alterar tema", `<div class="opcoes">${[["auto","🌗","Automático (segue o celular)"],["claro","☀️","Claro"],["escuro","🌙","Escuro"]].map(([v,ic,t])=>`<button type="button" data-t="${v}" aria-pressed="${(perfil.tema||"auto")===v}"><span style="font-size:22px">${ic}</span>${t}</button>`).join("")}</div>`, (m, fechar)=>{
-    m.querySelectorAll("[data-t]").forEach(b=> b.onclick = async ()=>{ aplicarTema(b.dataset.t); perfil.tema = b.dataset.t; m.querySelectorAll("[data-t]").forEach(x=> x.setAttribute("aria-pressed", String(x===b))); try{ await DB.salvarUsuario(usuario.uid, {tema:b.dataset.t}); }catch(e){} setTimeout(fechar, 250); });
-  });
+  $("mTema").onclick = ()=> modalTemas();
   $("mProfeta").onclick = ()=> telaProfeta();
   const alternar = (id, chave) => { const b = $(id); b.onclick = ()=>{ const v = !SOM[chave]; definirSom(chave, v); b.setAttribute("aria-checked", String(v)); b.querySelector(".switch").setAttribute("aria-checked", String(v)); aviso({ on: ["Sons ligados", "Sons desligados"], vib: ["Vibração ligada", "Vibração desligada"], mus: ["Música ligada", "Música desligada"] }[chave][v ? 0 : 1]); }; };
   alternar("mSom", "on"); alternar("mVib", "vib"); alternar("mMus", "mus");
@@ -5504,6 +5609,7 @@ function telaConta(){
   $("mDesempenho").onclick = modalDesempenho;
   $("mRetro").onclick = modalRetrospectiva;
   $("mTutorial").onclick = ()=> mostrarTutorial();
+  $("mExcluir").onclick = ()=> modalExcluirConta();
   $("mSair").onclick = async ()=>{ if(await confirmar("Sair da conta", "Quer mesmo sair? Seus pontos continuam salvos.", "Sair")) DB.sair(); };
 }
 
@@ -5652,6 +5758,248 @@ async function compartilharPodio(btn){
     await compartilharImagem(blob, "podio-" + slug(d.titulo) + ".jpg");
   }catch(e){ aviso("Não deu para montar a imagem: " + erroMsg(e)); }
   finally{ if(btn) ocupado(btn, false); }
+}
+
+/* ============================================================
+   EXCLUIR A PRÓPRIA CONTA, POLÍTICA DE PRIVACIDADE E INSTALAR O APP
+   ============================================================ */
+/* Enquanto a conta está sendo apagada, nada do jogo grava de novo os dados dela (o perfil, o perfil público, as salas etc.) */
+let CONTA_EXCLUINDO = false;
+(() => {
+  const minha = uid => CONTA_EXCLUINDO && usuario && uid === usuario.uid;
+  const embrulhar = (nome, uidDe) => { const f = DB[nome]; if(typeof f !== "function") return; DB[nome] = function(...a){ return minha(uidDe(a)) ? Promise.resolve() : f.apply(this, a); }; };
+  embrulhar("salvarUsuario", a => a[0]); embrulhar("salvarPrivado", a => a[0]); embrulhar("salvarPerfilPublico", a => a[0]);
+  embrulhar("salvarMembro", a => a[0] && a[0].uid); embrulhar("salvarResultado", a => a[0] && a[0].uid); embrulhar("salvarProgresso", a => a[0] && a[0].uid);
+})();
+
+/* Salas que impedem a exclusão: as que eu crio ou administro, com mais gente dentro e mais ninguém para cuidar */
+async function salasQuePrendemAConta(){
+  const eu = usuario.uid, presas = [];
+  for(const s of SALAS.filter(x => !x.global && (ehDonoSala(x) || ehAdminSala(x)))){
+    let ativos = [];
+    try{ ativos = (await DB.membrosDaSala(s.id)).filter(x => x.status === "ativo" && x.uid !== eu); }catch(e){ continue; }
+    const adms = new Set(s.admins || []);
+    if(ativos.length && !ativos.some(x => adms.has(x.uid) || x.uid === s.dono)) presas.push(s);
+  }
+  return presas;
+}
+/* Tira a pessoa das salas: sai de todas, deixa de ser admin, apaga as salas em que estava sozinha e tira o nome das que criou */
+async function sairDasSalasParaExcluir(){
+  const eu = usuario.uid;
+  let salas = [];
+  try{ salas = await DB.listarSalas(); }catch(e){ salas = SALAS.slice(); }
+  for(const s of salas){
+    if(s.global) continue;
+    const dono = s.dono === eu, adm = (s.admins || []).includes(eu);
+    let membros = null;
+    if(dono || adm || SALAS.some(x => x.id === s.id) || SALAS_PEDIDOS.some(x => x.id === s.id)){
+      try{ membros = await DB.membrosDaSala(s.id); }catch(e){ membros = []; }
+    }
+    if(!membros) continue;
+    const outros = membros.filter(x => x.uid !== eu);
+    if(dono && !outros.length){ await DB.excluirSala(s.id); continue; }                 // sala só minha: some com ela
+    if(dono || adm){
+      const dados = {};
+      if(adm) dados.admins = (s.admins || []).filter(id => id !== eu);
+      if(dono) dados.donoNome = "";
+      await DB.salvarSala(s.id, dados);
+    }
+    if(membros.some(x => x.uid === eu)) await DB.excluirMembro(s.id, eu);
+  }
+}
+async function excluirMinhaConta(senha, progresso){
+  const eu = usuario.uid;
+  progresso("Conferindo a senha");
+  await DB.reautenticar(senha);
+  CONTA_EXCLUINDO = true;
+  try{
+    progresso("Saindo das salas");
+    await sairDasSalasParaExcluir();
+    progresso("Apagando pontos, publicações, desafios e trocas");
+    await DB.apagarMeusDados(eu, REACOES.map(r => r[0]));
+    progresso("Apagando o login");
+    await DB.excluirLogin();
+  }catch(e){ CONTA_EXCLUINDO = false; throw e; }
+  /* o que estava guardado neste aparelho sobre a conta */
+  try{ Object.keys(localStorage).filter(k => k.indexOf(eu) >= 0).forEach(k => localStorage.removeItem(k)); }catch(e){}
+}
+function modalExcluirConta(){
+  if(ehMaster()){
+    modal("Excluir minha conta", `<p>Esta é uma conta <b>master</b>. Ela não pode ser excluída por aqui, para o jogo não ficar sem ninguém para administrar.</p><p class="muted small">Se precisar mesmo, outra pessoa master tira o seu nível de acesso em Admin › Usuários e depois você exclui a conta.</p><div class="btn-row uma"><button class="btn btn-ghost" id="exOk" style="width:100%">Entendi</button></div>`, (m, fechar) => { m.querySelector("#exOk").onclick = fechar; });
+    return;
+  }
+  modal("Excluir minha conta", `<div id="exC"><p class="vazio">Conferindo as suas salas…</p></div>`, async (m, fechar) => {
+    const c = m.querySelector("#exC");
+    let presas = [];
+    try{ await carregarSalas(); presas = await salasQuePrendemAConta(); }catch(e){}
+    if(!c.isConnected) return;
+    if(presas.length){
+      c.innerHTML = `<p>Antes de excluir a conta, passe a administração ${presas.length === 1 ? "desta sala" : "destas salas"} para alguém. Senão a turma fica sem ninguém para cuidar:</p>
+        <ul class="ex-salas">${presas.map(s => `<li><b>${esc(s.nome)}</b></li>`).join("")}</ul>
+        <p class="muted small">Em <b>Salas</b>, toque em <b>Sair</b> na sala e escolha quem vai administrar. Depois volte aqui.</p>
+        <div class="btn-row"><button class="btn btn-main" id="exSalas">Ir para Salas</button><button class="btn btn-ghost" id="exNao">Agora não</button></div>`;
+      c.querySelector("#exSalas").onclick = () => { fechar(); nav("salas"); };
+      c.querySelector("#exNao").onclick = fechar;
+      return;
+    }
+    c.innerHTML = `<p>Excluir a conta apaga <b>de vez</b>:</p>
+      <ul class="ex-lista"><li>seu perfil, personagem, moedas, compras e figurinhas;</li><li>seus pontos e resultados dos quizzes (você sai da corrida);</li><li>suas anotações, publicações e reações no mural;</li><li>sua participação nas salas, desafios e trocas;</li><li>seu login (e-mail e senha).</li></ul>
+      <p class="ex-aviso">Não dá para desfazer. Se quiser jogar de novo depois, vai ter que criar uma conta nova e começar do zero.</p>
+      <div class="field"><label for="exSenha">Digite a sua senha para confirmar</label><input type="password" id="exSenha" autocomplete="current-password"></div>
+      <label class="check ex-check"><input type="checkbox" id="exCerto"><span>Entendi que tudo será apagado e não volta.</span></label>
+      <p class="erro" id="exErro"></p>
+      <div class="btn-row"><button class="btn btn-danger" id="exOk" disabled>Excluir minha conta</button><button class="btn btn-ghost" id="exNao">Cancelar</button></div>`;
+    const ok = c.querySelector("#exOk"), senha = c.querySelector("#exSenha"), certo = c.querySelector("#exCerto"), erro = c.querySelector("#exErro");
+    const pode = () => { ok.disabled = !(certo.checked && senha.value.length >= 1); };
+    senha.addEventListener("input", pode); certo.addEventListener("change", pode);
+    c.querySelector("#exNao").onclick = fechar;
+    ok.onclick = async () => {
+      erro.textContent = ""; ok.disabled = true; c.querySelector("#exNao").disabled = true;
+      try{
+        await excluirMinhaConta(senha.value, t => { ok.textContent = t + "…"; });
+        fechar();
+        modal("Conta excluída", `<p>Sua conta e os seus dados foram apagados. Obrigado por ter jogado!</p><div class="btn-row uma"><button class="btn btn-main" id="exFim" style="width:100%">Fechar</button></div>`, (m2, f2) => { m2.querySelector("#exFim").onclick = f2; }, () => { location.reload(); });
+      }catch(e){
+        ok.textContent = "Excluir minha conta"; c.querySelector("#exNao").disabled = false; pode();
+        erro.textContent = e && /wrong-password|invalid-credential|invalid-login/.test(e.code || "") ? "Senha errada. Confira e tente de novo." : "Não deu para excluir agora: " + erroMsg(e) + ". Tente de novo.";
+      }
+    };
+    setTimeout(() => senha.focus(), 60);
+  });
+}
+
+/* ---------- Política de privacidade ---------- */
+const PRIVACIDADE_ATUALIZADA = "25 de novembro de 2026";
+const PRIVACIDADE_HTML = `<p class="priv-data">Atualizada em 25 de novembro de 2026</p>
+<p>O <b>Corrida do Rolo · Quiz da Lição</b> é um jogo gratuito para estudar a Lição da Escola Sabatina com o seu grupo de jovens. Aqui explicamos, de um jeito simples, quais dados o jogo guarda, para que servem e como você pode apagá-los.</p>
+<h4>Quem cuida do jogo</h4>
+<p>Responsável: Brenno. Contato para qualquer dúvida ou pedido sobre os seus dados: <a href="mailto:brenno.liberty@gmail.com">brenno.liberty@gmail.com</a>.</p>
+<h4>O que o jogo guarda</h4>
+<ul>
+<li><b>Conta:</b> seu nome, e-mail e senha. A senha fica protegida no serviço de login do Google (Firebase); ninguém do jogo consegue vê-la.</li>
+<li><b>Jogo:</b> personagem e itens escolhidos, moedas, compras da loja, figurinhas do álbum, conquistas, missões e nível.</li>
+<li><b>Quizzes:</b> suas respostas, pontos, acertos e datas, o andamento de um quiz e as anotações que você faz na lição.</li>
+<li><b>Convivência:</b> as salas de que você participa, suas publicações e reações no mural, seus desafios e trocas de figurinhas.</li>
+<li><b>No seu aparelho:</b> preferências (tema, sons, música) e uma cópia temporária dos dados, para o jogo abrir mais rápido.</li>
+</ul>
+<p>O jogo <b>não</b> coleta sua localização, seus contatos nem dados de pagamento. Não tem anúncios e não vende nada com dinheiro de verdade: as moedas existem só dentro do jogo. A câmera só é usada se você quiser tirar a selfie com o resultado; a foto fica no seu aparelho e não é enviada para o jogo.</p>
+<h4>Para que usamos</h4>
+<p>Só para o jogo funcionar: entrar na conta, contar os pontos e montar a corrida, as salas, o mural, os desafios e as trocas. Não vendemos nem passamos os seus dados para ninguém, nem para propaganda.</p>
+<h4>Quem vê o quê</h4>
+<ul>
+<li>Os outros jogadores das suas salas veem seu nome, personagem, nível, pontos e o que você publica no mural.</li>
+<li>Seu e-mail só você e os administradores gerais do jogo veem.</li>
+<li>Quem administra uma sala vê os membros e os resultados daquela sala.</li>
+</ul>
+<h4>Onde os dados ficam</h4>
+<p>No Google Firebase (login e banco de dados), em servidores do Google que podem ficar fora do Brasil. O site é hospedado no GitHub Pages e as letras vêm do Google Fonts; ao abrir o jogo, esses serviços recebem dados técnicos, como o endereço de internet do aparelho.</p>
+<h4>Por quanto tempo</h4>
+<p>Enquanto a sua conta existir. Quando você exclui a conta, os dados são apagados.</p>
+<h4>Como excluir a sua conta</h4>
+<p>No jogo, vá em <b>Minha conta › <a href="#" data-priv-excluir>Excluir minha conta</a></b>. Isso apaga o seu perfil, pontos, resultados, anotações, publicações, reações, participação nas salas, desafios, trocas e o seu login. Não dá para desfazer. Se não conseguir entrar na conta, peça a exclusão pelo e-mail acima.</p>
+<h4>Seus direitos</h4>
+<p>Pela Lei Geral de Proteção de Dados (LGPD), você pode pedir para ver, corrigir ou apagar os seus dados e tirar qualquer dúvida pelo e-mail acima. O nome você mesmo muda em Minha conta.</p>
+<h4>Menores de idade</h4>
+<p>O jogo é feito para jovens de grupos de igreja. Quem tem menos de 18 anos deve jogar com o conhecimento dos pais ou responsáveis, e crianças com menos de 12 anos só devem criar uma conta com a autorização deles.</p>
+<h4>Mudanças nesta política</h4>
+<p>Se esta política mudar, a nova versão aparece aqui, com a data atualizada.</p>`;
+function modalPrivacidade(){
+  modal("Política de privacidade", `<div class="priv">${PRIVACIDADE_HTML}</div><div class="btn-row uma"><button class="btn btn-ghost" id="pvOk" style="width:100%">Fechar</button></div>`, (m, fechar) => {
+    m.classList.add("modal-priv"); m.querySelector("#pvOk").onclick = fechar;
+    const ex = m.querySelector("[data-priv-excluir]"); if(ex) ex.onclick = e => { e.preventDefault(); fechar(); if(usuario && perfil) modalExcluirConta(); else aviso("Entre na sua conta e vá em Minha conta › Excluir minha conta."); };
+  });
+}
+document.addEventListener("click", e => { const a = e.target.closest ? e.target.closest("[data-privacidade]") : null; if(!a) return; e.preventDefault(); modalPrivacidade(); });
+
+/* ---------- Instalar o app ---------- */
+let INSTALAR_EVT = null;
+const appInstalado = () => { try{ return matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches || navigator.standalone === true; }catch(e){ return false; } };
+const ehIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const navegadorDeApp = () => /FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line\/|TikTok|musical_ly|Snapchat|; wv\)/i.test(navigator.userAgent);
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALAR_EVT = e; atualizarBotoesInstalar(); });
+window.addEventListener("appinstalled", () => { INSTALAR_EVT = null; lsSet(KEY + ":instalado", 1); atualizarBotoesInstalar(); aviso("Pronto! O jogo foi instalado. Procure o ícone na tela do celular."); });
+function podeOferecerInstalar(){ return !appInstalado(); }
+function atualizarBotoesInstalar(){
+  const mi = $("mInstalar"); if(mi) mi.hidden = !podeOferecerInstalar();
+  const bi = $("hmInstalar"); if(bi && !podeOferecerInstalar()) bi.remove();
+}
+/* o cartão do Início aparece até a pessoa instalar ou dispensar */
+function htmlInstalarInicio(){
+  if(!podeOferecerInstalar() || lsGet(KEY + ":instalarDispensado", 0)) return "";
+  return `<section class="panel hm-instalar" id="hmInstalar"><div class="hi-ic" aria-hidden="true"><img src="app-icone-192.png" alt="" onerror="this.replaceWith(document.createTextNode('📲'))"></div>
+    <div class="hi-tx"><b>Instale o jogo no celular</b><span>Ícone na tela inicial e o jogo abre em tela cheia, como um aplicativo.</span></div>
+    <div class="hi-bt"><button type="button" class="btn btn-main btn-sm" data-instalar>Instalar</button><button type="button" class="hi-x" id="hiFechar" aria-label="Dispensar">✕</button></div></section>`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest ? e.target.closest("[data-instalar]") : null;
+  if(b){ e.preventDefault(); instalarApp(); return; }
+  const x = e.target.closest ? e.target.closest("#hiFechar") : null;
+  if(x){ lsSet(KEY + ":instalarDispensado", 1); const c = $("hmInstalar"); if(c) c.remove(); aviso("Tudo bem! Dá para instalar depois em Minha conta."); }
+});
+async function instalarApp(){
+  if(appInstalado()){ aviso("O jogo já está instalado neste aparelho."); return; }
+  if(INSTALAR_EVT){
+    const ev = INSTALAR_EVT;
+    try{ ev.prompt(); const r = await ev.userChoice; if(r && r.outcome === "accepted"){ INSTALAR_EVT = null; lsSet(KEY + ":instalado", 1); atualizarBotoesInstalar(); } }catch(e){ modalPassosInstalar(); }
+    return;
+  }
+  modalPassosInstalar();
+}
+function modalPassosInstalar(){
+  const link = location.href.split("#")[0].split("?")[0];
+  const passo = (n, t) => `<li><span class="ip-n">${n}</span><span>${t}</span></li>`;
+  const ic = {
+    compartilhar: `<svg class="ip-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10H5v10h14V10h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
+    mais: `<svg class="ip-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+    menu: `<svg class="ip-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="19" r="2" fill="currentColor"/></svg>`
+  };
+  let corpo;
+  if(navegadorDeApp()){
+    corpo = `<p>Você abriu o jogo por dentro de outro aplicativo (WhatsApp, Instagram…). Daqui não dá para instalar.</p>
+      <ol class="ip-passos">${passo(1, "Copie o link do jogo no botão abaixo.")}${passo(2, ehIOS() ? "Abra o <b>Safari</b> e cole o link na barra de endereço." : "Abra o <b>Chrome</b> e cole o link na barra de endereço.")}${passo(3, "No jogo, vá em <b>Minha conta › Instalar o app</b>.")}</ol>
+      <div class="ip-link"><code>${esc(link)}</code></div>
+      <div class="btn-row"><button class="btn btn-main" id="ipCopiar">Copiar o link</button><button class="btn btn-ghost" id="ipOk">Fechar</button></div>`;
+  } else if(ehIOS()){
+    corpo = `<p>No iPhone a instalação é feita pelo menu do navegador. São 3 toques:</p>
+      <ol class="ip-passos">${passo(1, `Toque em <b>Compartilhar</b> ${ic.compartilhar} (na barra de baixo do Safari, ou no alto, no iPad).`)}${passo(2, `Role a lista e toque em <b>Adicionar à Tela de Início</b> ${ic.mais}.`)}${passo(3, "Toque em <b>Adicionar</b>, no canto de cima. O ícone aparece na tela do iPhone.")}</ol>
+      <p class="muted small">Não achou a opção? Abra o jogo no <b>Safari</b> (em outros navegadores ela pode não aparecer).</p>
+      <div class="btn-row uma"><button class="btn btn-main" id="ipOk" style="width:100%">Entendi</button></div>`;
+  } else {
+    corpo = `<p>Use o menu do navegador para instalar:</p>
+      <ol class="ip-passos">${passo(1, `Toque no menu ${ic.menu} (os três pontinhos, no alto à direita).`)}${passo(2, "Toque em <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.")}${passo(3, "Confirme em <b>Instalar</b>. O ícone aparece na tela do celular.")}</ol>
+      <p class="muted small">Não achou a opção? Abra o jogo no <b>Chrome</b>.</p>
+      <div class="btn-row uma"><button class="btn btn-main" id="ipOk" style="width:100%">Entendi</button></div>`;
+  }
+  modal("Instalar o app", `<div class="ip">${corpo}</div>`, (m, fechar) => {
+    m.querySelector("#ipOk").onclick = fechar;
+    const cp = m.querySelector("#ipCopiar"); if(cp) cp.onclick = () => copiarTexto(link, "Link copiado! Agora abra no navegador.");
+  });
+}
+/* o service worker: guarda as imagens no aparelho e deixa o jogo abrir mesmo com a internet fraca */
+(() => {
+  if(!("serviceWorker" in navigator) || !/^https:$|^http:$/.test(location.protocol)) return;
+  if(location.protocol === "http:" && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+})();
+
+/* ---------- Temas: uma amostra de cada um ---------- */
+const TEMAS_JOGO = [
+  ["auto", "Automático", "Segue o celular: claro de dia, escuro no modo escuro"],
+  ["claro", "Claro", "Céu da manhã: anil, azul e turquesa"],
+  ["escuro", "Escuro", "Noite: descansa a vista"],
+  ["sol", "Pôr do sol", "Roxo, rosa e laranja"],
+  ["classico", "Clássico", "As cores de antes"]
+];
+function modalTemas(){
+  const atual = perfil.tema || "auto";
+  modal("Alterar tema", `<div class="temas" role="radiogroup" aria-label="Tema">${TEMAS_JOGO.map(([v, nome, sub]) => `<button type="button" class="tema-op" role="radio" data-t="${v}" aria-checked="${atual === v}">
+      <span class="tema-am tema-am-${v}" aria-hidden="true"><i></i><i></i><i></i><b></b></span><span class="tema-tx"><b>${nome}</b><small>${sub}</small></span><span class="tema-ok" aria-hidden="true">✓</span></button>`).join("")}</div>`, (m, fechar) => {
+    m.querySelectorAll("[data-t]").forEach(b => b.onclick = async () => {
+      aplicarTema(b.dataset.t); perfil.tema = b.dataset.t;
+      m.querySelectorAll("[data-t]").forEach(x => x.setAttribute("aria-checked", String(x === b)));
+      try{ await DB.salvarUsuario(usuario.uid, { tema: b.dataset.t }); }catch(e){}
+    });
+  });
 }
 
 /* Livro do trimestre que já vem neste arquivo: nome e capa (primeira página do PDF da lição, reduzida). O que o master gravar em Admin → Livros ou ao importar a lição passa na frente. */
@@ -7316,6 +7664,8 @@ function novoMembro(salaId, status, papel){ return { salaId, uid: usuario.uid, n
 function ehDonoSala(s){ return !!(s && !s.global && usuario && s.dono === usuario.uid); }
 function podeGerenciarSala(s){ return !!s && (ehMaster() || (!s.global && (ehDonoSala(s) || ehAdminSala(s)))); }
 /* Incluir qualquer usuário direto na sala: só o master e o administrador atribuído àquela sala */
+/* Pôr e tirar administradores da sala: quem criou a sala e o master */
+function podeNomearAdmin(s){ return !!s && !s.global && (ehMaster() || ehDonoSala(s)); }
 function podeIncluirNaSala(s){ return !!s && !s.global && (ehMaster() || ehAdminSala(s)); }
 /* Participo desta sala? (o master também enxerga salas de que não participa) */
 function souMembroDaSala(s){ return !!s && SALAS.some(x => x.id === s.id); }
@@ -7452,7 +7802,7 @@ async function telaSalas(recarregar){
         <button class="btn btn-ghost btn-sm" data-mural="${esc(s.id)}">Mural</button>
         <button class="btn btn-ghost btn-sm" data-convidar="${esc(s.id)}">Convidar</button>
         ${podeGerenciarSala(s) ? `<button class="btn btn-ghost btn-sm" data-gerenciar="${esc(s.id)}">Gerenciar${s.pendentes ? ` <span class="nav-n fixo">${s.pendentes}</span>` : ""}</button>` : ""}
-        ${!s.global && !ehDonoSala(s) ? `<button class="btn btn-ghost btn-sm" data-sair="${esc(s.id)}">Sair</button>` : ""}
+        ${!s.global ? `<button class="btn btn-ghost btn-sm" data-sair="${esc(s.id)}">Sair</button>` : ""}
       </div></article>`;
   };
   app.innerHTML = `<div class="result-area duas"><div class="lado">
@@ -7461,12 +7811,12 @@ async function telaSalas(recarregar){
     <div class="sala-barra"><button class="btn btn-main" id="slCriar">+ Criar sala</button><button class="btn btn-ghost" id="slCodigo">Entrar com código</button><button class="btn btn-ghost" id="slPublicas">Salas públicas</button></div></div>
     <div class="principal">${SALAS.length ? `<div class="salas-grid">${SALAS.map(cartao).join("")}</div>` : `<section class="panel sem-sala"><div class="sem-sala-ic" aria-hidden="true">👥</div><h2>Você ainda não está em nenhuma sala</h2><p>Entre na sala da sua classe com o código, procure nas salas públicas ou crie a sua. A Corrida e o Mural são de cada sala.</p></section>`}
     ${SALAS_OUTRAS.length ? `<section class="panel" id="slOutras"><h3 class="h3">Outras salas do jogo <span class="badge adm">${SALAS_OUTRAS.length}</span></h3>
-      <p class="muted small" style="margin-top:0">Salas criadas por outras pessoas, de que você não participa. Como master, você vê a corrida e o mural de cada uma e pode gerenciá-las.</p>
+      <p class="muted small" style="margin-top:0">Salas de que você não participa. Os jogadores não veem você nelas, mas como master você vê a corrida e o mural de cada uma e pode gerenciá-las.</p>
       <div class="salas-grid">${SALAS_OUTRAS.map(s => `<article class="sala ${s.id === ativa.id ? "ativa" : ""}" data-sala="${esc(s.id)}">
         <div class="sala-top"><div class="sala-nome"><h3>${esc(s.nome)}</h3><div>${badgesSala(s)}${s.id === ativa.id ? '<span class="badge sala-ativa">Você está vendo</span>' : ""}</div></div>
           <div class="sala-cod"><span>Código</span><b>${esc(s.codigo || "")}</b></div></div>
         <p class="muted small sala-info">${s.descricao ? esc(s.descricao) + "<br>" : ""}<span data-conta="${esc(s.id)}">Contando membros…</span>${s.donoNome ? " · criada por " + esc(s.donoNome) : ""}</p>
-        <div class="sala-acoes"><button class="btn btn-ghost btn-sm" data-ver="${esc(s.id)}">Ver a corrida</button><button class="btn btn-ghost btn-sm" data-mural="${esc(s.id)}">Mural</button><button class="btn btn-ghost btn-sm" data-gerenciar="${esc(s.id)}">Gerenciar</button></div></article>`).join("")}</div></section>` : ""}
+        <div class="sala-acoes"><button class="btn btn-ghost btn-sm" data-ver="${esc(s.id)}">Ver a corrida</button><button class="btn btn-ghost btn-sm" data-mural="${esc(s.id)}">Mural</button><button class="btn btn-ghost btn-sm" data-gerenciar="${esc(s.id)}">Gerenciar</button><button class="btn btn-ghost btn-sm" data-voltar="${esc(s.id)}">Entrar na sala</button></div></article>`).join("")}</div></section>` : ""}
     ${SALAS_PEDIDOS.length ? `<section class="panel"><h3 class="h3">Aguardando aprovação</h3><ul class="lista">${SALAS_PEDIDOS.map(s => `<li><div class="info"><strong>${esc(s.nome)}</strong><span>Sala privada${s.donoNome ? " de " + esc(s.donoNome) : ""}. O dono precisa aprovar a sua entrada.</span></div><button class="btn btn-ghost btn-sm" data-cancelar="${esc(s.id)}">Cancelar</button></li>`).join("")}</ul></section>` : ""}
   </div></div>`;
   const achar = id => SALAS.find(x => x.id === id) || SALAS_PEDIDOS.find(x => x.id === id) || SALAS_OUTRAS.find(x => x.id === id);
@@ -7479,6 +7829,7 @@ async function telaSalas(recarregar){
   app.querySelectorAll("[data-convidar]").forEach(b => b.onclick = () => convidarSala(achar(b.dataset.convidar)));
   app.querySelectorAll("[data-gerenciar]").forEach(b => b.onclick = () => modalGerenciarSala(achar(b.dataset.gerenciar)));
   app.querySelectorAll("[data-sair]").forEach(b => b.onclick = () => sairDaSala(achar(b.dataset.sair)));
+  app.querySelectorAll("[data-voltar]").forEach(b => b.onclick = async () => { ocupado(b, true); try{ await entrarNaSala(achar(b.dataset.voltar)); }catch(e){ aviso(erroMsg(e)); ocupado(b, false); } });
   app.querySelectorAll("[data-cancelar]").forEach(b => b.onclick = async () => { ocupado(b, true); try{ await DB.excluirMembro(b.dataset.cancelar, eu); aviso("Solicitação cancelada"); }catch(e){ aviso(erroMsg(e)); } telaSalas(); });
   // Quantidade de membros (carrega depois, sem travar a tela)
   SALAS.filter(x => !x.global).concat(SALAS_OUTRAS).forEach(async s => {
@@ -7581,11 +7932,65 @@ async function entrarNaSala(s){
   else aviso("Pedido enviado! Você entra assim que o dono da sala aprovar.");
   if(tabAtual === "salas") telaSalas(false); else if(tabAtual === "ranking" || tabAtual === "inicio") nav(tabAtual);
 }
+/* Sair da sala.
+   - Master: sai quando quiser; deixa de aparecer para os jogadores, mas continua vendo e administrando a sala.
+   - Quem criou ou administra: só sai se a sala continuar com outra pessoa administrando; se não houver, escolhe alguém. */
 async function sairDaSala(s){
   if(!s || s.global) return;
-  if(!(await confirmar("Sair da sala", `Sair da sala "${s.nome}"? Seus pontos continuam guardados; você só deixa de aparecer na corrida dela.`, "Sair da sala", "btn-warn"))) return;
-  try{ await DB.excluirMembro(s.id, usuario.uid); aviso("Você saiu da sala"); }catch(e){ aviso(erroMsg(e)); }
+  const eu = usuario.uid, gerente = ehDonoSala(s) || ehAdminSala(s);
+  if(ehMaster()){
+    if(!(await confirmar("Sair da sala", `Sair da sala "${s.nome}"? Você deixa de aparecer na corrida e na lista de membros para os outros jogadores. Como master, continua vendo e administrando a sala em "Outras salas do jogo" e pode entrar de novo quando quiser.`, "Sair da sala", "btn-warn"))) return;
+    return efetivarSaida(s, "", "Você saiu da sala. Ela continua em Outras salas do jogo.");
+  }
+  if(!gerente){
+    if(!(await confirmar("Sair da sala", `Sair da sala "${s.nome}"? Seus pontos continuam guardados; você só deixa de aparecer na corrida dela.`, "Sair da sala", "btn-warn"))) return;
+    return efetivarSaida(s, "", "Você saiu da sala");
+  }
+  // Quem criou ou administra: confere quem mais administra a sala
+  let ativos;
+  try{ ativos = (await DB.membrosDaSala(s.id)).filter(x => x.status === "ativo" && x.uid !== eu); }catch(e){ aviso(erroMsg(e)); return; }
+  const adms = new Set(s.admins || []);
+  const outros = ativos.filter(x => adms.has(x.uid) || x.uid === s.dono);
+  if(outros.length){
+    const nomes = outros.map(x => x.nome || "?"), lista = nomes.length > 1 ? nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1] : nomes[0];
+    if(!(await confirmar("Sair da sala", `Sair da sala "${s.nome}"? ${lista} ${outros.length > 1 ? "continuam" : "continua"} administrando a sala. Seus pontos continuam guardados.`, "Sair da sala", "btn-warn"))) return;
+    return efetivarSaida(s, "", "Você saiu da sala");
+  }
+  if(!ativos.length){
+    modal("Sair da sala", `<p>Você é a única pessoa na sala "${esc(s.nome)}". Uma sala não fica sem ninguém para cuidar dela: para sair, exclua a sala em <b>Gerenciar</b>.</p><div class="btn-row uma"><button class="btn btn-ghost" id="ssOk" style="width:100%">Entendi</button></div>`, (m, fechar) => { m.querySelector("#ssOk").onclick = fechar; });
+    return;
+  }
+  const novo = await escolherAdminSala(s, ativos);
+  if(!novo) return;
+  if(!(await confirmar("Sair da sala", `${novo.nome || "Esta pessoa"} passa a administrar a sala "${s.nome}" e você sai. Seus pontos continuam guardados.`, "Confirmar e sair", "btn-warn"))) return;
+  return efetivarSaida(s, novo.uid, `Você saiu da sala. ${novo.nome || "A pessoa escolhida"} agora administra a sala.`);
+}
+/* Grava a saída: passa a administração (se for o caso), deixa de ser admin e sai da lista de membros */
+async function efetivarSaida(s, novoAdmin, msg){
+  const eu = usuario.uid;
+  try{
+    const era = (s.admins || []).includes(eu);
+    if(era || novoAdmin){
+      let adms = (s.admins || []).filter(id => id !== eu);
+      if(novoAdmin && !adms.includes(novoAdmin)) adms = adms.concat(novoAdmin);
+      await DB.salvarSala(s.id, { admins: adms }); s.admins = adms;
+    }
+    await DB.excluirMembro(s.id, eu);
+    GUARDA.del("sl:sala:" + s.id); delete membrosCache[s.id];
+    aviso(msg);
+  }catch(e){ aviso(erroMsg(e)); }
   telaSalas();
+}
+/* Escolher quem vai administrar a sala (entre os membros). Devolve o membro escolhido ou null. */
+function escolherAdminSala(s, ativos){
+  return new Promise(res => {
+    let escolhido = null;
+    const lista = ativos.slice().sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR"));
+    modal("Quem vai administrar a sala?", `<p class="muted small" style="margin-top:0">Ninguém mais administra a sala "${esc(s.nome)}". Antes de sair, escolha quem vai cuidar dela: aprovar pedidos, remover membros e mudar o nome.</p>
+      <ul class="lista gs-membros">${lista.map(x => `<li><div class="em">${avatarSVG(personagemDe(x.profeta, x.nivel), null, x.nivel)}</div><div class="info"><strong>${esc(x.nome || "(sem nome)")}</strong><span>Membro</span></div><button class="btn btn-main btn-sm" data-escolher="${esc(x.uid)}">Escolher</button></li>`).join("")}</ul>`,
+      (m, fechar) => { m.querySelectorAll("[data-escolher]").forEach(b => b.onclick = () => { escolhido = lista.find(x => x.uid === b.dataset.escolher) || null; fechar(); }); },
+      () => res(escolhido));
+  });
 }
 async function modalSalasPublicas(){
   modal("Salas públicas", `<div class="field"><input type="search" id="spBusca" placeholder="Buscar pelo nome da sala" aria-label="Buscar sala"></div><div id="spLista"><p class="vazio">Carregando…</p></div>`, async (m, fechar) => {
@@ -7629,7 +8034,9 @@ function modalGerenciarSala(s){
       const pend = membros.filter(x => x.status === "pendente").sort((a,b) => (a.quando||0) - (b.quando||0));
       const ativos = membros.filter(x => x.status === "ativo").sort((a,b) => String(a.nome).localeCompare(String(b.nome), "pt-BR"));
       const linha = (x, tipo) => `<li><div class="em">${avatarSVG(personagemDe(x.profeta, x.nivel), null, x.nivel)}</div><div class="info"><strong>${esc(x.nome || "(sem nome)")}${x.uid === usuario.uid ? " (você)" : ""}</strong><span>${x.uid === s.dono ? "Criou a sala" : tipo === "p" ? "Pediu para entrar" : (s.admins || []).includes(x.uid) ? "Administrador da sala" : "Membro"}</span></div>
-        ${tipo === "p" ? `<button class="btn btn-ok btn-sm" data-aprovar="${esc(x.uid)}">Aprovar</button><button class="btn btn-ghost btn-sm" data-recusar="${esc(x.uid)}">Recusar</button>` : (!s.global && x.uid !== s.dono ? `<button class="btn btn-ghost btn-sm" data-remover="${esc(x.uid)}">Remover</button>` : "")}</li>`;
+        ${tipo === "p" ? `<button class="btn btn-ok btn-sm" data-aprovar="${esc(x.uid)}">Aprovar</button><button class="btn btn-ghost btn-sm" data-recusar="${esc(x.uid)}">Recusar</button>`
+          : s.global || x.uid === s.dono || x.uid === usuario.uid ? ""
+          : `${podeNomearAdmin(s) ? `<button class="btn ${(s.admins || []).includes(x.uid) ? "btn-ghost" : "btn-ok"} btn-sm" data-adm="${esc(x.uid)}">${(s.admins || []).includes(x.uid) ? "Tirar admin" : "Tornar admin"}</button>` : ""}${(s.admins || []).includes(x.uid) && !podeNomearAdmin(s) ? "" : `<button class="btn btn-ghost btn-sm" data-remover="${esc(x.uid)}">Remover</button>`}`}</li>`;
       c.innerHTML = `
         ${pend.length ? `<h3 class="h3">Pedidos de entrada (${pend.length})</h3><ul class="lista">${pend.map(x => linha(x, "p")).join("")}</ul>${pend.length > 1 ? `<div class="btn-row uma" style="margin-bottom:14px"><button class="btn btn-ok btn-sm" id="gsTodos" style="width:100%">Aprovar todos</button></div>` : `<div style="height:10px"></div>`}` : (!s.global && !s.publica ? `<p class="note" style="margin:0 0 12px">Nenhum pedido de entrada no momento.</p>` : "")}
         ${s.global ? `<p class="muted small" style="margin-top:0">Sala global: todo mundo entra automaticamente ao criar a conta. Ela não pode ser renomeada, fechada nem excluída.</p>` : `
@@ -7640,6 +8047,7 @@ function modalGerenciarSala(s){
         <p class="erro" id="gsErro"></p>
         <div class="btn-row"><button class="btn btn-main" id="gsSalvar">Salvar</button><button class="btn btn-ghost" id="gsConvidar">Convidar (código ${esc(s.codigo)})</button></div>`}
         <h3 class="h3" style="margin-top:16px">Membros (${ativos.length})</h3>
+        ${podeNomearAdmin(s) && ativos.some(x => x.uid !== s.dono && x.uid !== usuario.uid) ? `<p class="muted small" style="margin:0 0 8px">Quem é admin da sala aprova pedidos, inclui e remove membros e muda o nome e o tipo da sala. ${ehDonoSala(s) ? "Para você sair da sala, ela precisa ter outro admin." : ""}</p>` : ""}
         ${ativos.length ? `<ul class="lista gs-membros">${ativos.map(x => linha(x, "a")).join("")}</ul>` : `<p class="vazio">Ninguém na sala ainda.</p>`}
         ${podeIncluirNaSala(s) ? `<h3 class="h3" style="margin-top:16px">Incluir usuários</h3>
           <p class="muted small" style="margin:0 0 8px">Como ${ehMaster() ? "master" : "administrador desta sala"}, você coloca qualquer pessoa com conta aprovada direto na sala, sem ela precisar do código nem de aprovação.</p>
@@ -7667,7 +8075,23 @@ function modalGerenciarSala(s){
       c.querySelectorAll("[data-remover]").forEach(b => b.onclick = async () => {
         const x = ativos.find(y => y.uid === b.dataset.remover);
         if(!(await confirmar("Remover da sala", `Remover ${x ? x.nome : "esta pessoa"} da sala "${s.nome}"?`, "Remover", "btn-warn"))) return;
-        try{ await DB.excluirMembro(s.id, b.dataset.remover); mudou = true; aviso("Removido da sala"); }catch(e){ aviso(erroMsg(e)); } render();
+        try{
+          await DB.excluirMembro(s.id, b.dataset.remover);
+          if((s.admins || []).includes(b.dataset.remover) && podeNomearAdmin(s)){ const adms = s.admins.filter(id => id !== b.dataset.remover); await DB.salvarSala(s.id, { admins: adms }); s.admins = adms; }
+          mudou = true; aviso("Removido da sala");
+        }catch(e){ aviso(erroMsg(e)); } render();
+      });
+      // Pôr e tirar administradores da sala
+      c.querySelectorAll("[data-adm]").forEach(b => b.onclick = async () => {
+        const uid = b.dataset.adm, x = ativos.find(y => y.uid === uid), era = (s.admins || []).includes(uid);
+        if(era && !(await confirmar("Tirar admin", `${x ? x.nome : "Esta pessoa"} deixa de administrar a sala "${s.nome}" e continua como membro.`, "Tirar admin", "btn-warn"))) return;
+        ocupado(b, true);
+        try{
+          const adms = era ? (s.admins || []).filter(id => id !== uid) : (s.admins || []).concat(uid);
+          await DB.salvarSala(s.id, { admins: adms }); s.admins = adms; GUARDA.del("sl:sala:" + s.id);
+          mudou = true; aviso(era ? `${x ? x.nome : "A pessoa"} não é mais admin da sala` : `${x ? x.nome : "A pessoa"} agora é admin da sala`);
+        }catch(e){ aviso(erroMsg(e)); }
+        render();
       });
       // Admin: incluir usuários direto na sala
       const add = c.querySelector("#gsAdd");
