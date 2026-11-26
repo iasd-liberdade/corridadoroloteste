@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="versao" content="20261126.001403">
+<meta name="versao" content="20261126.005744">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>[TESTE] Corrida do Rolo · Quiz da Lição</title>
 <meta name="theme-color" content="#524F9C">
@@ -3172,6 +3172,19 @@ button.fig.vaga:hover{transform:translateY(-2px)}
 .tema-tx small{font-size:13.5px;line-height:1.3;color:var(--muted)}
 .tema-ok{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:15px;color:transparent;border:2px solid var(--panel-line)}
 .tema-op[aria-checked="true"] .tema-ok{background:#fff;border-color:#fff;color:var(--deep)}
+/* p78: as 3 ajudas lado a lado, menores; as que não dá para usar ficam apagadas */
+.ajudas-wrap{padding:10px 10px 12px}
+.ajudas-tit{margin:0 2px 10px}
+.ajudas-wrap .ajudas-bar{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ajudas-wrap .ajuda-btn{min-height:68px;padding:9px 4px 8px;gap:2px;border-radius:14px;font-size:13.5px;box-shadow:0 3px 0 rgba(10,8,40,.35)}
+.ajudas-wrap .ajuda-btn .ic{font-size:22px}
+.ajudas-wrap .ajuda-btn .ic .ij{width:24px;height:24px}
+.ajudas-wrap .ajuda-btn .aj-nome{white-space:nowrap}
+.ajudas-wrap .ajuda-btn small{display:block;font-size:10.5px;font-weight:700;line-height:1.15;opacity:.9}
+.ajudas-wrap .ajuda-btn b{top:-8px;right:-6px;min-width:23px;height:23px;padding:0 5px;font-size:12px}
+.ajudas-wrap .ajuda-btn.off,.ajudas-wrap .ajuda-btn.usada{opacity:.4;filter:grayscale(.85);box-shadow:none;cursor:default;font-size:13.5px}
+.ajudas-wrap .ajuda-btn.off b{background:rgba(255,255,255,.5)}
+@media (min-width:700px){.ajudas-wrap .ajuda-btn{min-height:74px;font-size:14.5px}.ajudas-wrap .ajuda-btn .ic{font-size:24px}}
 </style>
 </head>
 <body class="sem-menu">
@@ -5086,7 +5099,7 @@ function telaPergunta(){
     <div class="tiles ${p.vf ? "vf" : ""}" id="tiles">
       ${p.vf ? ["Verdadeiro", "Falso"].map((op,k)=>`<button class="tile t${k} ${k ? "tf" : "tv"}" data-k="${k}"><span class="letter" aria-hidden="true">${k ? "✕" : "✓"}</span><span>${op}</span></button>`).join("")
         : p.o.map((op,k)=>`<button class="tile t${k}" data-k="${k}"><span class="letter">${LETRAS[k]}</span><span>${esc(op)}</span></button>`).join("")}
-    </div><div id="fb"></div>${(() => { const aj = p.reflexao ? "" : barraAjudas(p); return aj ? `<section class="ajudas-wrap" aria-label="Ajudas"><span class="ajudas-tit">Ajudas</span>${aj}</section>` : ""; })()}</div>`;
+    </div><div id="fb"></div>${(() => { return p.reflexao ? "" : `<section class="ajudas-wrap" aria-label="Ajudas"><span class="ajudas-tit">Ajudas</span>${barraAjudas(p)}</section>`; })()}</div>`;
   app.innerHTML = h;
   window.scrollTo(0,0);
   app.querySelectorAll(".tile").forEach(t=> t.onclick = ()=> responder(+t.dataset.k));
@@ -5118,16 +5131,26 @@ function pararTimer(){ if(timer){ cancelAnimationFrame(timer); timer = null; } }
 
 /* ---------- Ajudas durante a pergunta ---------- */
 /* Cada tipo de ajuda só pode ser usado uma vez em cada quiz (jogo.usadas), mesmo que a pessoa tenha várias guardadas. */
+/* o miolo de um botão de ajuda: ícone, nome, motivo (quando apagado) e quantas a pessoa tem */
+function miolosAjuda(k, nome, sub, n){
+  return `<span class="ic">${AJUDAS[k].ic}</span><span class="aj-nome">${nome}</span>${sub ? `<small>${sub}</small>` : ""}${n === null ? "" : `<b>${n}</b>`}`;
+}
 function barraAjudas(p){
   const d = ajudasDisponiveis(), u = jogo.usadas || (jogo.usadas = {}), meioAqui = jogo.meio && jogo.meio.q === jogo.q;
-  const podePular = d.pular > 0 && nivelAtual() >= NIVEL_PULAR;
-  if(!d.meio && !d.dobro && !jogo.dobro && !meioAqui && !podePular && !u.meio && !u.dobro && !u.pular) return "";
-  const usada = (id, nome, ic) => `<button type="button" class="ajuda-btn usada" id="${id}" disabled title="Só uma vez por quiz"><span class="ic">${ic}</span>${nome}</button>`;
-  return `<div class="ajudas-bar" id="ajBar">
-    ${meioAqui || u.meio ? usada("ajMeio", "Meio a meio usado", AJUDAS.meio.ic) : d.meio && p.vf ? `<button type="button" class="ajuda-btn usada" id="ajMeio" disabled title="O meio a meio não vale em pergunta de verdadeiro ou falso"><span class="ic">${AJUDAS.meio.ic}</span>Meio a meio não vale aqui</button>` : d.meio ? `<button type="button" class="ajuda-btn" id="ajMeio"><span class="ic">${AJUDAS.meio.ic}</span>Meio a meio<b>${d.meio}</b></button>` : ""}
-    ${u.dobro ? usada("ajDobro", "Dobro usado", AJUDAS.dobro.ic) : d.dobro || jogo.dobro ? `<button type="button" class="ajuda-btn ${jogo.dobro ? "ativa" : ""}" id="ajDobro" aria-pressed="${!!jogo.dobro}"><span class="ic">${AJUDAS.dobro.ic}</span>${jogo.dobro ? "Dobro ativado" : "Pontos em dobro"}<b>${d.dobro}</b></button>` : ""}
-    ${u.pular ? usada("ajPular", "Pular usado", AJUDAS.pular.ic) : podePular ? `<button type="button" class="ajuda-btn" id="ajPular"><span class="ic">${AJUDAS.pular.ic}</span>Pular<b>${d.pular}</b></button>` : ""}
-  </div>${jogo.dobro ? `<p class="ajuda-dica" id="ajDica">Sua próxima resposta certa vale o dobro.</p>` : `<p class="ajuda-dica" id="ajDica" hidden></p>`}`;
+  const nivelOk = nivelAtual() >= NIVEL_PULAR;
+  const apagado = (id, k, nome, sub, titulo, n, cls) => `<button type="button" class="ajuda-btn off ${cls || ""}" id="${id}" disabled title="${titulo}">${miolosAjuda(k, nome, sub, n)}</button>`;
+  const meio = meioAqui || u.meio ? apagado("ajMeio", "meio", "Meio a meio", "Usado", "Só uma vez por quiz", null, "usada")
+    : !d.meio ? apagado("ajMeio", "meio", "Meio a meio", "Você não tem", "Ganhe nas missões", 0)
+    : p.vf ? apagado("ajMeio", "meio", "Meio a meio", "Não vale em V ou F", "O meio a meio não vale em pergunta de verdadeiro ou falso", d.meio)
+    : `<button type="button" class="ajuda-btn" id="ajMeio" title="${esc(AJUDAS.meio.d)}">${miolosAjuda("meio", "Meio a meio", "", d.meio)}</button>`;
+  const dobro = u.dobro ? apagado("ajDobro", "dobro", "Dobro", "Usado", "Só uma vez por quiz", null, "usada")
+    : !d.dobro && !jogo.dobro ? apagado("ajDobro", "dobro", "Dobro", "Você não tem", "Ganhe nas missões", 0)
+    : `<button type="button" class="ajuda-btn ${jogo.dobro ? "ativa" : ""}" id="ajDobro" aria-pressed="${!!jogo.dobro}" title="${esc(AJUDAS.dobro.d)}">${miolosAjuda("dobro", "Dobro", jogo.dobro ? "Ativado" : "", d.dobro)}</button>`;
+  const pular = u.pular ? apagado("ajPular", "pular", "Pular", "Usado", "Só uma vez por quiz", null, "usada")
+    : !nivelOk ? apagado("ajPular", "pular", "Pular", `Nível ${NIVEL_PULAR}`, `Libera no nível ${NIVEL_PULAR}`, d.pular)
+    : !d.pular ? apagado("ajPular", "pular", "Pular", "Você não tem", "Ganhe nas missões", 0)
+    : `<button type="button" class="ajuda-btn" id="ajPular" title="${esc(AJUDAS.pular.d)}">${miolosAjuda("pular", "Pular", "", d.pular)}</button>`;
+  return `<div class="ajudas-bar" id="ajBar">${meio}${dobro}${pular}</div>${jogo.dobro ? `<p class="ajuda-dica" id="ajDica">Sua próxima resposta certa vale o dobro.</p>` : `<p class="ajuda-dica" id="ajDica" hidden></p>`}`;
 }
 /* Pular: a pergunta sai e entra outra do mesmo dia no lugar. O quiz continua com o mesmo número de perguntas
    (e a mesma chance de pontos). Precisa haver uma pergunta de reserva naquele dia, como na Segunda chance. */
@@ -5159,7 +5182,7 @@ function ligarAjudas(p){
     if($("tiles").classList.contains("done") || ajudasDisponiveis().meio < 1) return;
     const erradas = embaralhar(p.o.map((_, k) => k).filter(k => k !== p.c), semente(p.p + "|" + usuario.uid)).slice(0, Math.max(0, p.o.length - 2));
     jogo.meio = { q: jogo.q, fora: erradas }; jogo.usadas = Object.assign(jogo.usadas || {}, { meio: true }); gastarAjuda("meio"); tocar("ajuda"); salvarProgresso(); aplicarMeio();
-    bm.disabled = true; bm.classList.add("usada"); bm.innerHTML = `<span class="ic">${AJUDAS.meio.ic}</span>Meio a meio usado`;
+    bm.disabled = true; bm.classList.add("usada", "off"); bm.innerHTML = miolosAjuda("meio", "Meio a meio", "Usado", null);
   };
   const bp = $("ajPular"); if(bp && !bp.disabled) bp.onclick = pularPergunta;
   const bd = $("ajDobro");
@@ -5168,7 +5191,7 @@ function ligarAjudas(p){
     if(!jogo.dobro && ajudasDisponiveis().dobro < 1) return;
     jogo.dobro = !jogo.dobro; tocar("ajuda"); salvarProgresso();
     bd.classList.toggle("ativa", jogo.dobro); bd.setAttribute("aria-pressed", String(jogo.dobro));
-    bd.innerHTML = `<span class="ic">${AJUDAS.dobro.ic}</span>${jogo.dobro ? "Dobro ativado" : "Pontos em dobro"}<b>${ajudasDisponiveis().dobro}</b>`;
+    bd.innerHTML = miolosAjuda("dobro", "Dobro", jogo.dobro ? "Ativado" : "", ajudasDisponiveis().dobro);
     const dica = $("ajDica"); if(dica){ dica.hidden = !jogo.dobro; dica.textContent = "Sua próxima resposta certa vale o dobro."; }
   };
 }
